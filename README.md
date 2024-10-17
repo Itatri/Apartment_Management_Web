@@ -1,1 +1,1 @@
-Đồ án chuyên ngành : Website dành cho cư dân thuê trọ 
+Phần mềm Website dành cho cư dân thuê căn hộ ( User ) 
