@@ -31,8 +31,6 @@ public partial class Phong
 
     public virtual ICollection<FeedBack> FeedBacks { get; set; } = new List<FeedBack>();
 
-    public virtual ICollection<LuuTru> LuuTrus { get; set; } = new List<LuuTru>();
-
     public virtual KhuVuc? MaKhuVucNavigation { get; set; }
 
     public virtual ICollection<PhieuThu> PhieuThus { get; set; } = new List<PhieuThu>();
