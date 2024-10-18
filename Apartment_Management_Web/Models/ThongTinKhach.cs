@@ -21,6 +21,8 @@ public partial class ThongTinKhach
 
     public string? Phone { get; set; }
 
+    public string? Email { get; set; }
+
     public string? QueQuan { get; set; }
 
     public string? QuanHe { get; set; }
@@ -30,8 +32,6 @@ public partial class ThongTinKhach
     public string? MaPhong { get; set; }
 
     public int? TrangThai { get; set; }
-
-    public string? Email { get; set; }
 
     public virtual Phong? MaPhongNavigation { get; set; }
 

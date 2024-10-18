@@ -9,9 +9,10 @@ namespace Apartment_Management_Web.Services
     // Tạo lớp UserPhongService để triển khai IUserPhongService
     public class UserPhongService : IUserPhongService
     {
-        private readonly QlChungCu08102024Context _context;
+        // Sửa lại DBContext nếu có thay đổi DB
+        private readonly QlChungCuContext _context;
 
-        public UserPhongService(QlChungCu08102024Context context)
+        public UserPhongService(QlChungCuContext context)
         {
             _context = context;
         }

@@ -13,6 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Apartment_Management_Web.Models.Login;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Apartment_Management_Web.Controllers
 {
@@ -34,6 +35,7 @@ namespace Apartment_Management_Web.Controllers
             return Ok(userPhongs);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserPhong>> GetUserPhong(string id)
         {
