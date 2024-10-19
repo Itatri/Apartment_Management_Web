@@ -31,11 +31,23 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+
 //using Microsoft.AspNetCore.Mvc;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Thêm CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin",
+        builder => builder.WithOrigins("https://localhost:7230") // Địa chỉ của frontend
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
+
+
 
 builder.Services.AddScoped<IUserPhongService, UserPhongService>();
 
@@ -75,6 +87,10 @@ builder.Services.AddSwaggerGen();
 ////builder.Services.AddControllersWithViews(); // Thêm dịch vụ cho MVC và View
 
 var app = builder.Build();
+
+// Sử dụng CORS kết nối frontend
+app.UseCors("AllowOrigin");
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

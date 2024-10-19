@@ -18,6 +18,11 @@ namespace Apartment_Management_Web_GUI.Controllers
             return View();
         }
 
+        public IActionResult HomePageLogin()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
