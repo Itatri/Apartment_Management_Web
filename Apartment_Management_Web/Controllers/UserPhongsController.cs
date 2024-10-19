@@ -14,6 +14,7 @@ using System.Security.Claims;
 using System.Text;
 using Apartment_Management_Web.Models.Login;
 using Microsoft.AspNetCore.Authorization;
+using Apartment_Management_Web.Models.Authentication;
 
 namespace Apartment_Management_Web.Controllers
 {
@@ -47,18 +48,49 @@ namespace Apartment_Management_Web.Controllers
             return Ok(userPhong);
         }
 
+        //[HttpPost("login")]
+        //public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
+        //{
+        //    var userPhong = await _userPhongService.AuthenticateAsync(loginModel.Id, loginModel.MatKhau);
+        //    if (userPhong == null)
+        //    {
+        //        return Unauthorized(new { message = "Tài khoản hoặc mật khẩu không đúng." });
+        //    }
+
+        //    var token = GenerateJwtToken(userPhong);
+        //    return Ok(new { token });
+        //}
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-            var userPhong = await _userPhongService.AuthenticateAsync(loginModel.Id, loginModel.MatKhau);
-            if (userPhong == null)
+            var authenticationResult = await _userPhongService.AuthenticateAsync(loginModel.Id, loginModel.MatKhau);
+
+            if (!authenticationResult.IsSuccess)
             {
-                return Unauthorized(new { message = "Tài khoản hoặc mật khẩu không đúng." });
+                var response = new LoginResponse
+                {
+                    IsSuccess = false,
+                    Message = authenticationResult.ErrorMessage,
+                    Token = null,
+                    User = null
+                };
+                return Unauthorized(response);
             }
 
-            var token = GenerateJwtToken(userPhong);
-            return Ok(new { token });
+            var token = GenerateJwtToken(authenticationResult.User);
+            var successResponse = new LoginResponse
+            {
+                IsSuccess = true,
+                Token = token,
+                Message = "Đăng nhập thành công.",
+                User = authenticationResult.User // Cung cấp thông tin người dùng nếu cần
+            };
+
+            return Ok(successResponse);
         }
+
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUserPhong(string id, UserPhong userPhong)
