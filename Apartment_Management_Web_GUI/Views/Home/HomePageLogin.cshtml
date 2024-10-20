@@ -24,6 +24,8 @@
     <link href="~/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="~/css/responsive.css" rel="stylesheet" />
+
+   
 </head>
 
 <body>
@@ -56,18 +58,27 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("CategoryPage", "Category")">Phản hồi</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Hóa đơn</a>
+                            </li>
                         </ul>
 
+                  
+
                         <div class="user_option">
-                            <a href="@Url.Action("LoginPages", "Login")">
+                            <a href="#">
                                 <span>
-                                    Đăng nhập
+                                    Tài khoản : <span id="userIdDisplay"></span>
                                 </span>
                             </a>
+                            <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
+                                Đăng xuất
+                            </span>
                             <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
-                                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                               @*  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button> *@
                             </form>
                         </div>
+
                     </div>
                     <div>
                         <div class="custom_menu-btn ">
@@ -670,7 +681,33 @@
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/custom.js"></script>
 
+    <script>
+     
+        $(document).ready(function () {
+            // Hiển thị userId đã lưu trữ (nếu có)
+            var userId = localStorage.getItem('userId');
+            if (userId) {
+                $('#userIdDisplay').text(userId);
+            }
 
+            // Xử lý sự kiện nhấn vào nút Đăng xuất
+            $('#logoutBtn').on('click', function () {
+                // Xóa token và userId khỏi localStorage
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
+
+                // Kiểm tra xem token và userId đã bị xóa chưa
+                console.log('Token:', localStorage.getItem('token')); // Sẽ in ra null nếu đã xóa thành công
+                console.log('UserId:', localStorage.getItem('userId')); // Sẽ in ra null nếu đã xóa thành công
+
+                // Chuyển hướng người dùng về trang đăng nhập
+                window.location.href = '@Url.Action("HomePage", "Home")';
+            });
+
+
+        });
+
+    </script>
 </body>
 
 

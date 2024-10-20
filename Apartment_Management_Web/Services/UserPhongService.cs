@@ -29,11 +29,7 @@ namespace Apartment_Management_Web.Services
             return await _context.UserPhongs.FindAsync(id);
         }
 
-        //public async Task<UserPhong?> AuthenticateAsync(string id, string matKhau)
-        //{
-        //    return await _context.UserPhongs
-        //        .SingleOrDefaultAsync(u => u.Id == id && u.MatKhau == matKhau);
-        //}
+       
 
         public async Task<AuthResult> AuthenticateAsync(string id, string matKhau)
         {
