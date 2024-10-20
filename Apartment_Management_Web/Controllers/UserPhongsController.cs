@@ -48,18 +48,7 @@ namespace Apartment_Management_Web.Controllers
             return Ok(userPhong);
         }
 
-        //[HttpPost("login")]
-        //public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
-        //{
-        //    var userPhong = await _userPhongService.AuthenticateAsync(loginModel.Id, loginModel.MatKhau);
-        //    if (userPhong == null)
-        //    {
-        //        return Unauthorized(new { message = "Tài khoản hoặc mật khẩu không đúng." });
-        //    }
-
-        //    var token = GenerateJwtToken(userPhong);
-        //    return Ok(new { token });
-        //}
+      
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
@@ -140,10 +129,10 @@ namespace Apartment_Management_Web.Controllers
 
             // Tạo danh sách các claim cho token
             var claims = new List<Claim>
-    {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Id), // Đặt Id của người dùng làm claim
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Đặt một ID duy nhất cho token
-    };
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id), // Đặt Id của người dùng làm claim
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Đặt một ID duy nhất cho token
+        };
 
             // Tạo đối tượng SecurityKey từ chuỗi bảo mật (cần đảm bảo rằng khóa có độ dài tối thiểu 32 ký tự)
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ItatriSuperSecretKeyThatIsAtLeast32CharactersLong!")); // Đảm bảo khóa đủ dài

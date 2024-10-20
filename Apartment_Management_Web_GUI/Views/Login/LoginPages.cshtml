@@ -41,10 +41,11 @@
 	<script src="~/js/jquery-3.3.1.min.js"></script>
 	<script src="~/js/main.js"></script>
 
+
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Xử lý sự kiện khi biểu mẫu được gửi
-            $('#loginForm').on('submit', function(event) {
+            $('#loginForm').on('submit', function (event) {
                 event.preventDefault(); // Ngăn chặn hành động mặc định của biểu mẫu
 
                 // Lấy dữ liệu từ các trường nhập liệu
@@ -57,11 +58,14 @@
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ Id: userId, MatKhau: password }),
-                    success: function(response) {
+                    success: function (response) {
                         // Nếu đăng nhập thành công
                         if (response.token) {
-                            // Lưu token vào localStorage (nếu cần) hoặc sessionStorage
+                            // Lưu token vào localStorage (nếu cần)
                             localStorage.setItem('token', response.token); // Ví dụ: lưu token để sử dụng sau này
+
+                            // Lưu `userId` vào localStorage
+                            localStorage.setItem('userId', userId);
 
                             // Chuyển hướng đến trang HomePageLogin
                             window.location.href = '@Url.Action("HomePageLogin", "Home")';
@@ -69,13 +73,14 @@
                             alert(response.message); // Hiển thị thông báo lỗi
                         }
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         alert('Đã xảy ra lỗi khi đăng nhập: ' + xhr.responseJSON.message);
                     }
                 });
             });
         });
     </script>
+
 
 
 </body>
