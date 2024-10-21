@@ -15,10 +15,11 @@ using System.Text;
 using Apartment_Management_Web.Models.Login;
 using Microsoft.AspNetCore.Authorization;
 using Apartment_Management_Web.Models.Authentication;
+using Apartment_Management_Web.Models.User;
 
 namespace Apartment_Management_Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/UserPhongs")]
     [ApiController]
     public class UserPhongsController : ControllerBase
     {
@@ -28,16 +29,17 @@ namespace Apartment_Management_Web.Controllers
         {
             _userPhongService = userPhongService;
         }
-
-        [HttpGet]
+        // API lấy danh sách User phòng 
+        [HttpGet("GetAllUserPhongs")]
         public async Task<ActionResult<IEnumerable<UserPhong>>> GetUserPhongs()
         {
             var userPhongs = await _userPhongService.GetAllUserPhongsAsync();
             return Ok(userPhongs);
         }
 
-        [Authorize]
-        [HttpGet("{id}")]
+
+        // API lấy User phòng theo Id
+        [HttpGet("GetUserPhongById")]
         public async Task<ActionResult<UserPhong>> GetUserPhong(string id)
         {
             var userPhong = await _userPhongService.GetUserPhongByIdAsync(id);
@@ -48,9 +50,9 @@ namespace Apartment_Management_Web.Controllers
             return Ok(userPhong);
         }
 
-      
 
-        [HttpPost("login")]
+        // API kiển tra đăng nhập tài khoản
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
             var authenticationResult = await _userPhongService.AuthenticateAsync(loginModel.Id, loginModel.MatKhau);
@@ -80,38 +82,54 @@ namespace Apartment_Management_Web.Controllers
         }
 
 
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserPhong(string id, UserPhong userPhong)
+        [HttpPut("UpdateUserPhong")]
+        public async Task<IActionResult> UpdateUserPhong(string id, [FromBody] UserPhong userPhong)
         {
             if (id != userPhong.Id)
             {
-                return BadRequest();
+                return BadRequest(new UpdateUserResponse
+                {
+                    IsSuccess = false,
+                    Message = "ID không khớp với thông tin người dùng."
+                });
             }
 
             var result = await _userPhongService.UpdateUserPhongAsync(userPhong);
             if (!result)
             {
-                return NotFound();
+                return NotFound(new UpdateUserResponse
+                {
+                    IsSuccess = false,
+                    Message = "Không tìm thấy người dùng để cập nhật."
+                });
             }
 
-            return NoContent();
+            return Ok(new UpdateUserResponse
+            {
+                IsSuccess = true,
+                Message = "Cập nhật thông tin người dùng thành công.",
+                UpdatedUser = userPhong // Trả về thông tin người dùng đã cập nhật
+            });
         }
 
-        [HttpDelete("{id}")]
+
+        // API xóa thông tin User phòng  
+        [HttpDelete("DeleteUserPhong")]
         public async Task<IActionResult> DeleteUserPhong(string id)
         {
-            var result = await _userPhongService.DeleteUserPhongAsync(id);
-            if (!result)
+            var response = await _userPhongService.DeleteUserPhongAsync(id);
+
+            if (!response.IsSuccess)
             {
-                return NotFound();
+                return NotFound(response);
             }
 
-            return NoContent();
+            return Ok(response); // Trả về thông tin thành công
         }
 
-        [HttpPost]
-        public async Task<ActionResult<UserPhong>> PostUserPhong(UserPhong userPhong)
+        // API tạo thông tin User phòng mới 
+        [HttpPost("CreateUserPhong")]
+        public async Task<ActionResult<UserPhong>> CreateUserPhong(UserPhong userPhong)
         {
             var result = await _userPhongService.CreateUserPhongAsync(userPhong);
             if (!result)

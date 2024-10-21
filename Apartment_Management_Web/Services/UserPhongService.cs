@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Apartment_Management_Web.Models.Authentication;
+using Apartment_Management_Web.Models.User;
 
 
 namespace Apartment_Management_Web.Services
@@ -79,15 +80,32 @@ namespace Apartment_Management_Web.Services
             }
         }
 
-        public async Task<bool> DeleteUserPhongAsync(string id)
+        
+
+        public async Task<UserRespone> DeleteUserPhongAsync(string id)
         {
             var userPhong = await _context.UserPhongs.FindAsync(id);
-            if (userPhong == null) return false;
+            if (userPhong == null)
+            {
+                return new UserRespone
+                {
+                    IsSuccess = false,
+                    Message = "Người dùng không tồn tại.",
+                    User = null
+                };
+            }
 
             _context.UserPhongs.Remove(userPhong);
             await _context.SaveChangesAsync();
-            return true;
+
+            return new UserRespone
+            {
+                IsSuccess = true,
+                Message = "Người dùng đã được xóa thành công.",
+                User = userPhong // Có thể trả về thông tin người dùng đã xóa nếu cần
+            };
         }
+
 
         public async Task<bool> CreateUserPhongAsync(UserPhong userPhong)
         {
