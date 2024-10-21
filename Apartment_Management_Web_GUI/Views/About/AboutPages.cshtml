@@ -93,84 +93,50 @@
     <!-- experience section -->
 
     <section class="experience_section layout_padding">
-      @*   <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="img-box">
-                        <img src="~/images/experience-img.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="detail-box">
-                        <div class="heading_container">
-                            <h2>
-                                Cung cấp trải nghiệm tốt nhất cho khách hàng
-                            </h2>
-                        </div>
-                        <p>
-                            Luôn lắng nghe phản hồi và cung cấp những trải nghiệm tiện ích tuyệt vời cho khách hàng thuộc hệ thống IT APARTMENT
-                        </p>
-                        <div class="btn-box">
-                            <a href="" class="btn-1">
-                                Đọc thêm
-                            </a>
-                            <a href="" class="btn-2">
-                                Tra cứu
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div> *@
+   
 
     <div class="container">
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">CCCD</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập căn cước công dân">
-                <small id="emailHelp" class="form-text text-muted">Chúng tôi không bao giờ chia sẻ thông tin này với bất kì ai </small>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Phone</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập số điện thoại">
-              </div>
-              <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Đồng ý </label>
-              </div>
-              <button type="submit" class="btn btn-primary">Tra cứu</button>
-            </form>
+        
 
-
+                   <form id="customerForm">
+  <div class="form-group">
+    <label for="cccdInput">CCCD</label>
+    <input type="text" class="form-control" id="cccdInput" placeholder="Nhập căn cước công dân" required>
+    <small id="emailHelp" class="form-text text-muted">Chúng tôi không bao giờ chia sẻ thông tin này với bất kì ai</small>
+  </div>
+  <div class="form-group">
+    <label for="phoneInput">Phone</label>
+    <input type="text" class="form-control" id="phoneInput" placeholder="Nhập số điện thoại" required>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="agreeCheck" required>
+    <label class="form-check-label" for="agreeCheck">Đồng ý</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Tra cứu</button>
+</form>
 <br />
 <label for="exampleInputEmail1">Thông tin khách</label>
 <br />
 
-<table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Họ và tên</th>
-                  <th scope="col">Phòng</th>
+<table class="table" id="customerTable">
+  <thead>
+    <tr>
+      <th scope="col">Họ và tên</th>
+      <th scope="col">Phòng</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" id="customerName">Trống</th>
+      <td id="customerRoom">Trống</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
 
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Trống</th>
-                  <td>Trống</td>
 
-
-
-
-                </tr>
-
-
-              </tbody>
-            </table>
             <br /> <label for="exampleInputEmail1">Thông tin phiếu thu</label> <br />
 <table class="table">
               <thead>
@@ -382,6 +348,44 @@
     <script src="~/js/jquery-3.4.1.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/custom.js"></script>
+
+   <script>
+        document.getElementById('customerForm').addEventListener('submit', async function (event) {
+          event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+          // Kiểm tra trạng thái của checkbox
+          const agreeCheck = document.getElementById('agreeCheck');
+          if (!agreeCheck.checked) {
+            alert('Bạn cần đồng ý trước khi tra cứu thông tin!');
+            return; // Ngừng thực hiện nếu checkbox không được đánh dấu
+          }
+
+          // Lấy giá trị từ input
+          const cccd = document.getElementById('cccdInput').value;
+          const phone = document.getElementById('phoneInput').value;
+
+          try {
+            // Gọi API
+            const response = await fetch(`https://localhost:7298/api/ThongTinKhaches/GetThongTinKhachByCDDD_Phone?cccd=${cccd}&phone=${phone}`);
+            const data = await response.json();
+
+            if (data.isSuccess) {
+              // Cập nhật bảng với thông tin khách
+              document.getElementById('customerName').innerText = data.khach.hoTen || 'Không có dữ liệu';
+              document.getElementById('customerRoom').innerText = data.khach.maPhong || 'Không có dữ liệu';
+            } else {
+              // Xử lý thông báo khi không tìm thấy thông tin
+              alert(data.message);
+              document.getElementById('customerName').innerText = 'Trống';
+              document.getElementById('customerRoom').innerText = 'Trống';
+            }
+          } catch (error) {
+            console.error('Lỗi:', error);
+            alert('Có lỗi xảy ra trong quá trình gọi API.');
+          }
+        });
+</script>
+
 
 
 </body>
