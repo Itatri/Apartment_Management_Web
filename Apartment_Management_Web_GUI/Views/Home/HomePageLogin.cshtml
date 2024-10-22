@@ -52,14 +52,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
                             </li>
-                            <li class="nav-item">
+                         @*    <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
+                            </li> *@
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("CategoryPage", "Category")">Phản hồi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Hóa đơn</a>
+                                <a class="nav-link" href="@Url.Action("InputBill", "Bill")">Hóa đơn</a>
                             </li>
                         </ul>
 
@@ -681,33 +681,42 @@
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/custom.js"></script>
 
-    <script>
-     
-        $(document).ready(function () {
-            // Hiển thị userId đã lưu trữ (nếu có)
-            var userId = localStorage.getItem('userId');
-            if (userId) {
-                $('#userIdDisplay').text(userId);
-            }
 
-            // Xử lý sự kiện nhấn vào nút Đăng xuất
-            $('#logoutBtn').on('click', function () {
-                // Xóa token và userId khỏi localStorage
-                localStorage.removeItem('token');
-                localStorage.removeItem('userId');
+            <script>
+          $(document).ready(function () {
+              // Lấy thông tin loginResponse từ localStorage
+              var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
-                // Kiểm tra xem token và userId đã bị xóa chưa
-                console.log('Token:', localStorage.getItem('token')); // Sẽ in ra null nếu đã xóa thành công
-                console.log('UserId:', localStorage.getItem('userId')); // Sẽ in ra null nếu đã xóa thành công
+              // Kiểm tra xem loginResponse có tồn tại hay không
+              if (loginResponse) {
+                  var user = loginResponse.user; // Lấy thông tin user từ loginResponse
 
-                // Chuyển hướng người dùng về trang đăng nhập
-                window.location.href = '@Url.Action("HomePage", "Home")';
-            });
+                  // Hiển thị userId nếu có
+                  if (user?.id) {
+                      $('#userIdDisplay').text(user.id);
+                  }
 
+                  // Các thông tin khác từ loginResponse, nếu cần hiển thị
+                  console.log('Token:', loginResponse.token);
+                  console.log('User:', user);
+                  console.log('Mã phòng:', user?.maPhong);
+                  console.log('Trạng thái:', user?.trangThai);
+              }
 
-        });
+              // Xử lý sự kiện nhấn vào nút Đăng xuất
+              $('#logoutBtn').on('click', function () {
+                  // Xóa toàn bộ thông tin từ localStorage
+                  localStorage.removeItem('loginResponse');
 
-    </script>
+                  // Kiểm tra xem loginResponse đã bị xóa chưa
+                  console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
+
+                  // Chuyển hướng người dùng về trang đăng nhập
+                  window.location.href = '@Url.Action("HomePage", "Home")';
+              });
+          });
+        </script>
+
 </body>
 
 

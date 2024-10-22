@@ -1,4 +1,4 @@
-@media (max-width: 1120px) {}
+﻿@media (max-width: 1120px) {}
 
 @media (max-width: 992px) {
   .hero_area {
@@ -185,7 +185,32 @@
 @media (max-width: 360px) {}
 
 @media (min-width: 1200px) {
-  .container {
-    max-width: 1170px;
-  }
+    .container {
+        /*max-width: 1170px;*/
+        max-width: 1600px;
+    }
+   
+}
+/* CSS thanh cuôn cho table Phiếu thu Bill/InputBill */
+.table-responsive {
+    overflow-x: auto; /* Bật cuộn ngang */
+}
+
+.table {
+    min-width: 1800px; /* Đặt chiều rộng tối thiểu cho bảng nếu cần */
+    text-align: center; /* Căn giữa nội dung trong bảng */
+}
+
+.table th, /* Căn giữa tiêu đề cột */
+.table td { /* Căn giữa nội dung ô */
+        text-align: center; /* Căn giữa nội dung */
+    }
+
+.btn-nhap {
+    height: 40px;
+    width: 170px;
+}
+/* Ẩn cột mã phản hồi */
+.hidden-column {
+    display: none; /* Ẩn cột */
 }
