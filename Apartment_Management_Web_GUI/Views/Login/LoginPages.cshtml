@@ -42,44 +42,42 @@
 	<script src="~/js/main.js"></script>
 
 
+
     <script>
-        $(document).ready(function () {
-            // Xử lý sự kiện khi biểu mẫu được gửi
-            $('#loginForm').on('submit', function (event) {
-                event.preventDefault(); // Ngăn chặn hành động mặc định của biểu mẫu
+    $(document).ready(function () {
+        // Xử lý sự kiện khi biểu mẫu được gửi
+        $('#loginForm').on('submit', function (event) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của biểu mẫu
 
-                // Lấy dữ liệu từ các trường nhập liệu
-                var userId = $('#userId').val();
-                var password = $('#password').val();
+            // Lấy dữ liệu từ các trường nhập liệu
+            var userId = $('#userId').val();
+            var password = $('#password').val();
 
-                // Gọi API để đăng nhập
-                $.ajax({
-                    url: 'https://localhost:7298/api/UserPhongs/Login', // Thay thế bằng URL của API hiện tại
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ Id: userId, MatKhau: password }),
-                    success: function (response) {
-                        // Nếu đăng nhập thành công
-                        if (response.token) {
-                            // Lưu token vào localStorage (nếu cần)
-                            localStorage.setItem('token', response.token); // Ví dụ: lưu token để sử dụng sau này
+            // Gọi API để đăng nhập
+            $.ajax({
+                url: 'https://localhost:7298/api/UserPhongs/Login', 
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ Id: userId, MatKhau: password }),
+                success: function (response) {
+                    // Nếu đăng nhập thành công
+                    if (response.isSuccess) {
+                        // Lưu toàn bộ đối tượng response vào localStorage để lấy ra sử dụng khi cần 
+                        localStorage.setItem('loginResponse', JSON.stringify(response));
 
-                            // Lưu `userId` vào localStorage
-                            localStorage.setItem('userId', userId);
-
-                            // Chuyển hướng đến trang HomePageLogin
-                            window.location.href = '@Url.Action("HomePageLogin", "Home")';
-                        } else {
-                            alert(response.message); // Hiển thị thông báo lỗi
-                        }
-                    },
-                    error: function (xhr) {
-                        alert('Đã xảy ra lỗi khi đăng nhập: ' + xhr.responseJSON.message);
+                        // Chuyển hướng đến trang HomePageLogin
+                        window.location.href = '@Url.Action("HomePageLogin", "Home")';
+                    } else {
+                        alert(response.message); // Hiển thị thông báo nếu lỗi
                     }
-                });
+                },
+                error: function (xhr) {
+                    alert('Đã xảy ra lỗi khi đăng nhập: ' + xhr.responseJSON.message);
+                }
             });
         });
-    </script>
+    });
+</script>
 
 
 

@@ -1,0 +1,554 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Spering</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+
+  
+
+
+</head>
+
+<body class="sub_page">
+    <div class="hero_area">
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="#">
+                        <img src="~/images/apartment.png" alt="" />
+                        <span>
+                            IT APARTMENT
+                        </span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+
+
+                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="@Url.Action("HomePageLogin", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
+                            </li>
+                            @*    <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
+                            </li> *@
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("CategoryPage", "Category")">Phản hồi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("InputBill", "Bill")">Hóa đơn</a>
+                            </li>
+                        </ul>
+
+
+
+                        <div class="user_option">
+                            <a href="#">
+                                <span>
+                                    Tài khoản : <span id="userIdDisplay"></span>
+                                </span>
+                            </a>
+                            <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
+                                Đăng xuất
+                            </span>
+                            <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                                @*  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button> *@
+                            </form>
+                        </div>
+
+
+
+                    </div>
+                    <div>
+                        <div class="custom_menu-btn ">
+                            <button>
+                                <span class=" s-1">
+
+                                </span>
+                                <span class="s-2">
+
+                                </span>
+                                <span class="s-3">
+
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+    </div>
+
+
+                 <!-- Table danh sách phiếu thu của phòng -->
+
+                <section class="experience_section layout_padding">                
+                <div class="container">
+               <label for="exampleInputEmail1">Phản hồi của cư dân phòng : <span id="maPhongLabel"></span></label>
+                <br> <br>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                  <th scope="col" class="hidden-column">Mã phản hồi</th> <!-- Thêm class để ẩn cột -->
+
+                                <th scope="col">Nội dung phản hồi </th>
+                                <th scope="col">Ngày gửi </th>
+                                <th scope="col">Trả lời </th>
+                                <th scope="col">Ngày gửi</th>
+                                <th scope="col">Trạng thái</th>
+                             
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                   <th scope="row" class="hidden-column">Trống</th>
+                                <td>Trống</td>
+                                <td>Trống</td>
+                                <td>Trống</td>
+                                <td>Trống</td>
+                                <td>Trống</td>
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+             
+   
+
+
+
+
+                                        <!-- Button tạo phản hồi -->
+                    <section class="about_section layout_padding">
+                        <div class="container">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Phản hồi dịch vụ</button>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-10 col-lg-9 mx-auto">
+                                    <div class="img-box">
+                                        <img src="/images/feedback.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-box">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Modal tạo phản hồi -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Phản hồi dịch vụ</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Phòng</label>
+                                            <input type="text" class="form-control" id="recipient-name" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Nội dung</label>
+                                            <textarea class="form-control" id="message-text"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                    <button type="button" class="btn btn-primary">Đồng ý</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                  <!-- Modal thông báo gửi phản hồi thành công --> 
+<div class="modal" id="successModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn đã gửi phản hồi thành công!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- end about section -->
+    <!-- info section -->
+
+    <section class="info_section ">
+        <div class="info_container layout_padding-top">
+            <div class="container">
+                <div class="info_top">
+                    <div class="info_logo">
+                        <img src="~/images/apartment.png" alt="" />
+                        <span>
+
+                            IT APARTMENT
+
+                        </span>
+                    </div>
+                    <div class="social_box">
+                        <a href="#">
+                            <img src="~/images/fb.png" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="~/images/twitter.png" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="~/images/linkedin.png" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="~/images/instagram.png" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="~/images/youtube.png" alt="">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="info_main">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-2">
+                            <div class="info_link-box">
+                                <h5>
+                                    Liên kết
+                                </h5>
+                                <ul>
+                                    <li class=" active">
+                                        <a class="" href="index.html">Trang chủ <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a class="" href="about.html">Về chúng tôi  </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="" href="work.html">Tra cứu </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="" href="category.html">Phản hồi </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <h5>
+                                Văn phòng
+                            </h5>
+                            <p>
+                                Tại 163 Tây Thạnh, Tân Phú , Hồ Chí Minh
+                            </p>
+                        </div>
+
+                        <div class="col-md-3 col-lg-2 offset-lg-1">
+                            <h5>
+                                Thông tin
+                            </h5>
+                            <p>
+                                Cung cấp dịch vụ căn hộ và hỗ trợ khách hàng sử dụng dịch vụ
+                            </p>
+                        </div>
+
+                        <div class="col-md-3  offset-lg-1">
+                            <div class="info_form ">
+                                <h5>
+                                    Liên hệ
+                                </h5>
+                                <form action="">
+                                    <input type="email" placeholder="Email">
+                                    <button>
+                                        Gửi
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9 col-md-10 mx-auto">
+                        <div class="info_contact layout_padding2">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="#" class="link-box">
+                                        <div class="img-box">
+                                            <img src="~/images/location.png" alt="">
+                                        </div>
+                                        <div class="detail-box">
+                                            <h6>
+                                                Tân Phú
+                                            </h6>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#" class="link-box">
+                                        <div class="img-box">
+                                            <img src="~/images/mail.png" alt="">
+                                        </div>
+                                        <div class="detail-box">
+                                            <h6>
+                                                itapartment@gmail.com
+                                            </h6>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-5">
+                                    <a href="#" class="link-box">
+                                        <div class="img-box">
+                                            <img src="~/images/call.png" alt="">
+                                        </div>
+                                        <div class="detail-box">
+                                            <h6>
+                                                Call +03 89634776
+                                            </h6>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- end info section -->
+    <!-- footer section -->
+    <footer class="container-fluid footer_section ">
+        <div class="container">
+            <p>
+                &copy; <span id="displayDate"></span> All Rights Reserved By
+                <a href="https://github.com/Itatri">Itatri</a>
+            </p>
+        </div>
+    </footer>
+    <!-- end  footer section -->
+
+
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/custom.js"></script>
+
+
+     <script>
+            $(document).ready(function () {
+                // Lấy thông tin loginResponse từ localStorage
+                var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+
+                // Kiểm tra xem loginResponse có tồn tại hay không
+                if (loginResponse) {
+                    var user = loginResponse.user;
+
+                    // Hiển thị userId nếu có
+                    if (user?.id) {
+                        $('#userIdDisplay').text(user.id);
+                    }
+
+                    // Các thông tin khác từ loginResponse, nếu cần hiển thị
+                    console.log('Token:', loginResponse.token);
+                    console.log('User:', user);
+                    console.log('Mã phòng:', user?.maPhong);
+                    console.log('Trạng thái:', user?.trangThai);
+                }
+
+                // Xử lý sự kiện nhấn vào nút Đăng xuất
+                $('#logoutBtn').on('click', function () {
+                    localStorage.removeItem('loginResponse');
+                    console.log('loginResponse:', localStorage.getItem('loginResponse'));
+                    window.location.href = '@Url.Action("HomePage", "Home")';
+                });
+
+                var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                var maPhong = loginResponse?.user?.maPhong; 
+
+                if (maPhong) {
+                    $('#maPhongLabel').text(maPhong);
+                } else {
+                    $('#maPhongLabel').text('Không tìm thấy mã phòng');
+                }
+
+              if (maPhong) {
+                // Gọi API để lấy thông tin phiếu thu
+                $.ajax({
+                    url: `https://localhost:7298/api/FeedBacks/GetThongTinFeedbackBy_MaPhong?maPhong=${maPhong}`,
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + loginResponse.token
+                    },
+                    success: function (response) {
+                        if (response.isSuccess) {
+                            var feedBacks = response.feedBacks;
+                            feedBacks.sort(function (a, b) {
+                                return new Date(b.ngayGui) - new Date(a.ngayGui);
+                            });
+
+                            $('tbody').empty(); // Xóa tất cả các hàng trong tbody
+
+                            feedBacks.forEach(function (Feedback) {
+                                var trangThaiClass = Feedback.trangThai ? 'text-success' : 'text-danger';
+                                var trangThaiText = Feedback.trangThai ? 'Đã trả lời' : 'Chưa trả lời';
+
+                                // Kiểm tra nếu trường nào null thì thay thế bằng 'Chưa có' và thêm màu đỏ
+                                var checkNull = function(value) {
+                                    return value ? value : '<span style="color:red;">Trống</span>';
+                                };
+
+                                // Hàm định dạng lại ngày thành HH:mm dd/MM/yyyy
+                                var formatDate = function(dateStr) {
+                                    if (!dateStr) return '<span style="color:red;">Trống</span>';
+                                    var date = new Date(dateStr);
+                                    var day = String(date.getDate()).padStart(2, '0');
+                                    var month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+                                    var year = date.getFullYear();
+                                    var hours = String(date.getHours()).padStart(2, '0');
+                                    var minutes = String(date.getMinutes()).padStart(2, '0');
+                                    return `${hours}:${minutes} ${day}/${month}/${year}`;
+                                };
+
+                                var newRow = `
+                                    <tr>
+                                       <th scope="row" class="hidden-column">${checkNull(Feedback.maFb)}</th> <!-- Thêm class để ẩn cột -->
+                                        <td>${checkNull(Feedback.moTa)}</td>
+                                        <td>${formatDate(Feedback.ngayGui)}</td> <!-- Định dạng ngày gửi -->
+                                        <td class="text-success">${checkNull(Feedback.phanHoi)}</td>
+                                        <td>${formatDate(Feedback.ngayPhanHoi)}</td> <!-- Định dạng ngày phản hồi -->
+                                        <td class="${trangThaiClass}">${trangThaiText}</td>
+                                    </tr>
+                                `;
+                                $('tbody').append(newRow);
+                            });
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
+                    }
+                });
+            } else {
+                alert('Không tìm thấy mã phòng trong localStorage.');
+            }
+
+
+               // Khi modal mở, tự động điền mã phòng vào trường dữ liệu Phòng
+                $('#exampleModal').on('show.bs.modal', function (event) {
+                    var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                    var maPhong = loginResponse?.user?.maPhong; // Lấy mã phòng từ loginResponse
+
+                    var modal = $(this);
+                    modal.find('#recipient-name').val(maPhong); // Điền mã phòng vào input Phòng
+                });
+
+                // Sử dụng .off() để đảm bảo sự kiện click chỉ được gán một lần
+                $('.modal-footer .btn-primary').off('click').on('click', function () {
+                    var maPhong = $('#recipient-name').val(); // Lấy giá trị mã phòng từ input
+                    var moTa = $('#message-text').val(); // Lấy giá trị mô tả từ textarea
+
+                    if (!maPhong || !moTa) {
+                        alert('Vui lòng điền đầy đủ thông tin.');
+                        return;
+                    }
+
+                    var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+
+                    $.ajax({
+                        url: 'https://localhost:7298/api/FeedBacks/CreateFeedback',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        data: JSON.stringify({
+                            maPhong: maPhong, // Truyền mã phòng vào request
+                            moTa: moTa // Truyền mô tả vào request
+                        }),
+                        success: function (response) {
+                            if (response.isSuccess) {
+                                // Đóng exampleModal
+                                $('#exampleModal').modal('hide');
+                                // Hiển thị successModal
+                                $('#successModal').modal('show');
+
+                                // Sự kiện nhấn vào nút "Ok" trong successModal
+                                $('#successModal .btn-primary').off('click').on('click', function () {
+                                    location.reload(); // Tải lại trang khi nhấn Ok
+                                });
+                            } else {
+                                alert('Không thể tạo phản hồi: ' + response.message);
+                            }
+                        },
+                        error: function (xhr) {
+                            alert('Đã xảy ra lỗi khi tạo phản hồi: ' + xhr.responseJSON.message);
+                        }
+                    });
+                });
+
+
+               
+
+
+
+            
+            });
+        </script>
+
+
+
+
+</body>
+
+
+</html>

@@ -51,7 +51,7 @@
                                 <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
                             </li>
                           @*   <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
+                                <a class="nav-link" href="@Url.Action("SearchBillPage", "Bill")">Tra cứu</a>
                             </li> *@
                           @* @*   <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("CategoryPage", "Category")">Phản hồi</a>
@@ -670,6 +670,17 @@
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/custom.js"></script>
 
+    <script>
+    $(document).ready(function () {
+        // Kiểm tra xem loginResponse có tồn tại trong localStorage không
+        var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+
+        // Nếu loginResponse tồn tại, chuyển hướng đến trang HomePageLogin
+        if (loginResponse) {
+            window.location.href = '@Url.Action("HomePageLogin", "Home")';
+        }
+    });
+</script>
 
 
 </body>
