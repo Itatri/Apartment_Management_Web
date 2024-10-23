@@ -194,6 +194,8 @@
 /* CSS thanh cuôn cho table Phiếu thu Bill/InputBill */
 .table-responsive {
     overflow-x: auto; /* Bật cuộn ngang */
+    /*Thêm viền cho table*/
+    border: 2px solid #c7c7c7;
 }
 
 .table {

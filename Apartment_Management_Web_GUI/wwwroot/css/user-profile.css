@@ -22,7 +22,7 @@ body {
 
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: #0000FF
 }
 
 .profile-button {
@@ -32,21 +32,21 @@ body {
 }
 
     .profile-button:hover {
-        background: #682773
+        background: #045ad9
     }
 
     .profile-button:focus {
-        background: #682773;
+        background: #045ad9;
         box-shadow: none
     }
 
     .profile-button:active {
-        background: #682773;
+        background: #045ad9;
         box-shadow: none
     }
 
 .back:hover {
-    color: #682773;
+    color: #045ad9;
     cursor: pointer
 }
 
@@ -55,8 +55,19 @@ body {
 }
 
 .add-experience:hover {
-    background: #BA68C8;
+    background: #0000FF;
     color: #fff;
     cursor: pointer;
-    border: solid 1px #BA68C8
+    border: solid 1px #0000FF
+}
+
+.col-md-12 {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 80px;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
 }
