@@ -55,5 +55,79 @@ namespace Apartment_Management_Web.Controllers
             return Ok(response); // Trả về trạng thái 200 với response
         }
 
+        // API lấy thông tin khách theo CCCD và Phone
+        [HttpGet("GetThongTinKhachByPhong")]
+        public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByPhong(string maPhong)
+        {
+            var thongTinKhach = await _ThongTinKhachService.GetThongTinKhachByPhongAsync(maPhong);
+
+            var response = new APICustomerRespone();
+
+            if (thongTinKhach == null)
+            {
+                response.IsSuccess = false;
+                response.Message = "Không tìm thấy thông tin khách.";
+                response.Khachs = null;
+                return NotFound(response); // Trả về trạng thái 404 với response
+            }
+
+            response.IsSuccess = true;
+            response.Message = "Lấy thông tin khách thành công.";
+            response.Khachs = thongTinKhach; // Trả về thông tin khách tìm thấy
+
+            return Ok(response); // Trả về trạng thái 200 với response
+        }
+
+        // API lấy thông tin khách theo CCCD và Phone
+        [HttpGet("GetThongTinKhachByMaKhachTro")]
+        public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByMaKhachTro(string maKhachTro)
+        {
+            var thongTinKhach = await _ThongTinKhachService.GetThongTinKhachByMaKhachTroAsync(maKhachTro);
+
+            var response = new APICustomerRespone();
+
+            if (thongTinKhach == null)
+            {
+                response.IsSuccess = false;
+                response.Message = "Không tìm thấy thông tin khách.";
+                response.Khachs = null;
+                return NotFound(response); // Trả về trạng thái 404 với response
+            }
+
+            response.IsSuccess = true;
+            response.Message = "Lấy thông tin khách thành công.";
+            response.Khachs = thongTinKhach; // Trả về thông tin khách tìm thấy
+
+            return Ok(response); // Trả về trạng thái 200 với response
+        }
+
+
+
+        [HttpPut("UpdateThongTinKhach")]
+        public async Task<ActionResult<APICustomerRespone>> UpdateThongTinKhach(string maKhachTro, [FromBody] UpdateThongTinKhachRequest request)
+        {
+            var isUpdated = await _ThongTinKhachService.UpdateThongTinKhachAsync(maKhachTro, request);
+
+            if (!isUpdated)
+            {
+                return NotFound(new APICustomerRespone
+                {
+                    IsSuccess = false,
+                    Message = "Không tìm thấy thông tin khách.",
+                    Khachs = null
+                });
+            }
+
+            return Ok(new APICustomerRespone
+            {
+                IsSuccess = true,
+                Message = "Cập nhật thông tin khách thành công.",
+                Khachs = null // Bạn có thể trả về thông tin khách đã cập nhật nếu cần
+            });
+        }
+
+
+
+
     }
 }

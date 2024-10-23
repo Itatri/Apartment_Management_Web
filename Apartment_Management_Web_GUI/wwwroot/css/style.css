@@ -3,11 +3,13 @@
   color: #0c0c0c;
   background-color: #ffffff;
 }
-
+/*Chỉnh padding footer*/
 .layout_padding {
-    padding-top: 90px;
-   /* padding-bottom: 90px;*/
-    padding-bottom: 0px;
+   /* padding-top: 90px;
+    padding-bottom: 90px;*/
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* padding-bottom: 0px;*/
 }
 
 .layout_padding2 {
