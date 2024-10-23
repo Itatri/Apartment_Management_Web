@@ -1,12 +1,13 @@
-body {
+﻿body {
   font-family: 'Poppins', sans-serif;
   color: #0c0c0c;
   background-color: #ffffff;
 }
 
 .layout_padding {
-  padding-top: 90px;
-  padding-bottom: 90px;
+    padding-top: 90px;
+   /* padding-bottom: 90px;*/
+    padding-bottom: 0px;
 }
 
 .layout_padding2 {
@@ -165,13 +166,30 @@ a:focus {
   color: #ffffff;
   font-size: 24px;
 }
-
+/*
 .custom_nav-container {
   z-index: 99999;
   padding: 0;
   height: 70px;
-}
+}*/
 
+/* Fix navbar vừa với Dropdown*/
+.custom_nav-container {
+    z-index: 99999;
+    padding: 0;
+    /*margin-bottom: 150px;*/
+    height: 70px;
+}
+/*Đổi màu chữ dropdown tài khoản*/
+/*.header_section .user_option a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: #595555;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}*/
 .custom_nav-container .navbar-toggler {
   outline: none;
 }

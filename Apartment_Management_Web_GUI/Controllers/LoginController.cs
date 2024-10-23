@@ -9,6 +9,12 @@ namespace Apartment_Management_Web_GUI.Controllers
             return View();
         }
 
+        public IActionResult UserProfile()
+        {
+            return View();
+        }
+
+
         public IActionResult RegisterPages()
         {
             return View();

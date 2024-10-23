@@ -200,10 +200,15 @@
     min-width: 1800px; /* Đặt chiều rộng tối thiểu cho bảng nếu cần */
     text-align: center; /* Căn giữa nội dung trong bảng */
 }
+ /* Căn giữa tiêu đề cột */
+    .table th {
+        text-align: left; /* Căn giữa nội dung */
+    }
 
-.table th, /* Căn giữa tiêu đề cột */
-.table td { /* Căn giữa nội dung ô */
-        text-align: center; /* Căn giữa nội dung */
+    .table td { /* Căn giữa nội dung ô */
+        text-align: left; /* Căn giữa nội dung */
+        max-width: 400px;
+
     }
 
 .btn-nhap {
