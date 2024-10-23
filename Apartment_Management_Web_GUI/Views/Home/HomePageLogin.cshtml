@@ -34,7 +34,7 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="@Url.Action("HomePage", "Home")">
                         <img src="~/images/apartment.png" alt="" />
                         <span>
                             IT APARTMENT
@@ -49,9 +49,9 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
+                         @*    <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
-                            </li>
+                            </li> *@
                          @*    <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
                             </li> *@
@@ -61,6 +61,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("InputBill", "Bill")">Hóa đơn</a>
                             </li>
+
+                         
+
                         </ul>
 
                   
@@ -68,16 +71,27 @@
                         <div class="user_option">
                             <a href="#">
                                 <span>
-                                    Tài khoản : <span id="userIdDisplay"></span>
+
+                                <div class="button-container">
+                                  <a class="btn btn-secondary" href="@Url.Action("UserProfile", "Login")" role="button">
+                                     Tài khoản  : &nbsp; <span id="userIdDisplay"></span>
+                                  </a>
+                                </div>
+
                                 </span>
+
                             </a>
-                            <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
+                           
+                              <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
                                 Đăng xuất
-                            </span>
+                            </span> 
+
                             <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                                @*  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button> *@
                             </form>
                         </div>
+
+
 
                     </div>
                     <div>
@@ -680,6 +694,7 @@
     <script src="~/js/jquery-3.4.1.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/custom.js"></script>
+   
 
 
             <script>
