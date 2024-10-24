@@ -1,4 +1,4 @@
-# Phần mềm Website dành cho cư dân thuê căn hộ ( User ) 
+# Website dành cho cư dân thuê căn hộ ( User ) 
 
 
 ## Các chức năng
