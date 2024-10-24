@@ -1,7 +1,7 @@
 # Website dành cho cư dân thuê căn hộ ( User ) 
 
 
-## Các chức năng
+### Các chức năng
 
 - Cho phép người dùng ...
 
