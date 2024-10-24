@@ -15,34 +15,29 @@
 
     <title>IT APARTMENT</title>
 
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+  
 
+        <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="~/css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
+    <!-- Responsive style -->
     <link href="~/css/responsive.css" rel="stylesheet" />
+    <link href="~/css/user-profile.css" rel="stylesheet" />
 
-    
-     <link href="~/css/user-profile.css" rel="stylesheet" />
+    <!-- Bootstrap Datepicker CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-
-
-
-<!-- Bootstrap Datepicker CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Bootstrap Datepicker JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Bootstrap Datepicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 
 
@@ -77,7 +72,7 @@
                                                                 <li class="nav-item active">
                                                                     <a class="nav-link" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
                                                                 </li>
-                                                               @*  <li class="nav-item">
+                                                                @*    <li class="nav-item">
                                                                     <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
                                                                 </li> *@
                                                                 @*    <li class="nav-item">
@@ -88,6 +83,9 @@
                                                                 </li>
                                                                 <li class="nav-item">
                                                                     <a class="nav-link" href="@Url.Action("InputBill", "Bill")">Hóa đơn</a>
+                                                                </li>
+                                                                 <li class="nav-item">
+                                                                    <a class="nav-link" href="@Url.Action("UserProfile", "Login")">Thành viên</a>
                                                                 </li>
 
 
@@ -101,7 +99,7 @@
                                                                     <span>
 
                                                                     <div class="button-container">
-                                                                      <a class="btn btn-secondary" href="@Url.Action("UserProfile", "Login")" role="button">
+                                                                      <a class="btn btn-secondary" href="#" role="button">
                                                                          Tài khoản  : &nbsp; <span id="userIdDisplay"></span>
                                                                       </a>
                                                                     </div>
@@ -144,12 +142,12 @@
                                         </div>
 
                                             <!-- Phần Danh sách cư dân của phòng -->
-                                            <div class="container rounded bg-white mt-5 mb-5">
+                                            <div class="container rounded bg-white mt-5 mb-5" id="danhSachCuDan">
                                                 <div class="row" style="border: 2px solid #ededed;">
-                                                    <section class="experience_section layout_padding" style="padding-bottom: 0px; padding-top: 50px;">
+                                                    <section class="experience_section layout_padding" style="padding-bottom: 100px;min-width: 0px;padding-top: 50px;"">
                                                         <div class="container">
                                                             <label for="exampleInputEmail1">
-                                                                Khách trọ phòng : <span id="maPhongLabel"></span>
+                                                                Thành viên phòng : <span id="maPhongLabel"></span>
                                                             </label>
                                                             <br><br>
                                                             <div class="table-responsive">
@@ -186,9 +184,14 @@
                                                                 </table>
                                                             </div>
                                                             <br />
-                                                            <div class="container" style="text-align: center;">
+                                                            @* <div class="container" style="text-align: center;">
                                                                 <button type="button" class="btn btn-primary" onclick="showDetail()">Kê khai thông tin khách mới</button>
-                                                            </div>
+                                                            </div> *@
+                                                          <div class="container" style="text-align: center;">
+                                                         <button id="keKhaiKhachMoiBtn" class="btn btn-success create-button">Kê khai thông tin khách mới</button>
+                                                        </div>
+
+
                                                             <br />
                                                         </div>
                                                     </section>
@@ -198,7 +201,7 @@
 
                                         @* Thông tin chi tiết của cư dân *@
                                          @*   <div id="chiTietCuDan" class="container rounded bg-white mt-5 mb-5" style="display: none;"> *@ @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
-                                           <div  class="container rounded bg-white mt-5 mb-5" > @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
+                                           <div id="chiTietCuDan"  class="container rounded bg-white mt-5 mb-5" style="display: none;" > @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
                                         <div class="row" style="border: 2px solid #ededed;">
                                             <div class="col-md-3 border-right">
                                                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -257,7 +260,7 @@
 
                                                         <div class="col-md-12"><label class="labels">Số Điện Thoại</label><input type="text" class="form-control" placeholder="Nhập số điện thoại" value=""></div>
                                                         <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Nhập email" value=""></div>
-                                                        <div class="col-md-12"><label class="labels">Phòng</label><input type="text" class="form-control" placeholder="Thông tin phòng" value=""></div>
+                                                        <div class="col-md-12"><label class="labels">Phòng</label><input type="text" class="form-control" placeholder="Thông tin phòng" value="" readonly></div>
                                                          @* <div class="col-md-12">
                                                             <label class="labels">Quan hệ</label>
                                                             <select class="form-control">
@@ -355,6 +358,13 @@
                                                         <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
                                                     </div> *@
                                                     <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Lưu thông tin </button></div>
+                                                    <div class="col-md-12" style="text-align: center;">
+                                                        <!-- Nút bấm bằng hình ảnh -->
+                                                        <button class="btn-image" style="border: none; background: none; padding: 0;">
+                                                            <img src="~/images/arrow-left-big.png" alt="Quay lại" style="cursor: pointer;">
+                                                        </button>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -466,6 +476,7 @@
                                                         </select>
                                                     </div>
 
+                                                    
 
 
                                                 </div>
@@ -474,41 +485,10 @@
                                     </div>
                                     </div>
                                     </div>
-                              
+                             
 
 
-                    <!-- Modal tạo phản hồi -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Phản hồi dịch vụ</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Phòng</label>
-                                            <input type="text" class="form-control" id="recipient-name" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Nội dung</label>
-                                            <textarea class="form-control" id="message-text"></textarea>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                                    <button type="button" class="btn btn-primary">Đồng ý</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                  <!-- Modal thông báo gửi phản hồi thành công --> 
+                  <!-- Modal thông báo lưu thông tin thành công -->
                     <div class="modal" id="successModal" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -519,7 +499,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Bạn đã gửi phản hồi thành công!</p>
+                                    <p>Bạn đã lưu thông tin thành công!</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
@@ -527,6 +507,7 @@
                             </div>
                         </div>
                     </div>
+
 
 
                     <!-- end about section -->
@@ -714,11 +695,14 @@
                                         console.log('Mã phòng:', user?.maPhong);
                                         console.log('Trạng thái:', user?.trangThai);
 
-                                                // Hiển thị mã phòng
-                                          var maPhong = user?.maPhong;
+
+                                         // Hiển thị mã phòng
+                                         var maPhong = user?.maPhong;
 
                                          if (maPhong) {
+                                        
                                             $('#maPhongLabel').text(maPhong);
+
                                             // Gọi API để lấy thông tin khách theo mã phòng
                                             $.ajax({
                                                 url: 'https://localhost:7298/api/ThongTinKhaches/GetThongTinKhachByPhong',
@@ -831,6 +815,12 @@
                                                             $(this).attr('src', '/images/signature.png');
                                                         });
                                                         $('#chuKyName').text(chuKyFileName);
+                                                         
+
+                                                        $('#danhSachCuDan').hide();
+                                                       // Hiển thị thông tin chi tiết
+                                                        $('#chiTietCuDan').show();
+
 
                                                     } else {
                                                         alert('Không tìm thấy thông tin khách.');
@@ -847,97 +837,172 @@
                                     });
 
 
+                                          // Sự kiện click cho nút "Kê khai thông tin khách mới"
+                                $('#keKhaiKhachMoiBtn').on('click', function () {
+                                    // Ẩn danh sách cư dân
+                                    $('#danhSachCuDan').hide();
 
-$(".profile-button").click(function(event) {
-    event.stopPropagation(); // Ngăn chặn sự kiện tiếp tục
+                                    // Hiển thị chi tiết cư dân
+                                    $('#chiTietCuDan').show();
 
-    // Lấy giá trị từ các input
-    const maKhachTro = $("#hiddenMaKhachTro").val(); // Lấy mã khách trọ từ input ẩn
-    const hoTen = $("input[placeholder='Nhập họ tên']").val();
-    const gioiTinh = $("select[name='gioiTinh']").val();
-    const ngaySinh = convertDate($("#datepicker").val()); // Chuyển đổi ngày sinh
-    const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
-    const email = $("input[placeholder='Nhập email']").val();
-    const phong = $("input[placeholder='Thông tin phòng']").val();
-    const quanHe = $("select[name='quanHe']").val();
-    const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
-    const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
-    const queQuan = $("select[name='queQuan']").val();
-    const ngayCap = convertDate($("#datepicker_ngaycap").val()); // Chuyển đổi ngày cấp
-    const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
-    const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
+                                    // Đặt lại tất cả các trường thông tin trong chi tiết cư dân để nhập thông tin mới
+                                    resetChiTietCuDan(); // Gọi hàm reset
+                                });
 
-    // Nếu không có tệp chữ ký, đặt giá trị mặc định là 'None.jpg'
-    const chuKy = chuKyFile ? chuKyFile.name : 'None.jpg';
 
-    // Tạo đối tượng dữ liệu để gửi
-    const data = {
-        HoTen: hoTen,
-        GioiTinh: gioiTinh,
-        NgaySinh: ngaySinh,
-        Phone: soDienThoai,
-        Email: email,
-        MaPhong: phong,
-        QuanHe: quanHe,
-        CCCD: soCCCD,
-        NoiCap: noiCap,
-        QueQuan: queQuan,
-        NgayCap: ngayCap,
-        ChuKy: chuKy,
-        TrangThai: trangThai 
-    };
 
-    // Kiểm tra nếu mã khách trọ có giá trị
-    if (maKhachTro) {
-        // Gọi API để cập nhật thông tin khách trọ
-        $.ajax({
-            url: `https://localhost:7298/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
-            type: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            success: function(response) {
-                alert("Cập nhật thông tin thành công!");
-                console.log(response);
+                                    // Sự kiện click cho nút quay lại
+                                    $(document).on('click', '.btn-image', function () {
+                                        // Ẩn phần thông tin chi tiết
+                                        $('#chiTietCuDan').hide();
 
-                // Bắt đầu tải tệp chữ ký lên server
-                if (chuKyFile) {
-                    const formData = new FormData();
-                    formData.append("file", chuKyFile); // Thêm tệp chữ ký vào formData
+                                        // Hiển thị lại danh sách cư dân
+                                        $('#danhSachCuDan').show();
 
-                    // Gọi API để tải ảnh chữ ký lên
-                    $.ajax({
-                        url: 'https://localhost:7298/api/ThongTinKhaches/Upload', // Đường dẫn API để tải tệp
-                        type: 'POST',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function(uploadResponse) {
-                            alert("Tải ảnh chữ ký lên thành công!");
-                            console.log(uploadResponse);
+                                        // Load lại trang
+                                        location.reload(); // Làm mới lại trang
+                                    });
 
-                            // Hiển thị ảnh chữ ký
-                            $('.img-chuky').attr('src', '/images/' + chuKyFile.name).on('error', function () {
-                                $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
-                            });
-                        },
-                        error: function(uploadError) {
-                            alert("Tải ảnh chữ ký lên thất bại!");
-                            console.error(uploadError.responseText);
-                        }
-                    });
-                } else {
-                    alert("Không có tệp chữ ký để tải lên.");
-                }
-            },
-            error: function(xhr, status, error) {
-                alert("Cập nhật thông tin thất bại!");
-                console.error(xhr.responseText);
-            }
-        });
-    } else {
-        alert("Không thể lấy mã khách trọ.");
-    }
-});
+                                   
+
+
+
+                                $(".profile-button").click(function(event) {
+                                            event.stopPropagation(); // Ngăn chặn sự kiện tiếp tục
+
+                                            // Lấy giá trị từ các input
+                                            const maKhachTro = $("#hiddenMaKhachTro").val(); // Lấy mã khách trọ từ input ẩn
+                                            const hoTen = $("input[placeholder='Nhập họ tên']").val();
+                                            const gioiTinh = $("select[name='gioiTinh']").val();
+                                            const ngaySinh = convertDate($("#datepicker").val()); // Chuyển đổi ngày sinh
+                                            const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
+                                            const email = $("input[placeholder='Nhập email']").val();
+                                            const phong = $("input[placeholder='Thông tin phòng']").val();
+                                            const quanHe = $("select[name='quanHe']").val();
+                                            const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
+                                            const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
+                                            const queQuan = $("select[name='queQuan']").val();
+                                            const ngayCap = convertDate($("#datepicker_ngaycap").val()); // Chuyển đổi ngày cấp
+                                            const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
+                                            const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
+
+                                            // Nếu không có tệp chữ ký, đặt giá trị mặc định là 'None.jpg'
+                                            const chuKy = chuKyFile ? chuKyFile.name : 'None.jpg';
+
+                                            // Tạo đối tượng dữ liệu để gửi
+                                            const data = {
+                                                HoTen: hoTen,
+                                                GioiTinh: gioiTinh,
+                                                NgaySinh: ngaySinh,
+                                                Phone: soDienThoai,
+                                                Email: email,
+                                                MaPhong: phong,
+                                                QuanHe: quanHe,
+                                                CCCD: soCCCD,
+                                                NoiCap: noiCap,
+                                                QueQuan: queQuan,
+                                                NgayCap: ngayCap,
+                                                ChuKy: chuKy, // Đảm bảo rằng chuKy được bao gồm ở đây
+                                                TrangThai: trangThai 
+                                            };
+
+                                            // Kiểm tra nếu mã khách trọ có giá trị
+                                            if (maKhachTro) {
+                                                // Gọi API để cập nhật thông tin khách trọ
+                                                $.ajax({
+                                                    url: `https://localhost:7298/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
+                                                    type: 'PUT',
+                                                    contentType: 'application/json',
+                                                    data: JSON.stringify(data),
+                                                    success: function(response) {
+                                                        alert("Cập nhật thông tin thành công!");
+                                                        console.log(response);
+                                                        uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        alert("Cập nhật thông tin thất bại!");
+                                                        console.error(xhr.responseText);
+                                                    }
+                                                });
+                                            } else {
+                                                // Nếu không có mã khách trọ, gọi API để tạo mới thông tin khách
+                                                $.ajax({
+                                                    url: 'https://localhost:7298/api/ThongTinKhaches/CreateThongTinKhach',
+                                                    type: 'POST',
+                                                    contentType: 'application/json',
+                                                    data: JSON.stringify(data),
+                                                    success: function(response) {
+                                                        alert("Tạo mới khách thành công!");
+                                                        console.log(response);
+                                                        uploadChuKy(response.maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        alert("Tạo mới khách thất bại!");
+                                                        console.error(xhr.responseText);
+                                                    }
+                                                });
+                                            }
+
+                                            // Hàm tải chữ ký lên server
+                                            function uploadChuKy(maKhachTro, hoTen, chuKyFile) {
+                                                if (chuKyFile) {
+                                                    const formData = new FormData();
+                                                    formData.append("file", chuKyFile); // Thêm tệp chữ ký vào formData
+                                                    formData.append("maKhachTro", maKhachTro); // Thêm mã khách trọ
+                                                    formData.append("hoTen", hoTen); // Thêm họ tên
+
+                                                    // Gọi API để tải ảnh chữ ký lên
+                                                    $.ajax({
+                                                        url: 'https://localhost:7298/api/ThongTinKhaches/Upload', // Đường dẫn API để tải tệp
+                                                        type: 'POST',
+                                                        data: formData,
+                                                        processData: false,
+                                                        contentType: false,
+                                                        success: function(uploadResponse) {
+                                                            alert("Tải ảnh chữ ký lên thành công!");
+                                                            console.log(uploadResponse);
+
+                                                            // Hiển thị ảnh chữ ký
+                                                            $('.img-chuky').attr('src', '/images/CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
+                                                                $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
+                                                            });
+                                                        },
+                                                        error: function(uploadError) {
+                                                            alert("Tải ảnh chữ ký lên thất bại!");
+                                                            console.error(uploadError.responseText);
+                                                        }
+                                                    });
+                                                } else {
+                                                    alert("Không có tệp chữ ký để tải lên.");
+                                                }
+                                            }
+                                        });
+
+
+
+                            
+
+                                // Hàm để đặt lại tất cả các trường trong chi tiết cư dân
+                                function resetChiTietCuDan() {
+                                    $('input[placeholder="Nhập họ tên"]').val('');
+                                    $('select[name="gioiTinh"]').val('');
+                                    $('input[placeholder="Chọn ngày sinh"]').val('');
+                                    $('input[placeholder="Nhập số điện thoại"]').val('');
+                                    $('input[placeholder="Nhập email"]').val('');
+                                    $('input[placeholder="Thông tin phòng"]').val(maPhong); // Gán giá trị mã phòng vào input
+                                    $('select[name="quanHe"]').val('');
+                                    $('input[placeholder="Nhập số căn cước"]').val('');
+                                    $('input[placeholder="Nhập nơi cấp"]').val('');
+                                    $('select[name="queQuan"]').val('');
+                                    $('input[placeholder="Chọn ngày cấp"]').val('');
+                                    $('select[name="trangThaiKhach"]').val('');
+
+                                    // Reset hình chữ ký
+                                    $('.img-chuky').attr('src', '/images/signature.png'); // Đặt về hình ảnh mặc định
+                                    $('#chuKyName').text(''); // Xóa tên chữ ký
+                                    $('#chuKyInput').val(''); // Đặt lại input tệp chữ ký
+                                }
+
 
 
                                 // Hàm chuyển đổi định dạng ngày
