@@ -3,13 +3,15 @@
 
 ### Các chức năng
 
-- Cho phép người dùng ...
+- Cho phép người dùng xem hóa đơn
+- Cho phép người dùng nhập dịch vụ 
+- Cho phép người dùng phản hồi thông tin
 
 
 
 ### Công nghệ
 
-- Microsoft SQL Server (Database)
+- Microsoft SQL Server (Database SQL)
 - ASP.NET Core Web API (Backend)
 - ASP.NET Core Web MVC (Frontend)
 
