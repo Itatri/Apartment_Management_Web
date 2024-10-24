@@ -71,6 +71,41 @@ namespace Apartment_Management_Web.Services
         }
 
 
+        public async Task<bool> UpdateChuKyAsync(string maKhachTro, string chuKyFileName)
+        {
+            var thongTinKhach = await _context.ThongTinKhaches
+                .FirstOrDefaultAsync(t => t.MaKhachTro == maKhachTro);
+
+            if (thongTinKhach == null)
+            {
+                return false; // Không tìm thấy khách
+            }
+
+            // Cập nhật tên file chữ ký
+            thongTinKhach.ChuKy = chuKyFileName;
+
+            // Cập nhật vào cơ sở dữ liệu
+            _context.Entry(thongTinKhach).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return true; // Cập nhật thành công
+        }
+
+
+        public async Task<ThongTinKhach?> GetLastCustomerAsync()
+        {
+            return await _context.ThongTinKhaches
+                .OrderByDescending(c => c.MaKhachTro)
+                .FirstOrDefaultAsync();
+        }
+
+        // Tạo khách hàng mới
+        public async Task<ThongTinKhach> CreateCustomerAsync(ThongTinKhach customer)
+        {
+            _context.ThongTinKhaches.Add(customer);
+            await _context.SaveChangesAsync();
+            return customer;
+        }
 
     }
 }

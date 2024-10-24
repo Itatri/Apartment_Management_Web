@@ -8,6 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Services;
 using Apartment_Management_Web.Models.Customer;
+using System.Text.RegularExpressions; // Thêm namespace này nếu chưa có
+using System.Text; // Để sử dụng StringBuilder
+using System.Globalization; // Để sử dụng CharUnicodeInfo và UnicodeCategory
+
+
 
 namespace Apartment_Management_Web.Controllers
 {
@@ -126,11 +131,73 @@ namespace Apartment_Management_Web.Controllers
             });
         }
 
+        [HttpPost("CreateThongTinKhach")]
+        public async Task<ActionResult<APICustomerRespone>> CreateCustomer([FromBody] CreateCustomerRequest request)
+        {
+            var response = new APICustomerRespone();
+
+            try
+            {
+                // Tự động tạo MaKhachTro với tiền tố KT + số thứ tự
+                var lastCustomer = await _ThongTinKhachService.GetLastCustomerAsync();
+                int nextNumber = 1;
+
+                if (lastCustomer != null)
+                {
+                    // Lấy số thứ tự từ MaKhachTro cuối cùng
+                    var lastNumber = int.Parse(lastCustomer.MaKhachTro.Substring(2));
+                    nextNumber = lastNumber + 1;
+                }
+
+                // Tạo mã khách mới
+                string maKhachTro = "KT" + nextNumber.ToString("D3");
+
+                // Tạo đối tượng ThongTinKhach mới
+                var newCustomer = new ThongTinKhach
+                {
+                    MaKhachTro = maKhachTro,
+                    HoTen = request.HoTen,
+                    GioiTinh = request.GioiTinh,
+                    NgaySinh = request.NgaySinh,
+                    Cccd = request.Cccd,
+                    NgayCap = request.NgayCap,
+                    NoiCap = request.NoiCap,
+                    Phone = request.Phone,
+                    Email = request.Email,
+                    QueQuan = request.QueQuan,
+                    QuanHe = request.QuanHe,
+                    MaPhong = request.MaPhong,
+                    ChuKy = request.ChuKy, // Gán tên tệp chữ ký vào đối tượng
+                    TrangThai = 1 // Set trạng thái mặc định là 1 (đang hoạt động)
+                };
+
+                // Gọi service để thêm khách hàng mới vào database
+                var createdCustomer = await _ThongTinKhachService.CreateCustomerAsync(newCustomer);
+
+                response.IsSuccess = true;
+                response.Message = "Tạo khách hàng mới thành công.";
+                response.Khachs = new List<ThongTinKhach> { createdCustomer };
+
+                return Ok(response); // Trả về 200 với response
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Đã xảy ra lỗi khi tạo khách hàng mới: " + ex.Message;
+                return BadRequest(response); // Trả về 400 nếu có lỗi
+            }
+        }
+
+
+
+
 
         [HttpPost("Upload")]
         public async Task<IActionResult> Upload()
         {
             var file = Request.Form.Files.FirstOrDefault(); // Lấy tệp từ request
+            var maKhachTro = Request.Form["maKhachTro"]; // Lấy mã khách trọ từ request
+            var hoTen = Request.Form["hoTen"]; // Lấy họ tên từ request
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "D:\\CongViecHocTap\\TailieuCNTT\\Môn học\\Đồ án chuyên ngành\\Đồ án\\Web Phòng Trọ\\Apartment_Management_Web\\Apartment_Management_Web_GUI\\wwwroot\\images"); // Thư mục lưu hình ảnh
 
             if (file == null || file.Length == 0)
@@ -146,13 +213,20 @@ namespace Apartment_Management_Web.Controllers
                     Directory.CreateDirectory(folderPath);
                 }
 
-                var fileName = Path.GetFileName(file.FileName);
+                // Xử lý họ tên để loại bỏ dấu và khoảng trắng
+                var tenKhongDau = RemoveDiacritics(hoTen).Replace(" ", "");
+
+                // Đặt tên file theo định dạng CK_MaKhachTro_HoTen.jpeg
+                var fileName = $"CK_{maKhachTro}_{tenKhongDau}.jpeg";
                 var filePath = Path.Combine(folderPath, fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await file.CopyToAsync(stream); // Lưu tệp vào thư mục
                 }
+
+                // Ghi tên file vào database
+                await _ThongTinKhachService.UpdateChuKyAsync(maKhachTro, fileName);
 
                 return Ok(new { message = "Upload thành công!", fileName });
             }
@@ -162,8 +236,31 @@ namespace Apartment_Management_Web.Controllers
             }
         }
 
+        // Phương thức để loại bỏ dấu trong chuỗi
+        private string RemoveDiacritics(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
 
 
+
+      
+     
 
 
     }
