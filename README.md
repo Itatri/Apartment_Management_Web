@@ -9,11 +9,13 @@
 
 ### Công nghệ
 
-- Microsoft SQL Server
-- ASP.NET Core Web API
-- ASP.NET Core Web MVC
+- Microsoft SQL Server (Database)
+- ASP.NET Core Web API (Backend)
+- ASP.NET Core Web MVC (Frontend)
 
+### Mô hình 
 
+- Database First Entity Framework Core
 
 ### Demo
 - Trang chủ <br> <br>
