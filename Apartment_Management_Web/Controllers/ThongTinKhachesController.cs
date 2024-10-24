@@ -127,6 +127,43 @@ namespace Apartment_Management_Web.Controllers
         }
 
 
+        [HttpPost("Upload")]
+        public async Task<IActionResult> Upload()
+        {
+            var file = Request.Form.Files.FirstOrDefault(); // Lấy tệp từ request
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "D:\\CongViecHocTap\\TailieuCNTT\\Môn học\\Đồ án chuyên ngành\\Đồ án\\Web Phòng Trọ\\Apartment_Management_Web\\Apartment_Management_Web_GUI\\wwwroot\\images"); // Thư mục lưu hình ảnh
+
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest(new { message = "Không có tệp nào được tải lên." });
+            }
+
+            try
+            {
+                // Kiểm tra thư mục có tồn tại hay không, nếu không thì tạo
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                var fileName = Path.GetFileName(file.FileName);
+                var filePath = Path.Combine(folderPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream); // Lưu tệp vào thư mục
+                }
+
+                return Ok(new { message = "Upload thành công!", fileName });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Upload thất bại!", error = ex.Message });
+            }
+        }
+
+
+
 
 
     }
