@@ -4,7 +4,7 @@
 ### Các chức năng
 
 - Cho phép người dùng xem hóa đơn
-- Cho phép người dùng nhập dịch vụ 
+- Cho phép người dùng nhập điện nước 
 - Cho phép người dùng phản hồi thông tin
 - ...
 
