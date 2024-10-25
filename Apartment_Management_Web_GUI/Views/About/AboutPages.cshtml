@@ -32,7 +32,7 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="@Url.Action("HomePage", "Home")">
                         <img src="~/images/apartment.png" alt="" />
                         <span>
                             IT APARTMENT
@@ -99,77 +99,29 @@
 
 
 
-    <section class="category_section layout_padding">
+    <section class="about_section layout_padding">
         <div class="container">
-            <div class="heading_container">
-                <h2>
-                    Tiện ích
-                </h2>
+            <div class="row">
+                <div class="col-md-10 col-lg-9 mx-auto">
+                    <div class="img-box">
+                        <img src="/images/meet.png" alt="">
+                    </div>
+                </div>
             </div>
-            <div class="category_container">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="~/images/interior-design.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Phòng rẻ , đẹp
-                        </h5>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="img-box">
-                        <img src="~/images/tv-table.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Đầy đủ tiện nghi
-                        </h5>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="img-box">
-                        <img src="~/images/time-management.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Hỗ trợ 24/24
-                        </h5>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="img-box">
-                        <img src="~/images/atm-card.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Thanh toán tiện lợi
-                        </h5>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="img-box">
-                        <img src="~/images/wifi.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Wifi tần số cao
-                        </h5>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="img-box">
-                        <img src="~/images/swimming-pool.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Hồ bơi , công viên
-                        </h5>
-                    </div>
-                </div>
+            <div class="detail-box">
+                <h2>
+                    GIỚI THIỆU VỀ IT APARTMENT
+                </h2>
+               <p>
+                Được thành lập vào năm 2024, bởi các sinh viên IT trực thuộc Trường đại học Công Thương, với mục đích nâng cao trải nghiệm và cung cấp dịch vụ tiện lợi cho khách hàng sử dụng căn hộ 
+            </p>
+
+
             </div>
         </div>
     </section>
+
+
 
     <!-- end category section -->
     <!-- info section -->
@@ -188,21 +140,21 @@
                         </span>
                     </div>
                     <div class="social_box">
-                        <a href="#">
+                        <a href="https://www.facebook.com/trihvn">
                             <img src="~/images/fb.png" alt="">
                         </a>
-                        <a href="#">
+                       @*  <a href="#">
                             <img src="~/images/twitter.png" alt="">
-                        </a>
-                        <a href="#">
+                        </a> *@
+                        <a href="https://www.linkedin.com/in/itatri">
                             <img src="~/images/linkedin.png" alt="">
                         </a>
-                        <a href="#">
+                        <a href="http://www.instagram.com/trihvn">
                             <img src="~/images/instagram.png" alt="">
                         </a>
-                        <a href="#">
+                       @*  <a href="#">
                             <img src="~/images/youtube.png" alt="">
-                        </a>
+                        </a> *@
                     </div>
                 </div>
 
@@ -214,18 +166,18 @@
                                     Liên kết
                                 </h5>
                                 <ul>
-                                    <li class=" active">
-                                        <a class="" href="index.html">Trang chủ <span class="sr-only">(current)</span></a>
+                                   <li class=" active">
+                                        <a class="" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="about.html">Về chúng tôi  </a>
+                                        <a class="" href="@Url.Action("AboutPages", "About")">Về chúng tôi  </a>
                                     </li>
-                                    <li class="">
+                                    @*   <li class="">
                                         <a class="" href="work.html">Tra cứu </a>
                                     </li>
                                     <li class="">
                                         <a class="" href="category.html">Phản hồi </a>
-                                    </li>
+                                    </li> *@
                                 </ul>
                             </div>
                         </div>
@@ -310,6 +262,9 @@
             </div>
         </div>
     </section>
+
+
+
 
     <!-- end info section -->
     <!-- footer section -->
