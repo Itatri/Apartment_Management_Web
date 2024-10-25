@@ -274,21 +274,21 @@
                         </span>
                     </div>
                     <div class="social_box">
-                        <a href="#">
+                        <a href="https://www.facebook.com/trihvn">
                             <img src="~/images/fb.png" alt="">
                         </a>
-                        <a href="#">
+                            @*  <a href="#">
                             <img src="~/images/twitter.png" alt="">
-                        </a>
-                        <a href="#">
+                        </a> *@
+                        <a href="https://www.linkedin.com/in/itatri">
                             <img src="~/images/linkedin.png" alt="">
                         </a>
-                        <a href="#">
+                        <a href="http://www.instagram.com/trihvn">
                             <img src="~/images/instagram.png" alt="">
                         </a>
-                        <a href="#">
+                            @*  <a href="#">
                             <img src="~/images/youtube.png" alt="">
-                        </a>
+                        </a> *@
                     </div>
                 </div>
 
@@ -301,16 +301,16 @@
                                 </h5>
                                 <ul>
                                     <li class=" active">
-                                        <a class="" href="index.html">Trang chủ <span class="sr-only">(current)</span></a>
+                                        <a class="" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="about.html">Về chúng tôi  </a>
+                                        <a class="" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi  </a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="work.html">Tra cứu </a>
+                                        <a class="" href="@Url.Action("InputBill", "Bill")">Hóa đơn </a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="category.html">Phản hồi </a>
+                                        <a class="" href="@Url.Action("UserProfile", "Login")">Thành viên </a>
                                     </li>
                                 </ul>
                             </div>
@@ -478,6 +478,11 @@
                                         return value ? value : '<span style="color:red;">Trống</span>';
                                     };
 
+                                    // Định dạng tiền với dấu chấm ngăn cách hàng nghìn
+                                    var formatCurrency = function(value) {
+                                        return value ? value.toLocaleString('vi-VN') : '<span style="color:red;">Trống</span>';
+                                    };
+
                                     // Nếu phiếu thu đã thanh toán, làm nút bị khóa
                                     var buttonDisabled = phieuThu.trangThai ? 'disabled' : '';
                                     var buttonClass = phieuThu.trangThai ? 'btn-secondary' : 'btn-primary';
@@ -487,16 +492,19 @@
                                             <th scope="row">${checkNull(phieuThu.maPt)}</th>
                                             <td>${checkNull(phieuThu.ngayLap)}</td>
                                             <td>${checkNull(phieuThu.ngayThu)}</td>
-                                            <td>${checkNull(phieuThu.tienNha)}</td>
+                                            <td>${formatCurrency(phieuThu.tienNha)}</td>
+
                                             <td>${checkNull(phieuThu.dienCu)}  </td>
                                             <td>${checkNull(phieuThu.dienMoi)} </td>
-                                            <td>${checkNull(phieuThu.tienDien)}</td>
+                                            <td>${formatCurrency(phieuThu.tienDien)}</td>
+
                                             <td>${checkNull(phieuThu.nuocCu)}</td>
                                             <td>${checkNull(phieuThu.nuocMoi)}</td>
-                                            <td>${checkNull(phieuThu.tienNuoc)}</td>
-                                            <td>${checkNull(phieuThu.tienDv)}</td>
-                                            <td>${checkNull(phieuThu.tongTien)}</td>
-                                            <td>${checkNull(phieuThu.thanhToan)}</td>
+                                           <td>${formatCurrency(phieuThu.tienNuoc)}</td>
+                                            <td>${formatCurrency(phieuThu.tienDv)}</td>
+                                            <td>${formatCurrency(phieuThu.tongTien)}</td>
+                                            <td>${formatCurrency(phieuThu.thanhToan)}</td>
+
                                             <td class="${trangThaiClass}">${trangThaiText}</td>
                                             <td>
                                                 <button type="button" class="btn ${buttonClass}" ${buttonDisabled} data-toggle="modal" data-target="#exampleModal" data-whatever="" ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>

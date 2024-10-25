@@ -261,22 +261,22 @@
 
                         </span>
                     </div>
-                    <div class="social_box">
-                        <a href="#">
+                     <div class="social_box">
+                        <a href="https://www.facebook.com/trihvn">
                             <img src="~/images/fb.png" alt="">
                         </a>
-                        <a href="#">
+                            @*  <a href="#">
                             <img src="~/images/twitter.png" alt="">
-                        </a>
-                        <a href="#">
+                        </a> *@
+                        <a href="https://www.linkedin.com/in/itatri">
                             <img src="~/images/linkedin.png" alt="">
                         </a>
-                        <a href="#">
+                        <a href="http://www.instagram.com/trihvn">
                             <img src="~/images/instagram.png" alt="">
                         </a>
-                        <a href="#">
+                            @*  <a href="#">
                             <img src="~/images/youtube.png" alt="">
-                        </a>
+                        </a> *@
                     </div>
                 </div>
 
@@ -289,16 +289,16 @@
                                 </h5>
                                 <ul>
                                     <li class=" active">
-                                        <a class="" href="index.html">Trang chủ <span class="sr-only">(current)</span></a>
+                                        <a class="" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="about.html">Về chúng tôi  </a>
+                                        <a class="" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi  </a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="work.html">Tra cứu </a>
+                                        <a class="" href="@Url.Action("InputBill", "Bill")">Hóa đơn </a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="category.html">Phản hồi </a>
+                                        <a class="" href="@Url.Action("UserProfile", "Login")">Thành viên </a>
                                     </li>
                                 </ul>
                             </div>
