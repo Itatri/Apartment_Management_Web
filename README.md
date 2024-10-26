@@ -3,10 +3,9 @@
 
 ### Các chức năng
 
-- Cho phép người dùng xem hóa đơn
+- Cho phép người dùng xem hóa đơn giao dịch
 - Cho phép người dùng nhập điện nước 
 - Cho phép người dùng phản hồi thông tin
-- ...
 
 
 ### Công nghệ
