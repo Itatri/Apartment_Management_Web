@@ -63,6 +63,8 @@ namespace Apartment_Management_Web.Services
             thongTinKhach.MaPhong = request.MaPhong ?? thongTinKhach.MaPhong;
             thongTinKhach.TrangThai = request.TrangThai ?? thongTinKhach.TrangThai;
 
+            thongTinKhach.ThuongTru = request.ThuongTru ?? thongTinKhach.ThuongTru;
+
             // Cập nhật vào cơ sở dữ liệu
             _context.Entry(thongTinKhach).State = EntityState.Modified;
             await _context.SaveChangesAsync();

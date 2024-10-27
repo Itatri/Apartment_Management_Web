@@ -497,6 +497,8 @@
                                                             </select>
                                                         </div>
 
+                                                         <div class="col-md-12"><label class="labels">Thường trú</label><input type="text" class="form-control" placeholder="Nhập nơi thường trú" value=""></div>
+
                                                       <div class="col-md-12">
                                                         <label class="labels">Ngày Cấp</label>
                                                         <div class="input-group">
@@ -846,6 +848,7 @@
                                                         $('input[placeholder="Nhập số căn cước"]').val(khach.cccd);
                                                         $('input[placeholder="Nhập nơi cấp"]').val(khach.noiCap);
                                                          $('select.form-control').eq(2).val(khach.queQuan); 
+                                                          $('input[placeholder="Nhập nơi thường trú"]').val(khach.thuongTru);
                                                         $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toLocaleDateString());
                                                                             // Cập nhật trạng thái
                                                         $('select[name="trangThaiKhach"]').val(khach.trangThai); // Cập nhật trạng thái
@@ -923,6 +926,7 @@
                                             const quanHe = $("select[name='quanHe']").val();
                                             const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
                                             const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
+                                            const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
                                             const queQuan = $("select[name='queQuan']").val();
                                             const ngayCap = convertDate($("#datepicker_ngaycap").val()); // Chuyển đổi ngày cấp
                                             const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
@@ -942,6 +946,7 @@
                                                 QuanHe: quanHe,
                                                 CCCD: soCCCD,
                                                 NoiCap: noiCap,
+                                                ThuongTru: thuongTru,
                                                 QueQuan: queQuan,
                                                 NgayCap: ngayCap,
                                                 ChuKy: chuKy, // Đảm bảo rằng chuKy được bao gồm ở đây
@@ -1039,9 +1044,11 @@
                                     $('select[name="quanHe"]').val('');
                                     $('input[placeholder="Nhập số căn cước"]').val('');
                                     $('input[placeholder="Nhập nơi cấp"]').val('');
+                                    $('input[placeholder="Nhập nơi thường trú"]').val('');
                                     $('select[name="queQuan"]').val('');
                                     $('input[placeholder="Chọn ngày cấp"]').val('');
                                     $('select[name="trangThaiKhach"]').val('');
+                                    
 
                                     // Reset hình chữ ký
                                     $('.img-chuky').attr('src', '/images/signature.png'); // Đặt về hình ảnh mặc định

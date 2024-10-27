@@ -19,6 +19,8 @@ public partial class ThongTinKhach
 
     public string? NoiCap { get; set; }
 
+    public string? ThuongTru { get; set; }
+
     public string? Phone { get; set; }
 
     public string? Email { get; set; }

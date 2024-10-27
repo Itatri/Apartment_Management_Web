@@ -255,7 +255,8 @@ public partial class QlChungCu08102024Context : DbContext
             entity.Property(e => e.Phone)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.QueQuan).HasMaxLength(200);
+            //entity.Property(e => e.QueQuan).HasMaxLength(200);
+            entity.Property(e => e.DiaChi).HasMaxLength(200);
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.ThongTinAdmins)
                 .HasForeignKey(d => d.IdUser)

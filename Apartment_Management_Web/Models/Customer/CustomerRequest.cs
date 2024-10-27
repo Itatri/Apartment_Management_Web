@@ -11,6 +11,7 @@
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? QueQuan { get; set; }
+        public string? ThuongTru { get; set; }
         public string? QuanHe { get; set; }
         public string? ChuKy { get; set; }
         public string? MaPhong { get; set; }
@@ -32,6 +33,7 @@
         public string QuanHe { get; set; }
         public string MaPhong { get; set; }
         public string ChuKy { get; set; } // Thêm trường chữ ký
+        public string? ThuongTru { get; set; }
 
     }
 

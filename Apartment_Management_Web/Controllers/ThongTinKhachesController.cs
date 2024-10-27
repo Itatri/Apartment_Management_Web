@@ -150,7 +150,7 @@ namespace Apartment_Management_Web.Controllers
                 }
 
                 // Tạo mã khách mới
-                string maKhachTro = "KT" + nextNumber.ToString("D3");
+                string maKhachTro = "KH" + nextNumber.ToString("D3");
 
                 // Tạo đối tượng ThongTinKhach mới
                 var newCustomer = new ThongTinKhach
@@ -168,6 +168,7 @@ namespace Apartment_Management_Web.Controllers
                     QuanHe = request.QuanHe,
                     MaPhong = request.MaPhong,
                     ChuKy = request.ChuKy, // Gán tên tệp chữ ký vào đối tượng
+                    ThuongTru = request.ThuongTru,
                     TrangThai = 1 // Set trạng thái mặc định là 1 (đang hoạt động)
                 };
 
