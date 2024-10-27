@@ -15,9 +15,9 @@ public partial class ThongTinAdmin
 
     public string? Cccd { get; set; }
 
-    public string? Phone { get; set; }
+    public string? DiaChi { get; set; }
 
-    public string? QueQuan { get; set; }
+    public string? Phone { get; set; }
 
     public string? ChuKy { get; set; }
 

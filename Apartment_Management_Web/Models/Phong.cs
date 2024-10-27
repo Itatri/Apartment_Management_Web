@@ -13,6 +13,8 @@ public partial class Phong
 
     public DateOnly? NgayVao { get; set; }
 
+    public double? DienTich { get; set; }
+
     public double? TienCoc { get; set; }
 
     public double? TienPhong { get; set; }
