@@ -39,6 +39,9 @@
     <!-- Bootstrap Datepicker JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+      
 
 
 </head>
@@ -140,11 +143,50 @@
                                                 </div>
                                             </header>
                                         </div>
+                                            <!-- Modal thông báo kê khai thông tin thành công --> 
+                                            <div class="modal" id="successCreateModal" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Thông báo</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Bạn đã kê khai thông tin thành công thành công!</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                 <!-- Modal thông báo cập nhập thông tin thành công --> 
+                                            <div class="modal" id="successUpdateModal" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Thông báo</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Bạn đã cập thông tin thành công !</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <!-- Phần Danh sách cư dân của phòng -->
                                             <div class="container rounded bg-white mt-5 mb-5" id="danhSachCuDan">
                                                 <div class="row" style="border: 2px solid #ededed;">
-                                                    <section class="experience_section layout_padding" style="padding-bottom: 100px;min-width: 0px;padding-top: 50px;"">
+                                                    <section class="experience_section layout_padding" style="padding-bottom: 10    0px;min-width: 0px;padding-top: 50px;"">
                                                         <div class="container">
                                                             <label for="exampleInputEmail1">
                                                                 Thành viên phòng : <span id="maPhongLabel"></span>
@@ -665,10 +707,10 @@
     <script src="~/js/jquery-3.4.1.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/custom.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 
 
@@ -774,7 +816,7 @@
                    
 
                             // Sự kiện click cho nút "Xem chi tiết"
-                                    $(document).on('click', '.btn-primary', function () {
+                                    $(document).on('click', '.btn-primary:not(.profile-button)', function () {
                                         // Lấy mã khách trọ từ cột đầu tiên của hàng hiện tại
                                         var maKhachTro = $(this).closest('tr').find('th.hidden-column').text().trim();
 
@@ -832,7 +874,7 @@
                                                 }
                                             });
                                         } else {
-                                            alert('Không thể tìm thấy mã khách trọ.');
+                                            console.log('Không thể tìm thấy mã khách trọ.');
                                         }
                                     });
 
@@ -915,7 +957,9 @@
                                                     contentType: 'application/json',
                                                     data: JSON.stringify(data),
                                                     success: function(response) {
-                                                        alert("Cập nhật thông tin thành công!");
+                                                        // alert("Cập nhật thông tin thành công!");
+                                                          // Hiển thị modal cập nhật thành công
+                                                        $("#successUpdateModal").modal('show');
                                                         console.log(response);
                                                         uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
                                                     },
@@ -932,7 +976,9 @@
                                                     contentType: 'application/json',
                                                     data: JSON.stringify(data),
                                                     success: function(response) {
-                                                        alert("Tạo mới khách thành công!");
+                                                        // alert("Tạo mới khách thành công!");
+                                                         // Hiển thị modal tạo mới thành công
+                                                        $("#successCreateModal").modal('show');
                                                         console.log(response);
                                                         uploadChuKy(response.maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
                                                     },
@@ -973,7 +1019,7 @@
                                                         }
                                                     });
                                                 } else {
-                                                    alert("Không có tệp chữ ký để tải lên.");
+                                                    console.log("Không có tệp chữ ký để tải lên.");
                                                 }
                                             }
                                         });
