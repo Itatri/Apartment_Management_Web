@@ -199,7 +199,7 @@ namespace Apartment_Management_Web.Controllers
             var file = Request.Form.Files.FirstOrDefault(); // Lấy tệp từ request
             var maKhachTro = Request.Form["maKhachTro"]; // Lấy mã khách trọ từ request
             var hoTen = Request.Form["hoTen"]; // Lấy họ tên từ request
-            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "D:\\CongViecHocTap\\TailieuCNTT\\Môn học\\Đồ án chuyên ngành\\Đồ án\\Web Phòng Trọ\\Apartment_Management_Web\\Apartment_Management_Web_GUI\\wwwroot\\images"); // Thư mục lưu hình ảnh
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "D:\\CongViecHocTap\\TailieuCNTT\\Môn học\\Đồ án chuyên ngành\\Source đồ án\\Web Phòng Trọ\\Apartment_Management_Web\\Apartment_Management_Web_GUI\\wwwroot\\images"); // Thư mục lưu hình ảnh
 
             if (file == null || file.Length == 0)
             {

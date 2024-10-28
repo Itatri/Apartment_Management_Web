@@ -17,12 +17,39 @@ namespace Apartment_Management_Web.Services
             return await _context.FeedBacks.ToListAsync();
         }
 
-        public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong)
+        //public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong)
+        //{
+        //    return await _context.FeedBacks
+        //        .Where(t => t.MaPhong == maPhong)
+        //        .ToListAsync();
+        //}
+
+        public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
         {
-            return await _context.FeedBacks
-                .Where(t => t.MaPhong == maPhong)
-                .ToListAsync();
+            var query = _context.FeedBacks.AsQueryable();
+
+            query = query.Where(t => t.MaPhong == maPhong);
+
+            // Lọc theo ngày gửi
+            if (startDate.HasValue)
+            {
+                query = query.Where(t => t.NgayGui >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(t => t.NgayGui <= endDate.Value);
+            }
+
+            // Lọc theo trạng thái
+            if (trangThai.HasValue)
+            {
+                query = query.Where(t => t.TrangThai == trangThai.Value);
+            }
+
+            return await query.ToListAsync();
         }
+
 
         // Lấy phản hồi cuối cùng để tính số thứ tự
         public async Task<FeedBack?> GetLastFeedbackAsync()

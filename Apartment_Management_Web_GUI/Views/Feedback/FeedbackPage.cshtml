@@ -23,7 +23,7 @@
     <link href="~/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="~/css/responsive.css" rel="stylesheet" />
-
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
 
 
@@ -127,8 +127,52 @@
 
                 <section class="experience_section layout_padding" style = "padding-bottom: 0px;   padding-top: 80px;">                
                 <div class="container">
-               <label for="exampleInputEmail1">Phản hồi của cư dân phòng : <span id="maPhongLabel"></span></label>
-                <br> <br>
+             <label for="exampleInputEmail1">
+                <strong>Phản hồi của cư dân phòng :</strong> <span id="maPhongLabel"></span>
+            </label>
+
+            <br />
+             <br />
+
+            @* Lọc theo ngày *@
+              <div class="row mb-4 d-flex align-items-end">
+                    <div class="col-md-3" style="margin-right: 10px;">
+                        <label for="startDate" class="form-label">Từ ngày</label>
+                        <input type="date" class="form-control" id="startDate" value="2024-01-01">
+                    </div>
+
+                    <div class="col-md-3" style="margin-right: 10px;">
+                        <label for="endDate" class="form-label">Đến ngày</label>
+                        <input type="date" class="form-control" id="endDate" value="2024-12-31">
+                    </div>
+
+                  <div class="col-md-3" style="margin-right: 10px;">
+                        <label class="labels">Trạng thái</label>
+                        <select name="trangThaiFB" class="form-control" id="trangThaiSelect">
+                            <option value="">Chọn trạng thái</option> <!-- Tùy chọn mặc định -->
+                            <option value="1">Đã trả lời</option>
+                            <option value="0">Chưa trả lời</option>
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button class="btn btn-primary" id="filterButton" style="height: 40px;margin: 0px 12px 0px 12px;"">
+                            <i class="fas fa-filter"></i> <!-- Biểu tượng lọc -->
+                        </button>
+
+                      <button class="btn btn-primary" id="refeshButton" style="height: 40px; margin: 0px 12px 0px 12px;">
+                            <i class="fa-solid fa-arrows-rotate" style="color: #ffffff;"></i>
+                        </button>
+
+
+                    </div>
+
+                    
+                </div>
+
+
+                
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -440,67 +484,84 @@
                     $('#maPhongLabel').text('Không tìm thấy mã phòng');
                 }
 
-              if (maPhong) {
-                // Gọi API để lấy thông tin phiếu thu
-                $.ajax({
-                    url: `https://localhost:7298/api/FeedBacks/GetThongTinFeedbackBy_MaPhong?maPhong=${maPhong}`,
-                    type: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + loginResponse.token
-                    },
-                    success: function (response) {
-                        if (response.isSuccess) {
-                            var feedBacks = response.feedBacks;
-                            feedBacks.sort(function (a, b) {
-                                return new Date(b.ngayGui) - new Date(a.ngayGui);
-                            });
 
-                            $('tbody').empty(); // Xóa tất cả các hàng trong tbody
+                function loadFeedbacks(startDate, endDate, trangThai) {
+                    $.ajax({
+                        url: `https://localhost:7298/api/FeedBacks/GetThongTinFeedbackBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}`,
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        success: function (response) {
+                            if (response.isSuccess) {
+                                var feedBacks = response.feedBacks;
+                                feedBacks.sort(function (a, b) {
+                                    return new Date(b.ngayGui) - new Date(a.ngayGui);
+                                });
 
-                            feedBacks.forEach(function (Feedback) {
-                                var trangThaiClass = Feedback.trangThai ? 'text-success' : 'text-danger';
-                                var trangThaiText = Feedback.trangThai ? 'Đã trả lời' : 'Chưa trả lời';
+                                $('tbody').empty(); // Xóa tất cả các hàng trong tbody
 
-                                // Kiểm tra nếu trường nào null thì thay thế bằng 'Chưa có' và thêm màu đỏ
-                                var checkNull = function(value) {
-                                    return value ? value : '<span style="color:red;">Trống</span>';
-                                };
+                                feedBacks.forEach(function (Feedback) {
+                                    var trangThaiClass = Feedback.trangThai ? 'text-success' : 'text-danger';
+                                    var trangThaiText = Feedback.trangThai ? 'Đã trả lời' : 'Chưa trả lời';
 
-                                // Hàm định dạng lại ngày thành HH:mm dd/MM/yyyy
-                                var formatDate = function(dateStr) {
-                                    if (!dateStr) return '<span style="color:red;">Trống</span>';
-                                    var date = new Date(dateStr);
-                                    var day = String(date.getDate()).padStart(2, '0');
-                                    var month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
-                                    var year = date.getFullYear();
-                                    var hours = String(date.getHours()).padStart(2, '0');
-                                    var minutes = String(date.getMinutes()).padStart(2, '0');
-                                    return `${hours}:${minutes} ${day}/${month}/${year}`;
-                                };
+                                    // Kiểm tra nếu trường nào null thì thay thế bằng 'Chưa có' và thêm màu đỏ
+                                    var checkNull = function(value) {
+                                        return value ? value : '<span style="color:red;">Trống</span>';
+                                    };
 
-                                var newRow = `
-                                    <tr>
-                                       <th scope="row" class="hidden-column">${checkNull(Feedback.maFb)}</th> <!-- Thêm class để ẩn cột -->
-                                        <td>${checkNull(Feedback.moTa)}</td>
-                                        <td>${formatDate(Feedback.ngayGui)}</td> <!-- Định dạng ngày gửi -->
-                                        <td class="text-success">${checkNull(Feedback.phanHoi)}</td>
-                                        <td>${formatDate(Feedback.ngayPhanHoi)}</td> <!-- Định dạng ngày phản hồi -->
-                                        <td class="${trangThaiClass}">${trangThaiText}</td>
-                                    </tr>
-                                `;
-                                $('tbody').append(newRow);
-                            });
-                        } else {
-                            alert(response.message);
+                                    // Hàm định dạng lại ngày thành HH:mm dd/MM/yyyy
+                                    var formatDate = function(dateStr) {
+                                        if (!dateStr) return '<span style="color:red;">Trống</span>';
+                                        var date = new Date(dateStr);
+                                        var day = String(date.getDate()).padStart(2, '0');
+                                        var month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+                                        var year = date.getFullYear();
+                                        var hours = String(date.getHours()).padStart(2, '0');
+                                        var minutes = String(date.getMinutes()).padStart(2, '0');
+                                        return `${hours}:${minutes} ${day}/${month}/${year}`;
+                                    };
+
+                                    var newRow = `
+                                        <tr>
+                                           <th scope="row" class="hidden-column">${checkNull(Feedback.maFb)}</th> <!-- Thêm class để ẩn cột -->
+                                            <td>${checkNull(Feedback.moTa)}</td>
+                                            <td>${formatDate(Feedback.ngayGui)}</td> <!-- Định dạng ngày gửi -->
+                                            <td class="text-success">${checkNull(Feedback.phanHoi)}</td>
+                                            <td>${formatDate(Feedback.ngayPhanHoi)}</td> <!-- Định dạng ngày phản hồi -->
+                                            <td class="${trangThaiClass}">${trangThaiText}</td>
+                                        </tr>
+                                    `;
+                                    $('tbody').append(newRow);
+                                });
+                            } else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function (xhr) {
+                            alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
                         }
-                    },
-                    error: function (xhr) {
-                        alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
-                    }
+                    });
+                }
+
+
+                // Gọi API lần đầu tiên khi load trang
+                loadFeedbacks('', '', '');
+
+               $('#filterButton').on('click', function () {
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
+                    var trangThai = $('#trangThaiSelect').val(); // Lấy giá trị từ dropdown trạng thái
+
+                    loadFeedbacks(startDate, endDate, trangThai);
                 });
-            } else {
-                alert('Không tìm thấy mã phòng trong localStorage.');
-            }
+
+                $('#refeshButton').on('click', function () {
+                   // Gọi API lần đầu tiên khi load trang
+                     loadFeedbacks('', '', '');
+                });
+
+
 
 
                // Khi modal mở, tự động điền mã phòng vào trường dữ liệu Phòng
