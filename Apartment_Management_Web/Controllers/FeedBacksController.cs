@@ -34,11 +34,33 @@ namespace Apartment_Management_Web.Controllers
             return Ok(Feedback);
         }
 
-        // API lấy thông tin phiếu thu theo mã phòng
+        //// API lấy thông tin phiếu thu theo mã phòng
+        //[HttpGet("GetThongTinFeedbackBy_MaPhong")]
+        //public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(string maPhong)
+        //{
+        //    var thongtinFeeback = await _FeedbackService.GetThongTinFeedBacksBy_MaPhongAsync(maPhong);
+
+        //    var response = new FeedbackCustomerRespone();
+
+        //    if (thongtinFeeback == null || !thongtinFeeback.Any())
+        //    {
+        //        response.IsSuccess = false;
+        //        response.Message = "Không tìm thấy thông tin phản hồi.";
+        //        response.FeedBacks = null; // Chỉnh lại để trả về danh sách
+        //        return NotFound(response); // Trả về trạng thái 404 với response
+        //    }
+
+        //    response.IsSuccess = true;
+        //    response.Message = "Lấy thông tin phản hồi thành công.";
+        //    response.FeedBacks = thongtinFeeback; // Trả về danh sách phiếu thu tìm thấy
+
+        //    return Ok(response); // Trả về trạng thái 200 với response
+        //}
+
         [HttpGet("GetThongTinFeedbackBy_MaPhong")]
-        public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(string maPhong)
+        public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
         {
-            var thongtinFeeback = await _FeedbackService.GetThongTinFeedBacksBy_MaPhongAsync(maPhong);
+            var thongtinFeeback = await _FeedbackService.GetThongTinFeedBacksBy_MaPhongAsync(maPhong, startDate, endDate, trangThai);
 
             var response = new FeedbackCustomerRespone();
 
@@ -46,16 +68,17 @@ namespace Apartment_Management_Web.Controllers
             {
                 response.IsSuccess = false;
                 response.Message = "Không tìm thấy thông tin phản hồi.";
-                response.FeedBacks = null; // Chỉnh lại để trả về danh sách
-                return NotFound(response); // Trả về trạng thái 404 với response
+                response.FeedBacks = null;
+                return NotFound(response);
             }
 
             response.IsSuccess = true;
             response.Message = "Lấy thông tin phản hồi thành công.";
-            response.FeedBacks = thongtinFeeback; // Trả về danh sách phiếu thu tìm thấy
+            response.FeedBacks = thongtinFeeback;
 
-            return Ok(response); // Trả về trạng thái 200 với response
+            return Ok(response);
         }
+
 
         [Authorize]
         [HttpPost("CreateFeedback")]

@@ -33,13 +33,35 @@ namespace Apartment_Management_Web.Controllers
             return Ok(PhieuThu);
         }
 
-     
 
-        // API lấy thông tin phiếu thu theo mã phòng
+
+        //// API lấy thông tin phiếu thu theo mã phòng
+        //[HttpGet("GetThongTinPhieuThuBy_MaPhong")]
+        //public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong)
+        //{
+        //    var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong);
+
+        //    var response = new BillCustomerRespone();
+
+        //    if (thongtinPhieuThu == null || !thongtinPhieuThu.Any())
+        //    {
+        //        response.IsSuccess = false;
+        //        response.Message = "Không tìm thấy thông tin phiếu thu.";
+        //        response.Phieuthus = null; // Chỉnh lại để trả về danh sách
+        //        return NotFound(response); // Trả về trạng thái 404 với response
+        //    }
+
+        //    response.IsSuccess = true;
+        //    response.Message = "Lấy thông tin phiếu thu thành công.";
+        //    response.Phieuthus = thongtinPhieuThu; // Trả về danh sách phiếu thu tìm thấy
+
+        //    return Ok(response); // Trả về trạng thái 200 với response
+        //}
+
         [HttpGet("GetThongTinPhieuThuBy_MaPhong")]
-        public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong)
+        public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai)
         {
-            var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong);
+            var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai);
 
             var response = new BillCustomerRespone();
 
@@ -47,16 +69,17 @@ namespace Apartment_Management_Web.Controllers
             {
                 response.IsSuccess = false;
                 response.Message = "Không tìm thấy thông tin phiếu thu.";
-                response.Phieuthus = null; // Chỉnh lại để trả về danh sách
-                return NotFound(response); // Trả về trạng thái 404 với response
+                response.Phieuthus = null;
+                return NotFound(response);
             }
 
             response.IsSuccess = true;
             response.Message = "Lấy thông tin phiếu thu thành công.";
-            response.Phieuthus = thongtinPhieuThu; // Trả về danh sách phiếu thu tìm thấy
+            response.Phieuthus = thongtinPhieuThu;
 
-            return Ok(response); // Trả về trạng thái 200 với response
+            return Ok(response);
         }
+
 
         [Authorize]
         [HttpPut("UpdatePhieuThu")]

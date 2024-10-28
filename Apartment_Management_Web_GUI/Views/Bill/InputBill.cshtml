@@ -23,6 +23,8 @@
     <link href="~/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="~/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
    
 </head>
@@ -125,8 +127,50 @@
 
                 <section class="experience_section layout_padding" style = "padding-bottom: 0px;   padding-top: 80px;">                
                 <div class="container">
-               <label for="exampleInputEmail1">Phiếu thu phòng : <span id="maPhongLabel"></span></label>
-                <br> <br>
+               <label for="exampleInputEmail1">
+                   <strong>Phiếu thu phòng : </strong> <span id="maPhongLabel"></span>
+                   </label>
+
+
+            <br />
+             <br />
+
+            @* Lọc theo ngày *@
+           
+                
+                 <div class="row mb-4 d-flex align-items-end">
+                    <div class="col-md-3" style="margin-right: 10px;">
+                        <label for="startDate" class="form-label">Từ ngày</label>
+                        <input type="date" class="form-control" id="startDate" value="2024-01-01">
+                    </div>
+
+                    <div class="col-md-3" style="margin-right: 10px;">
+                        <label for="endDate" class="form-label">Đến ngày</label>
+                        <input type="date" class="form-control" id="endDate" value="2024-12-31">
+                    </div>
+
+                    <div class="col-md-3" style="margin-right: 10px;">
+                        <label for="trangThaiSelect" class="form-label">Trạng thái</label>
+                        <select id="trangThaiSelect" class="form-control">
+                            <option value="">Chọn trạng thái</option> <!-- Tùy chọn mặc định -->
+                            <option value="true">Đã thanh toán</option> <!-- Sử dụng giá trị số cho trạng thái -->
+                            <option value="false">Chưa thanh toán</option> <!-- Sử dụng giá trị số cho trạng thái -->
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button class="btn btn-primary" id="filterButton" style="height: 40px; margin: 0px 12px 0px 12px;">
+                            <i class="fas fa-filter"></i> <!-- Biểu tượng lọc -->
+                        </button>
+                        <button class="btn btn-primary" id="refeshButton" style="height: 40px; margin: 0px 12px 0px 12px;">
+                            <i class="fa-solid fa-arrows-rotate" style="color: #ffffff;"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+              
+
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -452,10 +496,9 @@
                     $('#maPhongLabel').text('Không tìm thấy mã phòng');
                 }
 
-                if (maPhong) {
-                    // Gọi API để lấy thông tin phiếu thu
+              function loadPhieuThus(maPhong, startDate, endDate, trangThai) {
                     $.ajax({
-                        url: `https://localhost:7298/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}`,
+                        url: `https://localhost:7298/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}`,
                         type: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + loginResponse.token
@@ -473,7 +516,7 @@
                                     var trangThaiClass = phieuThu.trangThai ? 'text-success' : 'text-danger';
                                     var trangThaiText = phieuThu.trangThai ? 'Đã thanh toán' : 'Chưa thanh toán';
 
-                                    // Kiểm tra nếu trường nào null thì thay thế bằng 'Chưa có' và thêm màu đỏ
+                                    // Kiểm tra nếu trường nào null thì thay thế bằng 'Trống' và thêm màu đỏ
                                     var checkNull = function(value) {
                                         return value ? value : '<span style="color:red;">Trống</span>';
                                     };
@@ -493,21 +536,20 @@
                                             <td>${checkNull(phieuThu.ngayLap)}</td>
                                             <td>${checkNull(phieuThu.ngayThu)}</td>
                                             <td>${formatCurrency(phieuThu.tienNha)}</td>
-
-                                            <td>${checkNull(phieuThu.dienCu)}  </td>
-                                            <td>${checkNull(phieuThu.dienMoi)} </td>
+                                            <td>${checkNull(phieuThu.dienCu)}</td>
+                                            <td>${checkNull(phieuThu.dienMoi)}</td>
                                             <td>${formatCurrency(phieuThu.tienDien)}</td>
-
                                             <td>${checkNull(phieuThu.nuocCu)}</td>
                                             <td>${checkNull(phieuThu.nuocMoi)}</td>
-                                           <td>${formatCurrency(phieuThu.tienNuoc)}</td>
+                                            <td>${formatCurrency(phieuThu.tienNuoc)}</td>
                                             <td>${formatCurrency(phieuThu.tienDv)}</td>
                                             <td>${formatCurrency(phieuThu.tongTien)}</td>
                                             <td>${formatCurrency(phieuThu.thanhToan)}</td>
-
                                             <td class="${trangThaiClass}">${trangThaiText}</td>
                                             <td>
-                                                <button type="button" class="btn ${buttonClass}" ${buttonDisabled} data-toggle="modal" data-target="#exampleModal" data-whatever="" ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
+                                                <button type="button" class="btn ${buttonClass}" ${buttonDisabled} 
+                                                        data-toggle="modal" data-target="#exampleModal" 
+                                                        ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
                                                     Nhập Điện Nước
                                                 </button>
                                             </td>
@@ -523,9 +565,30 @@
                             alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
                         }
                     });
-                } else {
-                    alert('Không tìm thấy mã phòng trong localStorage.');
                 }
+
+                // Gọi API lần đầu tiên khi load trang
+                loadPhieuThus(maPhong, '', '', '');
+
+                // Lắng nghe sự kiện nhấn nút lọc
+                $('#filterButton').on('click', function () {
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
+                    var trangThai = $('#trangThaiSelect').val(); // Lấy giá trị từ dropdown trạng thái
+
+                    loadPhieuThus(maPhong, startDate, endDate, trangThai);
+                });
+
+                // Lắng nghe sự kiện nhấn nút làm mới
+                $('#refeshButton').on('click', function () {
+                    // Gọi API lần đầu tiên khi load trang
+                    loadPhieuThus(maPhong, '', '', '');
+                });
+
+
+
+
+
 
                 // Sự kiện nhấn vào nút "Nhập Điện Nước"
                 $(document).on('click', '.btn-primary[data-target="#exampleModal"]', function () {

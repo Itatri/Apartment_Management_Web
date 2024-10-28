@@ -18,13 +18,41 @@ namespace Apartment_Management_Web.Services
             return await _context.PhieuThus.ToListAsync();
         }
 
-      
-        public async Task<List<PhieuThu>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong)
+
+        //public async Task<List<PhieuThu>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong)
+        //{
+        //    return await _context.PhieuThus
+        //        .Where(t => t.MaPhong == maPhong)
+        //        .ToListAsync();
+        //}
+
+        public async Task<List<PhieuThu>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai)
         {
-            return await _context.PhieuThus
-                .Where(t => t.MaPhong == maPhong)
-                .ToListAsync();
+            var query = _context.PhieuThus.AsQueryable();
+
+            query = query.Where(t => t.MaPhong == maPhong);
+
+            // Lọc theo ngày lập
+            if (startDate.HasValue)
+            {
+                query = query.Where(t => t.NgayLap >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(t => t.NgayLap <= endDate.Value);
+            }
+
+            // Lọc theo trạng thái
+            if (trangThai.HasValue)
+            {
+                query = query.Where(t => t.TrangThai == trangThai.Value);
+            }
+
+            return await query.ToListAsync();
         }
+
+
 
 
         // Lấy phiếu thu theo MaPt
