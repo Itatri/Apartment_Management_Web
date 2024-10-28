@@ -17,7 +17,7 @@
 - ASP.NET Core Web MVC (Frontend)
 
 ### Mô hình 
-
+- Mô hình Web MVC kết hợp Web API
 - Database First Entity Framework Core
 
 ### Demo
