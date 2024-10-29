@@ -189,7 +189,7 @@
                                                     <section class="experience_section layout_padding" style="padding-bottom: 10    0px;min-width: 0px;padding-top: 50px;"">
                                                         <div class="container">
                                                             <label for="exampleInputEmail1">
-                                                                Thành viên phòng : <span id="maPhongLabel"></span>
+                                                                <strong> Thành viên phòng : </strong>  <span id="maPhongLabel"></span>
                                                             </label>
                                                             <br><br>
                                                             <div class="table-responsive">
@@ -955,6 +955,7 @@
 
 
 
+
                                             // Tạo đối tượng dữ liệu để gửi
                                             const data = {
                                                 HoTen: hoTen,
@@ -1055,6 +1056,7 @@
                                         });
 
 
+
                                 // Hàm reload trang khi nhấn nút Ok
                                 $('#successCreateModal .btn-primary').click(function() {
                                     location.reload();
@@ -1108,30 +1110,7 @@
                                     return null; // Trả về null nếu định dạng không hợp lệ
                                 }
 
-                                // // Khai báo Datepicker:
-                                // $('#datepicker').datepicker({
-                                //     format: 'dd/mm/yyyy', // Định dạng ngày
-                                //     autoclose: true, // Tự động đóng khi chọn
-                                //     todayHighlight: true, // Đánh dấu ngày hiện tại
-                                //     orientation: 'bottom right' // Hiển thị ở góc phải dưới của icon
-                                // });
-
-                                // // Khi click vào icon lịch, kích hoạt datepicker
-                                // $('#calendar-icon').click(function() {
-                                //     $('#datepicker').datepicker('show'); // Hiển thị datepicker khi nhấn vào icon
-                                // });
-
-                                // $('#datepicker_ngaycap').datepicker({
-                                //     format: 'dd/mm/yyyy', // Định dạng ngày
-                                //     autoclose: true, // Tự động đóng khi chọn
-                                //     todayHighlight: true, // Đánh dấu ngày hiện tại
-                                //     orientation: 'bottom right' // Hiển thị ở góc phải dưới của icon
-                                // });
-
-                                // // Khi click vào icon lịch, kích hoạt datepicker
-                                // $('#calendar-icon_ngaycap').click(function() {
-                                //     $('#datepicker_ngaycap').datepicker('show'); // Hiển thị datepicker khi nhấn vào icon
-                                // });
+                               
 
 
 
