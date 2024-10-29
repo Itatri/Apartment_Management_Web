@@ -28,9 +28,12 @@ namespace Apartment_Management_Web.Services
         public async Task<List<ThongTinKhach?>> GetThongTinKhachByPhongAsync(string maPhong)
         {
             return await _context.ThongTinKhaches
-               .Where(t => t.MaPhong == maPhong)
+               .Where(t => t.MaPhong == maPhong && t.TrangThai == 1)
                .ToListAsync();
         }
+
+
+
         public async Task<List<ThongTinKhach?>> GetThongTinKhachByMaKhachTroAsync(string maKhachTro)
         {
             return await _context.ThongTinKhaches

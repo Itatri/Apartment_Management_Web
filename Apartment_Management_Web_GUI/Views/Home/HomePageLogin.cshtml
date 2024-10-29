@@ -729,6 +729,7 @@
 
                   // Kiểm tra xem loginResponse đã bị xóa chưa
                   console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
+                  alert("Đăng xuất thành công");
 
                   // Chuyển hướng người dùng về trang đăng nhập
                   window.location.href = '@Url.Action("HomePage", "Home")';

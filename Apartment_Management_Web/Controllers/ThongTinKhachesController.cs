@@ -83,6 +83,8 @@ namespace Apartment_Management_Web.Controllers
             return Ok(response); // Trả về trạng thái 200 với response
         }
 
+
+
         // API lấy thông tin khách theo CCCD và Phone
         [HttpGet("GetThongTinKhachByMaKhachTro")]
         public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByMaKhachTro(string maKhachTro)
@@ -217,8 +219,8 @@ namespace Apartment_Management_Web.Controllers
                 // Xử lý họ tên để loại bỏ dấu và khoảng trắng
                 var tenKhongDau = RemoveDiacritics(hoTen).Replace(" ", "");
 
-                // Đặt tên file theo định dạng CK_MaKhachTro_HoTen.jpeg
-                var fileName = $"CK_{maKhachTro}_{tenKhongDau}.jpeg";
+                // Đặt tên file theo định dạng CK_MaKhachTro_HoTen.jpg
+                var fileName = $"CK_{maKhachTro}_{tenKhongDau}.jpg";
                 var filePath = Path.Combine(folderPath, fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))

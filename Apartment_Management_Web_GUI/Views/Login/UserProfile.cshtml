@@ -284,7 +284,7 @@
                                                         </div>
 
                                                     @*     <div class="col-md-12"><label class="labels">Ngày Sinh</label><input type="text" class="form-control" placeholder="Chọn ngày sinh" value=""></div> *@
-
+@* 
                                                       <div class="col-md-12">
                                                         <label class="labels">Ngày Sinh</label>
                                                         <div class="input-group">
@@ -295,7 +295,13 @@
                                                                 </span>
                                                             </div>
                                                         </div>
+                                                    </div> *@
+
+                                                    <div class="col-md-12">
+                                                        <label class="labels">Ngày Sinh</label>
+                                                        <input type="date" class="form-control" id="datepicker" placeholder="Chọn ngày sinh" />
                                                     </div>
+
 
 
 
@@ -499,7 +505,7 @@
 
                                                          <div class="col-md-12"><label class="labels">Thường trú</label><input type="text" class="form-control" placeholder="Nhập nơi thường trú" value=""></div>
 
-                                                      <div class="col-md-12">
+                                                      @* <div class="col-md-12">
                                                         <label class="labels">Ngày Cấp</label>
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" id="datepicker_ngaycap" placeholder="Chọn ngày cấp" />
@@ -509,7 +515,13 @@
                                                                 </span>
                                                             </div>
                                                         </div>
+                                                    </div> *@
+
+                                                    <div class="col-md-12">
+                                                        <label class="labels">Ngày Cấp</label>
+                                                        <input type="date" class="form-control" id="datepicker_ngaycap" placeholder="Chọn ngày cấp" />
                                                     </div>
+
 
                                                     <div class="col-md-12">
                                                         <label class="labels">Trạng thái</label>
@@ -839,7 +851,8 @@
                                                         $('input[placeholder="Nhập họ tên"]').val(khach.hoTen);
                                                          // Sử dụng class để chọn thẻ select
                                                         $('select.form-control').val(khach.gioiTinh); // Thay đổi ở đây
-                                                        $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toLocaleDateString());
+                                                        // $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toLocaleDateString());
+                                                          $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toISOString().slice(0, 10));
                                                         $('input[placeholder="Nhập số điện thoại"]').val(khach.phone);
                                                         $('input[placeholder="Nhập email"]').val(khach.email);
                                                         $('input[placeholder="Thông tin phòng"]').val(khach.maPhong);
@@ -849,7 +862,8 @@
                                                         $('input[placeholder="Nhập nơi cấp"]').val(khach.noiCap);
                                                          $('select.form-control').eq(2).val(khach.queQuan); 
                                                           $('input[placeholder="Nhập nơi thường trú"]').val(khach.thuongTru);
-                                                        $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toLocaleDateString());
+                                                        // $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toLocaleDateString());
+                                                        $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toISOString().slice(0, 10));
                                                                             // Cập nhật trạng thái
                                                         $('select[name="trangThaiKhach"]').val(khach.trangThai); // Cập nhật trạng thái
 
@@ -920,6 +934,8 @@
                                             const hoTen = $("input[placeholder='Nhập họ tên']").val();
                                             const gioiTinh = $("select[name='gioiTinh']").val();
                                             const ngaySinh = convertDate($("#datepicker").val()); // Chuyển đổi ngày sinh
+                                               // Kiểm tra và lấy giá trị từ DatePicker
+                                            // const ngaySinh = convertDate($("input[placeholder='Chọn ngày sinh']").val()); // Chắc chắn bạn có giá trị này từ DatePicker
                                             const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
                                             const email = $("input[placeholder='Nhập email']").val();
                                             const phong = $("input[placeholder='Thông tin phòng']").val();
@@ -929,11 +945,15 @@
                                             const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
                                             const queQuan = $("select[name='queQuan']").val();
                                             const ngayCap = convertDate($("#datepicker_ngaycap").val()); // Chuyển đổi ngày cấp
+                                            // Lấy ngày cấp từ DatePicker
+                                            // const ngayCap = convertDate($("input[placeholder='Chọn ngày cấp']").val()); // Chuyển đổi ngày cấp
                                             const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
                                             const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
 
                                             // Nếu không có tệp chữ ký, đặt giá trị mặc định là 'None.jpg'
                                             const chuKy = chuKyFile ? chuKyFile.name : 'None.jpg';
+
+
 
                                             // Tạo đối tượng dữ liệu để gửi
                                             const data = {
@@ -953,6 +973,8 @@
                                                 TrangThai: trangThai 
                                             };
 
+
+
                                             // Kiểm tra nếu mã khách trọ có giá trị
                                             if (maKhachTro) {
                                                 // Gọi API để cập nhật thông tin khách trọ
@@ -967,10 +989,12 @@
                                                         $("#successUpdateModal").modal('show');
                                                         console.log(response);
                                                         uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
+                                                         location.reload();
                                                     },
                                                     error: function(xhr, status, error) {
                                                         alert("Cập nhật thông tin thất bại!");
                                                         console.error(xhr.responseText);
+
                                                     }
                                                 });
                                             } else {
@@ -986,6 +1010,7 @@
                                                         $("#successCreateModal").modal('show');
                                                         console.log(response);
                                                         uploadChuKy(response.maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
+                                                         location.reload();
                                                     },
                                                     error: function(xhr, status, error) {
                                                         alert("Tạo mới khách thất bại!");
@@ -1037,7 +1062,8 @@
                                 function resetChiTietCuDan() {
                                     $('input[placeholder="Nhập họ tên"]').val('');
                                     $('select[name="gioiTinh"]').val('');
-                                    $('input[placeholder="Chọn ngày sinh"]').val('');
+                                    // $('input[placeholder="Chọn ngày sinh"]').val('');
+                                     $('input[placeholder="Chọn ngày sinh"]').val('');
                                     $('input[placeholder="Nhập số điện thoại"]').val('');
                                     $('input[placeholder="Nhập email"]').val('');
                                     $('input[placeholder="Thông tin phòng"]').val(maPhong); // Gán giá trị mã phòng vào input
@@ -1046,7 +1072,8 @@
                                     $('input[placeholder="Nhập nơi cấp"]').val('');
                                     $('input[placeholder="Nhập nơi thường trú"]').val('');
                                     $('select[name="queQuan"]').val('');
-                                    $('input[placeholder="Chọn ngày cấp"]').val('');
+                                    // $('input[placeholder="Chọn ngày cấp"]').val('');
+                                     $('input[placeholder="Chọn ngày cấp"]').val('');
                                     $('select[name="trangThaiKhach"]').val('');
                                     
 
@@ -1056,38 +1083,47 @@
                                     $('#chuKyInput').val(''); // Đặt lại input tệp chữ ký
                                 }
 
-
-
                                 // Hàm chuyển đổi định dạng ngày
+                                    function convertDate(dateString) {
+                                        const parts = dateString.split('/');
+                                        return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
+                                    }
+
+
+                               // Hàm chuyển đổi định dạng ngày
                                 function convertDate(dateString) {
+                                    if (!dateString) return null; // Nếu không có giá trị, trả về null
                                     const parts = dateString.split('/');
-                                    return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
+                                    if (parts.length === 3) {
+                                        return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
+                                    }
+                                    return null; // Trả về null nếu định dạng không hợp lệ
                                 }
 
-                                // Khai báo Datepicker:
-                                $('#datepicker').datepicker({
-                                    format: 'dd/mm/yyyy', // Định dạng ngày
-                                    autoclose: true, // Tự động đóng khi chọn
-                                    todayHighlight: true, // Đánh dấu ngày hiện tại
-                                    orientation: 'bottom right' // Hiển thị ở góc phải dưới của icon
-                                });
+                                // // Khai báo Datepicker:
+                                // $('#datepicker').datepicker({
+                                //     format: 'dd/mm/yyyy', // Định dạng ngày
+                                //     autoclose: true, // Tự động đóng khi chọn
+                                //     todayHighlight: true, // Đánh dấu ngày hiện tại
+                                //     orientation: 'bottom right' // Hiển thị ở góc phải dưới của icon
+                                // });
 
-                                // Khi click vào icon lịch, kích hoạt datepicker
-                                $('#calendar-icon').click(function() {
-                                    $('#datepicker').datepicker('show'); // Hiển thị datepicker khi nhấn vào icon
-                                });
+                                // // Khi click vào icon lịch, kích hoạt datepicker
+                                // $('#calendar-icon').click(function() {
+                                //     $('#datepicker').datepicker('show'); // Hiển thị datepicker khi nhấn vào icon
+                                // });
 
-                                $('#datepicker_ngaycap').datepicker({
-                                    format: 'dd/mm/yyyy', // Định dạng ngày
-                                    autoclose: true, // Tự động đóng khi chọn
-                                    todayHighlight: true, // Đánh dấu ngày hiện tại
-                                    orientation: 'bottom right' // Hiển thị ở góc phải dưới của icon
-                                });
+                                // $('#datepicker_ngaycap').datepicker({
+                                //     format: 'dd/mm/yyyy', // Định dạng ngày
+                                //     autoclose: true, // Tự động đóng khi chọn
+                                //     todayHighlight: true, // Đánh dấu ngày hiện tại
+                                //     orientation: 'bottom right' // Hiển thị ở góc phải dưới của icon
+                                // });
 
-                                // Khi click vào icon lịch, kích hoạt datepicker
-                                $('#calendar-icon_ngaycap').click(function() {
-                                    $('#datepicker_ngaycap').datepicker('show'); // Hiển thị datepicker khi nhấn vào icon
-                                });
+                                // // Khi click vào icon lịch, kích hoạt datepicker
+                                // $('#calendar-icon_ngaycap').click(function() {
+                                //     $('#datepicker_ngaycap').datepicker('show'); // Hiển thị datepicker khi nhấn vào icon
+                                // });
 
 
 

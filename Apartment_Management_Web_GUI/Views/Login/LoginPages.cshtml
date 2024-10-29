@@ -10,6 +10,8 @@
 
 	<!-- STYLE CSS -->
 	<link rel="stylesheet" href="~/css/style_login.css">
+
+
 </head>
 
 <body>
@@ -38,6 +40,8 @@
 	</div>
 
 
+
+
 	<script src="~/js/jquery-3.3.1.min.js"></script>
 	<script src="~/js/main.js"></script>
 
@@ -52,6 +56,19 @@
             // Lấy dữ liệu từ các trường nhập liệu
             var userId = $('#userId').val();
             var password = $('#password').val();
+
+            // Kiểm tra nếu trường ID hoặc mật khẩu bị trống
+            if (!userId) {
+                alert("Vui lòng nhập ID");
+                $('#userId').focus(); // Đưa con trỏ vào trường ID
+                return;
+            }
+            if (!password) {
+                alert("Vui lòng nhập mật khẩu");
+                $('#password').focus(); // Đưa con trỏ vào trường mật khẩu
+                return;
+            }
+
 
             // Gọi API để đăng nhập
             $.ajax({
