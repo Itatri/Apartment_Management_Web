@@ -544,7 +544,7 @@
                              
 
 
-                  <!-- Modal thông báo lưu thông tin thành công -->
+                @*   <!-- Modal thông báo lưu thông tin thành công -->
                     <div class="modal" id="successModal" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -562,7 +562,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> *@
 
 
 
@@ -989,7 +989,7 @@
                                                         $("#successUpdateModal").modal('show');
                                                         console.log(response);
                                                         uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
-                                                         location.reload();
+                                                         // location.reload();
                                                     },
                                                     error: function(xhr, status, error) {
                                                         alert("Cập nhật thông tin thất bại!");
@@ -1010,7 +1010,7 @@
                                                         $("#successCreateModal").modal('show');
                                                         console.log(response);
                                                         uploadChuKy(response.maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
-                                                         location.reload();
+                                                         // location.reload();
                                                     },
                                                     error: function(xhr, status, error) {
                                                         alert("Tạo mới khách thất bại!");
@@ -1035,7 +1035,7 @@
                                                         processData: false,
                                                         contentType: false,
                                                         success: function(uploadResponse) {
-                                                            alert("Tải ảnh chữ ký lên thành công!");
+                                                            console.log("Tải ảnh chữ ký lên thành công!");
                                                             console.log(uploadResponse);
 
                                                             // Hiển thị ảnh chữ ký
@@ -1044,7 +1044,7 @@
                                                             });
                                                         },
                                                         error: function(uploadError) {
-                                                            alert("Tải ảnh chữ ký lên thất bại!");
+                                                            console.log("Tải ảnh chữ ký lên thất bại!");
                                                             console.error(uploadError.responseText);
                                                         }
                                                     });
@@ -1055,6 +1055,14 @@
                                         });
 
 
+                                // Hàm reload trang khi nhấn nút Ok
+                                $('#successCreateModal .btn-primary').click(function() {
+                                    location.reload();
+                                });
+
+                                $('#successUpdateModal .btn-primary').click(function() {
+                                    location.reload();
+                                });
 
                             
 
