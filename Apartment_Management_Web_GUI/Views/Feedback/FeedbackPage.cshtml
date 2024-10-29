@@ -499,7 +499,7 @@
                                     return new Date(b.ngayGui) - new Date(a.ngayGui);
                                 });
 
-                                $('tbody').empty(); // Xóa tất cả các hàng trong tbody
+                                $('tbody').empty(); // Xóa tất cả các hàng trong tbody 
 
                                 feedBacks.forEach(function (Feedback) {
                                     var trangThaiClass = Feedback.trangThai ? 'text-success' : 'text-danger';
@@ -539,7 +539,7 @@
                             }
                         },
                         error: function (xhr) {
-                            alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
+                            console.log('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
                         }
                     });
                 }
