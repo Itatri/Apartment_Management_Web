@@ -217,28 +217,45 @@
                 </div>
             </div>
 
-           <!-- Modal QR thanh toán -->
-<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="paymentModalLabel">Thanh Toán</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center">
-                <img src="~/images/QR_HoangVanTri.jpg" alt="QR Code" class="img-fluid">
-               <P></P>
-                <p>Quét mã QR để thanh toán</p>
+         <!-- Modal QR thanh toán -->
+        <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="paymentModalLabel">Thanh Toán</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p><strong>Tài khoản :</strong> HOANG VAN TRI - 5218 4567 89 </p>
+                        <img src="~/images/QR_HoangVanTri_Tech.jpg" alt="QR Code" class="img-fluid">
+                        <p></p>
+                        <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <!-- Hiển thị thông tin thanh toán -->
+                        <div id="paymentInfo" class="mb-3"></div>
+
+                        
+
+                        <!-- Nội dung chuyển khoản -->
+                         <p><strong>Nội dung chuyển khoản</strong>
+                             <br />Vui lòng ghi rõ nội dung chuyển khoản theo định dạng :<br>
+                            <strong>mã phiếu thu</strong>_<strong>mã phòng</strong>_<strong>tên khách hàng</strong><br>
+                            Ví dụ: <em>PT_M0110102024_P001_HOANG VAN TRI</em></p>
+                       
+
+                        <!-- Thông tin liên hệ -->
+                        <p><strong>Liên hệ chúng tôi </strong> <br /> Nếu có bất kỳ câu hỏi nào, vui lòng gửi <a href="@Url.Action("FeedbackPage", "Feedback")" style="color: blue; text-decoration: underline;">phản hồi</a> hoặc <br /> liên hệ chúng tôi qua số điện thoại : <strong>038-963-4776</strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+
+
 
 
 
@@ -555,9 +572,19 @@
 
 
 
-                                    // Nếu phiếu thu đã thanh toán, làm nút bị khóa
+                                    // // Nếu phiếu thu đã thanh toán, làm nút bị khóa
+                                    // var buttonDisabled = phieuThu.trangThai ? 'disabled' : '';
+                                    // var buttonClass = phieuThu.trangThai ? 'btn-secondary' : 'btn-primary';
+
+                                      // Nếu phiếu thu đã thanh toán, làm nút bị khóa
                                     var buttonDisabled = phieuThu.trangThai ? 'disabled' : '';
                                     var buttonClass = phieuThu.trangThai ? 'btn-secondary' : 'btn-primary';
+
+                                    // Kiểm tra nếu tongTien là null hoặc không tồn tại
+                                    var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0; // Chỉ cho phép thanh toán nếu có tổng tiền
+                                    var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
+
+
 
                                     var newRow = `
                                         <tr>
@@ -581,18 +608,13 @@
                                                         ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
                                                     Nhập Điện Nước
                                                 </button>
-                                                
-
-
                                             </td>
-
                                             <td>
-                                             <button type="button" style="width: 130px;" class="btn btn-success" ${buttonDisabled} 
-                                                        data-toggle="modal" data-target="#paymentModal"
-                                                        ${buttonDisabled ? '' : 'onclick="showQrCodeModal()"'}>
+                                                <button type="button" style="width: 130px;" class="btn btn-success" ${paymentButtonDisabled} 
+                                                        data-toggle="modal" data-target="#paymentModal">
                                                     Thanh Toán
                                                 </button>
-                                            </td>
+                                            </td>   
 
                                          
                                         </tr>
@@ -639,6 +661,20 @@
                 });
 
 
+
+                // Sự kiện nhấn vào nút "Thanh Toán"
+                $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
+                    var row = $(this).closest('tr');
+                    var maPt = row.find('th').text(); 
+                    var tongTien = row.find('td:nth-child(12)').text(); // Cột chứa tổng tiền thanh toán
+                    var tenKhachHang = "HOANG VAN TRI"; // Cần thay đổi để lấy tên khách hàng từ dữ liệu thực tế
+
+                    // Cập nhật thông tin trong modal
+                    $('#paymentInfo').html(`  <strong>Mã phiếu thu :</strong> ${maPt} <br>  <strong>Số tiền thanh toán :</strong> ${tongTien} VND`);
+
+                    // Hiển thị modal
+                    $('#paymentModal').modal('show');
+                });
 
 
 
