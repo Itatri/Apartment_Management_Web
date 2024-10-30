@@ -189,7 +189,8 @@
                                 <th scope="col">Tổng tiền</th>
                                 <th scope="col">Thanh toán</th>
                                 <th scope="col">Trạng Thái</th>
-                                 <th scope="col">Hành động</th>
+                                 <th scope="col"></th>
+                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -209,14 +210,37 @@
                                 <td>Trống</td>
                                 <td>Trống</td>
                                  <td>Trống</td>
+                                 <td>Trống</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
+           <!-- Modal QR thanh toán -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Thanh Toán</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="~/images/QR_HoangVanTri.jpg" alt="QR Code" class="img-fluid">
+               <P></P>
+                <p>Quét mã QR để thanh toán</p>
 
-        
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
                 <!-- Modal cập nhật thông tin điện nước -->
@@ -506,6 +530,9 @@
                         success: function (response) {
                             if (response.isSuccess) {
                                 var phieuThus = response.phieuthus;
+
+
+
                                 phieuThus.sort(function (a, b) {
                                     return new Date(b.ngayLap) - new Date(a.ngayLap);
                                 });
@@ -525,6 +552,8 @@
                                     var formatCurrency = function(value) {
                                         return value ? value.toLocaleString('vi-VN') : '<span style="color:red;">Trống</span>';
                                     };
+
+
 
                                     // Nếu phiếu thu đã thanh toán, làm nút bị khóa
                                     var buttonDisabled = phieuThu.trangThai ? 'disabled' : '';
@@ -547,12 +576,25 @@
                                             <td>${formatCurrency(phieuThu.thanhToan)}</td>
                                             <td class="${trangThaiClass}">${trangThaiText}</td>
                                             <td>
-                                                <button type="button" class="btn ${buttonClass}" ${buttonDisabled} 
+                                                <button type="button" style="width: 160px;" class="btn ${buttonClass}" ${buttonDisabled} 
                                                         data-toggle="modal" data-target="#exampleModal" 
                                                         ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
                                                     Nhập Điện Nước
                                                 </button>
+                                                
+
+
                                             </td>
+
+                                            <td>
+                                             <button type="button" style="width: 130px;" class="btn btn-success" ${buttonDisabled} 
+                                                        data-toggle="modal" data-target="#paymentModal"
+                                                        ${buttonDisabled ? '' : 'onclick="showQrCodeModal()"'}>
+                                                    Thanh Toán
+                                                </button>
+                                            </td>
+
+                                         
                                         </tr>
                                     `;
                                     $('tbody').append(newRow);
@@ -562,9 +604,14 @@
                             }
                         },
                         error: function (xhr) {
-                            alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
+                            // alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
+                             alert(' Không có thông tin phiếu thu tương ứng  ');
                         }
                     });
+                }
+
+                function showQrCodeModal() {
+                    $('#paymentModal').modal('show');
                 }
 
                 // Gọi API lần đầu tiên khi load trang
@@ -583,6 +630,12 @@
                 $('#refeshButton').on('click', function () {
                     // Gọi API lần đầu tiên khi load trang
                     loadPhieuThus(maPhong, '', '', '');
+
+                     // Đặt lại giá trị của các trường ngày
+                    $('#startDate').val('2024-01-01');
+                    $('#endDate').val('2024-12-31');
+
+                    $('#trangThaiSelect').val('');
                 });
 
 
