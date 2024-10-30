@@ -199,7 +199,7 @@
 }
 
 .table {
-    min-width: 1800px; /* Đặt chiều rộng tối thiểu cho bảng nếu cần */
+    min-width: 2000px; /* Đặt chiều rộng tối thiểu cho bảng nếu cần */
     text-align: center; /* Căn giữa nội dung trong bảng */
 }
  /* Căn giữa tiêu đề cột */

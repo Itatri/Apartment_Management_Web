@@ -539,7 +539,8 @@
                             }
                         },
                         error: function (xhr) {
-                            console.log('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
+                            // console.log('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
+                            alert(' Không có thông tin phiếu thu tương ứng  ');
                         }
                     });
                 }
@@ -559,6 +560,12 @@
                 $('#refeshButton').on('click', function () {
                    // Gọi API lần đầu tiên khi load trang
                      loadFeedbacks('', '', '');
+
+                      // Đặt lại giá trị của các trường ngày
+                    $('#startDate').val('2024-01-01');
+                    $('#endDate').val('2024-12-31');
+
+                    $('#trangThaiSelect').val('');
                 });
 
 
@@ -615,12 +622,7 @@
                             alert('Đã xảy ra lỗi khi tạo phản hồi: ' + xhr.responseJSON.message);
                         }
                     });
-                });
-
-
-               
-
-
+                });            
 
             
             });
