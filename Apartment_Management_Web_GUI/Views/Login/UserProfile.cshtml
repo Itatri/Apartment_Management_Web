@@ -1,4 +1,8 @@
-﻿
+﻿@{
+    ViewData["Title"] = "User Profilr";
+    var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
+}
+
 <!DOCTYPE html>
 <html>
 
@@ -761,8 +765,11 @@
 
                                             // Gọi API để lấy thông tin khách theo mã phòng
                                             $.ajax({
-                                                url: 'https://localhost:7298/api/ThongTinKhaches/GetThongTinKhachByPhong',
+                                                url: '@apiBaseUrl/api/ThongTinKhaches/GetThongTinKhachByPhong',
                                                 type: 'GET',
+                                                 headers: {
+                                                        'Authorization': 'Bearer ' + loginResponse.token
+                                                    },
                                                 data: { maPhong: maPhong },
                                                 success: function (response) {
                                                     if (response.isSuccess && response.khachs && response.khachs.length > 0) {
@@ -840,8 +847,11 @@
 
                                             // Gọi API để lấy thông tin khách theo mã khách trọ
                                             $.ajax({
-                                                url: 'https://localhost:7298/api/ThongTinKhaches/GetThongTinKhachByMaKhachTro',
+                                                url: '@apiBaseUrl/api/ThongTinKhaches/GetThongTinKhachByMaKhachTro',
                                                 type: 'GET',
+                                                                     headers: {
+                                                    'Authorization': 'Bearer ' + loginResponse.token
+                                                },
                                                 data: { maKhachTro: maKhachTro },  // Truyền mã khách trọ vừa lấy
                                                 success: function (response) {
                                                     if (response.isSuccess && response.khachs && response.khachs.length > 0) {
@@ -980,9 +990,12 @@
                                             if (maKhachTro) {
                                                 // Gọi API để cập nhật thông tin khách trọ
                                                 $.ajax({
-                                                    url: `https://localhost:7298/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
+                                                    url: `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
                                                     type: 'PUT',
                                                     contentType: 'application/json',
+                                                     headers: {
+                                                        'Authorization': 'Bearer ' + loginResponse.token
+                                                    },
                                                     data: JSON.stringify(data),
                                                     success: function(response) {
                                                         // alert("Cập nhật thông tin thành công!");
@@ -1001,9 +1014,12 @@
                                             } else {
                                                 // Nếu không có mã khách trọ, gọi API để tạo mới thông tin khách
                                                 $.ajax({
-                                                    url: 'https://localhost:7298/api/ThongTinKhaches/CreateThongTinKhach',
+                                                    url: '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach',
                                                     type: 'POST',
                                                     contentType: 'application/json',
+                                                     headers: {
+                                                            'Authorization': 'Bearer ' + loginResponse.token
+                                                        },
                                                     data: JSON.stringify(data),
                                                     success: function(response) {
                                                         // alert("Tạo mới khách thành công!");
@@ -1030,9 +1046,12 @@
 
                                                     // Gọi API để tải ảnh chữ ký lên
                                                     $.ajax({
-                                                        url: 'https://localhost:7298/api/ThongTinKhaches/Upload', // Đường dẫn API để tải tệp
+                                                        url: '@apiBaseUrl/api/ThongTinKhaches/Upload', // Đường dẫn API để tải tệp
                                                         type: 'POST',
                                                         data: formData,
+                                                         headers: {
+                                                            'Authorization': 'Bearer ' + loginResponse.token
+                                                        },
                                                         processData: false,
                                                         contentType: false,
                                                         success: function(uploadResponse) {
@@ -1135,9 +1154,6 @@
                                         reader.readAsDataURL(file); // Đọc tệp dưới dạng Data URL
                                     }
                                 });
-
-
-
             });
 
 

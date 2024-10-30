@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Services;
+using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models.Bill;
 using Apartment_Management_Web.Models.CusFeeback;
 using Microsoft.AspNetCore.Authorization;
@@ -25,8 +26,8 @@ namespace Apartment_Management_Web.Controllers
             _FeedbackService = FeedbackService;
         }
 
-
         // API lấy danh sách Feedback
+        [Authorize]
         [HttpGet("GetAllThongTinFeedback")]
         public async Task<ActionResult<IEnumerable<FeedBack>>> GetFeedbacks()
         {
@@ -56,7 +57,7 @@ namespace Apartment_Management_Web.Controllers
 
         //    return Ok(response); // Trả về trạng thái 200 với response
         //}
-
+        [Authorize]
         [HttpGet("GetThongTinFeedbackBy_MaPhong")]
         public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
         {

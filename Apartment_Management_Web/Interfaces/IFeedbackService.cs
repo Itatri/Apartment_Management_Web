@@ -1,6 +1,6 @@
 ﻿using Apartment_Management_Web.Models;
 
-namespace Apartment_Management_Web.Services
+namespace Apartment_Management_Web.Interfaces
 {
     public interface IFeedbackService
     {

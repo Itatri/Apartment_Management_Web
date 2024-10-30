@@ -1,5 +1,6 @@
 ﻿using Apartment_Management_Web.Models;
 using Microsoft.EntityFrameworkCore;
+using Apartment_Management_Web.Interfaces;
 
 namespace Apartment_Management_Web.Services
 {

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Login Pages";
+    var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
+}
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -72,7 +76,7 @@
 
             // Gọi API để đăng nhập
             $.ajax({
-                url: 'https://localhost:7298/api/UserPhongs/Login', 
+                url: '@apiBaseUrl/api/UserPhongs/Login', 
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ Id: userId, MatKhau: password }),

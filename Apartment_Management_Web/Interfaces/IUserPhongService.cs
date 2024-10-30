@@ -1,9 +1,8 @@
-﻿using Apartment_Management_Web.Models;
-using Microsoft.Identity.Client;
-using Apartment_Management_Web.Models.Authentication;
+﻿using Apartment_Management_Web.Models.Authentication;
 using Apartment_Management_Web.Models.User;
+using Apartment_Management_Web.Models;
 
-namespace Apartment_Management_Web.Services
+namespace Apartment_Management_Web.Interfaces
 {
     public interface IUserPhongService
     {

@@ -1,10 +1,7 @@
-﻿using Apartment_Management_Web.Models;
-using Microsoft.Identity.Client;
-using Apartment_Management_Web.Models.Authentication;
-using Apartment_Management_Web.Models.User;
-using Apartment_Management_Web.Models.Customer;
+﻿using Apartment_Management_Web.Models.Customer;
+using Apartment_Management_Web.Models;
 
-namespace Apartment_Management_Web.Services
+namespace Apartment_Management_Web.Interfaces
 {
     public interface IThongTinKhachService
     {
@@ -13,7 +10,7 @@ namespace Apartment_Management_Web.Services
         Task<List<ThongTinKhach?>> GetThongTinKhachByPhongAsync(string maPhong);
         Task<List<ThongTinKhach?>> GetThongTinKhachByMaKhachTroAsync(string maKhachTro);
         Task<bool> UpdateThongTinKhachAsync(string maKhachTro, UpdateThongTinKhachRequest request);
-        Task <bool> UpdateChuKyAsync(string maKhachTro, string chuKyFileName);
+        Task<bool> UpdateChuKyAsync(string maKhachTro, string chuKyFileName);
         Task<ThongTinKhach?> GetLastCustomerAsync();
         Task<ThongTinKhach> CreateCustomerAsync(ThongTinKhach customer);
 

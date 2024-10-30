@@ -1,7 +1,10 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Lấy URL API từ appsettings.json
+var apiBaseUrl = builder.Configuration["ApiSettings:BaseUrl"];
 
 var app = builder.Build();
 

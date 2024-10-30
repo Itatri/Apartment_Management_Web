@@ -1,4 +1,8 @@
 ﻿
+@{
+    ViewData["Title"] = "Input Bill";
+    var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
+}
 <!DOCTYPE html>
 <html>
 
@@ -588,7 +592,7 @@
 
               function loadPhieuThus(maPhong, startDate, endDate, trangThai) {
                     $.ajax({
-                        url: `https://localhost:7298/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}`,
+                        url: `@apiBaseUrl/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}`,
                         type: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + loginResponse.token
@@ -762,7 +766,7 @@
                     var nuocMoi = $('#nuocMoiInput').val(); 
 
                     $.ajax({
-                        url: `https://localhost:7298/api/PhieuThus/UpdatePhieuThu?maPt=${maPt}&dienMoi=${dienMoi}&nuocMoi=${nuocMoi}`,
+                        url: `@apiBaseUrl/api/PhieuThus/UpdatePhieuThu?maPt=${maPt}&dienMoi=${dienMoi}&nuocMoi=${nuocMoi}`,
                         type: 'PUT',
                         headers: {
                             'Authorization': 'Bearer ' + loginResponse.token 
