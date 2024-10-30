@@ -58,10 +58,42 @@ namespace Apartment_Management_Web.Controllers
         //    return Ok(response); // Trả về trạng thái 200 với response
         //}
 
+        //[HttpGet("GetThongTinPhieuThuBy_MaPhong")]
+        //public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai)
+        //{
+        //    var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai);
+
+        //    var response = new BillCustomerRespone();
+
+        //    if (thongtinPhieuThu == null || !thongtinPhieuThu.Any())
+        //    {
+        //        response.IsSuccess = false;
+        //        response.Message = "Không tìm thấy thông tin phiếu thu.";
+        //        response.Phieuthus = null;
+        //        return NotFound(response);
+        //    }
+
+        //    response.IsSuccess = true;
+        //    response.Message = "Lấy thông tin phiếu thu thành công.";
+        //    response.Phieuthus = thongtinPhieuThu;
+
+        //    return Ok(response);
+        //}
+
         [HttpGet("GetThongTinPhieuThuBy_MaPhong")]
-        public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai)
+        public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(
+    string maPhong,
+    DateOnly? startDate,
+    DateOnly? endDate,
+    bool? trangThai,
+    int pageNumber = 1,
+    int pageSize = 100)
         {
-            var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai);
+            // Lấy dữ liệu phiếu thu
+            var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai, pageNumber, pageSize);
+
+            // Tính tổng số bản ghi
+            var totalCount = await _PhieuThuService.GetTotalCountAsync(maPhong, startDate, endDate, trangThai);
 
             var response = new BillCustomerRespone();
 
@@ -70,15 +102,21 @@ namespace Apartment_Management_Web.Controllers
                 response.IsSuccess = false;
                 response.Message = "Không tìm thấy thông tin phiếu thu.";
                 response.Phieuthus = null;
+                response.TotalCount = totalCount;
+                response.TotalPages = 0; // Không có trang nếu không có dữ liệu
                 return NotFound(response);
             }
 
             response.IsSuccess = true;
             response.Message = "Lấy thông tin phiếu thu thành công.";
             response.Phieuthus = thongtinPhieuThu;
+            response.TotalCount = totalCount;
+            response.TotalPages = (int)Math.Ceiling((double)totalCount / pageSize); // Tính tổng số trang
 
             return Ok(response);
         }
+
+
 
 
         [Authorize]
