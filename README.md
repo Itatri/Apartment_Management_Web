@@ -5,9 +5,9 @@
 
 ### Các chức năng
 
-- Cho phép người dùng xem hóa đơn giao dịch
-- Cho phép người dùng nhập điện nước 
-- Cho phép người dùng phản hồi thông tin
+- Cho phép người dùng xem hóa đơn dịch vụ căn hộ 
+- Cho phép người dùng nhập điện nước, quét QR thanh toán
+- Cho phép người dùng phản hồi thông tin căn hộ 
 
 
 ### Công nghệ
