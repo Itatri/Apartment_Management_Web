@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Services;
+using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models.Customer;
 using System.Text.RegularExpressions; // Thêm namespace này nếu chưa có
 using System.Text; // Để sử dụng StringBuilder
 using System.Globalization; // Để sử dụng CharUnicodeInfo và UnicodeCategory
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -28,6 +30,7 @@ namespace Apartment_Management_Web.Controllers
         }
 
         // API lấy danh sách User phòng 
+        [Authorize]
         [HttpGet("GetAllThongTinKhach")]
         public async Task<ActionResult<IEnumerable<ThongTinKhach>>> GetThongTinKhachs()
         {
@@ -35,9 +38,10 @@ namespace Apartment_Management_Web.Controllers
             return Ok(thongtinKhach);
         }
 
-       
+
 
         // API lấy thông tin khách theo CCCD và Phone
+        [Authorize]
         [HttpGet("GetThongTinKhachByCDDD_Phone")]
         public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByCDDD_Phone(string cccd, string phone)
         {
@@ -61,6 +65,7 @@ namespace Apartment_Management_Web.Controllers
         }
 
         // API lấy thông tin khách theo CCCD và Phone
+        [Authorize]
         [HttpGet("GetThongTinKhachByPhong")]
         public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByPhong(string maPhong)
         {
@@ -86,6 +91,7 @@ namespace Apartment_Management_Web.Controllers
 
 
         // API lấy thông tin khách theo CCCD và Phone
+        [Authorize]
         [HttpGet("GetThongTinKhachByMaKhachTro")]
         public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByMaKhachTro(string maKhachTro)
         {
@@ -111,6 +117,7 @@ namespace Apartment_Management_Web.Controllers
 
 
         [HttpPut("UpdateThongTinKhach")]
+        [Authorize]
         public async Task<ActionResult<APICustomerRespone>> UpdateThongTinKhach(string maKhachTro, [FromBody] UpdateThongTinKhachRequest request)
         {
             var isUpdated = await _ThongTinKhachService.UpdateThongTinKhachAsync(maKhachTro, request);
@@ -134,6 +141,7 @@ namespace Apartment_Management_Web.Controllers
         }
 
         [HttpPost("CreateThongTinKhach")]
+        [Authorize]
         public async Task<ActionResult<APICustomerRespone>> CreateCustomer([FromBody] CreateCustomerRequest request)
         {
             var response = new APICustomerRespone();
@@ -194,7 +202,7 @@ namespace Apartment_Management_Web.Controllers
 
 
 
-
+        [Authorize]
         [HttpPost("Upload")]
         public async Task<IActionResult> Upload()
         {

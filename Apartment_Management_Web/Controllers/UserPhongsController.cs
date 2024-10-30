@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Apartment_Management_Web.Models;
 using static Apartment_Management_Web.Models.Login.LoginRequest;
 using Apartment_Management_Web.Services;
+using Apartment_Management_Web.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -30,6 +31,7 @@ namespace Apartment_Management_Web.Controllers
             _userPhongService = userPhongService;
         }
         // API lấy danh sách User phòng 
+        [Authorize]
         [HttpGet("GetAllUserPhongs")]
         public async Task<ActionResult<IEnumerable<UserPhong>>> GetUserPhongs()
         {
@@ -40,6 +42,7 @@ namespace Apartment_Management_Web.Controllers
 
         // API lấy User phòng theo Id
         [HttpGet("GetUserPhongById")]
+        [Authorize]
         public async Task<ActionResult<UserPhong>> GetUserPhong(string id)
         {
             var userPhong = await _userPhongService.GetUserPhongByIdAsync(id);
@@ -83,6 +86,7 @@ namespace Apartment_Management_Web.Controllers
 
 
         [HttpPut("UpdateUserPhong")]
+        [Authorize]
         public async Task<IActionResult> UpdateUserPhong(string id, [FromBody] UserPhong userPhong)
         {
             if (id != userPhong.Id)
@@ -114,6 +118,7 @@ namespace Apartment_Management_Web.Controllers
 
 
         // API xóa thông tin User phòng  
+        [Authorize]
         [HttpDelete("DeleteUserPhong")]
         public async Task<IActionResult> DeleteUserPhong(string id)
         {
@@ -128,6 +133,7 @@ namespace Apartment_Management_Web.Controllers
         }
 
         // API tạo thông tin User phòng mới 
+        [Authorize]
         [HttpPost("CreateUserPhong")]
         public async Task<ActionResult<UserPhong>> CreateUserPhong(UserPhong userPhong)
         {

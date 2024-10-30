@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Services;
+using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models.Customer;
 using Apartment_Management_Web.Models.Bill;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,9 @@ namespace Apartment_Management_Web.Controllers
             _PhieuThuService = ThongTinPhieuThuService;
         }
 
+
         // API lấy danh sách User phòng 
+        [Authorize]
         [HttpGet("GetAllThongTinPhieuThu")]
         public async Task<ActionResult<IEnumerable<PhieuThu>>> GetPhieuThus()
         {
@@ -79,15 +82,9 @@ namespace Apartment_Management_Web.Controllers
 
         //    return Ok(response);
         //}
-
+        [Authorize]
         [HttpGet("GetThongTinPhieuThuBy_MaPhong")]
-        public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(
-    string maPhong,
-    DateOnly? startDate,
-    DateOnly? endDate,
-    bool? trangThai,
-    int pageNumber = 1,
-    int pageSize = 100)
+        public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai, int pageNumber = 1,int pageSize = 100)
         {
             // Lấy dữ liệu phiếu thu
             var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai, pageNumber, pageSize);

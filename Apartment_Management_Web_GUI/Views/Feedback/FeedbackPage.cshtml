@@ -1,4 +1,7 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Feedback Page";
+    var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
+}
 <!DOCTYPE html>
 <html>
 
@@ -593,7 +596,7 @@
 
                 function loadFeedbacks(startDate, endDate, trangThai) {
                     $.ajax({
-                        url: `https://localhost:7298/api/FeedBacks/GetThongTinFeedbackBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}`,
+                        url: `@apiBaseUrl/api/FeedBacks/GetThongTinFeedbackBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}`,
                         type: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + loginResponse.token
@@ -750,7 +753,7 @@
                         var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
                         $.ajax({
-                            url: 'https://localhost:7298/api/FeedBacks/CreateFeedback',
+                            url: '@apiBaseUrl/api/FeedBacks/CreateFeedback',
                             type: 'POST',
                             contentType: 'application/json',
                             headers: {

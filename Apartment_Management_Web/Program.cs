@@ -27,6 +27,7 @@
 
 using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Services;
+using Apartment_Management_Web.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

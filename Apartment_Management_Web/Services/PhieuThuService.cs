@@ -1,7 +1,7 @@
 ﻿using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Models.Bill;
 using Microsoft.EntityFrameworkCore;
-
+using Apartment_Management_Web.Interfaces;
 namespace Apartment_Management_Web.Services
 {
     public class PhieuThuService : IPhieuThuService
