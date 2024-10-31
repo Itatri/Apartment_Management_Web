@@ -21,8 +21,13 @@
 - Database First Entity Framework Core
 
 ### Demo
-- Trang chủ <br> <br>
-![HomePage](https://github.com/user-attachments/assets/a9aafe61-0865-438c-817f-3e3c90f26208)
+- Đăng nhập <br> <br>
 
+![DangNhap](https://github.com/user-attachments/assets/17992d5c-5c1d-4645-b4e7-4f02ed5c330e)
+
+
+- Trang chủ <br> <br>
+
+![TrangChu](https://github.com/user-attachments/assets/87345b54-f419-45d2-958a-a7f09aa03833)
 
 
