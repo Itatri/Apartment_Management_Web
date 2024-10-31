@@ -25,13 +25,40 @@ namespace Apartment_Management_Web.Services
         //        .ToListAsync();
         //}
 
-        public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
+        //public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
+        //{
+        //    var query = _context.FeedBacks.AsQueryable();
+
+        //    query = query.Where(t => t.MaPhong == maPhong);
+
+        //    // Lọc theo ngày gửi
+        //    if (startDate.HasValue)
+        //    {
+        //        query = query.Where(t => t.NgayGui >= startDate.Value);
+        //    }
+
+        //    if (endDate.HasValue)
+        //    {
+        //        query = query.Where(t => t.NgayGui <= endDate.Value);
+        //    }
+
+        //    // Lọc theo trạng thái
+        //    if (trangThai.HasValue)
+        //    {
+        //        query = query.Where(t => t.TrangThai == trangThai.Value);
+        //    }
+
+        //    return await query.ToListAsync();
+        //}
+
+
+        // Cập nhật phương thức GetThongTinFeedBacksBy_MaPhongAsync để trả về danh sách phản hồi
+        public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(
+            string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai, int pageNumber, int pageSize)
         {
             var query = _context.FeedBacks.AsQueryable();
-
             query = query.Where(t => t.MaPhong == maPhong);
 
-            // Lọc theo ngày gửi
             if (startDate.HasValue)
             {
                 query = query.Where(t => t.NgayGui >= startDate.Value);
@@ -42,13 +69,36 @@ namespace Apartment_Management_Web.Services
                 query = query.Where(t => t.NgayGui <= endDate.Value);
             }
 
-            // Lọc theo trạng thái
             if (trangThai.HasValue)
             {
                 query = query.Where(t => t.TrangThai == trangThai.Value);
             }
 
-            return await query.ToListAsync();
+            return await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+        }
+
+        // Thêm phương thức để lấy tổng số phản hồi
+        public async Task<int> GetTotalFeedbackCount(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
+        {
+            var query = _context.FeedBacks.AsQueryable();
+            query = query.Where(t => t.MaPhong == maPhong);
+
+            if (startDate.HasValue)
+            {
+                query = query.Where(t => t.NgayGui >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(t => t.NgayGui <= endDate.Value);
+            }
+
+            if (trangThai.HasValue)
+            {
+                query = query.Where(t => t.TrangThai == trangThai.Value);
+            }
+
+            return await query.CountAsync();
         }
 
 

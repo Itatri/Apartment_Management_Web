@@ -57,11 +57,37 @@ namespace Apartment_Management_Web.Controllers
 
         //    return Ok(response); // Trả về trạng thái 200 với response
         //}
+
+
+        //[Authorize]
+        //[HttpGet("GetThongTinFeedbackBy_MaPhong")]
+        //public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
+        //{
+        //    var thongtinFeeback = await _FeedbackService.GetThongTinFeedBacksBy_MaPhongAsync(maPhong, startDate, endDate, trangThai);
+
+        //    var response = new FeedbackCustomerRespone();
+
+        //    if (thongtinFeeback == null || !thongtinFeeback.Any())
+        //    {
+        //        response.IsSuccess = false;
+        //        response.Message = "Không tìm thấy thông tin phản hồi.";
+        //        response.FeedBacks = null;
+        //        return NotFound(response);
+        //    }
+
+        //    response.IsSuccess = true;
+        //    response.Message = "Lấy thông tin phản hồi thành công.";
+        //    response.FeedBacks = thongtinFeeback;
+
+        //    return Ok(response);
+        //}
+
         [Authorize]
         [HttpGet("GetThongTinFeedbackBy_MaPhong")]
-        public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
+        public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(
+       string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai, int pageNumber = 1, int pageSize = 100)
         {
-            var thongtinFeeback = await _FeedbackService.GetThongTinFeedBacksBy_MaPhongAsync(maPhong, startDate, endDate, trangThai);
+            var thongtinFeeback = await _FeedbackService.GetThongTinFeedBacksBy_MaPhongAsync(maPhong, startDate, endDate, trangThai, pageNumber, pageSize);
 
             var response = new FeedbackCustomerRespone();
 
@@ -73,9 +99,13 @@ namespace Apartment_Management_Web.Controllers
                 return NotFound(response);
             }
 
+            // Tính tổng số bản ghi
+            var totalCount = await _FeedbackService.GetTotalFeedbackCount(maPhong, startDate, endDate, trangThai);
             response.IsSuccess = true;
             response.Message = "Lấy thông tin phản hồi thành công.";
             response.FeedBacks = thongtinFeeback;
+            response.TotalCount = totalCount;
+            response.TotalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
             return Ok(response);
         }

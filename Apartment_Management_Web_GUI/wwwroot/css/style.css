@@ -49,9 +49,9 @@
 .hero_area {
     height: calc(100vh - 30px);
     /* background: -webkit-gradient(linear, left top, right top, color-stop(55%, #1a2e35), color-stop(55%, #1cbbb4*/ ));
-    background: -webkit-gradient(linear, left top, right top, color-stop(55%, #1a2e35), color-stop(55%, #21b0e9));
+    background: -webkit-gradient(linear, left top, right top, color-stop(55%, #11191c), color-stop(55%, #21b0e9));
     /* background: linear-gradient(to right, #1a2e35 55%, #1cbbb4 55%);*/
-    background: linear-gradient(to right, #1a2e35 55%, #21b0e9 55%);
+    background: linear-gradient(to right, #11191c 55%, #21b0e9 55%);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -63,9 +63,10 @@
 }
 
 .sub_page .hero_area {
-  height: auto;
-  background: none;
-  background-color: #1a2e35;
+    height: auto;
+    background: none;
+    /* background-color: #1a2e35;*/
+    background-color: #11191c;
 }
 
 .hero_area.sub_pages {
@@ -433,22 +434,26 @@ a:focus {
   color: #ff4f5a;
 }
 
-.experience_section .detail-box .btn-box .btn-2 {
-  display: inline-block;
-  padding: 10px 0;
-  background-color: #1a2e35;
-  color: #ffffff;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  border: 1px solid transparent;
-  border-radius: 0;
-}
+    .experience_section .detail-box .btn-box .btn-2 {
+        display: inline-block;
+        padding: 10px 0;
+        /*background-color: #1a2e35;*/
+        background-color: #11191c;
+        color: #ffffff;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border: 1px solid transparent;
+        border-radius: 0;
+    }
 
-.experience_section .detail-box .btn-box .btn-2:hover {
-  background-color: transparent;
-  border-color: #1a2e35;
-  color: #1a2e35;
-}
+        .experience_section .detail-box .btn-box .btn-2:hover {
+            background-color: transparent;
+            /*  border-color: #1a2e35;
+  color: #1a2e35;*/
+
+            border-color: #11191c;
+            color: #11191c;
+        }
 
 .experience_section .img-box img {
   width: 100%;
@@ -566,24 +571,25 @@ a:focus {
   cursor: pointer;
 }
 
-.freelance_section .tab_container .t-link-box .img-box {
-  width: 90px;
-  height: 90px;
-  min-width: 90px;
-  min-height: 90px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: #1a2e35;
-  border-radius: 100%;
-  margin-right: 35px;
-}
+    .freelance_section .tab_container .t-link-box .img-box {
+        width: 90px;
+        height: 90px;
+        min-width: 90px;
+        min-height: 90px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        /*background-color: #1a2e35;*/
+        background-color: #11191c;
+        border-radius: 100%;
+        margin-right: 35px;
+    }
 
 .freelance_section .tab_container .t-link-box .img-box img {
   width: auto;
@@ -637,19 +643,20 @@ a:focus {
 
 .client_section .carousel-control-prev,
 .client_section .carousel-control-next {
-  top: 50%;
-  width: 65px;
-  height: 65px;
-  border: none;
-  border-radius: 100%;
-  opacity: 1;
-  background-repeat: no-repeat;
-  background-size: 10px;
-  background-position: center;
-  background-color: #1a2e35;
-  margin: 2px;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+    top: 50%;
+    width: 65px;
+    height: 65px;
+    border: none;
+    border-radius: 100%;
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: center;
+    /*  background-color: #1a2e35;*/
+    background-color: #11191c;
+    margin: 2px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .client_section .carousel-control-prev {
@@ -662,9 +669,10 @@ a:focus {
 
 /* info section */
 .info_section {
-  position: relative;
-  background-color: #1a2e35;
-  color: #ffffff;
+    position: relative;
+    /* background-color: #1a2e35;*/
+    background-color: #11191c;
+    color: #ffffff;
 }
 
 .info_section .heading_container {

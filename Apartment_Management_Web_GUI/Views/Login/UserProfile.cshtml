@@ -147,6 +147,30 @@
                                                 </div>
                                             </header>
                                         </div>
+
+
+
+                                        <!-- Modal thông báo đăng xuất thành công -->
+                                        <div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Thông báo</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Đăng xuất tài khoản thành công</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmLogout">Ok</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                             <!-- Modal thông báo kê khai thông tin thành công --> 
                                             <div class="modal" id="successCreateModal" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog" role="document">
@@ -189,7 +213,7 @@
 
                                             <!-- Phần Danh sách cư dân của phòng -->
                                             <div class="container rounded bg-white mt-5 mb-5" id="danhSachCuDan">
-                                                <div class="row" style="border: 2px solid #ededed;">
+                                                <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
                                                     <section class="experience_section layout_padding" style="padding-bottom: 10    0px;min-width: 0px;padding-top: 50px;"">
                                                         <div class="container">
                                                             <label for="exampleInputEmail1">
@@ -234,7 +258,7 @@
                                                                 <button type="button" class="btn btn-primary" onclick="showDetail()">Kê khai thông tin khách mới</button>
                                                             </div> *@
                                                           <div class="container" style="text-align: center;">
-                                                         <button id="keKhaiKhachMoiBtn" class="btn btn-success create-button">Kê khai thông tin khách mới</button>
+                                                         <button id="keKhaiKhachMoiBtn" class="btn btn-primary create-button">Kê khai thông tin khách mới</button>
                                                         </div>
 
 
@@ -242,13 +266,30 @@
                                                         </div>
                                                     </section>
                                                 </div>
+
+
+                                                <section class="about_section layout_padding">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-lg-9 mx-auto">
+                                                                <div class="img-box">
+                                                                    <img style="width:50%;" src="/images/kekhai.jpg" alt="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="detail-box">
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+
                                             </div>
 
 
                                         @* Thông tin chi tiết của cư dân *@
                                          @*   <div id="chiTietCuDan" class="container rounded bg-white mt-5 mb-5" style="display: none;"> *@ @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
                                            <div id="chiTietCuDan"  class="container rounded bg-white mt-5 mb-5" style="display: none;" > @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
-                                        <div class="row" style="border: 2px solid #ededed;">
+                                        <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
                                             <div class="col-md-3 border-right">
                                                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                                                    @*  <img class="mt-5" width="150px" src="~/images/ChuKy.jpg"> *@
@@ -816,12 +857,37 @@
                                     }
 
 
-                                // Xử lý sự kiện nhấn vào nút Đăng xuất
+                                // // Xử lý sự kiện nhấn vào nút Đăng xuất
+                                // $('#logoutBtn').on('click', function () {
+                                //     localStorage.removeItem('loginResponse');
+                                //     console.log('loginResponse:', localStorage.getItem('loginResponse'));
+                                //     window.location.href = '@Url.Action("HomePage", "Home")';
+                                // });
+
+                                 // Xử lý sự kiện nhấn vào nút Đăng xuất
                                 $('#logoutBtn').on('click', function () {
+                                    // Xóa toàn bộ thông tin từ localStorage
                                     localStorage.removeItem('loginResponse');
-                                    console.log('loginResponse:', localStorage.getItem('loginResponse'));
+
+                                    // Kiểm tra xem loginResponse đã bị xóa chưa
+                                    console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
+
+                                    // Hiển thị Modal thông báo đăng xuất thành công
+                                    $('#LogoutSuccessModal').modal('show');
+                                });
+
+                                // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
+                                $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
+                                    // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
                                     window.location.href = '@Url.Action("HomePage", "Home")';
                                 });
+
+                                // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
+                                $('#confirmLogout').on('click', function () {
+                                    $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
+                                });
+
+
 
                                 var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
                                 var maPhong = loginResponse?.user?.maPhong; 
