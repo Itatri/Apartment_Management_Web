@@ -130,7 +130,7 @@
                  <!-- Table danh sách phiếu thu của phòng -->
 
                 <section class="experience_section layout_padding" style = "padding-bottom: 0px;   padding-top: 80px;">                
-                <div class="container">
+                <div class="container" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
                <label for="exampleInputEmail1">
                    <strong>Phiếu thu phòng : </strong> <span id="maPhongLabel"></span>
                    </label>
@@ -219,35 +219,61 @@
                         </tbody>
                     </table>
                 </div>
+
+                     <!-- Phân trang Bootstrap -->
+                                    <section class="about_section layout_padding">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination justify-content-center" id="pagination">
+                                                <li class="page-item disabled" id="prevPage">
+                                                    <a class="page-link" href="#" tabindex="-1">Trước đó</a>
+                                                </li>
+                                                <li class="page-item active" aria-current="page" id="currentPage">
+                                                    <a class="page-link" href="#"> 0 / 0 </a>
+                                                </li>
+
+                                                <li class="page-item" id="nextPage">
+                                                    <a class="page-link" href="#">Tiếp theo</a>
+                                                </li>
+
+                                                   <li class="page-item" id="rowsPerPageItem">
+                                                    <select name="phantrangFeedback" class="form-control" id="feedbackRowsPerPageSelect" style="margin: 0px 10px 0px 10px;">
+                                                        <option value="5">5</option>
+                                                        <option value="10" selected>10</option>
+                                                        <option value="20">20</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+
+                                        </nav>
+                                    </section>
+
             </div>
 
 
-        @* Phan trang Bootstrap *@
-
-        @*    <section class="about_section layout_padding">
-
-                    <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled" id="prevPage">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
+                               
 
 
-                    </section> *@
+      
+
+<!-- Modal thông báo đăng xuất thành công -->
+<div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Đăng xuất tài khoản thành công</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmLogout">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 
                                   <!-- Modal thông báo lọc phiếu thu -->
                     <div class="modal fade" id="filterModal" tabindex="-1" role="dialog">
@@ -378,7 +404,7 @@
             <div class="row">
                 <div class="col-md-10 col-lg-9 mx-auto">
                     <div class="img-box">
-                        <img src="~/images/Bill2.png" alt="">
+                        <img style="width:70%;" src="~/images/Bill2.png" alt="">
                     </div>
                 </div>
             </div>
@@ -555,7 +581,29 @@
 
      <script>
             $(document).ready(function () {
-                // Lấy thông tin loginResponse từ localStorage
+                var currentPage = 1; // Biến để lưu trang hiện tại
+                var totalPages = 1; // Tổng số trang
+
+                // // Lấy thông tin loginResponse từ localStorage
+                // var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+
+                // // Kiểm tra xem loginResponse có tồn tại hay không
+                // if (loginResponse) {
+                //     var user = loginResponse.user;
+
+                //     // Hiển thị userId nếu có
+                //     if (user?.id) {
+                //         $('#userIdDisplay').text(user.id);
+                //     }
+
+                //     // Các thông tin khác từ loginResponse, nếu cần hiển thị
+                //     console.log('Token:', loginResponse.token);
+                //     console.log('User:', user);
+                //     console.log('Mã phòng:', user?.maPhong);
+                //     console.log('Trạng thái:', user?.trangThai);
+                // }
+
+                 // Lấy thông tin loginResponse từ localStorage
                 var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
                 // Kiểm tra xem loginResponse có tồn tại hay không
@@ -574,14 +622,47 @@
                     console.log('Trạng thái:', user?.trangThai);
                 }
 
-                // Xử lý sự kiện nhấn vào nút Đăng xuất
+
+                // // Xử lý sự kiện nhấn vào nút Đăng xuất
+                // $('#logoutBtn').on('click', function () {
+                //     localStorage.removeItem('loginResponse');
+                //     console.log('loginResponse:', localStorage.getItem('loginResponse'));
+                //     window.location.href = '@Url.Action("HomePage", "Home")';
+                // });
+
+                 // Xử lý sự kiện nhấn vào nút Đăng xuất
                 $('#logoutBtn').on('click', function () {
+                    // Xóa toàn bộ thông tin từ localStorage
                     localStorage.removeItem('loginResponse');
-                    console.log('loginResponse:', localStorage.getItem('loginResponse'));
+
+                    // Kiểm tra xem loginResponse đã bị xóa chưa
+                    console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
+
+                    // Hiển thị Modal thông báo đăng xuất thành công
+                    $('#LogoutSuccessModal').modal('show');
+                });
+
+                // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
+                $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
+                    // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
                     window.location.href = '@Url.Action("HomePage", "Home")';
                 });
 
-                var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
+                $('#confirmLogout').on('click', function () {
+                    $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
+                });
+
+                // var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                // var maPhong = loginResponse?.user?.maPhong; 
+
+                // if (maPhong) {
+                //     $('#maPhongLabel').text(maPhong);
+                // } else {
+                //     $('#maPhongLabel').text('Không tìm thấy mã phòng');
+                // }
+
+                 var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
                 var maPhong = loginResponse?.user?.maPhong; 
 
                 if (maPhong) {
@@ -590,15 +671,19 @@
                     $('#maPhongLabel').text('Không tìm thấy mã phòng');
                 }
 
-              function loadPhieuThus(maPhong, startDate, endDate, trangThai) {
+
+              function loadPhieuThus(maPhong, startDate, endDate, trangThai, pageSize = 5) {
                     $.ajax({
-                        url: `@apiBaseUrl/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}`,
+                        url: `@apiBaseUrl/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}&pageNumber=${currentPage}&pageSize=${pageSize}`,
                         type: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + loginResponse.token
                         },
                         success: function (response) {
                             if (response.isSuccess) {
+                                 totalPages = response.totalPages; // Lưu tổng số trang từ phản hồi API
+                                   // Cập nhật pagination
+                                updatePagination();
                                 var phieuThus = response.phieuthus;
 
 
@@ -685,6 +770,98 @@
                         }
                     });
                 }
+
+
+
+                // Khai báo biến để lưu số dòng hiển thị
+                    var currentRowsPerPage = 5; // Giá trị mặc định là 10
+
+                  function updatePagination() {
+                    $('#pagination').empty(); // Xóa tất cả các trang hiện tại
+
+                    // Previous button
+                    if (currentPage > 1) {
+                        $('#pagination').append(`
+                            <li class="page-item" id="prevPage">
+                                <a class="page-link" href="#" tabindex="-1">Trước đó</a>
+                            </li>
+                        `);
+                    } else {
+                        $('#pagination').append(`
+                            <li class="page-item disabled" id="prevPage">
+                                <a class="page-link" href="#" tabindex="-1">Trước đó</a>
+                            </li>
+                        `);
+                    }
+
+                    // Current page button
+                    $('#pagination').append(`
+                        <li class="page-item active" aria-current="page" id="currentPage">
+                            <a class="page-link" href="#">${currentPage} / ${totalPages}</a>
+                        </li>
+                    `);
+
+                    // Next button
+                    if (currentPage < totalPages) {
+                        $('#pagination').append(`
+                            <li class="page-item" id="nextPage">
+                                <a class="page-link" href="#">Tiếp theo</a>
+                            </li>
+                        `);
+                    } else {
+                        $('#pagination').append(`
+                            <li class="page-item disabled" id="nextPage">
+                                <a class="page-link" href="#">Tiếp theo</a>
+                            </li>
+                        `);
+                    }
+
+
+                    // Gán sự kiện cho nút Previous
+                    $('#prevPage').off('click').on('click', function () {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            loadPhieuThus(maPhong,'', '', '', currentRowsPerPage); // Gọi lại dữ liệu
+                        }
+                    });
+
+                       // Gán sự kiện cho nút Next
+                    $('#nextPage').off('click').on('click', function () {
+                        if (currentPage < totalPages) {
+                            currentPage++;
+                            loadPhieuThus(maPhong,'', '', '', currentRowsPerPage); // Gọi lại dữ liệu
+                        }
+                    });
+
+
+                      // Thêm combo box cho số dòng hiển thị vào cuối
+                    $('#pagination').append(`
+                        <li class="page-item" id="rowsPerPageItem">
+                            <select name="phantrangFeedback" class="form-control" id="feedbackRowsPerPageSelect" style="margin: 0px 10px 0px 10px;">
+                                <option value="5" disabled>Số dòng</option> <!-- Lựa chọn mặc định -->
+                                <option value="5" ${currentRowsPerPage == 5 ? 'selected' : ''}>5</option>
+                                <option value="10" ${currentRowsPerPage == 10 ? 'selected' : ''}>10</option>
+                                <option value="15" ${currentRowsPerPage == 15 ? 'selected' : ''}>15</option>
+                            </select>
+                        </li>
+                    `);
+
+
+
+                      // Gán sự kiện thay đổi cho combo box số dòng hiển thị
+                    $('#feedbackRowsPerPageSelect').on('change', function () {
+                        currentRowsPerPage = parseInt($(this).val()); // Lấy số dòng hiển thị từ select và chuyển đổi thành số nguyên
+                        currentPage = 1; // Đặt lại currentPage về 1 mỗi khi thay đổi số dòng
+                        loadPhieuThus(maPhong,'', '', '', currentRowsPerPage); // Gọi lại dữ liệu với số dòng mới
+                    });
+
+                }
+
+                 // Gọi API lần đầu tiên khi load trang
+                loadPhieuThus(maPhong,'', '', '', 5); // Mặc định là 10 dòng hiển thị
+
+
+
                   // Gán sự kiện cho nút "Ok" trong filterModal
                 $('#filterModalOk').off('click').on('click', function () {
                     $('#filterModal').modal('hide');
@@ -694,8 +871,8 @@
                     $('#paymentModal').modal('show');
                 }
 
-                // Gọi API lần đầu tiên khi load trang
-                loadPhieuThus(maPhong, '', '', '');
+                // // Gọi API lần đầu tiên khi load trang
+                // loadPhieuThus(maPhong, '', '', '');
 
                 // Lắng nghe sự kiện nhấn nút lọc
                 $('#filterButton').on('click', function () {
@@ -716,6 +893,11 @@
                     $('#endDate').val('2024-12-31');
 
                     $('#trangThaiSelect').val('');
+
+                       // Cập nhật lại phân trang
+                   currentPage = 1; // Đặt lại currentPage về 1 mỗi khi thay đổi số dòng
+                    currentRowsPerPage = 5; // Đặt lại số dòng hiển thị về 5
+                    updatePagination(); // Gọi lại hàm cập nhật phân trang
                 });
 
 
