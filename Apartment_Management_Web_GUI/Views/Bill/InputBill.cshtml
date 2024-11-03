@@ -297,7 +297,7 @@
 
 
          <!-- Modal QR thanh toán -->
-        <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+       @*  <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -308,7 +308,9 @@
                     </div>
                     <div class="modal-body text-center">
                         <p><strong>Tài khoản :</strong> HOANG VAN TRI - 5218 4567 89 </p>
-                        <img src="~/images/QR_HoangVanTri_Tech.jpg" alt="QR Code" class="img-fluid">
+                 
+                       <img src='https://qr.sepay.vn/img?bank=MBBank&acc=0328319660&template=compact&amount=500000&des=Ti%E1%BB%81n+tr%E1%BB%8D+' alt="QR Code" class="img-fluid"/>
+
                         <p></p>
                         <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
 
@@ -319,9 +321,9 @@
 
                         <!-- Nội dung chuyển khoản -->
                          <p><strong>Nội dung chuyển khoản</strong>
-                             <br />Vui lòng ghi rõ nội dung chuyển khoản theo định dạng :<br>
-                            <strong>mã phiếu thu</strong>_<strong>mã phòng</strong>_<strong>tên khách hàng</strong><br>
-                            Ví dụ: <em>PT_M0110102024_P001_HOANG VAN TRI</em></p>
+                             <br />Nội dung chuyển khoản tự động điền theo định dạng :<br>
+                            <strong>mã phiếu thu</strong>_<strong>mã phòng</strong><br>
+                            Ví dụ: <em>PT_M0110102024_P001</em></p>
                        
 
                         <!-- Thông tin liên hệ -->
@@ -334,8 +336,41 @@
             </div>
         </div>
 
+ *@
 
+                 <!-- Modal QR thanh toán -->
+                <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="paymentModalLabel">Thanh Toán</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p><strong>Tài khoản :</strong> HOANG VAN TRI - 5218 4567 89</p>
+                                <img id="qrCodeImage" src="" alt="QR Code" class="img-fluid"/>
+                                <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
 
+                                <!-- Hiển thị thông tin thanh toán -->
+                                <div id="paymentInfo" class="mb-3"></div>
+
+                                <!-- Nội dung chuyển khoản -->
+                                <p><strong>Nội dung chuyển khoản</strong>
+                                    <br />Nội dung chuyển khoản tự động điền theo định dạng :<br>
+                                  Ma phong <strong>mã phòng</strong> Ma phieu thu <strong>mã phiếu thu</strong><br>
+                                    Ví dụ : <em>Ma phong P001 Ma phieuthu PTP001</em></p>
+
+                                <!-- Thông tin liên hệ -->
+                                <p><strong>Liên hệ chúng tôi </strong> <br /> Nếu có bất kỳ câu hỏi nào, vui lòng gửi <a href="@Url.Action("FeedbackPage", "Feedback")" style="color: blue; text-decoration: underline;">phản hồi</a> hoặc <br /> liên hệ chúng tôi qua số điện thoại : <strong>038-963-4776</strong></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
@@ -902,19 +937,39 @@
 
 
 
+                // // Sự kiện nhấn vào nút "Thanh Toán"
+                // $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
+                //     var row = $(this).closest('tr');
+                //     var maPt = row.find('th').text(); 
+                //     var tongTien = row.find('td:nth-child(12)').text(); // Cột chứa tổng tiền thanh toán
+                //     var tenKhachHang = "HOANG VAN TRI"; // Cần thay đổi để lấy tên khách hàng từ dữ liệu thực tế
+
+                //     // Cập nhật thông tin trong modal
+                //     $('#paymentInfo').html(`  <strong>Mã phiếu thu :</strong> ${maPt} <br>  <strong>Số tiền thanh toán :</strong> ${tongTien} VND`);
+
+                //     // Hiển thị modal
+                //     $('#paymentModal').modal('show');
+                // });
+
+
                 // Sự kiện nhấn vào nút "Thanh Toán"
                 $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
                     var row = $(this).closest('tr');
                     var maPt = row.find('th').text(); 
-                    var tongTien = row.find('td:nth-child(12)').text(); // Cột chứa tổng tiền thanh toán
-                    var tenKhachHang = "HOANG VAN TRI"; // Cần thay đổi để lấy tên khách hàng từ dữ liệu thực tế
+                    var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, ''); // Loại bỏ ký tự không phải số
+                    var maPhongQR = maPhong; // Thay đổi để lấy mã phòng từ dữ liệu thực tế
 
                     // Cập nhật thông tin trong modal
-                    $('#paymentInfo').html(`  <strong>Mã phiếu thu :</strong> ${maPt} <br>  <strong>Số tiền thanh toán :</strong> ${tongTien} VND`);
+                    $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${tongTien} VND`);
+
+                    // Tạo URL động cho QR code với amount và des
+                    var qrCodeUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0328319660&template=compact&amount=${tongTien}&des= Ma phong : ${maPhongQR}, Ma phieu thu : ${maPt}`;
+                    $('#qrCodeImage').attr('src', qrCodeUrl);
 
                     // Hiển thị modal
                     $('#paymentModal').modal('show');
                 });
+
 
 
 

@@ -84,13 +84,7 @@ namespace Apartment_Management_Web.Services
         //    return pagedResult;
         //}
 
-        public async Task<List<PhieuThu>> GetThongTinPhieuThuBy_MaPhongAsync(
-    string maPhong,
-    DateOnly? startDate,
-    DateOnly? endDate,
-    bool? trangThai,
-    int pageNumber,
-    int pageSize)
+        public async Task<List<PhieuThu>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai, int pageNumber, int pageSize)
         {
             var query = _context.PhieuThus.AsQueryable();
 
@@ -113,11 +107,19 @@ namespace Apartment_Management_Web.Services
                 query = query.Where(t => t.TrangThai == trangThai.Value);
             }
 
-            // Thực hiện phân trang
+            //// Thực hiện phân trang
+            //var pagedResult = await query
+            //    .Skip((pageNumber - 1) * pageSize) // Bỏ qua các mục ở trên
+            //    .Take(pageSize) // Lấy số mục theo pageSize
+            //    .ToListAsync();
+
+            // Sắp xếp theo ngày lập giảm dần để hiển thị ngày mới nhất trước
             var pagedResult = await query
-                .Skip((pageNumber - 1) * pageSize) // Bỏ qua các mục ở trên
-                .Take(pageSize) // Lấy số mục theo pageSize
+                .OrderByDescending(t => t.NgayLap) // Sắp xếp theo ngày lập
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
 
             return pagedResult;
         }
