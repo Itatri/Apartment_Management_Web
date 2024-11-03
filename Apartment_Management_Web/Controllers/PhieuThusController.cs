@@ -108,13 +108,7 @@ namespace Apartment_Management_Web.Controllers
 
         [Authorize]
         [HttpGet("GetThongTinPhieuThuBy_MaPhong")]
-        public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(
-    string maPhong,
-    DateOnly? startDate,
-    DateOnly? endDate,
-    bool? trangThai,
-    int pageNumber = 1,
-    int pageSize = 5)
+        public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai, int pageNumber = 1, int pageSize = 5)
         {
             // Lấy dữ liệu phiếu thu
             var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai, pageNumber, pageSize);
