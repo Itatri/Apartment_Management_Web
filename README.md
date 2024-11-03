@@ -28,6 +28,7 @@
 
 - Trang chủ <br> <br>
 
-![TrangChu](https://github.com/user-attachments/assets/87345b54-f419-45d2-958a-a7f09aa03833)
+![HomePage](https://github.com/user-attachments/assets/f03ae76c-0669-4b22-981c-6805fd3ae0f9)
+
 
 
