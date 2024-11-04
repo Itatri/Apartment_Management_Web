@@ -1149,139 +1149,139 @@
                                 //         });
 
                                 $(".profile-button").click(function(event) {
-    event.stopPropagation(); // Ngăn chặn sự kiện tiếp tục
+                                event.stopPropagation(); // Ngăn chặn sự kiện tiếp tục
 
-    // Lấy giá trị từ các input
-    const maKhachTro = $("#hiddenMaKhachTro").val(); // Lấy mã khách trọ từ input ẩn
-    const hoTen = $("input[placeholder='Nhập họ tên']").val();
-    const gioiTinh = $("select[name='gioiTinh']").val();
-    const ngaySinh = $("#datepicker").val(); // Lấy giá trị trực tiếp từ DatePicker
-    const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
-    const email = $("input[placeholder='Nhập email']").val();
-    const phong = $("input[placeholder='Thông tin phòng']").val();
-    const quanHe = $("select[name='quanHe']").val();
-    const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
-    const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
-    const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
-    const queQuan = $("select[name='queQuan']").val();
-    const ngayCap = $("#datepicker_ngaycap").val(); // Lấy giá trị trực tiếp từ DatePicker
-    const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
-    const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
+                                // Lấy giá trị từ các input
+                                const maKhachTro = $("#hiddenMaKhachTro").val(); // Lấy mã khách trọ từ input ẩn
+                                const hoTen = $("input[placeholder='Nhập họ tên']").val();
+                                const gioiTinh = $("select[name='gioiTinh']").val();
+                                const ngaySinh = $("#datepicker").val(); // Lấy giá trị trực tiếp từ DatePicker
+                                const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
+                                const email = $("input[placeholder='Nhập email']").val();
+                                const phong = $("input[placeholder='Thông tin phòng']").val();
+                                const quanHe = $("select[name='quanHe']").val();
+                                const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
+                                const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
+                                const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
+                                const queQuan = $("select[name='queQuan']").val();
+                                const ngayCap = $("#datepicker_ngaycap").val(); // Lấy giá trị trực tiếp từ DatePicker
+                                const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
+                                const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
 
-    // Tạo đối tượng dữ liệu để gửi
-    const data = {
-        HoTen: hoTen,
-        GioiTinh: gioiTinh,
-        NgaySinh: ngaySinh,
-        Phone: soDienThoai,
-        Email: email,
-        MaPhong: phong,
-        QuanHe: quanHe,
-        CCCD: soCCCD,
-        NoiCap: noiCap,
-        ThuongTru: thuongTru,
-        QueQuan: queQuan,
-        NgayCap: ngayCap,
-        TrangThai: trangThai 
-    };
+                                // Tạo đối tượng dữ liệu để gửi
+                                const data = {
+                                    HoTen: hoTen,
+                                    GioiTinh: gioiTinh,
+                                    NgaySinh: ngaySinh,
+                                    Phone: soDienThoai,
+                                    Email: email,
+                                    MaPhong: phong,
+                                    QuanHe: quanHe,
+                                    CCCD: soCCCD,
+                                    NoiCap: noiCap,
+                                    ThuongTru: thuongTru,
+                                    QueQuan: queQuan,
+                                    NgayCap: ngayCap,
+                                    TrangThai: trangThai 
+                                };
 
-    // Nếu có tệp chữ ký, thêm trường ChuKy vào data
-    if (chuKyFile) {
-        data.ChuKy = chuKyFile.name; // Chỉ thêm chuKy nếu tệp được chọn
-    }
+                                // Nếu có tệp chữ ký, thêm trường ChuKy vào data
+                                if (chuKyFile) {
+                                    data.ChuKy = chuKyFile.name; // Chỉ thêm chuKy nếu tệp được chọn
+                                }
 
-    // Kiểm tra nếu mã khách trọ có giá trị
-    if (maKhachTro) {
-        // Gọi API để cập nhật thông tin khách trọ
-        $.ajax({
-            url: `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
-            type: 'PUT',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + loginResponse.token
-            },
-            data: JSON.stringify(data),
-            success: function(response) {
-                $("#successUpdateModal").modal('show');
-                console.log(response);
-                // Nếu có tệp chữ ký, tải nó lên
-                if (chuKyFile) {
-                    uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
-                }
-                // location.reload();
-            },
-            error: function(xhr, status, error) {
-                alert("Cập nhật thông tin thất bại!");
-                console.error(xhr.responseText);
-            }
-        });
-    } else {
-        // Nếu không có mã khách trọ, gọi API để tạo mới thông tin khách
-        $.ajax({
-            url: '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + loginResponse.token
-            },
-            data: JSON.stringify(data),
-            success: function(response) {
-                $("#successCreateModal").modal('show');
-                console.log(response);
-                if (response.isSuccess && response.khachs.length > 0) {
-                    const maKhachTroMoi = response.khachs[0].maKhachTro; // Lưu mã khách trọ mới từ phản hồi
-                    if (chuKyFile) {
-                        uploadChuKy(maKhachTroMoi, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên với mã khách mới
-                    }
-                } else {
-                    alert("Tạo khách hàng mới không thành công.");
-                }
-                // location.reload();
-            },
-            error: function(xhr, status, error) {
-                alert("Tạo mới khách thất bại!");
-                console.error(xhr.responseText);
-            }
-        });
-    }
+                                // Kiểm tra nếu mã khách trọ có giá trị
+                                if (maKhachTro) {
+                                    // Gọi API để cập nhật thông tin khách trọ
+                                    $.ajax({
+                                        url: `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
+                                        type: 'PUT',
+                                        contentType: 'application/json',
+                                        headers: {
+                                            'Authorization': 'Bearer ' + loginResponse.token
+                                        },
+                                        data: JSON.stringify(data),
+                                        success: function(response) {
+                                            $("#successUpdateModal").modal('show');
+                                            console.log(response);
+                                            // Nếu có tệp chữ ký, tải nó lên
+                                            if (chuKyFile) {
+                                                uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
+                                            }
+                                            // location.reload();
+                                        },
+                                        error: function(xhr, status, error) {
+                                            alert("Cập nhật thông tin thất bại!");
+                                            console.error(xhr.responseText);
+                                        }
+                                    });
+                                } else {
+                                    // Nếu không có mã khách trọ, gọi API để tạo mới thông tin khách
+                                    $.ajax({
+                                        url: '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach',
+                                        type: 'POST',
+                                        contentType: 'application/json',
+                                        headers: {
+                                            'Authorization': 'Bearer ' + loginResponse.token
+                                        },
+                                        data: JSON.stringify(data),
+                                        success: function(response) {
+                                            $("#successCreateModal").modal('show');
+                                            console.log(response);
+                                            if (response.isSuccess && response.khachs.length > 0) {
+                                                const maKhachTroMoi = response.khachs[0].maKhachTro; // Lưu mã khách trọ mới từ phản hồi
+                                                if (chuKyFile) {
+                                                    uploadChuKy(maKhachTroMoi, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên với mã khách mới
+                                                }
+                                            } else {
+                                                alert("Tạo khách hàng mới không thành công.");
+                                            }
+                                            // location.reload();
+                                        },
+                                        error: function(xhr, status, error) {
+                                            alert("Tạo mới khách thất bại!");
+                                            console.error(xhr.responseText);
+                                        }
+                                    });
+                                }
 
-    // Hàm tải chữ ký lên server
-    function uploadChuKy(maKhachTro, hoTen, chuKyFile) {
-        if (chuKyFile) {
-            const formData = new FormData();
-            formData.append("file", chuKyFile); // Thêm tệp chữ ký vào formData
-            formData.append("maKhachTro", maKhachTro); // Thêm mã khách trọ
-            formData.append("hoTen", hoTen); // Thêm họ tên
+                                // Hàm tải chữ ký lên server
+                                function uploadChuKy(maKhachTro, hoTen, chuKyFile) {
+                                    if (chuKyFile) {
+                                        const formData = new FormData();
+                                        formData.append("file", chuKyFile); // Thêm tệp chữ ký vào formData
+                                        formData.append("maKhachTro", maKhachTro); // Thêm mã khách trọ
+                                        formData.append("hoTen", hoTen); // Thêm họ tên
 
-            // Gọi API để tải ảnh chữ ký lên
-            $.ajax({
-                url: '@apiBaseUrl/api/ThongTinKhaches/Upload', // Đường dẫn API để tải tệp
-                type: 'POST',
-                data: formData,
-                headers: {
-                    'Authorization': 'Bearer ' + loginResponse.token
-                },
-                processData: false,
-                contentType: false,
-                success: function(uploadResponse) {
-                    console.log("Tải ảnh chữ ký lên thành công!");
-                    console.log(uploadResponse);
+                                        // Gọi API để tải ảnh chữ ký lên
+                                        $.ajax({
+                                            url: '@apiBaseUrl/api/ThongTinKhaches/Upload', // Đường dẫn API để tải tệp
+                                            type: 'POST',
+                                            data: formData,
+                                            headers: {
+                                                'Authorization': 'Bearer ' + loginResponse.token
+                                            },
+                                            processData: false,
+                                            contentType: false,
+                                            success: function(uploadResponse) {
+                                                console.log("Tải ảnh chữ ký lên thành công!");
+                                                console.log(uploadResponse);
 
-                    // Hiển thị ảnh chữ ký
-                    $('.img-chuky').attr('src', '/images/CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
-                        $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
-                    });
-                },
-                error: function(uploadError) {
-                    console.log("Tải ảnh chữ ký lên thất bại!");
-                    console.error(uploadError.responseText);
-                }
-            });
-        } else {
-            console.log("Không có tệp chữ ký để tải lên.");
-        }
-    }
-});
+                                                // Hiển thị ảnh chữ ký
+                                                $('.img-chuky').attr('src', '/images/CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
+                                                    $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
+                                                });
+                                            },
+                                            error: function(uploadError) {
+                                                console.log("Tải ảnh chữ ký lên thất bại!");
+                                                console.error(uploadError.responseText);
+                                            }
+                                        });
+                                    } else {
+                                        console.log("Không có tệp chữ ký để tải lên.");
+                                    }
+                                }
+                            });
 
                                  
 

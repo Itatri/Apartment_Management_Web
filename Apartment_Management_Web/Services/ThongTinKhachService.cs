@@ -4,16 +4,20 @@ using Apartment_Management_Web.Models.Customer;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Text;
+
+
 namespace Apartment_Management_Web.Services
 {
     public class ThongTinKhachService : IThongTinKhachService
     {
+        private readonly IConfiguration _configuration;
         // Sửa lại DBContext nếu có thay đổi DB
         private readonly QlChungCuContext _context;
 
-        public ThongTinKhachService(QlChungCuContext context)
+        public ThongTinKhachService(QlChungCuContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration)); // Khởi tạo IConfiguration
         }
 
         public async Task<IEnumerable<ThongTinKhach>> GetAllThongTinKhachAsync()
@@ -122,7 +126,9 @@ namespace Apartment_Management_Web.Services
                 throw new ArgumentException("Không có tệp nào được tải lên.");
             }
 
-            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "D:\\CongViecHocTap\\TailieuCNTT\\Môn học\\Đồ án chuyên ngành\\Source đồ án\\Web Phòng Trọ\\Apartment_Management_Web\\Apartment_Management_Web_GUI\\wwwroot\\images");
+            // Đọc đường dẫn từ appsettings.json
+            var folderPath = _configuration["ImageSettings:UploadFolderPath"];
+
 
             // Kiểm tra thư mục có tồn tại hay không, nếu không thì tạo
             if (!Directory.Exists(folderPath))
