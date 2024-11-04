@@ -296,47 +296,7 @@
                     </div>
 
 
-         <!-- Modal QR thanh toán -->
-       @*  <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="paymentModalLabel">Thanh Toán</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p><strong>Tài khoản :</strong> HOANG VAN TRI - 5218 4567 89 </p>
-                 
-                       <img src='https://qr.sepay.vn/img?bank=MBBank&acc=0328319660&template=compact&amount=500000&des=Ti%E1%BB%81n+tr%E1%BB%8D+' alt="QR Code" class="img-fluid"/>
-
-                        <p></p>
-                        <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
-
-                        <!-- Hiển thị thông tin thanh toán -->
-                        <div id="paymentInfo" class="mb-3"></div>
-
-                        
-
-                        <!-- Nội dung chuyển khoản -->
-                         <p><strong>Nội dung chuyển khoản</strong>
-                             <br />Nội dung chuyển khoản tự động điền theo định dạng :<br>
-                            <strong>mã phiếu thu</strong>_<strong>mã phòng</strong><br>
-                            Ví dụ: <em>PT_M0110102024_P001</em></p>
-                       
-
-                        <!-- Thông tin liên hệ -->
-                        <p><strong>Liên hệ chúng tôi </strong> <br /> Nếu có bất kỳ câu hỏi nào, vui lòng gửi <a href="@Url.Action("FeedbackPage", "Feedback")" style="color: blue; text-decoration: underline;">phản hồi</a> hoặc <br /> liên hệ chúng tôi qua số điện thoại : <strong>038-963-4776</strong></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
- *@
+      
 
                  <!-- Modal QR thanh toán -->
                 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
@@ -350,7 +310,7 @@
                             </div>
                             <div class="modal-body text-center">
                                 <p><strong>Tài khoản :</strong> HOANG VAN TRI - 5218 4567 89</p>
-                                <img id="qrCodeImage" src="" alt="QR Code" class="img-fluid"/>
+                                <img style="width:70%;" id="qrCodeImage" src="" alt="QR Code" class="img-fluid"/>
                                 <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
 
                                 <!-- Hiển thị thông tin thanh toán -->
@@ -533,16 +493,19 @@
                         </div>
 
                         <div class="col-md-3  offset-lg-1">
-                            <div class="info_form ">
+                           <div class="info_form ">
                                 <h5>
                                     Liên hệ
                                 </h5>
-                                <form action="">
+                                    @*  <form action="">
                                     <input type="email" placeholder="Email">
                                     <button>
                                         Gửi
                                     </button>
-                                </form>
+                                </form> *@
+                                   <p>
+                               Liên hệ chúng tôi qua các thông tin liên hệ hiển thị trên trang web hoặc có thể gặp trực tiếp tại văn phòng 
+                            </p>
                             </div>
                         </div>
                     </div>
@@ -744,19 +707,21 @@
                                     };
 
 
-
-                                    // // Nếu phiếu thu đã thanh toán, làm nút bị khóa
+                                    //   // Nếu phiếu thu đã thanh toán, làm nút bị khóa
                                     // var buttonDisabled = phieuThu.trangThai ? 'disabled' : '';
                                     // var buttonClass = phieuThu.trangThai ? 'btn-secondary' : 'btn-primary';
 
-                                      // Nếu phiếu thu đã thanh toán, làm nút bị khóa
-                                    var buttonDisabled = phieuThu.trangThai ? 'disabled' : '';
-                                    var buttonClass = phieuThu.trangThai ? 'btn-secondary' : 'btn-primary';
+                                    // // Kiểm tra nếu tongTien là null hoặc không tồn tại
+                                    // var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0; // Chỉ cho phép thanh toán nếu có tổng tiền
+                                    // var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
 
-                                    // Kiểm tra nếu tongTien là null hoặc không tồn tại
-                                    var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0; // Chỉ cho phép thanh toán nếu có tổng tiền
-                                    var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
+                                                        // Nếu phiếu thu đã thanh toán hoặc có tổng tiền, làm nút "Nhập Điện Nước" bị khóa
+                    var buttonDisabled = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'disabled' : '';
+                    var buttonClass = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'btn-secondary' : 'btn-primary';
 
+                    // Nếu phiếu thu đã có tổng tiền hợp lệ và chưa thanh toán, cho phép thanh toán
+                    var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0;
+                    var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
 
 
                                     var newRow = `
