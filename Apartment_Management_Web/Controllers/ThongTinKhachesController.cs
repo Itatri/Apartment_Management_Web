@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models;
-using Apartment_Management_Web.Services;
-using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models.Customer;
-using System.Text.RegularExpressions; // Thêm namespace này nếu chưa có
-using System.Text; // Để sử dụng StringBuilder
-using System.Globalization; // Để sử dụng CharUnicodeInfo và UnicodeCategory
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Globalization; // Để sử dụng CharUnicodeInfo và UnicodeCategory
+using System.Text; // Để sử dụng StringBuilder
 
 
 
@@ -270,8 +262,8 @@ namespace Apartment_Management_Web.Controllers
 
 
 
-      
-     
+
+
 
 
     }

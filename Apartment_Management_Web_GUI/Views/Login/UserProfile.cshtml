@@ -268,19 +268,7 @@
                                                 </div>
 
 
-                                                <section class="about_section layout_padding">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col-md-10 col-lg-9 mx-auto">
-                                                                <div class="img-box">
-                                                                    <img style="width:50%;" src="/images/typinginfor.jpg" alt="">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-box">
-                                                        </div>
-                                                    </div>
-                                                </section>
+                                            
 
 
                                             </div>
@@ -584,9 +572,25 @@
                                             </div>
                                         </div>
                                     </div>
+                                   
                                     </div>
+
+                                       
                                     </div>
                              
+                                      <section class="about_section layout_padding">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-lg-9 mx-auto">
+                                                                <div class="img-box">
+                                                                    <img style="width:40%;" src="/images/kekhai.png" alt="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="detail-box">
+                                                        </div>
+                                                    </div>
+                                                </section>
 
 
                 @*   <!-- Modal thông báo lưu thông tin thành công -->
@@ -1009,7 +1013,8 @@
                                             const maKhachTro = $("#hiddenMaKhachTro").val(); // Lấy mã khách trọ từ input ẩn
                                             const hoTen = $("input[placeholder='Nhập họ tên']").val();
                                             const gioiTinh = $("select[name='gioiTinh']").val();
-                                            const ngaySinh = convertDate($("#datepicker").val()); // Chuyển đổi ngày sinh
+                                            // const ngaySinh = convertDate($("#datepicker").val()); // Chuyển đổi ngày sinh
+                                                const ngaySinh = $("#datepicker").val(); // Lấy giá trị trực tiếp từ DatePicker
                                                // Kiểm tra và lấy giá trị từ DatePicker
                                             // const ngaySinh = convertDate($("input[placeholder='Chọn ngày sinh']").val()); // Chắc chắn bạn có giá trị này từ DatePicker
                                             const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
@@ -1020,7 +1025,9 @@
                                             const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
                                             const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
                                             const queQuan = $("select[name='queQuan']").val();
-                                            const ngayCap = convertDate($("#datepicker_ngaycap").val()); // Chuyển đổi ngày cấp
+                                            // const ngayCap = convertDate($("#datepicker_ngaycap").val()); // Chuyển đổi ngày cấp
+                                                const ngayCap = $("#datepicker_ngaycap").val(); // Lấy giá trị trực tiếp từ DatePicker
+
                                             // Lấy ngày cấp từ DatePicker
                                             // const ngayCap = convertDate($("input[placeholder='Chọn ngày cấp']").val()); // Chuyển đổi ngày cấp
                                             const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
@@ -1028,6 +1035,7 @@
 
                                             // Nếu không có tệp chữ ký, đặt giá trị mặc định là 'None.jpg'
                                             const chuKy = chuKyFile ? chuKyFile.name : 'None.jpg';
+
 
 
 
@@ -1141,6 +1149,21 @@
                                         });
 
 
+                                 
+
+
+                               // // Hàm chuyển đổi định dạng ngày
+                               //  function convertDate(dateString) {
+                               //      if (!dateString) return null; // Nếu không có giá trị, trả về null
+                               //      const parts = dateString.split('/');
+                               //      if (parts.length === 3) {
+                               //          return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
+                               //      }
+                               //      return null; // Trả về null nếu định dạng không hợp lệ
+                               //  }
+
+
+
 
                                 // Hàm reload trang khi nhấn nút Ok
                                 $('#successCreateModal .btn-primary').click(function() {
@@ -1178,23 +1201,7 @@
                                     $('#chuKyInput').val(''); // Đặt lại input tệp chữ ký
                                 }
 
-                                // Hàm chuyển đổi định dạng ngày
-                                    function convertDate(dateString) {
-                                        const parts = dateString.split('/');
-                                        return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
-                                    }
-
-
-                               // Hàm chuyển đổi định dạng ngày
-                                function convertDate(dateString) {
-                                    if (!dateString) return null; // Nếu không có giá trị, trả về null
-                                    const parts = dateString.split('/');
-                                    if (parts.length === 3) {
-                                        return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
-                                    }
-                                    return null; // Trả về null nếu định dạng không hợp lệ
-                                }
-
+                            
                                
 
 
