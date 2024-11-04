@@ -128,7 +128,7 @@
     <script src="~/js/custom.js"></script>
 
 
-    <script>
+   @*  <script>
         $(document).ready(function () {
             // Xử lý sự kiện khi biểu mẫu được gửi
             $('#loginForm').on('submit', function (event) {
@@ -188,6 +188,73 @@
                 });
             });
         });
-    </script>
+    </script> *@
+
+    <script>
+    $(document).ready(function () {
+        // Hàm kiểm tra trạng thái checkbox "Đồng ý"
+        function checkAgreeCheckbox() {
+            if (!$('#agreeCheckbox').is(':checked')) {
+                $('#AgreeModal').modal('show'); // Hiển thị modal nếu chưa chọn
+                return false;
+            }
+            return true;
+        }
+
+        // Hàm kiểm tra nếu trường đầu vào rỗng
+        function validateInput(userId, password) {
+            if (!userId) {
+                alert("Vui lòng nhập ID");
+                $('#userId').focus();
+                return false;
+            }
+            if (!password) {
+                alert("Vui lòng nhập mật khẩu");
+                $('#password').focus();
+                return false;
+            }
+            return true;
+        }
+
+        // Hàm xử lý đăng nhập
+        function handleLoginSuccess(response) {
+            localStorage.setItem('loginResponse', JSON.stringify(response)); // Lưu vào localStorage
+            $('#LoginSuccessModal').modal('show'); // Hiển thị modal thành công
+            $('#LoginSuccessModal').on('hide.bs.modal', function () { // Điều hướng sau khi đóng modal
+                window.location.href = '@Url.Action("HomePageLogin", "Home")';
+            });
+        }
+
+        // Xử lý sự kiện gửi biểu mẫu đăng nhập
+        $('#loginForm').on('submit', function (event) {
+            event.preventDefault();
+
+            // Kiểm tra checkbox "Đồng ý" và các trường đầu vào
+            if (!checkAgreeCheckbox()) return;
+            var userId = $('#userId').val();
+            var password = $('#password').val();
+            if (!validateInput(userId, password)) return;
+
+            // Gọi API đăng nhập
+            $.ajax({
+                url: '@apiBaseUrl/api/UserPhongs/Login',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ Id: userId, MatKhau: password }),
+                success: function (response) {
+                    if (response.isSuccess) {
+                        handleLoginSuccess(response);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (xhr) {
+                    alert('Đã xảy ra lỗi khi đăng nhập: ' + xhr.responseJSON.message);
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

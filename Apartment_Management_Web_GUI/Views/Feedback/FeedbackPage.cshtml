@@ -268,7 +268,7 @@
                             <div class="row">
                                 <div class="col-md-10 col-lg-9 mx-auto">
                                     <div class="img-box">
-                                        <img style="width:70%;" src="/images/khachhangph.jpg" alt="">
+                                        <img style="width:50%;" src="/images/sendfb1.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -529,7 +529,7 @@
     <script src="~/js/custom.js"></script>
 
 
-     <script>
+     @* <script>
             $(document).ready(function () {
                 var currentPage = 1; // Biến để lưu trang hiện tại
                 var totalPages = 1; // Tổng số trang
@@ -842,7 +842,172 @@
 
 
             });
-        </script>
+        </script> *@
+
+        <script>
+            $(document).ready(function () {
+                let currentPage = 1;
+                let totalPages = 1;
+                const pageSizeDefault = 5;
+                const loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                const user = loginResponse?.user;
+
+                // Hiển thị userId và mã phòng nếu có
+                $('#userIdDisplay').text(user?.id || 'Không có ID');
+                $('#maPhongLabel').text(user?.maPhong || 'Không tìm thấy mã phòng');
+
+                // Đăng xuất và hiển thị modal đăng xuất thành công
+                $('#logoutBtn').on('click', function () {
+                    localStorage.removeItem('loginResponse');
+                    $('#LogoutSuccessModal').modal('show');
+                });
+                $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
+                    window.location.href = '@Url.Action("HomePage", "Home")';
+                });
+
+                // Hàm tải phản hồi
+                function loadFeedbacks(startDate = '', endDate = '', trangThai = '', pageSize = pageSizeDefault) {
+                    $.ajax({
+                        url: `@apiBaseUrl/api/FeedBacks/GetThongTinFeedbackBy_MaPhong?maPhong=${user?.maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}&pageNumber=${currentPage}&pageSize=${pageSize}`,
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        success: function (response) {
+                            if (response.isSuccess) {
+                                totalPages = response.totalPages;
+                                updatePagination();
+                                renderFeedbackTable(response.feedBacks);
+                            } else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function () {
+                            $('#filterModal').modal('show');
+                        }
+                    });
+                }
+
+                // Hàm render bảng phản hồi
+                function renderFeedbackTable(feedBacks) {
+                    $('tbody').empty();
+                    feedBacks.sort((a, b) => new Date(b.ngayGui) - new Date(a.ngayGui));
+
+                    feedBacks.forEach(function (Feedback) {
+                        const trangThaiClass = Feedback.trangThai ? 'text-success' : 'text-danger';
+                        const trangThaiText = Feedback.trangThai ? 'Đã trả lời' : 'Chưa trả lời';
+
+                        // Kiểm tra giá trị null và định dạng ngày
+                        const checkNull = (value) => value ? value : '<span style="color:red;">Trống</span>';
+                        const formatDate = (dateStr) => {
+                            if (!dateStr) return '<span style="color:red;">Trống</span>';
+                            const date = new Date(dateStr);
+                            return `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                        };
+
+                        $('tbody').append(`
+                            <tr>
+                                <th scope="row" class="hidden-column">${checkNull(Feedback.maFb)}</th>
+                                <td>${checkNull(Feedback.moTa)}</td>
+                                <td>${formatDate(Feedback.ngayGui)}</td>
+                                <td class="text-success">${checkNull(Feedback.phanHoi)}</td>
+                                <td>${formatDate(Feedback.ngayPhanHoi)}</td>
+                                <td class="${trangThaiClass}">${trangThaiText}</td>
+                            </tr>
+                        `);
+                    });
+                }
+
+                // Cập nhật phân trang
+                function updatePagination() {
+                    $('#pagination').empty();
+
+                    $('#pagination').append(`
+                        <li class="page-item ${currentPage > 1 ? '' : 'disabled'}" id="prevPage">
+                            <a class="page-link" href="#">Trước đó</a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">${currentPage} / ${totalPages}</a>
+                        </li>
+                        <li class="page-item ${currentPage < totalPages ? '' : 'disabled'}" id="nextPage">
+                            <a class="page-link" href="#">Tiếp theo</a>
+                        </li>
+                        <li class="page-item">
+                            <select id="feedbackRowsPerPageSelect" class="form-control" style="margin: 0px 10px;">
+                                <option value="5" ${pageSizeDefault == 5 ? 'selected' : ''}>5</option>
+                                <option value="10" ${pageSizeDefault == 10 ? 'selected' : ''}>10</option>
+                                <option value="15" ${pageSizeDefault == 15 ? 'selected' : ''}>15</option>
+                            </select>
+                        </li>
+                    `);
+
+                    // Điều hướng trang trước và sau
+                    $('#prevPage').off('click').on('click', function () { if (currentPage > 1) currentPage--; loadFeedbacks(); });
+                    $('#nextPage').off('click').on('click', function () { if (currentPage < totalPages) currentPage++; loadFeedbacks(); });
+
+                    // Thay đổi số dòng hiển thị
+                    $('#feedbackRowsPerPageSelect').on('change', function () {
+                        currentRowsPerPage = parseInt($(this).val());
+                        currentPage = 1;
+                        loadFeedbacks('', '', '', currentRowsPerPage);
+                    });
+                }
+
+                // Xử lý filter và refresh
+                $('#filterButton').on('click', function () {
+                    loadFeedbacks($('#startDate').val(), $('#endDate').val(), $('#trangThaiSelect').val());
+                });
+                $('#refeshButton').on('click', function () {
+                    loadFeedbacks();
+                    $('#startDate').val('2024-01-01');
+                    $('#endDate').val('2024-12-31');
+                    $('#trangThaiSelect').val('');
+                    currentPage = 1;
+                    updatePagination();
+                });
+
+                // Hiển thị mã phòng trong modal và gửi phản hồi mới
+                $('#feedbackButton').on('click', function () {
+                    $('#exampleModal').modal('show');
+                    $('#recipient-name').val(user?.maPhong || '');
+                });
+
+                $('#createFeedbackOk').off('click').on('click', function () {
+                    const maPhong = $('#recipient-name').val();
+                    const moTa = $('#message-text').val();
+
+                    if (!maPhong || !moTa) {
+                        alert('Vui lòng điền đầy đủ thông tin.');
+                        return;
+                    }
+
+                    $.ajax({
+                        url: '@apiBaseUrl/api/FeedBacks/CreateFeedback',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        data: JSON.stringify({ maPhong, moTa }),
+                        success: function (response) {
+                            if (response.isSuccess) {
+                                $('#exampleModal').modal('hide');
+                                $('#successModal').modal('show');
+                                $('#successModal .btn-primary').off('click').on('click', function () { location.reload(); });
+                            } else {
+                                alert('Không thể tạo phản hồi: ' + response.message);
+                            }
+                        },
+                        error: function (xhr) {
+                            alert('Đã xảy ra lỗi khi tạo phản hồi: ' + xhr.responseJSON.message);
+                        }
+                    });
+                });
+
+                loadFeedbacks(); // Lần đầu tải dữ liệu
+            });
+            </script>
+
 
 
 

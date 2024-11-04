@@ -107,11 +107,7 @@ namespace Apartment_Management_Web.Services
                 query = query.Where(t => t.TrangThai == trangThai.Value);
             }
 
-            //// Thực hiện phân trang
-            //var pagedResult = await query
-            //    .Skip((pageNumber - 1) * pageSize) // Bỏ qua các mục ở trên
-            //    .Take(pageSize) // Lấy số mục theo pageSize
-            //    .ToListAsync();
+
 
             // Sắp xếp theo ngày lập giảm dần để hiển thị ngày mới nhất trước
             var pagedResult = await query
