@@ -25,13 +25,14 @@
 
 //  Đăng ký Service trong Program.cs
 
+using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Services;
-using Apartment_Management_Web.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+
 
 //using Microsoft.AspNetCore.Mvc;
 
@@ -52,8 +53,8 @@ builder.Services.AddCors(options =>
 // Đăng kí Interfacem Servues
 builder.Services.AddScoped<IUserPhongService, UserPhongService>();
 builder.Services.AddScoped<IThongTinKhachService, ThongTinKhachService>();
-builder.Services.AddScoped<IPhieuThuService,PhieuThuService>();
-builder.Services.AddScoped<IFeedbackService,FeedbackService>();
+builder.Services.AddScoped<IPhieuThuService, PhieuThuService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 
 
 builder.Services.AddControllers();

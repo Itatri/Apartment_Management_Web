@@ -1,5 +1,5 @@
-﻿using Apartment_Management_Web.Models.Customer;
-using Apartment_Management_Web.Models;
+﻿using Apartment_Management_Web.Models;
+using Apartment_Management_Web.Models.Customer;
 
 namespace Apartment_Management_Web.Interfaces
 {
@@ -14,5 +14,6 @@ namespace Apartment_Management_Web.Interfaces
         Task<ThongTinKhach?> GetLastCustomerAsync();
         Task<ThongTinKhach> CreateCustomerAsync(ThongTinKhach customer);
 
+        Task<string> UploadChuKyAsync(IFormFile file, string maKhachTro, string hoTen);
     }
 }
