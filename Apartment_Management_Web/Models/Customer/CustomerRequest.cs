@@ -32,7 +32,7 @@
         public string QueQuan { get; set; }
         public string QuanHe { get; set; }
         public string MaPhong { get; set; }
-        public string ChuKy { get; set; } // Thêm trường chữ ký
+        public string? ChuKy { get; set; } // Thêm trường chữ ký
         public string? ThuongTru { get; set; }
 
     }

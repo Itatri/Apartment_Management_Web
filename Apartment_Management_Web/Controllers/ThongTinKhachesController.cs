@@ -3,8 +3,6 @@ using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Models.Customer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization; // Để sử dụng CharUnicodeInfo và UnicodeCategory
-using System.Text; // Để sử dụng StringBuilder
 
 
 
@@ -194,6 +192,8 @@ namespace Apartment_Management_Web.Controllers
 
 
 
+
+
         [Authorize]
         [HttpPost("Upload")]
         public async Task<IActionResult> Upload()
@@ -201,36 +201,11 @@ namespace Apartment_Management_Web.Controllers
             var file = Request.Form.Files.FirstOrDefault(); // Lấy tệp từ request
             var maKhachTro = Request.Form["maKhachTro"]; // Lấy mã khách trọ từ request
             var hoTen = Request.Form["hoTen"]; // Lấy họ tên từ request
-            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "D:\\CongViecHocTap\\TailieuCNTT\\Môn học\\Đồ án chuyên ngành\\Source đồ án\\Web Phòng Trọ\\Apartment_Management_Web\\Apartment_Management_Web_GUI\\wwwroot\\images"); // Thư mục lưu hình ảnh
-
-            if (file == null || file.Length == 0)
-            {
-                return BadRequest(new { message = "Không có tệp nào được tải lên." });
-            }
 
             try
             {
-                // Kiểm tra thư mục có tồn tại hay không, nếu không thì tạo
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-
-                // Xử lý họ tên để loại bỏ dấu và khoảng trắng
-                var tenKhongDau = RemoveDiacritics(hoTen).Replace(" ", "");
-
-                // Đặt tên file theo định dạng CK_MaKhachTro_HoTen.jpg
-                var fileName = $"CK_{maKhachTro}_{tenKhongDau}.jpg";
-                var filePath = Path.Combine(folderPath, fileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream); // Lưu tệp vào thư mục
-                }
-
-                // Ghi tên file vào database
-                await _ThongTinKhachService.UpdateChuKyAsync(maKhachTro, fileName);
-
+                // Gọi phương thức UploadChuKyAsync từ service
+                var fileName = await _ThongTinKhachService.UploadChuKyAsync(file, maKhachTro, hoTen);
                 return Ok(new { message = "Upload thành công!", fileName });
             }
             catch (Exception ex)
@@ -238,28 +213,6 @@ namespace Apartment_Management_Web.Controllers
                 return StatusCode(500, new { message = "Upload thất bại!", error = ex.Message });
             }
         }
-
-        // Phương thức để loại bỏ dấu trong chuỗi
-        private string RemoveDiacritics(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return text;
-
-            var normalizedString = text.Normalize(NormalizationForm.FormD);
-            var stringBuilder = new StringBuilder();
-
-            foreach (var c in normalizedString)
-            {
-                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
-                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-                {
-                    stringBuilder.Append(c);
-                }
-            }
-
-            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-        }
-
 
 
 

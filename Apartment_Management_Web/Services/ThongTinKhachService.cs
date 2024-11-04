@@ -2,6 +2,8 @@
 using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Models.Customer;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Text;
 namespace Apartment_Management_Web.Services
 {
     public class ThongTinKhachService : IThongTinKhachService
@@ -110,6 +112,61 @@ namespace Apartment_Management_Web.Services
             _context.ThongTinKhaches.Add(customer);
             await _context.SaveChangesAsync();
             return customer;
+        }
+
+
+        public async Task<string> UploadChuKyAsync(IFormFile file, string maKhachTro, string hoTen)
+        {
+            if (file == null || file.Length == 0)
+            {
+                throw new ArgumentException("Không có tệp nào được tải lên.");
+            }
+
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "D:\\CongViecHocTap\\TailieuCNTT\\Môn học\\Đồ án chuyên ngành\\Source đồ án\\Web Phòng Trọ\\Apartment_Management_Web\\Apartment_Management_Web_GUI\\wwwroot\\images");
+
+            // Kiểm tra thư mục có tồn tại hay không, nếu không thì tạo
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            // Xử lý họ tên để loại bỏ dấu và khoảng trắng
+            var tenKhongDau = RemoveDiacritics(hoTen).Replace(" ", "");
+
+            // Đặt tên file theo định dạng CK_MaKhachTro_HoTen.jpg
+            var fileName = $"CK_{maKhachTro}_{tenKhongDau}.jpg";
+            var filePath = Path.Combine(folderPath, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream); // Lưu tệp vào thư mục
+            }
+
+            // Ghi tên file vào database
+            await UpdateChuKyAsync(maKhachTro, fileName);
+
+            return fileName; // Trả về tên file đã upload
+        }
+
+        // Phương thức để loại bỏ dấu trong chuỗi
+        public string RemoveDiacritics(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
     }
