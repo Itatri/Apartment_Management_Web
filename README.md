@@ -4,10 +4,10 @@
 - https://github.com/Itatri/QuanLyPhongTro.git
 
 ### Các chức năng
-- Cho phép người dùng kê khai thông tin 
-- Cho phép người dùng xem hóa đơn dịch vụ 
+- Cho phép người dùng kê khai thông tin thành viên phòng
+- Cho phép người dùng xem hóa đơn dịch vụ sử dụng
 - Cho phép người dùng nhập điện nước, quét QR thanh toán
-- Cho phép người dùng phản hồi đến quản lý 
+- Cho phép người dùng phản hồi đến quản lý căn hộ 
 
 
 ### Công nghệ
