@@ -27,6 +27,7 @@
 
 using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models;
+using Apartment_Management_Web.Models.Mail;
 using Apartment_Management_Web.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,12 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });
+
+// Cấu hình SmtpSettings từ appsettings.json
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
+
+// Đăng ký dịch vụ EmailSender
+builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
 
 
 // Đăng kí Interfacem Servues
