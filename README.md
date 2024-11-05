@@ -1,4 +1,4 @@
-## Website dành cho cư dân thuê căn hộ ( User ) 
+## Website dành cho cư dân thuê căn hộ ( User Role ) 
 
 ### Winform Admin 
 - https://github.com/Itatri/QuanLyPhongTro.git
