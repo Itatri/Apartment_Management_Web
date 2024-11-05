@@ -503,9 +503,13 @@
                                         Gửi
                                     </button>
                                 </form> *@
-                                   <p>
+                                   <form id="emailForm">
+                                    <input type="email" id="toEmail" placeholder="Email" required>
+                                    <button type="submit">Gửi</button>
+                                </form>
+                                 @*   <p>
                                Liên hệ chúng tôi qua các thông tin liên hệ hiển thị trên trang web hoặc có thể gặp trực tiếp tại văn phòng 
-                            </p>
+                            </p> *@
                             </div>
                         </div>
                     </div>
@@ -559,6 +563,25 @@
         </div>
     </section>
 
+        <!-- Modal thông báo gửi Email thành công -->
+<div class="modal fade" id="SendEmailSuccessModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Gửi email thành công!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButton">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- end info section -->
     <!-- footer section -->
     <footer class="container-fluid footer_section ">
@@ -650,6 +673,28 @@
                 $('#confirmLogout').on('click', function () {
                     $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
                 });
+
+
+
+                                  // Lắng nghe sự kiện submit của biểu mẫu
+                                $('#emailForm').on('submit', function (e) {
+                                    e.preventDefault(); // Ngăn chặn gửi form mặc định
+
+                                    var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
+
+                                    // Gọi API để gửi email
+                                    $.ajax({
+                                        url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
+                                        type: 'POST',
+                                        success: function (response) {
+                                            // alert(response); // Thông báo thành công
+                                             $('#SendEmailSuccessModal').modal('show');
+                                        },
+                                        error: function (xhr) {
+                                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
+                                        }
+                                    });
+                                });
 
                 // var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
                 // var maPhong = loginResponse?.user?.maPhong; 
