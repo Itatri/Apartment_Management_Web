@@ -11455,7 +11455,8 @@ h1, h2, h3, h4, h5,
     border: 2px solid #ffffff;
     border-radius: 8px;
     font-weight: bold;
-    color: #2b0869;
+    /*  color: #2b0869;*/
+    color: #21b0e9;
     background-color: #ffffff; /* Màu nền phía trong border */
     box-shadow: 3px 5px 15px rgb(151 151 151 / 30%);
 }

@@ -26,11 +26,6 @@ namespace Apartment_Management_Web_GUI.Controllers
         }
 
 
-        public IActionResult RegisterPages()
-        {
-            // Truyền URL API vào View thông qua ViewBag
-            ViewBag.ApiBaseUrl = _apiBaseUrl;
-            return View();
-        }
+
     }
 }
