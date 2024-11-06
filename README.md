@@ -23,7 +23,8 @@
 ### Demo
 - Đăng nhập <br> <br>
 
-![DangNhap](https://github.com/user-attachments/assets/17992d5c-5c1d-4645-b4e7-4f02ed5c330e)
+
+![DangNhap](https://github.com/user-attachments/assets/c391b0aa-fe12-4d8a-972b-0256db6e2ee8)
 
 
 - Trang chủ <br> <br>
