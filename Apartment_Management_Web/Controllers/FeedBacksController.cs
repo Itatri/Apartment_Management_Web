@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models;
-using Apartment_Management_Web.Services;
-using Apartment_Management_Web.Interfaces;
-using Apartment_Management_Web.Models.Bill;
 using Apartment_Management_Web.Models.CusFeeback;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Apartment_Management_Web.Controllers
 {
@@ -35,52 +27,7 @@ namespace Apartment_Management_Web.Controllers
             return Ok(Feedback);
         }
 
-        //// API lấy thông tin phiếu thu theo mã phòng
-        //[HttpGet("GetThongTinFeedbackBy_MaPhong")]
-        //public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(string maPhong)
-        //{
-        //    var thongtinFeeback = await _FeedbackService.GetThongTinFeedBacksBy_MaPhongAsync(maPhong);
 
-        //    var response = new FeedbackCustomerRespone();
-
-        //    if (thongtinFeeback == null || !thongtinFeeback.Any())
-        //    {
-        //        response.IsSuccess = false;
-        //        response.Message = "Không tìm thấy thông tin phản hồi.";
-        //        response.FeedBacks = null; // Chỉnh lại để trả về danh sách
-        //        return NotFound(response); // Trả về trạng thái 404 với response
-        //    }
-
-        //    response.IsSuccess = true;
-        //    response.Message = "Lấy thông tin phản hồi thành công.";
-        //    response.FeedBacks = thongtinFeeback; // Trả về danh sách phiếu thu tìm thấy
-
-        //    return Ok(response); // Trả về trạng thái 200 với response
-        //}
-
-
-        //[Authorize]
-        //[HttpGet("GetThongTinFeedbackBy_MaPhong")]
-        //public async Task<ActionResult<FeedbackCustomerRespone>> GetThongTinFeedbackBy_MaPhong(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
-        //{
-        //    var thongtinFeeback = await _FeedbackService.GetThongTinFeedBacksBy_MaPhongAsync(maPhong, startDate, endDate, trangThai);
-
-        //    var response = new FeedbackCustomerRespone();
-
-        //    if (thongtinFeeback == null || !thongtinFeeback.Any())
-        //    {
-        //        response.IsSuccess = false;
-        //        response.Message = "Không tìm thấy thông tin phản hồi.";
-        //        response.FeedBacks = null;
-        //        return NotFound(response);
-        //    }
-
-        //    response.IsSuccess = true;
-        //    response.Message = "Lấy thông tin phản hồi thành công.";
-        //    response.FeedBacks = thongtinFeeback;
-
-        //    return Ok(response);
-        //}
 
         [Authorize]
         [HttpGet("GetThongTinFeedbackBy_MaPhong")]
