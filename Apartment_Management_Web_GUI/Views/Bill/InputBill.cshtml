@@ -3,6 +3,8 @@
     ViewData["Title"] = "Input Bill";
     var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
 }
+
+
 <!DOCTYPE html>
 <html>
 
@@ -29,6 +31,7 @@
     <link href="~/css/responsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+  
 
 
 </head>
@@ -605,24 +608,7 @@
                 var currentPage = 1; // Biến để lưu trang hiện tại
                 var totalPages = 1; // Tổng số trang
 
-                // // Lấy thông tin loginResponse từ localStorage
-                // var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-
-                // // Kiểm tra xem loginResponse có tồn tại hay không
-                // if (loginResponse) {
-                //     var user = loginResponse.user;
-
-                //     // Hiển thị userId nếu có
-                //     if (user?.id) {
-                //         $('#userIdDisplay').text(user.id);
-                //     }
-
-                //     // Các thông tin khác từ loginResponse, nếu cần hiển thị
-                //     console.log('Token:', loginResponse.token);
-                //     console.log('User:', user);
-                //     console.log('Mã phòng:', user?.maPhong);
-                //     console.log('Trạng thái:', user?.trangThai);
-                // }
+            
 
                  // Lấy thông tin loginResponse từ localStorage
                 var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
@@ -644,13 +630,7 @@
                 }
 
 
-                // // Xử lý sự kiện nhấn vào nút Đăng xuất
-                // $('#logoutBtn').on('click', function () {
-                //     localStorage.removeItem('loginResponse');
-                //     console.log('loginResponse:', localStorage.getItem('loginResponse'));
-                //     window.location.href = '@Url.Action("HomePage", "Home")';
-                // });
-
+             
                  // Xử lý sự kiện nhấn vào nút Đăng xuất
                 $('#logoutBtn').on('click', function () {
                     // Xóa toàn bộ thông tin từ localStorage
@@ -696,14 +676,7 @@
                                     });
                                 });
 
-                // var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-                // var maPhong = loginResponse?.user?.maPhong; 
-
-                // if (maPhong) {
-                //     $('#maPhongLabel').text(maPhong);
-                // } else {
-                //     $('#maPhongLabel').text('Không tìm thấy mã phòng');
-                // }
+              
 
                  var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
                 var maPhong = loginResponse?.user?.maPhong; 
@@ -752,14 +725,7 @@
                                     };
 
 
-                                    //   // Nếu phiếu thu đã thanh toán, làm nút bị khóa
-                                    // var buttonDisabled = phieuThu.trangThai ? 'disabled' : '';
-                                    // var buttonClass = phieuThu.trangThai ? 'btn-secondary' : 'btn-primary';
-
-                                    // // Kiểm tra nếu tongTien là null hoặc không tồn tại
-                                    // var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0; // Chỉ cho phép thanh toán nếu có tổng tiền
-                                    // var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
-
+                                   
                                                         // Nếu phiếu thu đã thanh toán hoặc có tổng tiền, làm nút "Nhập Điện Nước" bị khóa
                     var buttonDisabled = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'disabled' : '';
                     var buttonClass = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'btn-secondary' : 'btn-primary';
@@ -797,8 +763,7 @@
                                                         data-toggle="modal" data-target="#paymentModal">
                                                     Thanh Toán
                                                 </button>
-                                            </td>   
-
+                                              </td>
 
                                         </tr>
                                     `;
@@ -815,6 +780,7 @@
                         }
                     });
                 }
+
 
 
 
@@ -947,20 +913,6 @@
 
 
 
-                // // Sự kiện nhấn vào nút "Thanh Toán"
-                // $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
-                //     var row = $(this).closest('tr');
-                //     var maPt = row.find('th').text(); 
-                //     var tongTien = row.find('td:nth-child(12)').text(); // Cột chứa tổng tiền thanh toán
-                //     var tenKhachHang = "HOANG VAN TRI"; // Cần thay đổi để lấy tên khách hàng từ dữ liệu thực tế
-
-                //     // Cập nhật thông tin trong modal
-                //     $('#paymentInfo').html(`  <strong>Mã phiếu thu :</strong> ${maPt} <br>  <strong>Số tiền thanh toán :</strong> ${tongTien} VND`);
-
-                //     // Hiển thị modal
-                //     $('#paymentModal').modal('show');
-                // });
-
 
                 // Sự kiện nhấn vào nút "Thanh Toán"
                 $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
@@ -981,6 +933,7 @@
                 });
 
 
+         
 
 
 
@@ -1041,6 +994,7 @@
                     });
                 });
             });
+            
         </script>
 
 

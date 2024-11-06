@@ -4,7 +4,6 @@ using Apartment_Management_Web.Models.Bill;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace Apartment_Management_Web.Controllers
 {
     [Route("api/PhieuThus")]
@@ -28,82 +27,6 @@ namespace Apartment_Management_Web.Controllers
             return Ok(PhieuThu);
         }
 
-
-
-        //// API lấy thông tin phiếu thu theo mã phòng
-        //[HttpGet("GetThongTinPhieuThuBy_MaPhong")]
-        //public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong)
-        //{
-        //    var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong);
-
-        //    var response = new BillCustomerRespone();
-
-        //    if (thongtinPhieuThu == null || !thongtinPhieuThu.Any())
-        //    {
-        //        response.IsSuccess = false;
-        //        response.Message = "Không tìm thấy thông tin phiếu thu.";
-        //        response.Phieuthus = null; // Chỉnh lại để trả về danh sách
-        //        return NotFound(response); // Trả về trạng thái 404 với response
-        //    }
-
-        //    response.IsSuccess = true;
-        //    response.Message = "Lấy thông tin phiếu thu thành công.";
-        //    response.Phieuthus = thongtinPhieuThu; // Trả về danh sách phiếu thu tìm thấy
-
-        //    return Ok(response); // Trả về trạng thái 200 với response
-        //}
-
-        //[HttpGet("GetThongTinPhieuThuBy_MaPhong")]
-        //public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai)
-        //{
-        //    var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai);
-
-        //    var response = new BillCustomerRespone();
-
-        //    if (thongtinPhieuThu == null || !thongtinPhieuThu.Any())
-        //    {
-        //        response.IsSuccess = false;
-        //        response.Message = "Không tìm thấy thông tin phiếu thu.";
-        //        response.Phieuthus = null;
-        //        return NotFound(response);
-        //    }
-
-        //    response.IsSuccess = true;
-        //    response.Message = "Lấy thông tin phiếu thu thành công.";
-        //    response.Phieuthus = thongtinPhieuThu;
-
-        //    return Ok(response);
-        //}
-        //[Authorize]
-        //[HttpGet("GetThongTinPhieuThuBy_MaPhong")]
-        //public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai, int pageNumber = 1, int pageSize = 100)
-        //{
-        //    // Lấy dữ liệu phiếu thu
-        //    var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai, pageNumber, pageSize);
-
-        //    // Tính tổng số bản ghi
-        //    var totalCount = await _PhieuThuService.GetTotalCountAsync(maPhong, startDate, endDate, trangThai);
-
-        //    var response = new BillCustomerRespone();
-
-        //    if (thongtinPhieuThu == null || !thongtinPhieuThu.Any())
-        //    {
-        //        response.IsSuccess = false;
-        //        response.Message = "Không tìm thấy thông tin phiếu thu.";
-        //        response.Phieuthus = null;
-        //        response.TotalCount = totalCount;
-        //        response.TotalPages = 0; // Không có trang nếu không có dữ liệu
-        //        return NotFound(response);
-        //    }
-
-        //    response.IsSuccess = true;
-        //    response.Message = "Lấy thông tin phiếu thu thành công.";
-        //    response.Phieuthus = thongtinPhieuThu;
-        //    response.TotalCount = totalCount;
-        //    response.TotalPages = (int)Math.Ceiling((double)totalCount / pageSize); // Tính tổng số trang
-
-        //    return Ok(response);
-        //}
 
 
         [Authorize]
@@ -175,6 +98,20 @@ namespace Apartment_Management_Web.Controllers
             return Ok(response); // Trả về trạng thái 200 với response
         }
 
+        // Phương thức xuất phiếu thu thành PDF
+        [HttpGet("ExportPhieuThuToPdf")]
+        public async Task<IActionResult> ExportPhieuThuToPdf(string maPt)
+        {
+            try
+            {
+                var fileBytes = await _PhieuThuService.ExportPhieuThuToPdfAsync(maPt);
+                return File(fileBytes, "application/pdf", $"PhieuThu_{maPt}.pdf");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
 
     }

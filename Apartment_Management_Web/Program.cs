@@ -19,6 +19,9 @@
 // Add libary Bootstrap Terminal 
 // dotnet add package Bootstrap
 
+// Cài đặt Thư Viện iTextSharp ( Chuyen den thu muc cua API ) 
+// dotnet add package itext7
+
 
 
 // Add services to the container.
