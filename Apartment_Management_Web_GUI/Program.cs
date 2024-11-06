@@ -27,4 +27,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=HomePage}/{id?}");
 
+app.MapControllerRoute(
+    name: "inputBill",  // Tên của route
+    pattern: "bill/input",  // URL mà người dùng sẽ truy cập
+    defaults: new { controller = "Bill", action = "InputBill" }  // Điều hướng đến action và controller tương ứng
+);
+
+
 app.Run();
