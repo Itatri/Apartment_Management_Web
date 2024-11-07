@@ -393,6 +393,23 @@
                         </div>
                     </div>
 
+                    <!-- Modal để hiển thị PDF -->
+<div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pdfModalLabel">Hóa đơn PDF</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe src="" style="width: 100%; height: 800px;" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- end experience section -->
     <!-- about section -->
@@ -765,6 +782,14 @@
                                                 </button>
                                               </td>
 
+                                              <td>
+                                                <button type="button" style="width: 150px;" class="btn btn-info" 
+                                                        onclick="exportPhieuThuToPdf('${phieuThu.maPt}')">
+                                                   Xem hóa đơn 
+                                                </button>
+                                            </td>
+
+
                                         </tr>
                                     `;
                                     $('tbody').append(newRow);
@@ -781,8 +806,40 @@
                     });
                 }
 
+                $(document).on('click', '.btn-info', function () {
+                    var row = $(this).closest('tr');
+                    var maPt = row.find('th').text(); // Lấy mã phiếu thu từ hàng tương ứng
+
+                    // Gọi hàm exportPhieuThuToPdf với mã phiếu thu
+                    exportPhieuThuToPdf(maPt);
+                });
 
 
+                function exportPhieuThuToPdf(maPt) {
+                    $.ajax({
+                        url: `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`,
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        xhrFields: {
+                            responseType: 'blob' // Đảm bảo nhận dữ liệu dưới dạng blob (PDF)
+                        },
+                        success: function (response) {
+                            var blob = new Blob([response], { type: 'application/pdf' });
+                            var url = URL.createObjectURL(blob);
+
+                            // Hiển thị file PDF trong modal
+                            $('#pdfModal iframe').attr('src', url);
+                            $('#pdfModal').modal('show');
+                        },
+                        error: function (xhr) {
+                            alert('Đã xảy ra lỗi khi tải hóa đơn.');
+                        }
+                    });
+                }
+
+        
 
                 // Khai báo biến để lưu số dòng hiển thị
                     var currentRowsPerPage = 5; // Giá trị mặc định là 10
@@ -959,6 +1016,8 @@
                     }
                 });
 
+
+
                 // Sự kiện nhấn vào nút "Cập nhật" trong Modal
                 $('#btnCapNhat').on('click', function () {
                     var maPt = $('#maPtInput').val(); 
@@ -994,7 +1053,16 @@
                     });
                 });
             });
-            
+
+                //     function exportPhieuThuToPdf(maPt) {
+                //     var apiUrl = `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`;
+
+                //     // Thực hiện tải file PDF
+                //     window.location.href = apiUrl;
+                // }
+
+    
+
         </script>
 
 
