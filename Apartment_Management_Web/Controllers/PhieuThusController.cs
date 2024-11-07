@@ -98,6 +98,7 @@ namespace Apartment_Management_Web.Controllers
             return Ok(response); // Trả về trạng thái 200 với response
         }
 
+
         // Phương thức xuất phiếu thu thành PDF
         [HttpGet("ExportPhieuThuToPdf")]
         public async Task<IActionResult> ExportPhieuThuToPdf(string maPt)
