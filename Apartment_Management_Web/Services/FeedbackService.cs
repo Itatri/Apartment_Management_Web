@@ -1,6 +1,6 @@
-﻿using Apartment_Management_Web.Models;
+﻿using Apartment_Management_Web.Interfaces;
+using Apartment_Management_Web.Models;
 using Microsoft.EntityFrameworkCore;
-using Apartment_Management_Web.Interfaces;
 
 namespace Apartment_Management_Web.Services
 {
@@ -18,38 +18,7 @@ namespace Apartment_Management_Web.Services
             return await _context.FeedBacks.ToListAsync();
         }
 
-        //public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong)
-        //{
-        //    return await _context.FeedBacks
-        //        .Where(t => t.MaPhong == maPhong)
-        //        .ToListAsync();
-        //}
 
-        //public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
-        //{
-        //    var query = _context.FeedBacks.AsQueryable();
-
-        //    query = query.Where(t => t.MaPhong == maPhong);
-
-        //    // Lọc theo ngày gửi
-        //    if (startDate.HasValue)
-        //    {
-        //        query = query.Where(t => t.NgayGui >= startDate.Value);
-        //    }
-
-        //    if (endDate.HasValue)
-        //    {
-        //        query = query.Where(t => t.NgayGui <= endDate.Value);
-        //    }
-
-        //    // Lọc theo trạng thái
-        //    if (trangThai.HasValue)
-        //    {
-        //        query = query.Where(t => t.TrangThai == trangThai.Value);
-        //    }
-
-        //    return await query.ToListAsync();
-        //}
 
 
         // Cập nhật phương thức GetThongTinFeedBacksBy_MaPhongAsync để trả về danh sách phản hồi
@@ -73,6 +42,9 @@ namespace Apartment_Management_Web.Services
             {
                 query = query.Where(t => t.TrangThai == trangThai.Value);
             }
+
+            // Sắp xếp theo NgayGui từ mới đến cũ, rồi phân trang
+            query = query.OrderByDescending(t => t.NgayGui);
 
             return await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         }
