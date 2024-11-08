@@ -185,14 +185,16 @@
                                 <th scope="col">Mã phiếu </th>
                                 <th scope="col">Ngày lập</th>
                                 <th scope="col">Ngày thu</th>
-                                <th scope="col">Tiền nhà</th>
+                             
                                 <th scope="col">Điện cũ</th>
                                 <th scope="col">Điện mới</th>
-                                <th scope="col">Tiền điện</th>
+                               
                                 <th scope="col">Nước cũ</th>
                                 <th scope="col">Nước mới</th>
+                                 <th scope="col">Tiền điện</th>
                                 <th scope="col">Tiền nước</th>
                                 <th scope="col">Tiền dịch vụ</th>
+                                   <th scope="col">Tiền nhà</th>
                                 <th scope="col">Tổng tiền</th>
                                 <th scope="col">Thanh toán</th>
                                 <th scope="col">Trạng Thái</th>
@@ -419,7 +421,7 @@
             <div class="row">
                 <div class="col-md-10 col-lg-9 mx-auto">
                     <div class="img-box">
-                        <img style="width:30%;" src="~/images/BillEle.png" alt="">
+                        <img style="width:35%;" src="~/images/payment.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -757,33 +759,35 @@
                                             <th scope="row">${checkNull(phieuThu.maPt)}</th>
                                             <td>${checkNull(phieuThu.ngayLap)}</td>
                                             <td>${checkNull(phieuThu.ngayThu)}</td>
-                                            <td>${formatCurrency(phieuThu.tienNha)}</td>
+                                           
                                             <td>${checkNull(phieuThu.dienCu)}</td>
                                             <td>${checkNull(phieuThu.dienMoi)}</td>
-                                            <td>${formatCurrency(phieuThu.tienDien)}</td>
+                                           
                                             <td>${checkNull(phieuThu.nuocCu)}</td>
                                             <td>${checkNull(phieuThu.nuocMoi)}</td>
+                                             <td>${formatCurrency(phieuThu.tienDien)}</td>
                                             <td>${formatCurrency(phieuThu.tienNuoc)}</td>
                                             <td>${formatCurrency(phieuThu.tienDv)}</td>
+                                             <td>${formatCurrency(phieuThu.tienNha)}</td>
                                             <td>${formatCurrency(phieuThu.tongTien)}</td>
                                             <td>${formatCurrency(phieuThu.thanhToan)}</td>
                                             <td class="${trangThaiClass}">${trangThaiText}</td>
                                             <td>
-                                                <button type="button" style="width: 160px;" class="btn ${buttonClass}" ${buttonDisabled} 
+                                                <button type="button" style="width: 125px; font-size: 12px;" class="btn ${buttonClass}" ${buttonDisabled} 
                                                         data-toggle="modal" data-target="#exampleModal" 
                                                         ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
                                                     Nhập Điện Nước
                                                 </button>
                                             </td>
                                             <td>
-                                                <button type="button" style="width: 130px;" class="btn btn-success" ${paymentButtonDisabled} 
+                                                <button type="button" style="width: 100px; font-size: 12px;" class="btn btn-success" ${paymentButtonDisabled} 
                                                         data-toggle="modal" data-target="#paymentModal">
                                                     Thanh Toán
                                                 </button>
                                               </td>
 
                                               <td>
-                                                <button type="button" style="width: 150px;" class="btn btn-info" 
+                                                <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info" 
                                                         onclick="exportPhieuThuToPdf('${phieuThu.maPt}')">
                                                    Xem hóa đơn 
                                                 </button>
@@ -806,16 +810,7 @@
                     });
                 }
 
-                $(document).on('click', '.btn-info', function () {
-                    var row = $(this).closest('tr');
-                    var maPt = row.find('th').text(); // Lấy mã phiếu thu từ hàng tương ứng
-
-                    // Gọi hàm exportPhieuThuToPdf với mã phiếu thu
-                    exportPhieuThuToPdf(maPt);
-                });
-
-
-                function exportPhieuThuToPdf(maPt) {
+                 function exportPhieuThuToPdf(maPt) {
                     $.ajax({
                         url: `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`,
                         type: 'GET',
@@ -838,6 +833,17 @@
                         }
                     });
                 }
+
+                $(document).on('click', '.btn-info', function () {
+                    var row = $(this).closest('tr');
+                    var maPt = row.find('th').text(); // Lấy mã phiếu thu từ hàng tương ứng
+
+                    // Gọi hàm exportPhieuThuToPdf với mã phiếu thu
+                    exportPhieuThuToPdf(maPt);
+                });
+
+
+               
 
         
 
@@ -1054,12 +1060,7 @@
                 });
             });
 
-                //     function exportPhieuThuToPdf(maPt) {
-                //     var apiUrl = `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`;
-
-                //     // Thực hiện tải file PDF
-                //     window.location.href = apiUrl;
-                // }
+              
 
     
 
