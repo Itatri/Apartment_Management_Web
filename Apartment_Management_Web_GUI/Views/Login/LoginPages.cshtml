@@ -13,7 +13,7 @@
     <!-- LINEARICONS -->
     <link rel="stylesheet" href="~/fonts/linearicons/style.css">
 
-     <!-- STYLE CSS -->
+    <!-- STYLE CSS -->
     <link rel="stylesheet" href="~/css/loginform.css">
 
     <!-- Font Awesome -->
@@ -23,7 +23,7 @@
 
 <body>
 
-        <section class="ftco-section">
+    <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
@@ -33,55 +33,55 @@
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-10">
                     <div class="wrap d-md-flex">
-                           <div class="img" style="background-image: url('@Url.Content("~/images/loginsp.jpg")');">
-
-                  </div>
+                        <div class="img" style="background-image: url('@Url.Content("~/images/loginsp.jpg")');">
+                        </div>
                         <div class="login-wrap p-4 p-md-5">
-                      <div class="d-flex">
-                          <div class="w-100">
-                              <h3 class="mb-4">TÀI KHOẢN</h3>
-                          </div>
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">TÀI KHOẢN</h3>
+                                </div>
                                 <div class="w-100">
                                     <p class="social-media d-flex justify-content-end">
                                         <a href="https://www.facebook.com/trihvn/" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
                                         <a href="https://www.instagram.com/trihvn/" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
                                     </p>
                                 </div>
-                      </div>
-                            <form  id="loginForm" action="#" class="signin-form">
-                          <div class="form-group mb-3">
-                              <label class="label" for="name">ID</label>
-                              <input type="text"  id="userId" class="form-control" placeholder="Nhập ID tài khoản" required>
-                          </div>
-                    <div class="form-group mb-3">
-                        <label class="label" for="password">Mật khẩu</label>
-                      <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu" required>
-                    </div>
-                  
-                    <div class="form-group d-md-flex">
-                        <div class="w-50 text-left">
-                            <label class="checkbox-wrap checkbox-primary mb-0">Đồng ý
-                                      <input  id="agreeCheckbox" type="checkbox" unchecked>
-                                      <span class="checkmark"></span>
+                            </div>
+                            <form id="loginForm" action="#" class="signin-form">
+                                <div class="form-group mb-3">
+                                    <label class="label" for="name">ID</label>
+                                    <input type="text" id="userId" class="form-control" placeholder="Nhập ID tài khoản" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="password">Mật khẩu</label>
+                                    <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                                </div>
+
+                                <div class="form-group d-md-flex">
+                                    <div class="w-50 text-left">
+                                        <label class="checkbox-wrap checkbox-primary mb-0">
+                                            Đồng ý
+                                            <input id="agreeCheckbox" type="checkbox" unchecked>
+                                            <span class="checkmark"></span>
                                         </label>
                                     </div>
                                     <div class="w-50 text-md-right">
-                                        <a href="@Url.Action("HomePage", "Home")">Quay về </a>
+                                        <a href="/home/homepage">Quay về </a>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Đăng nhập </button>
+                                </div>
+                            </form>
+                            @*    <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Đăng nhập </a></p> *@
+                        </div>
                     </div>
-                      <div class="form-group">
-                        <button type="submit" class="form-control btn btn-primary rounded submit px-3">Đăng nhập </button>
-                    </div>
-                  </form>
-               @*    <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Đăng nhập </a></p> *@
-                </div>
-              </div>
                 </div>
             </div>
         </div>
     </section>
 
-     <!-- Modal thông báo chưa chọn đồng ý -->
+    <!-- Modal thông báo chưa chọn đồng ý -->
     <div class="modal" id="AgreeModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -101,85 +101,90 @@
         </div>
     </div>
 
-       <!-- Modal thông báo đăng nhập thành công -->
-<div class="modal" id="LoginSuccessModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thông báo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="loginSuccessMessage">Đăng nhập thành công</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+    <!-- Modal thông báo đăng nhập thành công -->
+    <div class="modal" id="LoginSuccessModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="loginSuccessMessage">Đăng nhập thành công</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
     </div>
 
-  
+
     <script src="~/js/jquery-3.4.1.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/custom.js"></script>
 
 
-   @*  <script>
+
+    <script>
         $(document).ready(function () {
-            // Xử lý sự kiện khi biểu mẫu được gửi
-            $('#loginForm').on('submit', function (event) {
-                event.preventDefault(); // Ngăn chặn hành động mặc định của biểu mẫu
-
-                    // Kiểm tra trạng thái checkbox "Đồng ý"
+            // Hàm kiểm tra trạng thái checkbox "Đồng ý"
+            function checkAgreeCheckbox() {
                 if (!$('#agreeCheckbox').is(':checked')) {
-                    // Nếu chưa được chọn, hiển thị modal thông báo
-                    $('#AgreeModal').modal('show');
-                    return;
+                    $('#AgreeModal').modal('show'); // Hiển thị modal nếu chưa chọn
+                    return false;
                 }
+                return true;
+            }
 
-
-                // Lấy dữ liệu từ các trường nhập liệu
-                var userId = $('#userId').val();
-                var password = $('#password').val();
-
-
-                // Kiểm tra nếu trường ID hoặc mật khẩu bị trống
+            // Hàm kiểm tra nếu trường đầu vào rỗng
+            function validateInput(userId, password) {
                 if (!userId) {
                     alert("Vui lòng nhập ID");
-                    $('#userId').focus(); // Đưa con trỏ vào trường ID
-                    return;
+                    $('#userId').focus();
+                    return false;
                 }
                 if (!password) {
                     alert("Vui lòng nhập mật khẩu");
-                    $('#password').focus(); // Đưa con trỏ vào trường mật khẩu
-                    return;
+                    $('#password').focus();
+                    return false;
                 }
+                return true;
+            }
 
-                // Gọi API để đăng nhập
+            // Hàm xử lý đăng nhập
+            function handleLoginSuccess(response) {
+                localStorage.setItem('loginResponse', JSON.stringify(response)); // Lưu vào localStorage
+                $('#LoginSuccessModal').modal('show'); // Hiển thị modal thành công
+                $('#LoginSuccessModal').on('hide.bs.modal', function () { // Điều hướng sau khi đóng modal
+                    window.location.href = '/user/homepage';
+                });
+            }
+
+            // Xử lý sự kiện gửi biểu mẫu đăng nhập
+            $('#loginForm').on('submit', function (event) {
+                event.preventDefault();
+
+                // Kiểm tra checkbox "Đồng ý" và các trường đầu vào
+                if (!checkAgreeCheckbox()) return;
+                var userId = $('#userId').val();
+                var password = $('#password').val();
+                if (!validateInput(userId, password)) return;
+
+                // Gọi API đăng nhập
                 $.ajax({
-                    url: '@apiBaseUrl/api/UserPhongs/Login', 
+                    url: '@apiBaseUrl/api/UserPhongs/Login',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ Id: userId, MatKhau: password }),
                     success: function (response) {
-                        // Nếu đăng nhập thành công
                         if (response.isSuccess) {
-                            // Lưu toàn bộ đối tượng response vào localStorage để lấy ra sử dụng khi cần 
-                            localStorage.setItem('loginResponse', JSON.stringify(response));
-                              // Hiển thị Modal thông báo đăng nhập thành công
-                             $('#LoginSuccessModal').modal('show');
-
-                            // Đợi người dùng nhấn nút "Ok" mới chuyển trang
-                        $('#LoginSuccessModal').on('hide.bs.modal', function () {
-                            window.location.href = '@Url.Action("HomePageLogin", "Home")';
-                        });
-
+                            handleLoginSuccess(response);
                         } else {
-                            alert(response.message); // Hiển thị thông báo nếu lỗi
+                            alert(response.message);
                         }
                     },
                     error: function (xhr) {
@@ -188,73 +193,7 @@
                 });
             });
         });
-    </script> *@
-
-    <script>
-    $(document).ready(function () {
-        // Hàm kiểm tra trạng thái checkbox "Đồng ý"
-        function checkAgreeCheckbox() {
-            if (!$('#agreeCheckbox').is(':checked')) {
-                $('#AgreeModal').modal('show'); // Hiển thị modal nếu chưa chọn
-                return false;
-            }
-            return true;
-        }
-
-        // Hàm kiểm tra nếu trường đầu vào rỗng
-        function validateInput(userId, password) {
-            if (!userId) {
-                alert("Vui lòng nhập ID");
-                $('#userId').focus();
-                return false;
-            }
-            if (!password) {
-                alert("Vui lòng nhập mật khẩu");
-                $('#password').focus();
-                return false;
-            }
-            return true;
-        }
-
-        // Hàm xử lý đăng nhập
-        function handleLoginSuccess(response) {
-            localStorage.setItem('loginResponse', JSON.stringify(response)); // Lưu vào localStorage
-            $('#LoginSuccessModal').modal('show'); // Hiển thị modal thành công
-            $('#LoginSuccessModal').on('hide.bs.modal', function () { // Điều hướng sau khi đóng modal
-                window.location.href = '@Url.Action("HomePageLogin", "Home")';
-            });
-        }
-
-        // Xử lý sự kiện gửi biểu mẫu đăng nhập
-        $('#loginForm').on('submit', function (event) {
-            event.preventDefault();
-
-            // Kiểm tra checkbox "Đồng ý" và các trường đầu vào
-            if (!checkAgreeCheckbox()) return;
-            var userId = $('#userId').val();
-            var password = $('#password').val();
-            if (!validateInput(userId, password)) return;
-
-            // Gọi API đăng nhập
-            $.ajax({
-                url: '@apiBaseUrl/api/UserPhongs/Login',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ Id: userId, MatKhau: password }),
-                success: function (response) {
-                    if (response.isSuccess) {
-                        handleLoginSuccess(response);
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function (xhr) {
-                    alert('Đã xảy ra lỗi khi đăng nhập: ' + xhr.responseJSON.message);
-                }
-            });
-        });
-    });
-</script>
+    </script>
 
 </body>
 </html>

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Home Page Login";
     var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
 }
@@ -40,7 +39,7 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
-                    <a class="navbar-brand" href="@Url.Action("HomePage", "Home")">
+                    <a class="navbar-brand" href="/home/homepage">
                         <img src="~/images/apartment.png" alt="" />
                         <span>
                             IT APARTMENT
@@ -53,23 +52,23 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/user/homepage">Trang chủ <span class="sr-only">(current)</span></a>
                             </li>
 
                             @*    <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
+                            <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
                             </li> *@
                             @*    <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
+                            <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
                             </li> *@
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi</a>
+                                <a class="nav-link" href="/user/feedback">Phản hồi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/bill/input">Hóa đơn</a>
+                                <a class="nav-link" href="/user/input">Hóa đơn</a>
                             </li>
-                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("UserProfile", "Login")">Thành viên</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/profile">Thành viên</a>
                             </li>
 
 
@@ -82,19 +81,19 @@
                             <a href="#">
                                 <span>
 
-                                <div class="button-container">
-                                  <a class="btn btn-secondary" href="#" role="button">
-                                     Tài khoản  : &nbsp; <span id="userIdDisplay"></span>
-                                  </a>
-                                </div>
+                                    <div class="button-container">
+                                        <a class="btn btn-secondary" href="#" role="button">
+                                            Tài khoản  : &nbsp; <span id="userIdDisplay"></span>
+                                        </a>
+                                    </div>
 
                                 </span>
 
                             </a>
 
-                              <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
+                            <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
                                 Đăng xuất
-                            </span> 
+                            </span>
 
                             <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                                 @*  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button> *@
@@ -126,7 +125,6 @@
 
 
         <!-- end header section -->
-
         <!-- slider section -->
         <section class="slider_section ">
             <div class="carousel_btn-container">
@@ -160,12 +158,12 @@
                                             căn hộ quản lí bởi IT APARTMENT
                                         </p>
                                         @*  <div class="btn-box">
-                                            <a href="@Url.Action("AboutPages", "About")" class="btn-1">
-                                                Về chúng tôi
-                                            </a>
-                                            <a href="#" class="btn-2">
-                                                Đặt câu hỏi
-                                            </a>
+                                        <a href="@Url.Action("AboutPages", "About")" class="btn-1">
+                                        Về chúng tôi
+                                        </a>
+                                        <a href="#" class="btn-2">
+                                        Đặt câu hỏi
+                                        </a>
                                         </div> *@
                                     </div>
                                 </div>
@@ -189,15 +187,15 @@
 
                                         </h1>
                                         <p>
-                                           Thông tin luôn đầy đủ và được cập nhật nhanh chóng trên hệ thống
+                                            Thông tin luôn đầy đủ và được cập nhật nhanh chóng trên hệ thống
                                         </p>
                                         @*   <div class="btn-box">
-                                            <a href="@Url.Action("AboutPages", "About")" class="btn-1">
-                                                Về chúng tôi
-                                            </a>
-                                            <a href="#" class="btn-2">
-                                                Đặt câu hỏi 
-                                            </a>
+                                        <a href="@Url.Action("AboutPages", "About")" class="btn-1">
+                                        Về chúng tôi
+                                        </a>
+                                        <a href="#" class="btn-2">
+                                        Đặt câu hỏi
+                                        </a>
                                         </div> *@
                                     </div>
                                 </div>
@@ -221,15 +219,15 @@
 
                                         </h1>
                                         <p>
-                                            Phòng đẹp , đầy đủ tiện nghi và tiện ích giúp mang đến trải nghiệm tuyệt vời 
+                                            Phòng đẹp , đầy đủ tiện nghi và tiện ích giúp mang đến trải nghiệm tuyệt vời
                                         </p>
                                         @*   <div class="btn-box">
-                                            <a href="@Url.Action("AboutPages", "About")" class="btn-1">
-                                                Về chúng tôi
-                                            </a>
-                                            <a href="#" class="btn-2">
-                                                Đặt câu hỏi
-                                            </a>
+                                        <a href="@Url.Action("AboutPages", "About")" class="btn-1">
+                                        Về chúng tôi
+                                        </a>
+                                        <a href="#" class="btn-2">
+                                        Đặt câu hỏi
+                                        </a>
                                         </div> *@
                                     </div>
                                 </div>
@@ -268,16 +266,16 @@
                             </h2>
                         </div>
                         <p>
-                                       Tại IT APARTMENT, chúng tôi cam kết mang đến cho khách hàng những trải nghiệm tốt nhất khi thuê trọ hoặc căn hộ . Chúng tôi không ngừng lắng nghe phản hồi từ khách hàng để cải thiện dịch vụ và cung cấp những tiện ích tuyệt vời nhất.
+                            Tại IT APARTMENT, chúng tôi cam kết mang đến cho khách hàng những trải nghiệm tốt nhất khi thuê trọ hoặc căn hộ . Chúng tôi không ngừng lắng nghe phản hồi từ khách hàng để cải thiện dịch vụ và cung cấp những tiện ích tuyệt vời nhất.
 
                         </p>
                         @*  <div class="btn-box">
-                            <a href="" class="btn-1">
-                                Đọc thêm
-                            </a>
-                            <a href="" class="btn-2">
-                                Tra cứu
-                            </a>
+                        <a href="" class="btn-1">
+                        Đọc thêm
+                        </a>
+                        <a href="" class="btn-2">
+                        Tra cứu
+                        </a>
                         </div> *@
                     </div>
                 </div>
@@ -287,11 +285,9 @@
     </section>
 
     <!-- end experience section -->
-
-
     <!-- category section -->
 
-    <section class="category_section layout_padding"  style = "background-color: #2d667d;">
+    <section class="category_section layout_padding" style="background-color: #2d667d;">
         <div class="container">
             <div class="heading_container">
                 <h2>
@@ -365,8 +361,6 @@
 
 
     <!-- end category section -->
-
-
     <!-- about section -->
 
     <section class="about_section layout_padding">
@@ -383,22 +377,20 @@
                     GIỚI THIỆU VỀ IT APARTMENT
                 </h2>
                 <p>
-                 Được thành lập vào năm 2024 , bởi các sinh viên IT trực thuộc Trường đại học Công Thương , với mục đích nhằm <br />  nâng cao trải nghiệm và cung cấp dịch tiện lợi cho khách hàng sử dụng căn hộ .
+                    Được thành lập vào năm 2024 , bởi các sinh viên IT trực thuộc Trường đại học Công Thương , với mục đích nhằm <br />  nâng cao trải nghiệm và cung cấp dịch tiện lợi cho khách hàng sử dụng căn hộ .
                 </p>
 
                 @*  <a href="">
-                    Đọc tiếp
+                Đọc tiếp
                 </a> *@
-                   <a href="@Url.Action("AboutPages", "About")">
-                  Xem thêm 
+                <a href="/home/aboutus">
+                    Xem thêm
                 </a>
             </div>
         </div>
     </section>
 
     <!-- end about section -->
-
-
     <!-- freelance section -->
 
     <section class="freelance_section ">
@@ -498,8 +490,6 @@
     </section>
 
     <!-- end freelance section -->
-
-
     <!-- client section -->
 
     <section class="client_section layout_padding">
@@ -508,7 +498,7 @@
                 <div class="col-lg-9 col-md-10 mx-auto">
                     <div class="heading_container">
                         <h2>
-                            Đánh giá 
+                            Đánh giá
                         </h2>
                     </div>
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -530,7 +520,7 @@
                                         Lê Anh Tuấn
                                     </h4>
                                     <p>
-                                        Quan tâm khách hàng , giải quyết vấn đề nhanh chóng 
+                                        Quan tâm khách hàng , giải quyết vấn đề nhanh chóng
                                     </p>
                                     <img src="~/images/quote.png" alt="">
                                 </div>
@@ -541,7 +531,7 @@
                                         Lê Thị Hân
                                     </h4>
                                     <p>
-                                        Dịch vụ , tiện ích rất tốt , cần phát huy 
+                                        Dịch vụ , tiện ích rất tốt , cần phát huy
                                     </p>
                                     <img src="~/images/quote.png" alt="">
                                 </div>
@@ -574,12 +564,12 @@
 
                         </span>
                     </div>
-                     <div class="social_box">
+                    <div class="social_box">
                         <a href="https://www.facebook.com/trihvn">
                             <img src="~/images/fb.png" alt="">
                         </a>
                         @*  <a href="#">
-                            <img src="~/images/twitter.png" alt="">
+                        <img src="~/images/twitter.png" alt="">
                         </a> *@
                         <a href="https://www.linkedin.com/in/itatri">
                             <img src="~/images/linkedin.png" alt="">
@@ -588,7 +578,7 @@
                             <img src="~/images/instagram.png" alt="">
                         </a>
                         @*  <a href="#">
-                            <img src="~/images/youtube.png" alt="">
+                        <img src="~/images/youtube.png" alt="">
                         </a> *@
                     </div>
                 </div>
@@ -602,16 +592,16 @@
                                 </h5>
                                 <ul>
                                     <li class=" active">
-                                        <a class="" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
+                                        <a class="" href="/home/homepage">Trang chủ <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi  </a>
+                                        <a class="" href="/user/feedback">Phản hồi  </a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="@Url.Action("InputBill", "Bill")">Hóa đơn </a>
+                                        <a class="" href="/user/input">Hóa đơn </a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="@Url.Action("UserProfile", "Login")">Thành viên </a>
+                                        <a class="" href="/user/profile">Thành viên </a>
                                     </li>
                                 </ul>
                             </div>
@@ -639,15 +629,15 @@
                                 <h5>
                                     Liên hệ
                                 </h5>
-                               @*  <form action="">
-                                    <input type="email" placeholder="Email">
-                                    <button>
-                                        Gửi
-                                    </button>
+                                @*  <form action="">
+                                <input type="email" placeholder="Email">
+                                <button>
+                                Gửi
+                                </button>
                                 </form> *@
-                               @*     <p>
-                               Liên hệ chúng tôi qua các thông tin liên hệ hiển thị trên trang web hoặc có thể gặp trực tiếp tại văn phòng 
-                            </p> *@
+                                @*     <p>
+                                Liên hệ chúng tôi qua các thông tin liên hệ hiển thị trên trang web hoặc có thể gặp trực tiếp tại văn phòng
+                                </p> *@
                                 <form id="emailForm">
                                     <input type="email" id="toEmail" placeholder="Email" required>
                                     <button type="submit">Gửi</button>
@@ -705,48 +695,48 @@
         </div>
     </section>
 
-   
 
-<!-- Modal thông báo đăng xuất thành công -->
-<div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thông báo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Đăng xuất tài khoản thành công</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmLogout">Ok</button>
+
+    <!-- Modal thông báo đăng xuất thành công -->
+    <div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Đăng xuất tài khoản thành công</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmLogout">Ok</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-  <!-- Modal thông báo gửi Email thành công -->
-<div class="modal fade" id="SendEmailSuccessModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thông báo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Gửi email thành công!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButton">Ok</button>
+    <!-- Modal thông báo gửi Email thành công -->
+    <div class="modal fade" id="SendEmailSuccessModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Gửi email thành công!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButton">Ok</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- end info section -->
     <!-- footer section -->
@@ -769,79 +759,79 @@
 
 
 
-            <script>
-          $(document).ready(function () {
-              // Lấy thông tin loginResponse từ localStorage
-              var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+    <script>
+        $(document).ready(function () {
+            // Lấy thông tin loginResponse từ localStorage
+            var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
-              // Kiểm tra xem loginResponse có tồn tại hay không
-              if (loginResponse) {
-                  var user = loginResponse.user; // Lấy thông tin user từ loginResponse
+            // Kiểm tra xem loginResponse có tồn tại hay không
+            if (loginResponse) {
+                var user = loginResponse.user; // Lấy thông tin user từ loginResponse
 
 
 
-                 if (user?.id) {
-                        $('#userIdDisplay').text(user.id);
-                       
+                if (user?.id) {
+                    $('#userIdDisplay').text(user.id);
+
+                }
+
+
+
+
+                // Các thông tin khác từ loginResponse, nếu cần hiển thị
+                console.log('Token:', loginResponse.token);
+                console.log('User:', user);
+                console.log('Mã phòng:', user?.maPhong);
+                console.log('Trạng thái:', user?.trangThai);
+            }
+
+
+
+            // Xử lý sự kiện nhấn vào nút Đăng xuất
+            $('#logoutBtn').on('click', function () {
+                // Xóa toàn bộ thông tin từ localStorage
+                localStorage.removeItem('loginResponse');
+
+                // Kiểm tra xem loginResponse đã bị xóa chưa
+                console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
+
+                // Hiển thị Modal thông báo đăng xuất thành công
+                $('#LogoutSuccessModal').modal('show');
+            });
+
+            // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
+            $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
+                // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
+                window.location.href = '/home/homepage';
+            });
+
+            // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
+            $('#confirmLogout').on('click', function () {
+                $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
+            });
+
+
+            // Lắng nghe sự kiện submit của biểu mẫu
+            $('#emailForm').on('submit', function (e) {
+                e.preventDefault(); // Ngăn chặn gửi form mặc định
+
+                var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
+
+                // Gọi API để gửi email
+                $.ajax({
+                    url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
+                    type: 'POST',
+                    success: function (response) {
+                        // alert(response); // Thông báo thành công
+                        $('#SendEmailSuccessModal').modal('show');
+                    },
+                    error: function (xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
                     }
-
-
-                   
-
-                  // Các thông tin khác từ loginResponse, nếu cần hiển thị
-                  console.log('Token:', loginResponse.token);
-                  console.log('User:', user);
-                  console.log('Mã phòng:', user?.maPhong);
-                  console.log('Trạng thái:', user?.trangThai);
-              }
-
-
-
-              // Xử lý sự kiện nhấn vào nút Đăng xuất
-                $('#logoutBtn').on('click', function () {
-                    // Xóa toàn bộ thông tin từ localStorage
-                    localStorage.removeItem('loginResponse');
-
-                    // Kiểm tra xem loginResponse đã bị xóa chưa
-                    console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
-
-                    // Hiển thị Modal thông báo đăng xuất thành công
-                    $('#LogoutSuccessModal').modal('show');
                 });
-
-                // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
-                $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
-                    // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
-                    window.location.href = '@Url.Action("HomePage", "Home")';
-                });
-
-                // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
-                $('#confirmLogout').on('click', function () {
-                    $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
-                });
-
-
-                  // Lắng nghe sự kiện submit của biểu mẫu
-                $('#emailForm').on('submit', function (e) {
-                    e.preventDefault(); // Ngăn chặn gửi form mặc định
-
-                    var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
-
-                    // Gọi API để gửi email
-                    $.ajax({
-                        url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
-                        type: 'POST',
-                        success: function (response) {
-                            // alert(response); // Thông báo thành công
-                             $('#SendEmailSuccessModal').modal('show');
-                        },
-                        error: function (xhr) {
-                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
-                        }
-                    });
-                });
-          });
-        </script>
+            });
+        });
+    </script>
 
 </body>
 
