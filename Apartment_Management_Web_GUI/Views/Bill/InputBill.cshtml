@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Input Bill";
     var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
 }
@@ -31,7 +30,7 @@
     <link href="~/css/responsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  
+
 
 
 </head>
@@ -42,7 +41,7 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
-                    <a class="navbar-brand" href="@Url.Action("HomePage", "Home")">
+                    <a class="navbar-brand" href="/home/homepage">
                         <img src="~/images/apartment.png" alt="" />
                         <span>
                             IT APARTMENT
@@ -54,55 +53,56 @@
 
 
 
-                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                  <ul class="navbar-nav">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
-                                        </li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/user/homepage">Trang chủ <span class="sr-only">(current)</span></a>
+                            </li>
+
                             @*    <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
-                                        </li> *@
+                            <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
+                            </li> *@
                             @*    <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
-                                        </li> *@
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/bill/input">Hóa đơn</a>
-                                        </li>
-                                         <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("UserProfile", "Login")">Thành viên</a>
-                                        </li>
+                            <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
+                            </li> *@
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/feedback">Phản hồi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/input">Hóa đơn</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/profile">Thành viên</a>
+                            </li>
 
 
 
-                                    </ul>
+                        </ul>
 
 
 
-                                    <div class="user_option">
-                                        <a href="#">
-                                            <span>
+                        <div class="user_option">
+                            <a href="#">
+                                <span>
 
-                                            <div class="button-container">
-                                              <a class="btn btn-secondary" href="#" role="button">
-                                                 Tài khoản  : &nbsp; <span id="userIdDisplay"></span>
-                                              </a>
-                                            </div>
-
-                                            </span>
-
+                                    <div class="button-container">
+                                        <a class="btn btn-secondary" href="#" role="button">
+                                            Tài khoản  : &nbsp; <span id="userIdDisplay"></span>
                                         </a>
-
-                                          <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
-                                            Đăng xuất
-                                        </span> 
-
-                                        <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
-                                @*  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button> *@
-                                        </form>
                                     </div>
+
+                                </span>
+
+                            </a>
+
+                            <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
+                                Đăng xuất
+                            </span>
+
+                            <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                                @*  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button> *@
+                            </form>
+                        </div>
 
 
 
@@ -130,506 +130,511 @@
     </div>
 
 
-                 <!-- Table danh sách phiếu thu của phòng -->
+    <!-- Table danh sách phiếu thu của phòng -->
 
-                <section class="experience_section layout_padding" style = "padding-bottom: 0px;   padding-top: 80px;">                
-                <div class="container" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
-               <label for="exampleInputEmail1">
-                   <strong>Phiếu thu phòng : </strong> <span id="maPhongLabel"></span>
-                   </label>
+    <section class="experience_section layout_padding" style="padding-bottom: 0px;   padding-top: 80px;">
+        <div class="container" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
+            <label for="exampleInputEmail1">
+                <strong>Phiếu thu phòng : </strong> <span id="maPhongLabel"></span>
+            </label>
 
 
             <br />
-             <br />
+            <br />
 
             @* Lọc theo ngày *@
 
 
-                 <div class="row mb-4 d-flex align-items-end">
-                    <div class="col-md-3" style="margin-right: 10px;">
-                        <label for="startDate" class="form-label">Từ ngày</label>
-                        <input type="date" class="form-control" id="startDate" value="2024-01-01">
-                    </div>
-
-                    <div class="col-md-3" style="margin-right: 10px;">
-                        <label for="endDate" class="form-label">Đến ngày</label>
-                        <input type="date" class="form-control" id="endDate" value="2024-12-31">
-                    </div>
-
-                    <div class="col-md-3" style="margin-right: 10px;">
-                        <label for="trangThaiSelect" class="form-label">Trạng thái</label>
-                        <select id="trangThaiSelect" class="form-control">
-                            <option value="">Chọn trạng thái</option> <!-- Tùy chọn mặc định -->
-                            <option value="true">Đã thanh toán</option> <!-- Sử dụng giá trị số cho trạng thái -->
-                            <option value="false">Chưa thanh toán</option> <!-- Sử dụng giá trị số cho trạng thái -->
-                        </select>
-                    </div>
-
-                    <div class="col-md-2 d-flex align-items-end">
-                        <button class="btn btn-primary" id="filterButton" style="height: 40px; margin: 0px 12px 0px 12px;">
-                            <i class="fas fa-filter"></i> <!-- Biểu tượng lọc -->
-                        </button>
-                        <button class="btn btn-primary" id="refeshButton" style="height: 40px; margin: 0px 12px 0px 12px;">
-                            <i class="fa-solid fa-arrows-rotate" style="color: #ffffff;"></i>
-                        </button>
-                    </div>
+            <div class="row mb-4 d-flex align-items-end">
+                <div class="col-md-3" style="margin-right: 10px;">
+                    <label for="startDate" class="form-label">Từ ngày</label>
+                    <input type="date" class="form-control" id="startDate" value="2024-01-01">
                 </div>
 
-
-
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Mã phiếu </th>
-                                <th scope="col">Ngày lập</th>
-                                <th scope="col">Ngày thu</th>
-                             
-                                <th scope="col">Điện cũ</th>
-                                <th scope="col">Điện mới</th>
-                               
-                                <th scope="col">Nước cũ</th>
-                                <th scope="col">Nước mới</th>
-                                 <th scope="col">Tiền điện</th>
-                                <th scope="col">Tiền nước</th>
-                                <th scope="col">Tiền dịch vụ</th>
-                                   <th scope="col">Tiền nhà</th>
-                                <th scope="col">Tổng tiền</th>
-                                <th scope="col">Thanh toán</th>
-                                <th scope="col">Trạng Thái</th>
-                                 <th scope="col"></th>
-                                 <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Trống</th>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                <td>Trống</td>
-                                 <td>Trống</td>
-                                 <td>Trống</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col-md-3" style="margin-right: 10px;">
+                    <label for="endDate" class="form-label">Đến ngày</label>
+                    <input type="date" class="form-control" id="endDate" value="2024-12-31">
                 </div>
 
-                     <!-- Phân trang Bootstrap -->
-                                    <section class="about_section layout_padding">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination justify-content-center" id="pagination">
-                                                <li class="page-item disabled" id="prevPage">
-                                                    <a class="page-link" href="#" tabindex="-1">Trước đó</a>
-                                                </li>
-                                                <li class="page-item active" aria-current="page" id="currentPage">
-                                                    <a class="page-link" href="#"> 0 / 0 </a>
-                                                </li>
+                <div class="col-md-3" style="margin-right: 10px;">
+                    <label for="trangThaiSelect" class="form-label">Trạng thái</label>
+                    <select id="trangThaiSelect" class="form-control">
+                        <option value="">Chọn trạng thái</option> <!-- Tùy chọn mặc định -->
+                        <option value="true">Đã thanh toán</option> <!-- Sử dụng giá trị số cho trạng thái -->
+                        <option value="false">Chưa thanh toán</option> <!-- Sử dụng giá trị số cho trạng thái -->
+                    </select>
+                </div>
 
-                                                <li class="page-item" id="nextPage">
-                                                    <a class="page-link" href="#">Tiếp theo</a>
-                                                </li>
-
-                                                   <li class="page-item" id="rowsPerPageItem">
-                                                    <select name="phantrangFeedback" class="form-control" id="feedbackRowsPerPageSelect" style="margin: 0px 10px 0px 10px;">
-                                                        <option value="5">5</option>
-                                                        <option value="10" selected>10</option>
-                                                        <option value="20">20</option>
-                                                    </select>
-                                                </li>
-                                            </ul>
-
-                                        </nav>
-                                    </section>
-
+                <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-primary" id="filterButton" style="height: 40px; margin: 0px 12px 0px 12px;">
+                        <i class="fas fa-filter"></i> <!-- Biểu tượng lọc -->
+                    </button>
+                    <button class="btn btn-primary" id="refeshButton" style="height: 40px; margin: 0px 12px 0px 12px;">
+                        <i class="fa-solid fa-arrows-rotate" style="color: #ffffff;"></i>
+                    </button>
+                </div>
             </div>
 
 
 
 
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã phiếu </th>
+                            <th scope="col">Ngày lập</th>
+                            <th scope="col">Ngày thu</th>
 
+                            <th scope="col">Điện cũ</th>
+                            <th scope="col">Điện mới</th>
 
-
-<!-- Modal thông báo đăng xuất thành công -->
-<div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thông báo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                            <th scope="col">Nước cũ</th>
+                            <th scope="col">Nước mới</th>
+                            <th scope="col">Tiền điện</th>
+                            <th scope="col">Tiền nước</th>
+                            <th scope="col">Tiền dịch vụ</th>
+                            <th scope="col">Tiền nhà</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Thanh toán</th>
+                            <th scope="col">Trạng Thái</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Trống</th>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                            <td>Trống</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="modal-body">
-                <p>Đăng xuất tài khoản thành công</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmLogout">Ok</button>
+
+            <!-- Phân trang Bootstrap -->
+            <section class="about_section layout_padding">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <li class="page-item disabled" id="prevPage">
+                            <a class="page-link" href="#" tabindex="-1">Trước đó</a>
+                        </li>
+                        <li class="page-item active" aria-current="page" id="currentPage">
+                            <a class="page-link" href="#"> 0 / 0 </a>
+                        </li>
+
+                        <li class="page-item" id="nextPage">
+                            <a class="page-link" href="#">Tiếp theo</a>
+                        </li>
+
+                        <li class="page-item" id="rowsPerPageItem">
+                            <select name="phantrangFeedback" class="form-control" id="feedbackRowsPerPageSelect" style="margin: 0px 10px 0px 10px;">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                            </select>
+                        </li>
+                    </ul>
+
+                </nav>
+            </section>
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Modal thông báo đăng xuất thành công -->
+        <div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Đăng xuất tài khoản thành công</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmLogout">Ok</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-                                  <!-- Modal thông báo lọc phiếu thu -->
-                    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Thông báo</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Không có thông tin phiếu thu tương ứng </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" id="filterModalOk">Ok</button>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Modal thông báo lọc phiếu thu -->
+        <div class="modal fade" id="filterModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-
-
-
-
-                 <!-- Modal QR thanh toán -->
-                <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="paymentModalLabel">Thanh Toán</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body text-center">
-                                <p><strong>Tài khoản :</strong> HOANG VAN TRI - 5218 4567 89</p>
-                                <img style="width:70%;" id="qrCodeImage" src="" alt="QR Code" class="img-fluid"/>
-                                <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
-
-                                <!-- Hiển thị thông tin thanh toán -->
-                                <div id="paymentInfo" class="mb-3"></div>
-
-                                <!-- Nội dung chuyển khoản -->
-                                <p><strong>Nội dung chuyển khoản</strong>
-                                    <br />Nội dung chuyển khoản tự động điền theo định dạng :<br>
-                                  Ma phong <strong>mã phòng</strong> Ma phieu thu <strong>mã phiếu thu</strong><br>
-                                    Ví dụ : <em>Ma phong P001 Ma phieuthu PTP001</em></p>
-
-                                <!-- Thông tin liên hệ -->
-                                <p><strong>Liên hệ chúng tôi </strong> <br /> Nếu có bất kỳ câu hỏi nào, vui lòng gửi <a href="@Url.Action("FeedbackPage", "Feedback")" style="color: blue; text-decoration: underline;">phản hồi</a> hoặc <br /> liên hệ chúng tôi qua số điện thoại : <strong>038-963-4776</strong></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            </div>
-                        </div>
+                    <div class="modal-body">
+                        <p>Không có thông tin phiếu thu tương ứng </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="filterModalOk">Ok</button>
                     </div>
                 </div>
+            </div>
+        </div>
 
 
 
-                <!-- Modal cập nhật thông tin điện nước -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Cập nhật số điện, nước</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Hủy">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form>
-                              <div class="form-group">
+
+        <!-- Modal QR thanh toán -->
+        <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="paymentModalLabel">Thanh Toán</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p><strong>Tài khoản :</strong> HOANG VAN TRI - 5218 4567 89</p>
+                        <img style="width:70%;" id="qrCodeImage" src="" alt="QR Code" class="img-fluid" />
+                        <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
+
+                        <!-- Hiển thị thông tin thanh toán -->
+                        <div id="paymentInfo" class="mb-3"></div>
+
+                        <!-- Nội dung chuyển khoản -->
+                        <p>
+                            <strong>Nội dung chuyển khoản</strong>
+                            <br />Nội dung chuyển khoản tự động điền theo định dạng :<br>
+                            Ma phong <strong>mã phòng</strong> Ma phieu thu <strong>mã phiếu thu</strong><br>
+                            Ví dụ : <em>Ma phong P001 Ma phieuthu PTP001</em>
+                        </p>
+
+                        <!-- Thông tin liên hệ -->
+                        <p><strong>Liên hệ chúng tôi </strong> <br /> Nếu có bất kỳ câu hỏi nào, vui lòng gửi <a href="/user/feedback" style="color: blue; text-decoration: underline;">phản hồi</a> hoặc <br /> liên hệ chúng tôi qua số điện thoại : <strong>038-963-4776</strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Modal cập nhật thông tin điện nước -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cập nhật số điện, nước</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Hủy">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
                                 <label for="maPtInput" class="col-form-label">Mã phiếu thu</label>
                                 <input type="text" class="form-control" id="maPtInput" readonly>
-                              </div>
-                              <div class="form-group">
+                            </div>
+                            <div class="form-group">
                                 <label for="dienMoiInput" class="col-form-label">Nhập số điện hiện tại ( kWh )</label>
                                 <input type="text" class="form-control" id="dienMoiInput">
-                              </div>
-                              <div class="form-group">
+                            </div>
+                            <div class="form-group">
                                 <label for="nuocMoiInput" class="col-form-label">Nhập số nước hiện tại ( m3 ) </label>
                                 <input type="text" class="form-control" id="nuocMoiInput">
-                              </div>
-                            </form>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <button type="button" class="btn btn-primary" id="btnCapNhat">Cập nhật</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-                    <!-- Modal thông báo cập nhật thông tin điện nước thành công --> 
-                    <div class="modal" id="successModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Thông báo</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Bạn đã cập nhật thông tin điện nước của phiếu thu thành công !</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-
-                    <!-- Modal để hiển thị PDF -->
-<div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pdfModalLabel">Hóa đơn PDF</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <iframe src="" style="width: 100%; height: 800px;" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    <!-- end experience section -->
-    <!-- about section -->
-
-    <section class="about_section layout_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-lg-9 mx-auto">
-                    <div class="img-box">
-                        <img style="width:35%;" src="~/images/payment.jpg" alt="">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary" id="btnCapNhat">Cập nhật</button>
                     </div>
                 </div>
             </div>
-            <div class="detail-box">
+        </div>
+
+
+
+        <!-- Modal thông báo cập nhật thông tin điện nước thành công -->
+        <div class="modal" id="successModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn đã cập nhật thông tin điện nước của phiếu thu thành công !</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal để hiển thị PDF -->
+        <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModalLabel">Hóa đơn PDF</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="" style="width: 100%; height: 800px;" frameborder="0"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- end experience section -->
+        <!-- about section -->
+
+        <section class="about_section layout_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-lg-9 mx-auto">
+                        <div class="img-box">
+                            <img style="width:35%;" src="~/images/payment.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-box">
                     @*  <h2>
                     GIỚI THIỆU VỀ IT APARTMENT
-                </h2>
-                <p>
+                    </h2>
+                    <p>
                     Được thành lập vào năm 2024 , bởi các sinh viên IT trực thuộc Trường đại học Công Thương , với mục đích nhằm nâng cao trải nghiệm và cung cấp dịch tiện lợi cho khách hàng sử dụng căn hộ của hệ thống
-                </p>
-                <a href="">
+                    </p>
+                    <a href="">
                     Đọc tiếp
-                </a> *@
+                    </a> *@
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- end about section -->
-    <!-- info section -->
+        <!-- end about section -->
+        <!-- info section -->
 
-    <section class="info_section ">
-        <div class="info_container layout_padding-top">
-            <div class="container">
-                <div class="info_top">
-                    <div class="info_logo">
-                        <img src="~/images/apartment.png" alt="" />
-                        <span>
+        <section class="info_section ">
+            <div class="info_container layout_padding-top">
+                <div class="container">
+                    <div class="info_top">
+                        <div class="info_logo">
+                            <img src="~/images/apartment.png" alt="" />
+                            <span>
 
-                            IT APARTMENT
+                                IT APARTMENT
 
-                        </span>
-                    </div>
-                    <div class="social_box">
-                        <a href="https://www.facebook.com/trihvn">
-                            <img src="~/images/fb.png" alt="">
-                        </a>
+                            </span>
+                        </div>
+                        <div class="social_box">
+                            <a href="https://www.facebook.com/trihvn">
+                                <img src="~/images/fb.png" alt="">
+                            </a>
                             @*  <a href="#">
                             <img src="~/images/twitter.png" alt="">
-                        </a> *@
-                        <a href="https://www.linkedin.com/in/itatri">
-                            <img src="~/images/linkedin.png" alt="">
-                        </a>
-                        <a href="http://www.instagram.com/trihvn">
-                            <img src="~/images/instagram.png" alt="">
-                        </a>
+                            </a> *@
+                            <a href="https://www.linkedin.com/in/itatri">
+                                <img src="~/images/linkedin.png" alt="">
+                            </a>
+                            <a href="http://www.instagram.com/trihvn">
+                                <img src="~/images/instagram.png" alt="">
+                            </a>
                             @*  <a href="#">
                             <img src="~/images/youtube.png" alt="">
-                        </a> *@
+                            </a> *@
+                        </div>
                     </div>
-                </div>
 
-                <div class="info_main">
-                    <div class="row">
-                        <div class="col-md-3 col-lg-2">
-                            <div class="info_link-box">
-                                <h5>
-                                    Liên kết
-                                </h5>
-                                <ul>
-                                    <li class=" active">
-                                        <a class="" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="">
-                                        <a class="" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi  </a>
-                                    </li>
-                                    <li class="">
-                                        <a class="" href="@Url.Action("InputBill", "Bill")">Hóa đơn </a>
-                                    </li>
-                                    <li class="">
-                                        <a class="" href="@Url.Action("UserProfile", "Login")">Thành viên </a>
-                                    </li>
-                                </ul>
+                    <div class="info_main">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-2">
+                                <div class="info_link-box">
+                                    <h5>
+                                        Liên kết
+                                    </h5>
+                                    <ul>
+                                        <li class=" active">
+                                            <a class="" href="/home/homepage">Trang chủ <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="">
+                                            <a class="" href="/user/feedback">Phản hồi  </a>
+                                        </li>
+                                        <li class="">
+                                            <a class="" href="/user/input">Hóa đơn </a>
+                                        </li>
+                                        <li class="">
+                                            <a class="" href="/user/profile">Thành viên </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 ">
-                            <h5>
-                                Văn phòng
-                            </h5>
-                            <p>
-                                Tại 163 Tây Thạnh, Tân Phú , Hồ Chí Minh
-                            </p>
-                        </div>
-
-                        <div class="col-md-3 col-lg-2 offset-lg-1">
-                            <h5>
-                                Thông tin
-                            </h5>
-                            <p>
-                                Cung cấp dịch vụ căn hộ và hỗ trợ khách hàng sử dụng dịch vụ
-                            </p>
-                        </div>
-
-                        <div class="col-md-3  offset-lg-1">
-                           <div class="info_form ">
+                            <div class="col-md-3 ">
                                 <h5>
-                                    Liên hệ
+                                    Văn phòng
                                 </h5>
+                                <p>
+                                    Tại 163 Tây Thạnh, Tân Phú , Hồ Chí Minh
+                                </p>
+                            </div>
+
+                            <div class="col-md-3 col-lg-2 offset-lg-1">
+                                <h5>
+                                    Thông tin
+                                </h5>
+                                <p>
+                                    Cung cấp dịch vụ căn hộ và hỗ trợ khách hàng sử dụng dịch vụ
+                                </p>
+                            </div>
+
+                            <div class="col-md-3  offset-lg-1">
+                                <div class="info_form ">
+                                    <h5>
+                                        Liên hệ
+                                    </h5>
                                     @*  <form action="">
                                     <input type="email" placeholder="Email">
                                     <button>
-                                        Gửi
+                                    Gửi
                                     </button>
-                                </form> *@
-                                   <form id="emailForm">
-                                    <input type="email" id="toEmail" placeholder="Email" required>
-                                    <button type="submit">Gửi</button>
-                                </form>
+                                    </form> *@
+                                    <form id="emailForm">
+                                        <input type="email" id="toEmail" placeholder="Email" required>
+                                        <button type="submit">Gửi</button>
+                                    </form>
                                     @*   <p>
-                               Liên hệ chúng tôi qua các thông tin liên hệ hiển thị trên trang web hoặc có thể gặp trực tiếp tại văn phòng 
-                            </p> *@
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-9 col-md-10 mx-auto">
-                        <div class="info_contact layout_padding2">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <a href="#" class="link-box">
-                                        <div class="img-box">
-                                            <img src="~/images/location.png" alt="">
-                                        </div>
-                                        <div class="detail-box">
-                                            <h6>
-                                                Tân Phú
-                                            </h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="#" class="link-box">
-                                        <div class="img-box">
-                                            <img src="~/images/mail.png" alt="">
-                                        </div>
-                                        <div class="detail-box">
-                                            <h6>
-                                                itapartment@gmail.com
-                                            </h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-5">
-                                    <a href="#" class="link-box">
-                                        <div class="img-box">
-                                            <img src="~/images/call.png" alt="">
-                                        </div>
-                                        <div class="detail-box">
-                                            <h6>
-                                                Call +03 89634776
-                                            </h6>
-                                        </div>
-                                    </a>
+                                    Liên hệ chúng tôi qua các thông tin liên hệ hiển thị trên trang web hoặc có thể gặp trực tiếp tại văn phòng
+                                    </p> *@
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-lg-9 col-md-10 mx-auto">
+                            <div class="info_contact layout_padding2">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <a href="#" class="link-box">
+                                            <div class="img-box">
+                                                <img src="~/images/location.png" alt="">
+                                            </div>
+                                            <div class="detail-box">
+                                                <h6>
+                                                    Tân Phú
+                                                </h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="#" class="link-box">
+                                            <div class="img-box">
+                                                <img src="~/images/mail.png" alt="">
+                                            </div>
+                                            <div class="detail-box">
+                                                <h6>
+                                                    itapartment@gmail.com
+                                                </h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <a href="#" class="link-box">
+                                            <div class="img-box">
+                                                <img src="~/images/call.png" alt="">
+                                            </div>
+                                            <div class="detail-box">
+                                                <h6>
+                                                    Call +03 89634776
+                                                </h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
         <!-- Modal thông báo gửi Email thành công -->
-<div class="modal fade" id="SendEmailSuccessModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thông báo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Gửi email thành công!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButton">Ok</button>
+        <div class="modal fade" id="SendEmailSuccessModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Gửi email thành công!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButton">Ok</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-    <!-- end info section -->
-    <!-- footer section -->
-    <footer class="container-fluid footer_section ">
-        <div class="container">
-            <p>
-                &copy; <span id="displayDate"></span> All Rights Reserved By
-                <a href="https://github.com/Itatri">Itatri</a>
-            </p>
-        </div>
-    </footer>
-    <!-- end  footer section -->
+        <!-- end info section -->
+        <!-- footer section -->
+        <footer class="container-fluid footer_section ">
+            <div class="container">
+                <p>
+                    &copy; <span id="displayDate"></span> All Rights Reserved By
+                    <a href="https://github.com/Itatri">Itatri</a>
+                </p>
+            </div>
+        </footer>
+        <!-- end  footer section -->
 
 
-    <script src="~/js/jquery-3.4.1.min.js"></script>
-    <script src="~/js/bootstrap.js"></script>
-    <script src="~/js/custom.js"></script>
+        <script src="~/js/jquery-3.4.1.min.js"></script>
+        <script src="~/js/bootstrap.js"></script>
+        <script src="~/js/custom.js"></script>
 
 
-     <script>
+        <script>
             $(document).ready(function () {
                 var currentPage = 1; // Biến để lưu trang hiện tại
                 var totalPages = 1; // Tổng số trang
 
-            
 
-                 // Lấy thông tin loginResponse từ localStorage
+
+                // Lấy thông tin loginResponse từ localStorage
                 var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
                 // Kiểm tra xem loginResponse có tồn tại hay không
@@ -649,8 +654,8 @@
                 }
 
 
-             
-                 // Xử lý sự kiện nhấn vào nút Đăng xuất
+
+                // Xử lý sự kiện nhấn vào nút Đăng xuất
                 $('#logoutBtn').on('click', function () {
                     // Xóa toàn bộ thông tin từ localStorage
                     localStorage.removeItem('loginResponse');
@@ -665,7 +670,7 @@
                 // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
                 $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
                     // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
-                    window.location.href = '@Url.Action("HomePage", "Home")';
+                    window.location.href = '/home/homepage';
                 });
 
                 // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
@@ -675,30 +680,30 @@
 
 
 
-                                  // Lắng nghe sự kiện submit của biểu mẫu
-                                $('#emailForm').on('submit', function (e) {
-                                    e.preventDefault(); // Ngăn chặn gửi form mặc định
+                // Lắng nghe sự kiện submit của biểu mẫu
+                $('#emailForm').on('submit', function (e) {
+                    e.preventDefault(); // Ngăn chặn gửi form mặc định
 
-                                    var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
+                    var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
 
-                                    // Gọi API để gửi email
-                                    $.ajax({
-                                        url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
-                                        type: 'POST',
-                                        success: function (response) {
-                                            // alert(response); // Thông báo thành công
-                                             $('#SendEmailSuccessModal').modal('show');
-                                        },
-                                        error: function (xhr) {
-                                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
-                                        }
-                                    });
-                                });
+                    // Gọi API để gửi email
+                    $.ajax({
+                        url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
+                        type: 'POST',
+                        success: function (response) {
+                            // alert(response); // Thông báo thành công
+                            $('#SendEmailSuccessModal').modal('show');
+                        },
+                        error: function (xhr) {
+                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
+                        }
+                    });
+                });
 
-              
 
-                 var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-                var maPhong = loginResponse?.user?.maPhong; 
+
+                var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                var maPhong = loginResponse?.user?.maPhong;
 
                 if (maPhong) {
                     $('#maPhongLabel').text(maPhong);
@@ -707,7 +712,7 @@
                 }
 
 
-              function loadPhieuThus(maPhong, startDate, endDate, trangThai, pageSize = 5) {
+                function loadPhieuThus(maPhong, startDate, endDate, trangThai, pageSize = 5) {
                     $.ajax({
                         url: `@apiBaseUrl/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}&pageNumber=${currentPage}&pageSize=${pageSize}`,
                         type: 'GET',
@@ -716,8 +721,8 @@
                         },
                         success: function (response) {
                             if (response.isSuccess) {
-                                 totalPages = response.totalPages; // Lưu tổng số trang từ phản hồi API
-                                   // Cập nhật pagination
+                                totalPages = response.totalPages; // Lưu tổng số trang từ phản hồi API
+                                // Cập nhật pagination
                                 updatePagination();
                                 var phieuThus = response.phieuthus;
 
@@ -734,68 +739,68 @@
                                     var trangThaiText = phieuThu.trangThai ? 'Đã thanh toán' : 'Chưa thanh toán';
 
                                     // Kiểm tra nếu trường nào null thì thay thế bằng 'Trống' và thêm màu đỏ
-                                    var checkNull = function(value) {
+                                    var checkNull = function (value) {
                                         return value ? value : '<span style="color:red;">Trống</span>';
                                     };
 
                                     // Định dạng tiền với dấu chấm ngăn cách hàng nghìn
-                                    var formatCurrency = function(value) {
+                                    var formatCurrency = function (value) {
                                         return value ? value.toLocaleString('vi-VN') : '<span style="color:red;">Trống</span>';
                                     };
 
 
-                                   
-                                                        // Nếu phiếu thu đã thanh toán hoặc có tổng tiền, làm nút "Nhập Điện Nước" bị khóa
-                    var buttonDisabled = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'disabled' : '';
-                    var buttonClass = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'btn-secondary' : 'btn-primary';
 
-                    // Nếu phiếu thu đã có tổng tiền hợp lệ và chưa thanh toán, cho phép thanh toán
-                    var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0;
-                    var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
+                                    // Nếu phiếu thu đã thanh toán hoặc có tổng tiền, làm nút "Nhập Điện Nước" bị khóa
+                                    var buttonDisabled = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'disabled' : '';
+                                    var buttonClass = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'btn-secondary' : 'btn-primary';
+
+                                    // Nếu phiếu thu đã có tổng tiền hợp lệ và chưa thanh toán, cho phép thanh toán
+                                    var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0;
+                                    var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
 
 
                                     var newRow = `
-                                        <tr>
-                                            <th scope="row">${checkNull(phieuThu.maPt)}</th>
-                                            <td>${checkNull(phieuThu.ngayLap)}</td>
-                                            <td>${checkNull(phieuThu.ngayThu)}</td>
-                                           
-                                            <td>${checkNull(phieuThu.dienCu)}</td>
-                                            <td>${checkNull(phieuThu.dienMoi)}</td>
-                                           
-                                            <td>${checkNull(phieuThu.nuocCu)}</td>
-                                            <td>${checkNull(phieuThu.nuocMoi)}</td>
-                                             <td>${formatCurrency(phieuThu.tienDien)}</td>
-                                            <td>${formatCurrency(phieuThu.tienNuoc)}</td>
-                                            <td>${formatCurrency(phieuThu.tienDv)}</td>
-                                             <td>${formatCurrency(phieuThu.tienNha)}</td>
-                                            <td>${formatCurrency(phieuThu.tongTien)}</td>
-                                            <td>${formatCurrency(phieuThu.thanhToan)}</td>
-                                            <td class="${trangThaiClass}">${trangThaiText}</td>
-                                            <td>
-                                                <button type="button" style="width: 125px; font-size: 12px;" class="btn ${buttonClass}" ${buttonDisabled} 
-                                                        data-toggle="modal" data-target="#exampleModal" 
-                                                        ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
-                                                    Nhập Điện Nước
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button type="button" style="width: 100px; font-size: 12px;" class="btn btn-success" ${paymentButtonDisabled} 
-                                                        data-toggle="modal" data-target="#paymentModal">
-                                                    Thanh Toán
-                                                </button>
-                                              </td>
+                                                    <tr>
+                                                        <th scope="row">${checkNull(phieuThu.maPt)}</th>
+                                                        <td>${checkNull(phieuThu.ngayLap)}</td>
+                                                        <td>${checkNull(phieuThu.ngayThu)}</td>
 
-                                              <td>
-                                                <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info" 
-                                                        onclick="exportPhieuThuToPdf('${phieuThu.maPt}')">
-                                                   Xem hóa đơn 
-                                                </button>
-                                            </td>
+                                                        <td>${checkNull(phieuThu.dienCu)}</td>
+                                                        <td>${checkNull(phieuThu.dienMoi)}</td>
+
+                                                        <td>${checkNull(phieuThu.nuocCu)}</td>
+                                                        <td>${checkNull(phieuThu.nuocMoi)}</td>
+                                                         <td>${formatCurrency(phieuThu.tienDien)}</td>
+                                                        <td>${formatCurrency(phieuThu.tienNuoc)}</td>
+                                                        <td>${formatCurrency(phieuThu.tienDv)}</td>
+                                                         <td>${formatCurrency(phieuThu.tienNha)}</td>
+                                                        <td>${formatCurrency(phieuThu.tongTien)}</td>
+                                                        <td>${formatCurrency(phieuThu.thanhToan)}</td>
+                                                        <td class="${trangThaiClass}">${trangThaiText}</td>
+                                                        <td>
+                                                            <button type="button" style="width: 125px; font-size: 12px;" class="btn ${buttonClass}" ${buttonDisabled}
+                                                                    data-toggle="modal" data-target="#exampleModal"
+                                                                    ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
+                                                                Nhập Điện Nước
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" style="width: 100px; font-size: 12px;" class="btn btn-success" ${paymentButtonDisabled}
+                                                                    data-toggle="modal" data-target="#paymentModal">
+                                                                Thanh Toán
+                                                            </button>
+                                                          </td>
+
+                                                          <td>
+                                                            <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info"
+                                                                    onclick="exportPhieuThuToPdf('${phieuThu.maPt}')">
+                                                               Xem hóa đơn
+                                                            </button>
+                                                        </td>
 
 
-                                        </tr>
-                                    `;
+                                                    </tr>
+                                                `;
                                     $('tbody').append(newRow);
                                 });
                             } else {
@@ -804,13 +809,13 @@
                         },
                         error: function (xhr) {
                             // alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
-                             // alert(' Không có thông tin phiếu thu tương ứng  ');
-                                $('#filterModal').modal('show');
+                            // alert(' Không có thông tin phiếu thu tương ứng  ');
+                            $('#filterModal').modal('show');
                         }
                     });
                 }
 
-                 function exportPhieuThuToPdf(maPt) {
+                function exportPhieuThuToPdf(maPt) {
                     $.ajax({
                         url: `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`,
                         type: 'GET',
@@ -843,51 +848,51 @@
                 });
 
 
-               
 
-        
+
+
 
                 // Khai báo biến để lưu số dòng hiển thị
-                    var currentRowsPerPage = 5; // Giá trị mặc định là 10
+                var currentRowsPerPage = 5; // Giá trị mặc định là 10
 
-                  function updatePagination() {
+                function updatePagination() {
                     $('#pagination').empty(); // Xóa tất cả các trang hiện tại
 
                     // Previous button
                     if (currentPage > 1) {
                         $('#pagination').append(`
-                            <li class="page-item" id="prevPage">
-                                <a class="page-link" href="#" tabindex="-1">Trước đó</a>
-                            </li>
-                        `);
+                                        <li class="page-item" id="prevPage">
+                                            <a class="page-link" href="#" tabindex="-1">Trước đó</a>
+                                        </li>
+                                    `);
                     } else {
                         $('#pagination').append(`
-                            <li class="page-item disabled" id="prevPage">
-                                <a class="page-link" href="#" tabindex="-1">Trước đó</a>
-                            </li>
-                        `);
+                                        <li class="page-item disabled" id="prevPage">
+                                            <a class="page-link" href="#" tabindex="-1">Trước đó</a>
+                                        </li>
+                                    `);
                     }
 
                     // Current page button
                     $('#pagination').append(`
-                        <li class="page-item active" aria-current="page" id="currentPage">
-                            <a class="page-link" href="#">${currentPage} / ${totalPages}</a>
-                        </li>
-                    `);
+                                    <li class="page-item active" aria-current="page" id="currentPage">
+                                        <a class="page-link" href="#">${currentPage} / ${totalPages}</a>
+                                    </li>
+                                `);
 
                     // Next button
                     if (currentPage < totalPages) {
                         $('#pagination').append(`
-                            <li class="page-item" id="nextPage">
-                                <a class="page-link" href="#">Tiếp theo</a>
-                            </li>
-                        `);
+                                        <li class="page-item" id="nextPage">
+                                            <a class="page-link" href="#">Tiếp theo</a>
+                                        </li>
+                                    `);
                     } else {
                         $('#pagination').append(`
-                            <li class="page-item disabled" id="nextPage">
-                                <a class="page-link" href="#">Tiếp theo</a>
-                            </li>
-                        `);
+                                        <li class="page-item disabled" id="nextPage">
+                                            <a class="page-link" href="#">Tiếp theo</a>
+                                        </li>
+                                    `);
                     }
 
 
@@ -895,48 +900,48 @@
                     $('#prevPage').off('click').on('click', function () {
                         if (currentPage > 1) {
                             currentPage--;
-                            loadPhieuThus(maPhong,'', '', '', currentRowsPerPage); // Gọi lại dữ liệu
+                            loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); // Gọi lại dữ liệu
                         }
                     });
 
-                       // Gán sự kiện cho nút Next
+                    // Gán sự kiện cho nút Next
                     $('#nextPage').off('click').on('click', function () {
                         if (currentPage < totalPages) {
                             currentPage++;
-                            loadPhieuThus(maPhong,'', '', '', currentRowsPerPage); // Gọi lại dữ liệu
+                            loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); // Gọi lại dữ liệu
                         }
                     });
 
 
-                      // Thêm combo box cho số dòng hiển thị vào cuối
+                    // Thêm combo box cho số dòng hiển thị vào cuối
                     $('#pagination').append(`
-                        <li class="page-item" id="rowsPerPageItem">
-                            <select name="phantrangFeedback" class="form-control" id="feedbackRowsPerPageSelect" style="margin: 0px 10px 0px 10px;">
-                                <option value="5" disabled>Số dòng</option> <!-- Lựa chọn mặc định -->
-                                <option value="5" ${currentRowsPerPage == 5 ? 'selected' : ''}>5</option>
-                                <option value="10" ${currentRowsPerPage == 10 ? 'selected' : ''}>10</option>
-                                <option value="15" ${currentRowsPerPage == 15 ? 'selected' : ''}>15</option>
-                            </select>
-                        </li>
-                    `);
+                                    <li class="page-item" id="rowsPerPageItem">
+                                        <select name="phantrangFeedback" class="form-control" id="feedbackRowsPerPageSelect" style="margin: 0px 10px 0px 10px;">
+                                            <option value="5" disabled>Số dòng</option> <!-- Lựa chọn mặc định -->
+                                            <option value="5" ${currentRowsPerPage == 5 ? 'selected' : ''}>5</option>
+                                            <option value="10" ${currentRowsPerPage == 10 ? 'selected' : ''}>10</option>
+                                            <option value="15" ${currentRowsPerPage == 15 ? 'selected' : ''}>15</option>
+                                        </select>
+                                    </li>
+                                `);
 
 
 
-                      // Gán sự kiện thay đổi cho combo box số dòng hiển thị
+                    // Gán sự kiện thay đổi cho combo box số dòng hiển thị
                     $('#feedbackRowsPerPageSelect').on('change', function () {
                         currentRowsPerPage = parseInt($(this).val()); // Lấy số dòng hiển thị từ select và chuyển đổi thành số nguyên
                         currentPage = 1; // Đặt lại currentPage về 1 mỗi khi thay đổi số dòng
-                        loadPhieuThus(maPhong,'', '', '', currentRowsPerPage); // Gọi lại dữ liệu với số dòng mới
+                        loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); // Gọi lại dữ liệu với số dòng mới
                     });
 
                 }
 
-                 // Gọi API lần đầu tiên khi load trang
-                loadPhieuThus(maPhong,'', '', '', 5); // Mặc định là 10 dòng hiển thị
+                // Gọi API lần đầu tiên khi load trang
+                loadPhieuThus(maPhong, '', '', '', 5); // Mặc định là 10 dòng hiển thị
 
 
 
-                  // Gán sự kiện cho nút "Ok" trong filterModal
+                // Gán sự kiện cho nút "Ok" trong filterModal
                 $('#filterModalOk').off('click').on('click', function () {
                     $('#filterModal').modal('hide');
                 });
@@ -962,14 +967,14 @@
                     // Gọi API lần đầu tiên khi load trang
                     loadPhieuThus(maPhong, '', '', '');
 
-                     // Đặt lại giá trị của các trường ngày
+                    // Đặt lại giá trị của các trường ngày
                     $('#startDate').val('2024-01-01');
                     $('#endDate').val('2024-12-31');
 
                     $('#trangThaiSelect').val('');
 
-                       // Cập nhật lại phân trang
-                   currentPage = 1; // Đặt lại currentPage về 1 mỗi khi thay đổi số dòng
+                    // Cập nhật lại phân trang
+                    currentPage = 1; // Đặt lại currentPage về 1 mỗi khi thay đổi số dòng
                     currentRowsPerPage = 5; // Đặt lại số dòng hiển thị về 5
                     updatePagination(); // Gọi lại hàm cập nhật phân trang
                 });
@@ -980,7 +985,7 @@
                 // Sự kiện nhấn vào nút "Thanh Toán"
                 $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
                     var row = $(this).closest('tr');
-                    var maPt = row.find('th').text(); 
+                    var maPt = row.find('th').text();
                     var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, ''); // Loại bỏ ký tự không phải số
                     var maPhongQR = maPhong; // Thay đổi để lấy mã phòng từ dữ liệu thực tế
 
@@ -996,15 +1001,15 @@
                 });
 
 
-         
+
 
 
 
                 // Sự kiện nhấn vào nút "Nhập Điện Nước"
                 $(document).on('click', '.btn-primary[data-target="#exampleModal"]', function () {
-                    var row = $(this).closest('tr'); 
-                    var maPt = row.find('th').text(); 
-                    var dienMoi = row.find('td:nth-child(6)').text(); 
+                    var row = $(this).closest('tr');
+                    var maPt = row.find('th').text();
+                    var dienMoi = row.find('td:nth-child(6)').text();
                     var nuocMoi = row.find('td:nth-child(9)').text();
 
                     $('#maPtInput').val(maPt);
@@ -1026,33 +1031,33 @@
 
                 // Sự kiện nhấn vào nút "Cập nhật" trong Modal
                 $('#btnCapNhat').on('click', function () {
-                    var maPt = $('#maPtInput').val(); 
+                    var maPt = $('#maPtInput').val();
                     var dienMoi = $('#dienMoiInput').val();
-                    var nuocMoi = $('#nuocMoiInput').val(); 
+                    var nuocMoi = $('#nuocMoiInput').val();
 
                     $.ajax({
                         url: `@apiBaseUrl/api/PhieuThus/UpdatePhieuThu?maPt=${maPt}&dienMoi=${dienMoi}&nuocMoi=${nuocMoi}`,
                         type: 'PUT',
                         headers: {
-                            'Authorization': 'Bearer ' + loginResponse.token 
+                            'Authorization': 'Bearer ' + loginResponse.token
                         },
-                       success: function (response) {
-                        if (response.isSuccess) {
-                            // Ẩn modal exampleModal
-                            $('#exampleModal').modal('hide'); 
+                        success: function (response) {
+                            if (response.isSuccess) {
+                                // Ẩn modal exampleModal
+                                $('#exampleModal').modal('hide');
 
-                            // Hiển thị modal thông báo cập nhật thành công
-                            $('#successModal').modal('show'); // Mở modal thông báo
+                                // Hiển thị modal thông báo cập nhật thành công
+                                $('#successModal').modal('show'); // Mở modal thông báo
 
-                            // Sự kiện nhấn vào nút "Ok" trong successModal
-                            $('#successModal .btn-primary').on('click', function () {
-                                location.reload(); // Tải lại trang khi nhấn Ok
-                            });
+                                // Sự kiện nhấn vào nút "Ok" trong successModal
+                                $('#successModal .btn-primary').on('click', function () {
+                                    location.reload(); // Tải lại trang khi nhấn Ok
+                                });
 
-                        } else {
-                            alert(response.message);
-                        }
-                    },
+                            } else {
+                                alert(response.message);
+                            }
+                        },
                         error: function (xhr) {
                             alert('Đã xảy ra lỗi khi cập nhật phiếu thu: ' + xhr.responseJSON.message);
                         }
@@ -1060,9 +1065,9 @@
                 });
             });
 
-              
 
-    
+
+
 
         </script>
 

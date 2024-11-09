@@ -19,9 +19,9 @@
 
     <title>IT APARTMENT</title>
 
-  
 
-        <!-- Bootstrap core CSS -->
+
+    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -43,1233 +43,1235 @@
     <!-- Bootstrap Datepicker JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-      
+
 
 
 </head>
 
-       <body className='snippet-body'>
-                             
-
-                                </body>
-
-                                    <body class="sub_page">
-                                        <div class="hero_area">
-                                            <!-- header section strats -->
-                                            <header class="header_section">
-                                                <div class="container-fluid">
-                                                    <nav class="navbar navbar-expand-lg custom_nav-container">
-                                                        <a class="navbar-brand" href="@Url.Action("HomePage", "Home")">
-                                                            <img src="~/images/apartment.png" alt="" />
-                                                            <span>
-                                                                IT APARTMENT
-                                                            </span>
-                                                        </a>
-                                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                                            <span class="navbar-toggler-icon"></span>
-                                                        </button>
+<body className='snippet-body'>
 
 
+</body>
 
-                                                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                                                            <ul class="navbar-nav">
-                                                                <li class="nav-item active">
-                                                                    <a class="nav-link" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
-                                                                </li>
-                                                                @*    <li class="nav-item">
-                                                                    <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
-                                                                </li> *@
-                                                                @*    <li class="nav-item">
-                                                                    <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
-                                                                </li> *@
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" href="/bill/input">Hóa đơn</a>
-                                                                </li>
-                                                                 <li class="nav-item">
-                                                                    <a class="nav-link" href="@Url.Action("UserProfile", "Login")">Thành viên</a>
-                                                                </li>
+<body class="sub_page">
+    <div class="hero_area">
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="/home/homepage">
+                        <img src="~/images/apartment.png" alt="" />
+                        <span>
+                            IT APARTMENT
+                        </span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
 
 
-                                                            </ul>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/user/homepage">Trang chủ <span class="sr-only">(current)</span></a>
+                            </li>
+
+                            @*    <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("AboutPages", "About")">Về chúng tôi</a>
+                            </li> *@
+                            @*    <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("WorkPages", "Work")">Tra cứu</a>
+                            </li> *@
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/feedback">Phản hồi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/input">Hóa đơn</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/profile">Thành viên</a>
+                            </li>
 
 
 
-                                                            <div class="user_option">
-                                                                <a href="#">
-                                                                    <span>
-
-                                                                    <div class="button-container">
-                                                                      <a class="btn btn-secondary" href="#" role="button">
-                                                                         Tài khoản  : &nbsp; <span id="userIdDisplay"></span>
-                                                                      </a>
-                                                                    </div>
-
-                                                                    </span>
-
-                                                                </a>
-
-                                                                  <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
-                                                                    Đăng xuất
-                                                                </span> 
-
-                                                                <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
-                                                                    @*  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button> *@
-                                                                </form>
-                                                            </div>
+                        </ul>
 
 
 
-                                                        </div>
-                                                        <div>
-                                                            <div class="custom_menu-btn ">
-                                                                <button>
-                                                                    <span class=" s-1">
+                        <div class="user_option">
+                            <a href="#">
+                                <span>
 
-                                                                    </span>
-                                                                    <span class="s-2">
-
-                                                                    </span>
-                                                                    <span class="s-3">
-
-                                                                    </span>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-
-                                                    </nav>
-                                                </div>
-                                            </header>
-                                        </div>
-
-
-
-                                        <!-- Modal thông báo đăng xuất thành công -->
-                                        <div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Thông báo</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Đăng xuất tài khoản thành công</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmLogout">Ok</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                            <!-- Modal thông báo kê khai thông tin thành công --> 
-                                            <div class="modal" id="successCreateModal" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Thông báo</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Bạn đã kê khai thông tin thành công thành công!</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                                 <!-- Modal thông báo cập nhập thông tin thành công --> 
-                                            <div class="modal" id="successUpdateModal" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Thông báo</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Bạn đã cập thông tin thành công !</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Phần Danh sách cư dân của phòng -->
-                                            <div class="container rounded bg-white mt-5 mb-5" id="danhSachCuDan">
-                                                <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
-                                                    <section class="experience_section layout_padding" style="padding-bottom: 10    0px;min-width: 0px;padding-top: 50px;"">
-                                                        <div class="container">
-                                                            <label for="exampleInputEmail1">
-                                                                <strong> Thành viên phòng : </strong>  <span id="maPhongLabel"></span>
-                                                            </label>
-                                                            <br><br>
-                                                            <div class="table-responsive">
-                                                                <table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th scope="col" class="hidden-column">Mã cư dân</th>
-                                                                            <th scope="col">Họ tên </th>
-                                                                            <th scope="col">Giới tính</th>
-                                                                            <th scope="col">Ngày sinh</th>
-                                                                            <th scope="col">Căn cước công dân</th>
-                                                                            <th scope="col">Số điện thoại</th>
-                                                                            <th scope="col">Email</th>
-                                                                            <th scope="col">Quê quán</th>
-                                                                            <th scope="col">Quan hệ</th>
-                                                                            <th scope="col">Trạng thái</th>
-                                                                            <th scope="col">Hành động</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="khachTableBody">
-                                                                        <tr>
-                                                                            <th scope="row">Trống</th>
-                                                                            <td>Trống</td>
-                                                                            <td>Trống</td>
-                                                                            <td>Trống</td>
-                                                                            <td>Trống</td>
-                                                                            <td>Trống</td>
-                                                                            <td>Trống</td>
-                                                                            <td>Trống</td>
-                                                                            <td>Trống</td>
-                                                                            <td>Trống</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <br />
-                                                            @* <div class="container" style="text-align: center;">
-                                                                <button type="button" class="btn btn-primary" onclick="showDetail()">Kê khai thông tin khách mới</button>
-                                                            </div> *@
-                                                          <div class="container" style="text-align: center;">
-                                                         <button id="keKhaiKhachMoiBtn" class="btn btn-primary create-button">Kê khai thông tin khách mới</button>
-                                                        </div>
-
-
-                                                            <br />
-                                                        </div>
-                                                    </section>
-                                                </div>
-
-
-                                            
-
-
-                                            </div>
-
-
-                                        @* Thông tin chi tiết của cư dân *@
-                                         @*   <div id="chiTietCuDan" class="container rounded bg-white mt-5 mb-5" style="display: none;"> *@ @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
-                                           <div id="chiTietCuDan"  class="container rounded bg-white mt-5 mb-5" style="display: none;" > @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
-                                        <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
-                                            <div class="col-md-3 border-right">
-                                                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                                   @*  <img class="mt-5" width="150px" src="~/images/ChuKy.jpg"> *@
-                                                   <img class="mt-5 img-chuky" width="150px" src="~/images/signature.png">
-
-                                                
-                                                    <span class="text-black-50" id="chuKyName" >default.jpg</span>
-                                                        <span class="font-weight-bold">Ảnh chữ ký</span>
-                                                    <span> 
-
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5 border-right">
-                                                <div class="p-3 py-5">
-                                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                                        <h4 class="text-right">Thông Tin Chi Tiết</h4>
-                                                    </div>
-                                                   @*  <div class="row mt-2">
-                                                        <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-                                                        <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
-                                                    </div> *@
-                                                    <div class="row mt-3">
-                                                        <div class="col-md-12" style="display: none;">
-                                                            <label class="labels">Mã Khách Trọ </label>
-                                                            <input type="text" class="form-control" placeholder="Mã khách trọ" id="hiddenMaKhachTro" value="">
-                                                        </div>
-                                                        <div class="col-md-12"><label class="labels">Họ Tên </label><input type="text" class="form-control" placeholder="Nhập họ tên" value=""></div>
-                                                        @* <div class="col-md-12"><label class="labels">Giới tính</label><input type="text" class="form-control" placeholder="Chọn giới tinh" value=""></div> *@
-                                                        <div class="col-md-12">
-                                                            <label class="labels">Giới tính</label>
-                                                            <select name="gioiTinh" class="form-control">
-                                                                <option value="">Chọn giới tính</option> <!-- Tùy chọn mặc định -->
-                                                                <option value="Nam">Nam</option>
-                                                                <option value="Nữ">Nữ</option>
-                                                            </select>
-                                                        </div>
-
-                                                    @*     <div class="col-md-12"><label class="labels">Ngày Sinh</label><input type="text" class="form-control" placeholder="Chọn ngày sinh" value=""></div> *@
-@* 
-                                                      <div class="col-md-12">
-                                                        <label class="labels">Ngày Sinh</label>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" id="datepicker" placeholder="Chọn ngày sinh" />
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text bg-light d-block" id="calendar-icon">
-                                                                    <i class="fa fa-calendar"></i> <!-- Icon lịch -->
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div> *@
-
-                                                    <div class="col-md-12">
-                                                        <label class="labels">Ngày Sinh</label>
-                                                        <input type="date" class="form-control" id="datepicker" placeholder="Chọn ngày sinh" />
-                                                    </div>
-
-
-
-
-
-                                                        <div class="col-md-12"><label class="labels">Số Điện Thoại</label><input type="text" class="form-control" placeholder="Nhập số điện thoại" value=""></div>
-                                                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Nhập email" value=""></div>
-                                                        <div class="col-md-12"><label class="labels">Phòng</label><input type="text" class="form-control" placeholder="Thông tin phòng" value="" readonly></div>
-                                                         @* <div class="col-md-12">
-                                                            <label class="labels">Quan hệ</label>
-                                                            <select class="form-control">
-                                                                <option value="">Chọn quan hệ</option> <!-- Tùy chọn mặc định -->
-                                                                <option value="Chủ hộ">Chủ hộ</option>
-                                                                <option value="Ba">Ba</option>
-                                                                <option value="Mẹ">Mẹ</option>
-                                                            </select>
-                                                        </div> *@
-
-                                                        <div class="col-md-12">
-                                                            <label class="labels">Quan hệ</label>
-                                                            <select class="form-control" name='quanHe'>
-                                                                <option value="">Chọn quan hệ</option> <!-- Tùy chọn mặc định -->
-                                                                <option value="Chủ hộ">Chủ hộ</option>
-                                                                <option value="Ba">Ba</option>
-                                                                <option value="Mẹ">Mẹ</option>
-                                                                <option value="Bố">Bố</option>
-                                                                <option value="Cha">Cha</option>
-                                                                <option value="Cha chồng">Cha chồng</option>
-                                                                <option value="Cha đẻ">Cha đẻ</option>
-                                                                <option value="Cha nuôi">Cha nuôi</option>
-                                                                <option value="Cha vợ">Cha vợ</option>
-                                                                <option value="Mẹ chồng">Mẹ chồng</option>
-                                                                <option value="Mẹ đẻ">Mẹ đẻ</option>
-                                                                <option value="Mẹ nuôi">Mẹ nuôi</option>
-                                                                <option value="Mẹ vợ">Mẹ vợ</option>
-                                                                <option value="Chồng">Chồng</option>
-                                                                <option value="Vợ">Vợ</option>
-                                                                <option value="Con">Con</option>
-                                                                <option value="Con chồng">Con chồng</option>
-                                                                <option value="Con dâu">Con dâu</option>
-                                                                <option value="Con đẻ">Con đẻ</option>
-                                                                <option value="Con nuôi">Con nuôi</option>
-                                                                <option value="Con rể">Con rể</option>
-                                                                <option value="Con vợ">Con vợ</option>
-                                                                <option value="Cháu">Cháu</option>
-                                                                <option value="Cháu dâu">Cháu dâu</option>
-                                                                <option value="Cháu họ">Cháu họ</option>
-                                                                <option value="Cháu ngoại">Cháu ngoại</option>
-                                                                <option value="Cháu nội">Cháu nội</option>
-                                                                <option value="Cháu rể">Cháu rể</option>
-                                                                <option value="Anh">Anh</option>
-                                                                <option value="Anh chồng">Anh chồng</option>
-                                                                <option value="Anh họ">Anh họ</option>
-                                                                <option value="Anh rể">Anh rể</option>
-                                                                <option value="Anh ruột">Anh ruột</option>
-                                                                <option value="Anh vợ">Anh vợ</option>
-                                                                <option value="Chị">Chị</option>
-                                                                <option value="Chị chồng">Chị chồng</option>
-                                                                <option value="Chị dâu">Chị dâu</option>
-                                                                <option value="Chị họ">Chị họ</option>
-                                                                <option value="Chị ruột">Chị ruột</option>
-                                                                <option value="Chị vợ">Chị vợ</option>
-                                                                <option value="Em">Em</option>
-                                                                <option value="Em chồng">Em chồng</option>
-                                                                <option value="Em dâu">Em dâu</option>
-                                                                <option value="Em họ">Em họ</option>
-                                                                <option value="Em rể">Em rể</option>
-                                                                <option value="Em ruột">Em ruột</option>
-                                                                <option value="Em vợ">Em vợ</option>
-                                                                <option value="Bà">Bà</option>
-                                                                <option value="Bà ngoại">Bà ngoại</option>
-                                                                <option value="Bà nội">Bà nội</option>
-                                                                <option value="Ông">Ông</option>
-                                                                <option value="Ông ngoại">Ông ngoại</option>
-                                                                <option value="Ông nội">Ông nội</option>
-                                                                <option value="Cô">Cô</option>
-                                                                <option value="Dì">Dì</option>
-                                                                <option value="Bác">Bác</option>
-                                                                <option value="Thím">Thím</option>
-                                                                <option value="Tía">Tía</option>
-                                                                <option value="Bạn">Bạn</option>
-                                                                <option value="Người được chăm sóc">Người được chăm sóc</option>
-                                                                <option value="Người được giám hộ">Người được giám hộ</option>
-                                                                <option value="Người được nuôi dưỡng">Người được nuôi dưỡng</option>
-                                                                <option value="Người được trợ giúp">Người được trợ giúp</option>
-                                                                <option value="Người giám hộ">Người giám hộ</option>
-                                                                <option value="Người mượn nhà">Người mượn nhà</option>
-                                                                <option value="Người ở nhờ">Người ở nhờ</option>
-                                                                <option value="Người thuê nhà">Người thuê nhà</option>
-                                                                <option value="Nhân khẩu tập thể">Nhân khẩu tập thể</option>
-                                                                <option value="Khác">Khác</option>
-                                                                <option value="Chưa có thông tin">Chưa có thông tin</option>
-                                                                <option value="Cắt">Cắt</option>
-                                                                <option value="Cùng ở thuê">Cùng ở thuê</option>
-                                                            </select>
-                                                        </div>
-                                                     
-                                                       @*  <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                                                        <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div> *@
-                                                    </div>
-                                                 @*    <div class="row mt-3">
-                                                        <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                                                        <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                                                    </div> *@
-                                                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Lưu thông tin </button></div>
-                                                    <div class="col-md-12" style="text-align: center;">
-                                                        <!-- Nút bấm bằng hình ảnh -->
-                                                        <button class="btn-image" style="border: none; background: none; padding: 0;">
-                                                            <img src="~/images/arrow-left-big.png" alt="Quay lại" style="cursor: pointer;">
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="p-3 py-5">
-                                                    <div class="d-flex justify-content-between align-items-center experience">
-                                                        <span>Thông tin CCCD</span>
-                                                       @*  <span class="border px-3 p-1 add-experience">
-                                                        <i class="fa fa-plus"></i>&nbsp;Chọn ảnh chữ ký
-                                                        </span> *@
-
-                                                        <span class="border px-3 p-1 add-experience">
-                                                            <i class="fa fa-plus"></i>&nbsp;Chọn ảnh chữ ký
-                                                        </span>
-                                                        <input type="file" id="chuKyInput" style="display: none;" accept="image/*" />
-
-
-                                                    </div>
-                                                        <br>
-                                                    <div class="col-md-12"><label class="labels">Số căn cước</label><input type="text" class="form-control" placeholder="Nhập số căn cước" value=""></div> 
-                                                    <div class="col-md-12"><label class="labels">Nơi cấp</label><input type="text" class="form-control" placeholder="Nhập nơi cấp" value=""></div>
-                                                    @*  <div class="col-md-12">
-                                                            <label class="labels">Quê quán</label>
-                                                            <select class="form-control">
-                                                                <option value="">Chọn quê quán</option> <!-- Tùy chọn mặc định -->
-                                                                <option value="Hà Nội">Hà Nội</option>
-                                                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                                            </select>
-                                                        </div> *@
-
-                                                        <div class="col-md-12">
-                                                            <label class="labels">Quê quán</label>
-                                                            <select class="form-control" name='queQuan'>
-                                                                <option value="">Chọn quê quán</option> <!-- Tùy chọn mặc định -->
-                                                                <option value="Hà Nội">Hà Nội</option>
-                                                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                                                <option value="An Giang">An Giang</option>
-                                                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                                                                <option value="Bắc Giang">Bắc Giang</option>
-                                                                <option value="Bắc Kạn">Bắc Kạn</option>
-                                                                <option value="Bến Tre">Bến Tre</option>
-                                                                <option value="Bình Định">Bình Định</option>
-                                                                <option value="Bình Dương">Bình Dương</option>
-                                                                <option value="Bình Phước">Bình Phước</option>
-                                                                <option value="Cà Mau">Cà Mau</option>
-                                                                <option value="Cần Thơ">Cần Thơ</option>
-                                                                <option value="Đà Nẵng">Đà Nẵng</option>
-                                                                <option value="Đắk Lắk">Đắk Lắk</option>
-                                                                <option value="Đắk Nông">Đắk Nông</option>
-                                                                <option value="Điện Biên">Điện Biên</option>
-                                                                <option value="Hà Giang">Hà Giang</option>
-                                                                <option value="Hà Nam">Hà Nam</option>
-                                                                <option value="Hà Tĩnh">Hà Tĩnh</option>
-                                                                <option value="Hải Dương">Hải Dương</option>
-                                                                <option value="Hải Phòng">Hải Phòng</option>
-                                                                <option value="Hòa Bình">Hòa Bình</option>
-                                                                <option value="Hưng Yên">Hưng Yên</option>
-                                                                <option value="Khánh Hòa">Khánh Hòa</option>
-                                                                <option value="Kiên Giang">Kiên Giang</option>
-                                                                <option value="Kon Tum">Kon Tum</option>
-                                                                <option value="Lai Châu">Lai Châu</option>
-                                                                <option value="Lạng Sơn">Lạng Sơn</option>
-                                                                <option value="Lào Cai">Lào Cai</option>
-                                                                <option value="Long An">Long An</option>
-                                                                <option value="Nam Định">Nam Định</option>
-                                                                <option value="Nghệ An">Nghệ An</option>
-                                                                <option value="Ninh Bình">Ninh Bình</option>
-                                                                <option value="Ninh Thuận">Ninh Thuận</option>
-                                                                <option value="Phú Thọ">Phú Thọ</option>
-                                                                <option value="Phú Yên">Phú Yên</option>
-                                                                <option value="Quảng Bình">Quảng Bình</option>
-                                                                <option value="Quảng Nam">Quảng Nam</option>
-                                                                <option value="Quảng Ngãi">Quảng Ngãi</option>
-                                                                <option value="Quảng Ninh">Quảng Ninh</option>
-                                                                <option value="Quảng Trị">Quảng Trị</option>
-                                                                <option value="Sóc Trăng">Sóc Trăng</option>
-                                                                <option value="Sơn La">Sơn La</option>
-                                                                <option value="Tây Ninh">Tây Ninh</option>
-                                                                <option value="Thái Bình">Thái Bình</option>
-                                                                <option value="Thái Nguyên">Thái Nguyên</option>
-                                                                <option value="Thanh Hóa">Thanh Hóa</option>
-                                                                <option value="Thừa Thiên - Huế">Thừa Thiên - Huế</option>
-                                                                <option value="Tiền Giang">Tiền Giang</option>
-                                                                <option value="Trà Vinh">Trà Vinh</option>
-                                                                <option value="Tuyên Quang">Tuyên Quang</option>
-                                                                <option value="Vĩnh Long">Vĩnh Long</option>
-                                                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                                                                <option value="Yên Bái">Yên Bái</option>
-                                                            </select>
-                                                        </div>
-
-                                                         <div class="col-md-12"><label class="labels">Thường trú</label><input type="text" class="form-control" placeholder="Nhập nơi thường trú" value=""></div>
-
-                                                      @* <div class="col-md-12">
-                                                        <label class="labels">Ngày Cấp</label>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" id="datepicker_ngaycap" placeholder="Chọn ngày cấp" />
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text bg-light d-block" id="calendar-icon_ngaycap">
-                                                                    <i class="fa fa-calendar"></i> <!-- Icon lịch -->
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div> *@
-
-                                                    <div class="col-md-12">
-                                                        <label class="labels">Ngày Cấp</label>
-                                                        <input type="date" class="form-control" id="datepicker_ngaycap" placeholder="Chọn ngày cấp" />
-                                                    </div>
-
-
-                                                    <div class="col-md-12">
-                                                        <label class="labels">Trạng thái</label>
-                                                        <select class="form-control" name="trangThaiKhach">
-                                                            <option value="">Chọn trạng thái</option> <!-- Tùy chọn mặc định -->
-                                                            <option value="1">Đang cư trú</option>
-                                                            <option value="0">Đã rời đi</option>
-                                                        </select>
-                                                    </div>
-
-                                                    
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
+                                    <div class="button-container">
+                                        <a class="btn btn-secondary" href="#" role="button">
+                                            Tài khoản  : &nbsp; <span id="userIdDisplay"></span>
+                                        </a>
                                     </div>
 
-                                       
-                                    </div>
-                             
-                                      <section class="about_section layout_padding">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col-md-10 col-lg-9 mx-auto">
-                                                                <div class="img-box">
-                                                                    <img style="width:40%;" src="/images/kekhai.png" alt="">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="detail-box">
-                                                        </div>
-                                                    </div>
-                                                </section>
+                                </span>
 
+                            </a>
 
-                @*   <!-- Modal thông báo lưu thông tin thành công -->
-                    <div class="modal" id="successModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Thông báo</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Bạn đã lưu thông tin thành công!</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                                </div>
-                            </div>
+                            <span id="logoutBtn" style="cursor: pointer; margin-left: 10px; color: white;">
+                                Đăng xuất
+                            </span>
+
+                            <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                                @*  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button> *@
+                            </form>
                         </div>
+
+
+
+                    </div>
+                    <div>
+                        <div class="custom_menu-btn ">
+                            <button>
+                                <span class=" s-1">
+
+                                </span>
+                                <span class="s-2">
+
+                                </span>
+                                <span class="s-3">
+
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+        </header>
+    </div>
+
+
+
+    <!-- Modal thông báo đăng xuất thành công -->
+    <div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Đăng xuất tài khoản thành công</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmLogout">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal thông báo kê khai thông tin thành công -->
+    <div class="modal" id="successCreateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn đã kê khai thông tin thành công thành công!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thông báo cập nhập thông tin thành công -->
+    <div class="modal" id="successUpdateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn đã cập thông tin thành công !</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phần Danh sách cư dân của phòng -->
+    <div class="container rounded bg-white mt-5 mb-5" id="danhSachCuDan">
+        <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
+            <section class="experience_section layout_padding" style="padding-bottom: 10    0px;min-width: 0px;padding-top: 50px;" ">
+                <div class="container">
+                    <label for="exampleInputEmail1">
+                        <strong> Thành viên phòng : </strong>  <span id="maPhongLabel"></span>
+                    </label>
+                    <br><br>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="hidden-column">Mã cư dân</th>
+                                    <th scope="col">Họ tên </th>
+                                    <th scope="col">Giới tính</th>
+                                    <th scope="col">Ngày sinh</th>
+                                    <th scope="col">Căn cước công dân</th>
+                                    <th scope="col">Số điện thoại</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Quê quán</th>
+                                    <th scope="col">Quan hệ</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="khachTableBody">
+                                <tr>
+                                    <th scope="row">Trống</th>
+                                    <td>Trống</td>
+                                    <td>Trống</td>
+                                    <td>Trống</td>
+                                    <td>Trống</td>
+                                    <td>Trống</td>
+                                    <td>Trống</td>
+                                    <td>Trống</td>
+                                    <td>Trống</td>
+                                    <td>Trống</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+            @* <div class="container" style="text-align: center;">
+                    <button type="button" class="btn btn-primary" onclick="showDetail()">Kê khai thông tin khách mới</button>
+                    </div> *@
+                    <div class="container" style="text-align: center;">
+                        <button id="keKhaiKhachMoiBtn" class="btn btn-primary create-button">Kê khai thông tin khách mới</button>
+                    </div>
+
+
+                    <br />
+                </div>
+            </section>
+        </div>
+
+
+
+
+
+    </div>
+
+
+            @* Thông tin chi tiết của cư dân *@
+            @*   <div id="chiTietCuDan" class="container rounded bg-white mt-5 mb-5" style="display: none;"> *@ @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
+    <div id="chiTietCuDan" class="container rounded bg-white mt-5 mb-5" style="display: none;">
+            @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
+        <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            @*  <img class="mt-5" width="150px" src="~/images/ChuKy.jpg"> *@
+                    <img class="mt-5 img-chuky" width="150px" src="~/images/signature.png">
+
+
+                    <span class="text-black-50" id="chuKyName">default.jpg</span>
+                    <span class="font-weight-bold">Ảnh chữ ký</span>
+                    <span>
+
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Thông Tin Chi Tiết</h4>
+                    </div>
+            @*  <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
+                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
+                    </div> *@
+                    <div class="row mt-3">
+                        <div class="col-md-12" style="display: none;">
+                            <label class="labels">Mã Khách Trọ </label>
+                            <input type="text" class="form-control" placeholder="Mã khách trọ" id="hiddenMaKhachTro" value="">
+                        </div>
+                        <div class="col-md-12"><label class="labels">Họ Tên </label><input type="text" class="form-control" placeholder="Nhập họ tên" value=""></div>
+                @* <div class="col-md-12"><label class="labels">Giới tính</label><input type="text" class="form-control" placeholder="Chọn giới tinh" value=""></div> *@
+                        <div class="col-md-12">
+                            <label class="labels">Giới tính</label>
+                            <select name="gioiTinh" class="form-control">
+                                <option value="">Chọn giới tính</option> <!-- Tùy chọn mặc định -->
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+
+                @*     <div class="col-md-12"><label class="labels">Ngày Sinh</label><input type="text" class="form-control" placeholder="Chọn ngày sinh" value=""></div> *@
+                @*
+                        <div class="col-md-12">
+                        <label class="labels">Ngày Sinh</label>
+                        <div class="input-group">
+                        <input type="text" class="form-control" id="datepicker" placeholder="Chọn ngày sinh" />
+                        <div class="input-group-append">
+                        <span class="input-group-text bg-light d-block" id="calendar-icon">
+                        <i class="fa fa-calendar"></i> <!-- Icon lịch -->
+                        </span>
+                        </div>
+                        </div>
+                        </div> *@
+
+                        <div class="col-md-12">
+                            <label class="labels">Ngày Sinh</label>
+                            <input type="date" class="form-control" id="datepicker" placeholder="Chọn ngày sinh" />
+                        </div>
+
+
+
+
+
+                        <div class="col-md-12"><label class="labels">Số Điện Thoại</label><input type="text" class="form-control" placeholder="Nhập số điện thoại" value=""></div>
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Nhập email" value=""></div>
+                        <div class="col-md-12"><label class="labels">Phòng</label><input type="text" class="form-control" placeholder="Thông tin phòng" value="" readonly></div>
+                @* <div class="col-md-12">
+                        <label class="labels">Quan hệ</label>
+                        <select class="form-control">
+                        <option value="">Chọn quan hệ</option> <!-- Tùy chọn mặc định -->
+                        <option value="Chủ hộ">Chủ hộ</option>
+                        <option value="Ba">Ba</option>
+                        <option value="Mẹ">Mẹ</option>
+                        </select>
+                        </div> *@
+
+                        <div class="col-md-12">
+                            <label class="labels">Quan hệ</label>
+                            <select class="form-control" name='quanHe'>
+                                <option value="">Chọn quan hệ</option> <!-- Tùy chọn mặc định -->
+                                <option value="Chủ hộ">Chủ hộ</option>
+                                <option value="Ba">Ba</option>
+                                <option value="Mẹ">Mẹ</option>
+                                <option value="Bố">Bố</option>
+                                <option value="Cha">Cha</option>
+                                <option value="Cha chồng">Cha chồng</option>
+                                <option value="Cha đẻ">Cha đẻ</option>
+                                <option value="Cha nuôi">Cha nuôi</option>
+                                <option value="Cha vợ">Cha vợ</option>
+                                <option value="Mẹ chồng">Mẹ chồng</option>
+                                <option value="Mẹ đẻ">Mẹ đẻ</option>
+                                <option value="Mẹ nuôi">Mẹ nuôi</option>
+                                <option value="Mẹ vợ">Mẹ vợ</option>
+                                <option value="Chồng">Chồng</option>
+                                <option value="Vợ">Vợ</option>
+                                <option value="Con">Con</option>
+                                <option value="Con chồng">Con chồng</option>
+                                <option value="Con dâu">Con dâu</option>
+                                <option value="Con đẻ">Con đẻ</option>
+                                <option value="Con nuôi">Con nuôi</option>
+                                <option value="Con rể">Con rể</option>
+                                <option value="Con vợ">Con vợ</option>
+                                <option value="Cháu">Cháu</option>
+                                <option value="Cháu dâu">Cháu dâu</option>
+                                <option value="Cháu họ">Cháu họ</option>
+                                <option value="Cháu ngoại">Cháu ngoại</option>
+                                <option value="Cháu nội">Cháu nội</option>
+                                <option value="Cháu rể">Cháu rể</option>
+                                <option value="Anh">Anh</option>
+                                <option value="Anh chồng">Anh chồng</option>
+                                <option value="Anh họ">Anh họ</option>
+                                <option value="Anh rể">Anh rể</option>
+                                <option value="Anh ruột">Anh ruột</option>
+                                <option value="Anh vợ">Anh vợ</option>
+                                <option value="Chị">Chị</option>
+                                <option value="Chị chồng">Chị chồng</option>
+                                <option value="Chị dâu">Chị dâu</option>
+                                <option value="Chị họ">Chị họ</option>
+                                <option value="Chị ruột">Chị ruột</option>
+                                <option value="Chị vợ">Chị vợ</option>
+                                <option value="Em">Em</option>
+                                <option value="Em chồng">Em chồng</option>
+                                <option value="Em dâu">Em dâu</option>
+                                <option value="Em họ">Em họ</option>
+                                <option value="Em rể">Em rể</option>
+                                <option value="Em ruột">Em ruột</option>
+                                <option value="Em vợ">Em vợ</option>
+                                <option value="Bà">Bà</option>
+                                <option value="Bà ngoại">Bà ngoại</option>
+                                <option value="Bà nội">Bà nội</option>
+                                <option value="Ông">Ông</option>
+                                <option value="Ông ngoại">Ông ngoại</option>
+                                <option value="Ông nội">Ông nội</option>
+                                <option value="Cô">Cô</option>
+                                <option value="Dì">Dì</option>
+                                <option value="Bác">Bác</option>
+                                <option value="Thím">Thím</option>
+                                <option value="Tía">Tía</option>
+                                <option value="Bạn">Bạn</option>
+                                <option value="Người được chăm sóc">Người được chăm sóc</option>
+                                <option value="Người được giám hộ">Người được giám hộ</option>
+                                <option value="Người được nuôi dưỡng">Người được nuôi dưỡng</option>
+                                <option value="Người được trợ giúp">Người được trợ giúp</option>
+                                <option value="Người giám hộ">Người giám hộ</option>
+                                <option value="Người mượn nhà">Người mượn nhà</option>
+                                <option value="Người ở nhờ">Người ở nhờ</option>
+                                <option value="Người thuê nhà">Người thuê nhà</option>
+                                <option value="Nhân khẩu tập thể">Nhân khẩu tập thể</option>
+                                <option value="Khác">Khác</option>
+                                <option value="Chưa có thông tin">Chưa có thông tin</option>
+                                <option value="Cắt">Cắt</option>
+                                <option value="Cùng ở thuê">Cùng ở thuê</option>
+                            </select>
+                        </div>
+
+                @*  <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
+                        <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div> *@
+                    </div>
+            @*    <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
+                    </div> *@
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Lưu thông tin </button></div>
+                    <div class="col-md-12" style="text-align: center;">
+                        <!-- Nút bấm bằng hình ảnh -->
+                        <button class="btn-image" style="border: none; background: none; padding: 0;">
+                            <img src="~/images/arrow-left-big.png" alt="Quay lại" style="cursor: pointer;">
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center experience">
+                        <span>Thông tin CCCD</span>
+                @*  <span class="border px-3 p-1 add-experience">
+                        <i class="fa fa-plus"></i>&nbsp;Chọn ảnh chữ ký
+                        </span> *@
+
+                        <span class="border px-3 p-1 add-experience">
+                            <i class="fa fa-plus"></i>&nbsp;Chọn ảnh chữ ký
+                        </span>
+                        <input type="file" id="chuKyInput" style="display: none;" accept="image/*" />
+
+
+                    </div>
+                    <br>
+                    <div class="col-md-12"><label class="labels">Số căn cước</label><input type="text" class="form-control" placeholder="Nhập số căn cước" value=""></div>
+                    <div class="col-md-12"><label class="labels">Nơi cấp</label><input type="text" class="form-control" placeholder="Nhập nơi cấp" value=""></div>
+            @*  <div class="col-md-12">
+                    <label class="labels">Quê quán</label>
+                    <select class="form-control">
+                    <option value="">Chọn quê quán</option> <!-- Tùy chọn mặc định -->
+                    <option value="Hà Nội">Hà Nội</option>
+                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                    </select>
                     </div> *@
 
+                    <div class="col-md-12">
+                        <label class="labels">Quê quán</label>
+                        <select class="form-control" name='queQuan'>
+                            <option value="">Chọn quê quán</option> <!-- Tùy chọn mặc định -->
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                            <option value="An Giang">An Giang</option>
+                            <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                            <option value="Bắc Giang">Bắc Giang</option>
+                            <option value="Bắc Kạn">Bắc Kạn</option>
+                            <option value="Bến Tre">Bến Tre</option>
+                            <option value="Bình Định">Bình Định</option>
+                            <option value="Bình Dương">Bình Dương</option>
+                            <option value="Bình Phước">Bình Phước</option>
+                            <option value="Cà Mau">Cà Mau</option>
+                            <option value="Cần Thơ">Cần Thơ</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                            <option value="Đắk Lắk">Đắk Lắk</option>
+                            <option value="Đắk Nông">Đắk Nông</option>
+                            <option value="Điện Biên">Điện Biên</option>
+                            <option value="Hà Giang">Hà Giang</option>
+                            <option value="Hà Nam">Hà Nam</option>
+                            <option value="Hà Tĩnh">Hà Tĩnh</option>
+                            <option value="Hải Dương">Hải Dương</option>
+                            <option value="Hải Phòng">Hải Phòng</option>
+                            <option value="Hòa Bình">Hòa Bình</option>
+                            <option value="Hưng Yên">Hưng Yên</option>
+                            <option value="Khánh Hòa">Khánh Hòa</option>
+                            <option value="Kiên Giang">Kiên Giang</option>
+                            <option value="Kon Tum">Kon Tum</option>
+                            <option value="Lai Châu">Lai Châu</option>
+                            <option value="Lạng Sơn">Lạng Sơn</option>
+                            <option value="Lào Cai">Lào Cai</option>
+                            <option value="Long An">Long An</option>
+                            <option value="Nam Định">Nam Định</option>
+                            <option value="Nghệ An">Nghệ An</option>
+                            <option value="Ninh Bình">Ninh Bình</option>
+                            <option value="Ninh Thuận">Ninh Thuận</option>
+                            <option value="Phú Thọ">Phú Thọ</option>
+                            <option value="Phú Yên">Phú Yên</option>
+                            <option value="Quảng Bình">Quảng Bình</option>
+                            <option value="Quảng Nam">Quảng Nam</option>
+                            <option value="Quảng Ngãi">Quảng Ngãi</option>
+                            <option value="Quảng Ninh">Quảng Ninh</option>
+                            <option value="Quảng Trị">Quảng Trị</option>
+                            <option value="Sóc Trăng">Sóc Trăng</option>
+                            <option value="Sơn La">Sơn La</option>
+                            <option value="Tây Ninh">Tây Ninh</option>
+                            <option value="Thái Bình">Thái Bình</option>
+                            <option value="Thái Nguyên">Thái Nguyên</option>
+                            <option value="Thanh Hóa">Thanh Hóa</option>
+                            <option value="Thừa Thiên - Huế">Thừa Thiên - Huế</option>
+                            <option value="Tiền Giang">Tiền Giang</option>
+                            <option value="Trà Vinh">Trà Vinh</option>
+                            <option value="Tuyên Quang">Tuyên Quang</option>
+                            <option value="Vĩnh Long">Vĩnh Long</option>
+                            <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                            <option value="Yên Bái">Yên Bái</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12"><label class="labels">Thường trú</label><input type="text" class="form-control" placeholder="Nhập nơi thường trú" value=""></div>
+
+            @* <div class="col-md-12">
+                    <label class="labels">Ngày Cấp</label>
+                    <div class="input-group">
+                    <input type="text" class="form-control" id="datepicker_ngaycap" placeholder="Chọn ngày cấp" />
+                    <div class="input-group-append">
+                    <span class="input-group-text bg-light d-block" id="calendar-icon_ngaycap">
+                    <i class="fa fa-calendar"></i> <!-- Icon lịch -->
+                    </span>
+                    </div>
+                    </div>
+                    </div> *@
+
+                    <div class="col-md-12">
+                        <label class="labels">Ngày Cấp</label>
+                        <input type="date" class="form-control" id="datepicker_ngaycap" placeholder="Chọn ngày cấp" />
+                    </div>
 
 
-                    <!-- end about section -->
-                    <!-- info section -->
+                    <div class="col-md-12">
+                        <label class="labels">Trạng thái</label>
+                        <select class="form-control" name="trangThaiKhach">
+                            <option value="">Chọn trạng thái</option> <!-- Tùy chọn mặc định -->
+                            <option value="1">Đang cư trú</option>
+                            <option value="0">Đã rời đi</option>
+                        </select>
+                    </div>
 
-                    <section class="info_section ">
-                        <div class="info_container layout_padding-top">
-                            <div class="container">
-                                <div class="info_top">
-                                    <div class="info_logo">
-                                        <img src="~/images/apartment.png" alt="" />
-                                        <span>
 
-                                            IT APARTMENT
 
-                                        </span>
-                                    </div>
-                                     <div class="social_box">
-                                        <a href="https://www.facebook.com/trihvn">
-                                            <img src="~/images/fb.png" alt="">
-                                        </a>
-                                        @*  <a href="#">
-                                            <img src="~/images/twitter.png" alt="">
-                                        </a> *@
-                                        <a href="https://www.linkedin.com/in/itatri">
-                                            <img src="~/images/linkedin.png" alt="">
-                                        </a>
-                                        <a href="http://www.instagram.com/trihvn">
-                                            <img src="~/images/instagram.png" alt="">
-                                        </a>
-                                        @*  <a href="#">
-                                            <img src="~/images/youtube.png" alt="">
-                                        </a> *@
-                                    </div>
-                                </div>
 
-                                <div class="info_main">
-                                    <div class="row">
-                                        <div class="col-md-3 col-lg-2">
-                                            <div class="info_link-box">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+    </div>
+
+    <section class="about_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-9 mx-auto">
+                    <div class="img-box">
+                        <img style="width:40%;" src="/images/kekhai.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-box">
+            </div>
+        </div>
+    </section>
+
+
+    @*   <!-- Modal thông báo lưu thông tin thành công -->
+    <div class="modal" id="successModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title">Thông báo</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <p>Bạn đã lưu thông tin thành công!</p>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+    </div>
+    </div>
+    </div>
+    </div> *@
+
+
+
+    <!-- end about section -->
+    <!-- info section -->
+
+    <section class="info_section ">
+        <div class="info_container layout_padding-top">
+            <div class="container">
+                <div class="info_top">
+                    <div class="info_logo">
+                        <img src="~/images/apartment.png" alt="" />
+                        <span>
+
+                            IT APARTMENT
+
+                        </span>
+                    </div>
+                    <div class="social_box">
+                        <a href="https://www.facebook.com/trihvn">
+                            <img src="~/images/fb.png" alt="">
+                        </a>
+                        @*  <a href="#">
+                        <img src="~/images/twitter.png" alt="">
+                        </a> *@
+                        <a href="https://www.linkedin.com/in/itatri">
+                            <img src="~/images/linkedin.png" alt="">
+                        </a>
+                        <a href="http://www.instagram.com/trihvn">
+                            <img src="~/images/instagram.png" alt="">
+                        </a>
+                        @*  <a href="#">
+                        <img src="~/images/youtube.png" alt="">
+                        </a> *@
+                    </div>
+                </div>
+
+                <div class="info_main">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-2">
+                            <div class="info_link-box">
                                 <h5>
                                     Liên kết
                                 </h5>
                                 <ul>
                                     <li class=" active">
-                                        <a class="" href="@Url.Action("HomePage", "Home")">Trang chủ <span class="sr-only">(current)</span></a>
+                                        <a class="" href="/home/homepage">Trang chủ <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="@Url.Action("FeedbackPage", "Feedback")">Phản hồi  </a>
+                                        <a class="" href="/user/feedback">Phản hồi  </a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="@Url.Action("InputBill", "Bill")">Hóa đơn </a>
+                                        <a class="" href="/user/input">Hóa đơn </a>
                                     </li>
                                     <li class="">
-                                        <a class="" href="@Url.Action("UserProfile", "Login")">Thành viên </a>
+                                        <a class="" href="/user/profile">Thành viên </a>
                                     </li>
                                 </ul>
                             </div>
-                                        </div>
-                                        <div class="col-md-3 ">
-                                            <h5>
-                                                Văn phòng
-                                            </h5>
-                                            <p>
-                                                Tại 163 Tây Thạnh, Tân Phú , Hồ Chí Minh
-                                            </p>
-                                        </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <h5>
+                                Văn phòng
+                            </h5>
+                            <p>
+                                Tại 163 Tây Thạnh, Tân Phú , Hồ Chí Minh
+                            </p>
+                        </div>
 
-                                        <div class="col-md-3 col-lg-2 offset-lg-1">
-                                            <h5>
-                                                Thông tin
-                                            </h5>
-                                            <p>
-                                                Cung cấp dịch vụ căn hộ và hỗ trợ khách hàng sử dụng dịch vụ
-                                            </p>
-                                        </div>
+                        <div class="col-md-3 col-lg-2 offset-lg-1">
+                            <h5>
+                                Thông tin
+                            </h5>
+                            <p>
+                                Cung cấp dịch vụ căn hộ và hỗ trợ khách hàng sử dụng dịch vụ
+                            </p>
+                        </div>
 
-                                        <div class="col-md-3  offset-lg-1">
-                                         @*    <div class="info_form ">
-                                                <h5>
-                                                    Liên hệ
-                                                </h5>
-                                                <form action="">
-                                                    <input type="email" placeholder="Email">
-                                                    <button>
-                                                        Gửi
-                                                    </button>
-                                                </form>
-                                            </div> *@
-                                            <div class="info_form ">
+                        <div class="col-md-3  offset-lg-1">
+                            @*    <div class="info_form ">
+                            <h5>
+                            Liên hệ
+                            </h5>
+                            <form action="">
+                            <input type="email" placeholder="Email">
+                            <button>
+                            Gửi
+                            </button>
+                            </form>
+                            </div> *@
+                            <div class="info_form ">
                                 <h5>
                                     Liên hệ
                                 </h5>
                                 @*  <form action="">
-                                    <input type="email" placeholder="Email">
-                                    <button>
-                                        Gửi
-                                    </button>
+                                <input type="email" placeholder="Email">
+                                <button>
+                                Gửi
+                                </button>
                                 </form> *@
-                                   <form id="emailForm">
+                                <form id="emailForm">
                                     <input type="email" id="toEmail" placeholder="Email" required>
                                     <button type="submit">Gửi</button>
                                 </form>
-                                 @*   <p>
-                               Liên hệ chúng tôi qua các thông tin liên hệ hiển thị trên trang web hoặc có thể gặp trực tiếp tại văn phòng 
-                            </p> *@
-                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-9 col-md-10 mx-auto">
-                                        <div class="info_contact layout_padding2">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <a href="#" class="link-box">
-                                                        <div class="img-box">
-                                                            <img src="~/images/location.png" alt="">
-                                                        </div>
-                                                        <div class="detail-box">
-                                                            <h6>
-                                                                Tân Phú
-                                                            </h6>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <a href="#" class="link-box">
-                                                        <div class="img-box">
-                                                            <img src="~/images/mail.png" alt="">
-                                                        </div>
-                                                        <div class="detail-box">
-                                                            <h6>
-                                                                itapartment@gmail.com
-                                                            </h6>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <a href="#" class="link-box">
-                                                        <div class="img-box">
-                                                            <img src="~/images/call.png" alt="">
-                                                        </div>
-                                                        <div class="detail-box">
-                                                            <h6>
-                                                                Call +03 89634776
-                                                            </h6>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                @*   <p>
+                                Liên hệ chúng tôi qua các thông tin liên hệ hiển thị trên trang web hoặc có thể gặp trực tiếp tại văn phòng
+                                </p> *@
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9 col-md-10 mx-auto">
+                        <div class="info_contact layout_padding2">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="#" class="link-box">
+                                        <div class="img-box">
+                                            <img src="~/images/location.png" alt="">
+                                        </div>
+                                        <div class="detail-box">
+                                            <h6>
+                                                Tân Phú
+                                            </h6>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#" class="link-box">
+                                        <div class="img-box">
+                                            <img src="~/images/mail.png" alt="">
+                                        </div>
+                                        <div class="detail-box">
+                                            <h6>
+                                                itapartment@gmail.com
+                                            </h6>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-5">
+                                    <a href="#" class="link-box">
+                                        <div class="img-box">
+                                            <img src="~/images/call.png" alt="">
+                                        </div>
+                                        <div class="detail-box">
+                                            <h6>
+                                                Call +03 89634776
+                                            </h6>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
 
-                      <!-- Modal thông báo gửi Email thành công -->
-<div class="modal fade" id="SendEmailSuccessModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thông báo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Gửi email thành công!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButton">Ok</button>
+    <!-- Modal thông báo gửi Email thành công -->
+    <div class="modal fade" id="SendEmailSuccessModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Gửi email thành công!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButton">Ok</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-                    <!-- end info section -->
-                    <!-- footer section -->
-                    <footer class="container-fluid footer_section ">
-                        <div class="container">
-                            <p>
-                                &copy; <span id="displayDate"></span> All Rights Reserved By
-                                <a href="https://github.com/Itatri">Itatri</a>
-                            </p>
-                        </div>
-                    </footer>
-                    <!-- end  footer section -->
+    <!-- end info section -->
+    <!-- footer section -->
+    <footer class="container-fluid footer_section ">
+        <div class="container">
+            <p>
+                &copy; <span id="displayDate"></span> All Rights Reserved By
+                <a href="https://github.com/Itatri">Itatri</a>
+            </p>
+        </div>
+    </footer>
+    <!-- end  footer section -->
 
 
     <script src="~/js/jquery-3.4.1.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/custom.js"></script>
-  
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 
 
 
 
-     <script>
+    <script>
 
-            $(document).ready(function () {
-                                // Lấy thông tin loginResponse từ localStorage
-                                    var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+        $(document).ready(function () {
+            // Lấy thông tin loginResponse từ localStorage
+            var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
-                                    // Kiểm tra xem loginResponse có tồn tại hay không
-                                    if (loginResponse) {
-                                        var user = loginResponse.user;
+            // Kiểm tra xem loginResponse có tồn tại hay không
+            if (loginResponse) {
+                var user = loginResponse.user;
 
-                                        // Hiển thị userId nếu có
-                                        if (user?.id) {
-                                            $('#userIdDisplay').text(user.id);
-                                        }
+                // Hiển thị userId nếu có
+                if (user?.id) {
+                    $('#userIdDisplay').text(user.id);
+                }
 
-                                        // Các thông tin khác từ loginResponse, nếu cần hiển thị
-                                        console.log('Token:', loginResponse.token);
-                                        console.log('User:', user);
-                                        console.log('Mã phòng:', user?.maPhong);
-                                        console.log('Trạng thái:', user?.trangThai);
+                // Các thông tin khác từ loginResponse, nếu cần hiển thị
+                console.log('Token:', loginResponse.token);
+                console.log('User:', user);
+                console.log('Mã phòng:', user?.maPhong);
+                console.log('Trạng thái:', user?.trangThai);
 
 
-                                         // Hiển thị mã phòng
-                                         var maPhong = user?.maPhong;
+                // Hiển thị mã phòng
+                var maPhong = user?.maPhong;
 
-                                         if (maPhong) {
-                                        
-                                            $('#maPhongLabel').text(maPhong);
+                if (maPhong) {
 
-                                            // Gọi API để lấy thông tin khách theo mã phòng
-                                            $.ajax({
-                                                url: '@apiBaseUrl/api/ThongTinKhaches/GetThongTinKhachByPhong',
-                                                type: 'GET',
-                                                 headers: {
-                                                        'Authorization': 'Bearer ' + loginResponse.token
-                                                    },
-                                                data: { maPhong: maPhong },
-                                                success: function (response) {
-                                                    if (response.isSuccess && response.khachs && response.khachs.length > 0) {
-                                                        var khachTableBody = $('#khachTableBody');
-                                                        khachTableBody.empty(); // Xóa nội dung cũ trong bảng
+                    $('#maPhongLabel').text(maPhong);
 
-                                                        // Lặp qua danh sách khách và thêm từng hàng vào bảng
-                                                        response.khachs.forEach(function (khach) {
+                    // Gọi API để lấy thông tin khách theo mã phòng
+                    $.ajax({
+                        url: '@apiBaseUrl/api/ThongTinKhaches/GetThongTinKhachByPhong',
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        data: { maPhong: maPhong },
+                        success: function (response) {
+                            if (response.isSuccess && response.khachs && response.khachs.length > 0) {
+                                var khachTableBody = $('#khachTableBody');
+                                khachTableBody.empty(); // Xóa nội dung cũ trong bảng
 
-                                                             var trangThaiClass = khach.trangThai ? 'text-success' : 'text-danger';
-                                                             var trangThaiText = khach.trangThai ? 'Đang cư trú' : 'Đã rời đi';
+                                // Lặp qua danh sách khách và thêm từng hàng vào bảng
+                                response.khachs.forEach(function (khach) {
 
-                                                            var row = `
-                                                                <tr>
-                                                  
-                                                                    <th scope="row" class="hidden-column">${khach.maKhachTro}</th>  <!-- Thêm class để ẩn cột -->
-                                                                    <td>${khach.hoTen}</td>
-                                                                    <td>${khach.gioiTinh}</td>
-                                                                    <td>${khach.ngaySinh ? new Date(khach.ngaySinh).toLocaleDateString() : 'Trống'}</td>
-                                                                    <td>${khach.cccd}</td>
-                                                                    <td>${khach.phone}</td>
-                                                                    <td>${khach.email}</td>
-                                                                    <td>${khach.queQuan}</td>
-                                                                    <td>${khach.quanHe}</td>
-                                                                      <td class="${trangThaiClass}">${trangThaiText}</td>
-                                                                    <td><button class="btn btn-primary"  style="width: 115px; font-size: 12px;" >Xem chi tiết</button></td>
-                                                                </tr>
-                                                            `;
-                                                            khachTableBody.append(row);
-                                                        });
-                                                    } else {
-                                                        alert(response.message || 'Không tìm thấy thông tin khách.');
-                                                    }
-                                                },
-                                                error: function (error) {
-                                                    console.error('Đã xảy ra lỗi:', error);
-                                                    alert('Không thể lấy thông tin khách.');
-                                                }
-                                            });
-                                        } else {
-                                            $('#maPhongLabel').text('Không tìm thấy mã phòng');
-                                        }
+                                    var trangThaiClass = khach.trangThai ? 'text-success' : 'text-danger';
+                                    var trangThaiText = khach.trangThai ? 'Đang cư trú' : 'Đã rời đi';
 
-                                    }
+                                    var row = `
+                                                                                <tr>
 
-                                 // Xử lý sự kiện nhấn vào nút Đăng xuất
-                                $('#logoutBtn').on('click', function () {
-                                    // Xóa toàn bộ thông tin từ localStorage
-                                    localStorage.removeItem('loginResponse');
-
-                                    // Kiểm tra xem loginResponse đã bị xóa chưa
-                                    console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
-
-                                    // Hiển thị Modal thông báo đăng xuất thành công
-                                    $('#LogoutSuccessModal').modal('show');
+                                                                                    <th scope="row" class="hidden-column">${khach.maKhachTro}</th>  <!-- Thêm class để ẩn cột -->
+                                                                                    <td>${khach.hoTen}</td>
+                                                                                    <td>${khach.gioiTinh}</td>
+                                                                                    <td>${khach.ngaySinh ? new Date(khach.ngaySinh).toLocaleDateString() : 'Trống'}</td>
+                                                                                    <td>${khach.cccd}</td>
+                                                                                    <td>${khach.phone}</td>
+                                                                                    <td>${khach.email}</td>
+                                                                                    <td>${khach.queQuan}</td>
+                                                                                    <td>${khach.quanHe}</td>
+                                                                                      <td class="${trangThaiClass}">${trangThaiText}</td>
+                                                                                    <td><button class="btn btn-primary"  style="width: 115px; font-size: 12px;" >Xem chi tiết</button></td>
+                                                                                </tr>
+                                                                            `;
+                                    khachTableBody.append(row);
                                 });
+                            } else {
+                                alert(response.message || 'Không tìm thấy thông tin khách.');
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Đã xảy ra lỗi:', error);
+                            alert('Không thể lấy thông tin khách.');
+                        }
+                    });
+                } else {
+                    $('#maPhongLabel').text('Không tìm thấy mã phòng');
+                }
 
-                                // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
-                                $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
-                                    // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
-                                    window.location.href = '@Url.Action("HomePage", "Home")';
-                                });
+            }
 
-                                // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
-                                $('#confirmLogout').on('click', function () {
-                                    $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
-                                });
+            // Xử lý sự kiện nhấn vào nút Đăng xuất
+            $('#logoutBtn').on('click', function () {
+                // Xóa toàn bộ thông tin từ localStorage
+                localStorage.removeItem('loginResponse');
 
+                // Kiểm tra xem loginResponse đã bị xóa chưa
+                console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
 
+                // Hiển thị Modal thông báo đăng xuất thành công
+                $('#LogoutSuccessModal').modal('show');
+            });
 
-                                var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-                                var maPhong = loginResponse?.user?.maPhong; 
+            // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
+            $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
+                // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
+                window.location.href = '/home/homepage';
+            });
 
-                                if (maPhong) {
-                                    $('#maPhongLabel').text(maPhong);
-                                } else {
-                                    $('#maPhongLabel').text('Không tìm thấy mã phòng');
-                                }
-
-
-
-                   
-
-                            // Sự kiện click cho nút "Xem chi tiết"
-                                    $(document).on('click', '.btn-primary:not(.profile-button)', function () {
-                                        // Lấy mã khách trọ từ cột đầu tiên của hàng hiện tại
-                                        var maKhachTro = $(this).closest('tr').find('th.hidden-column').text().trim();
-
-                                        if (maKhachTro) {
-                                                    // Lưu mã khách trọ vào input ẩn
-                                            $('#hiddenMaKhachTro').val(maKhachTro);
-
-                                            // Gọi API để lấy thông tin khách theo mã khách trọ
-                                            $.ajax({
-                                                url: '@apiBaseUrl/api/ThongTinKhaches/GetThongTinKhachByMaKhachTro',
-                                                type: 'GET',
-                                                                     headers: {
-                                                    'Authorization': 'Bearer ' + loginResponse.token
-                                                },
-                                                data: { maKhachTro: maKhachTro },  // Truyền mã khách trọ vừa lấy
-                                                success: function (response) {
-                                                    if (response.isSuccess && response.khachs && response.khachs.length > 0) {
-                                                        var khach = response.khachs[0];  // Lấy thông tin khách đầu tiên trong danh sách
-
-                                                        // Đổ dữ liệu vào các trường trên giao diện
-                                                        $('input[placeholder="Nhập họ tên"]').val(khach.hoTen);
-                                                         // Sử dụng class để chọn thẻ select
-                                                        $('select.form-control').val(khach.gioiTinh); // Thay đổi ở đây
-                                                        // $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toLocaleDateString());
-                                                          $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toISOString().slice(0, 10));
-                                                        $('input[placeholder="Nhập số điện thoại"]').val(khach.phone);
-                                                        $('input[placeholder="Nhập email"]').val(khach.email);
-                                                        $('input[placeholder="Thông tin phòng"]').val(khach.maPhong);
-                                                            // Cập nhật quan hệ
-                                                        $('select.form-control').eq(1).val(khach.quanHe); 
-                                                        $('input[placeholder="Nhập số căn cước"]').val(khach.cccd);
-                                                        $('input[placeholder="Nhập nơi cấp"]').val(khach.noiCap);
-                                                         $('select.form-control').eq(2).val(khach.queQuan); 
-                                                          $('input[placeholder="Nhập nơi thường trú"]').val(khach.thuongTru);
-                                                        // $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toLocaleDateString());
-                                                        $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toISOString().slice(0, 10));
-                                                                            // Cập nhật trạng thái
-                                                        $('select[name="trangThaiKhach"]').val(khach.trangThai); // Cập nhật trạng thái
-
-
-                                                        // Cập nhật chữ ký nếu có
-                                                        var chuKyFileName = khach.chuKy || 'default.jpg';
-                                                        $('.img-chuky').attr('src', '/images/' + chuKyFileName).on('error', function () {
-                                                            $(this).attr('src', '/images/signature.png');
-                                                        });
-                                                        $('#chuKyName').text(chuKyFileName);
-                                                         
-
-                                                        $('#danhSachCuDan').hide();
-                                                       // Hiển thị thông tin chi tiết
-                                                        $('#chiTietCuDan').show();
-
-
-                                                    } else {
-                                                        alert('Không tìm thấy thông tin khách.');
-                                                    }
-                                                },
-                                                error: function (error) {
-                                                    console.error('Đã xảy ra lỗi:', error);
-                                                    alert('Không thể lấy thông tin khách.');
-                                                }
-                                            });
-                                        } else {
-                                            console.log('Không thể tìm thấy mã khách trọ.');
-                                        }
-                                    });
-
-
-                                          // Sự kiện click cho nút "Kê khai thông tin khách mới"
-                                $('#keKhaiKhachMoiBtn').on('click', function () {
-                                    // Ẩn danh sách cư dân
-                                    $('#danhSachCuDan').hide();
-
-                                    // Hiển thị chi tiết cư dân
-                                    $('#chiTietCuDan').show();
-
-                                    // Đặt lại tất cả các trường thông tin trong chi tiết cư dân để nhập thông tin mới
-                                    resetChiTietCuDan(); // Gọi hàm reset
-                                });
-
-
-
-                                    // Sự kiện click cho nút quay lại
-                                    $(document).on('click', '.btn-image', function () {
-                                        // Ẩn phần thông tin chi tiết
-                                        $('#chiTietCuDan').hide();
-
-                                        // Hiển thị lại danh sách cư dân
-                                        $('#danhSachCuDan').show();
-
-                                        // Load lại trang
-                                        location.reload(); // Làm mới lại trang
-                                    });
-
-                                   
-
-                                $(".profile-button").click(function(event) {
-                                event.stopPropagation(); // Ngăn chặn sự kiện tiếp tục
-
-                                // Lấy giá trị từ các input
-                                const maKhachTro = $("#hiddenMaKhachTro").val(); // Lấy mã khách trọ từ input ẩn
-                                const hoTen = $("input[placeholder='Nhập họ tên']").val();
-                                const gioiTinh = $("select[name='gioiTinh']").val();
-                                const ngaySinh = $("#datepicker").val(); // Lấy giá trị trực tiếp từ DatePicker
-                                const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
-                                const email = $("input[placeholder='Nhập email']").val();
-                                const phong = $("input[placeholder='Thông tin phòng']").val();
-                                const quanHe = $("select[name='quanHe']").val();
-                                const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
-                                const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
-                                const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
-                                const queQuan = $("select[name='queQuan']").val();
-                                const ngayCap = $("#datepicker_ngaycap").val(); // Lấy giá trị trực tiếp từ DatePicker
-                                const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
-                                const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
-
-                                // Tạo đối tượng dữ liệu để gửi
-                                const data = {
-                                    HoTen: hoTen,
-                                    GioiTinh: gioiTinh,
-                                    NgaySinh: ngaySinh,
-                                    Phone: soDienThoai,
-                                    Email: email,
-                                    MaPhong: phong,
-                                    QuanHe: quanHe,
-                                    CCCD: soCCCD,
-                                    NoiCap: noiCap,
-                                    ThuongTru: thuongTru,
-                                    QueQuan: queQuan,
-                                    NgayCap: ngayCap,
-                                    TrangThai: trangThai 
-                                };
-
-                                // Nếu có tệp chữ ký, thêm trường ChuKy vào data
-                                if (chuKyFile) {
-                                    data.ChuKy = chuKyFile.name; // Chỉ thêm chuKy nếu tệp được chọn
-                                }
-
-                                // Kiểm tra nếu mã khách trọ có giá trị
-                                if (maKhachTro) {
-                                    // Gọi API để cập nhật thông tin khách trọ
-                                    $.ajax({
-                                        url: `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
-                                        type: 'PUT',
-                                        contentType: 'application/json',
-                                        headers: {
-                                            'Authorization': 'Bearer ' + loginResponse.token
-                                        },
-                                        data: JSON.stringify(data),
-                                        success: function(response) {
-                                            $("#successUpdateModal").modal('show');
-                                            console.log(response);
-                                            // Nếu có tệp chữ ký, tải nó lên
-                                            if (chuKyFile) {
-                                                uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
-                                            }
-                                            // location.reload();
-                                        },
-                                        error: function(xhr, status, error) {
-                                            alert("Cập nhật thông tin thất bại!");
-                                            console.error(xhr.responseText);
-                                        }
-                                    });
-                                } else {
-                                    // Nếu không có mã khách trọ, gọi API để tạo mới thông tin khách
-                                    $.ajax({
-                                        url: '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach',
-                                        type: 'POST',
-                                        contentType: 'application/json',
-                                        headers: {
-                                            'Authorization': 'Bearer ' + loginResponse.token
-                                        },
-                                        data: JSON.stringify(data),
-                                        success: function(response) {
-                                            $("#successCreateModal").modal('show');
-                                            console.log(response);
-                                            if (response.isSuccess && response.khachs.length > 0) {
-                                                const maKhachTroMoi = response.khachs[0].maKhachTro; // Lưu mã khách trọ mới từ phản hồi
-                                                if (chuKyFile) {
-                                                    uploadChuKy(maKhachTroMoi, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên với mã khách mới
-                                                }
-                                            } else {
-                                                alert("Tạo khách hàng mới không thành công.");
-                                            }
-                                            // location.reload();
-                                        },
-                                        error: function(xhr, status, error) {
-                                            alert("Tạo mới khách thất bại!");
-                                            console.error(xhr.responseText);
-                                        }
-                                    });
-                                }
-
-                                // Hàm tải chữ ký lên server
-                                function uploadChuKy(maKhachTro, hoTen, chuKyFile) {
-                                    if (chuKyFile) {
-                                        const formData = new FormData();
-                                        formData.append("file", chuKyFile); // Thêm tệp chữ ký vào formData
-                                        formData.append("maKhachTro", maKhachTro); // Thêm mã khách trọ
-                                        formData.append("hoTen", hoTen); // Thêm họ tên
-
-                                        // Gọi API để tải ảnh chữ ký lên
-                                        $.ajax({
-                                            url: '@apiBaseUrl/api/ThongTinKhaches/Upload', // Đường dẫn API để tải tệp
-                                            type: 'POST',
-                                            data: formData,
-                                            headers: {
-                                                'Authorization': 'Bearer ' + loginResponse.token
-                                            },
-                                            processData: false,
-                                            contentType: false,
-                                            success: function(uploadResponse) {
-                                                console.log("Tải ảnh chữ ký lên thành công!");
-                                                console.log(uploadResponse);
-
-                                                // Hiển thị ảnh chữ ký
-                                                $('.img-chuky').attr('src', '/images/CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
-                                                    $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
-                                                });
-                                            },
-                                            error: function(uploadError) {
-                                                console.log("Tải ảnh chữ ký lên thất bại!");
-                                                console.error(uploadError.responseText);
-                                            }
-                                        });
-                                    } else {
-                                        console.log("Không có tệp chữ ký để tải lên.");
-                                    }
-                                }
-                            });
-
-                                 
-
-
-                               // // Hàm chuyển đổi định dạng ngày
-                               //  function convertDate(dateString) {
-                               //      if (!dateString) return null; // Nếu không có giá trị, trả về null
-                               //      const parts = dateString.split('/');
-                               //      if (parts.length === 3) {
-                               //          return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
-                               //      }
-                               //      return null; // Trả về null nếu định dạng không hợp lệ
-                               //  }
-
-
-
-
-                                // Hàm reload trang khi nhấn nút Ok
-                                $('#successCreateModal .btn-primary').click(function() {
-                                    location.reload();
-                                });
-
-                                $('#successUpdateModal .btn-primary').click(function() {
-                                    location.reload();
-                                });
-
-                            
-
-                                // Hàm để đặt lại tất cả các trường trong chi tiết cư dân
-                                function resetChiTietCuDan() {
-                                    $('input[placeholder="Nhập họ tên"]').val('');
-                                    $('select[name="gioiTinh"]').val('');
-                                    // $('input[placeholder="Chọn ngày sinh"]').val('');
-                                     $('input[placeholder="Chọn ngày sinh"]').val('');
-                                    $('input[placeholder="Nhập số điện thoại"]').val('');
-                                    $('input[placeholder="Nhập email"]').val('');
-                                    $('input[placeholder="Thông tin phòng"]').val(maPhong); // Gán giá trị mã phòng vào input
-                                    $('select[name="quanHe"]').val('');
-                                    $('input[placeholder="Nhập số căn cước"]').val('');
-                                    $('input[placeholder="Nhập nơi cấp"]').val('');
-                                    $('input[placeholder="Nhập nơi thường trú"]').val('');
-                                    $('select[name="queQuan"]').val('');
-                                    // $('input[placeholder="Chọn ngày cấp"]').val('');
-                                     $('input[placeholder="Chọn ngày cấp"]').val('');
-                                    $('select[name="trangThaiKhach"]').val('');
-                                    
-
-                                    // Reset hình chữ ký
-                                    $('.img-chuky').attr('src', '/images/signature.png'); // Đặt về hình ảnh mặc định
-                                    $('#chuKyName').text(''); // Xóa tên chữ ký
-                                    $('#chuKyInput').val(''); // Đặt lại input tệp chữ ký
-                                }
-
-                            
-
-                                  // Lắng nghe sự kiện submit của biểu mẫu
-                                $('#emailForm').on('submit', function (e) {
-                                    e.preventDefault(); // Ngăn chặn gửi form mặc định
-
-                                    var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
-
-                                    // Gọi API để gửi email
-                                    $.ajax({
-                                        url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
-                                        type: 'POST',
-                                        success: function (response) {
-                                            // alert(response); // Thông báo thành công
-                                             $('#SendEmailSuccessModal').modal('show');
-                                        },
-                                        error: function (xhr) {
-                                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
-                                        }
-                                    });
-                                });
-
-
-
-
-                                $(document).on('click', '.add-experience', function() {
-                                    $('#chuKyInput').click(); // Kích hoạt input file khi nhấn vào nút
-                                });
-
-                                // Khi người dùng chọn tệp
-                                $('#chuKyInput').on('change', function() {
-                                    const file = $(this).prop('files')[0]; // Lấy tệp đã chọn
-                                    if (file) {
-                                        const reader = new FileReader(); // Tạo đối tượng FileReader để đọc tệp
-
-                                        reader.onload = function(e) {
-                                            // Hiển thị ảnh chữ ký lên giao diện
-                                            $('.img-chuky').attr('src', e.target.result).on('error', function () {
-                                                $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
-                                            });
-                                        };
-
-                                        reader.readAsDataURL(file); // Đọc tệp dưới dạng Data URL
-                                    }
-                                });
+            // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
+            $('#confirmLogout').on('click', function () {
+                $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
             });
 
 
-        </script>
+
+            var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+            var maPhong = loginResponse?.user?.maPhong;
+
+            if (maPhong) {
+                $('#maPhongLabel').text(maPhong);
+            } else {
+                $('#maPhongLabel').text('Không tìm thấy mã phòng');
+            }
+
+
+
+
+
+            // Sự kiện click cho nút "Xem chi tiết"
+            $(document).on('click', '.btn-primary:not(.profile-button)', function () {
+                // Lấy mã khách trọ từ cột đầu tiên của hàng hiện tại
+                var maKhachTro = $(this).closest('tr').find('th.hidden-column').text().trim();
+
+                if (maKhachTro) {
+                    // Lưu mã khách trọ vào input ẩn
+                    $('#hiddenMaKhachTro').val(maKhachTro);
+
+                    // Gọi API để lấy thông tin khách theo mã khách trọ
+                    $.ajax({
+                        url: '@apiBaseUrl/api/ThongTinKhaches/GetThongTinKhachByMaKhachTro',
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        data: { maKhachTro: maKhachTro },  // Truyền mã khách trọ vừa lấy
+                        success: function (response) {
+                            if (response.isSuccess && response.khachs && response.khachs.length > 0) {
+                                var khach = response.khachs[0];  // Lấy thông tin khách đầu tiên trong danh sách
+
+                                // Đổ dữ liệu vào các trường trên giao diện
+                                $('input[placeholder="Nhập họ tên"]').val(khach.hoTen);
+                                // Sử dụng class để chọn thẻ select
+                                $('select.form-control').val(khach.gioiTinh); // Thay đổi ở đây
+                                // $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toLocaleDateString());
+                                $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toISOString().slice(0, 10));
+                                $('input[placeholder="Nhập số điện thoại"]').val(khach.phone);
+                                $('input[placeholder="Nhập email"]').val(khach.email);
+                                $('input[placeholder="Thông tin phòng"]').val(khach.maPhong);
+                                // Cập nhật quan hệ
+                                $('select.form-control').eq(1).val(khach.quanHe);
+                                $('input[placeholder="Nhập số căn cước"]').val(khach.cccd);
+                                $('input[placeholder="Nhập nơi cấp"]').val(khach.noiCap);
+                                $('select.form-control').eq(2).val(khach.queQuan);
+                                $('input[placeholder="Nhập nơi thường trú"]').val(khach.thuongTru);
+                                // $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toLocaleDateString());
+                                $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toISOString().slice(0, 10));
+                                // Cập nhật trạng thái
+                                $('select[name="trangThaiKhach"]').val(khach.trangThai); // Cập nhật trạng thái
+
+
+                                // Cập nhật chữ ký nếu có
+                                var chuKyFileName = khach.chuKy || 'default.jpg';
+                                $('.img-chuky').attr('src', '/images/' + chuKyFileName).on('error', function () {
+                                    $(this).attr('src', '/images/signature.png');
+                                });
+                                $('#chuKyName').text(chuKyFileName);
+
+
+                                $('#danhSachCuDan').hide();
+                                // Hiển thị thông tin chi tiết
+                                $('#chiTietCuDan').show();
+
+
+                            } else {
+                                alert('Không tìm thấy thông tin khách.');
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Đã xảy ra lỗi:', error);
+                            alert('Không thể lấy thông tin khách.');
+                        }
+                    });
+                } else {
+                    console.log('Không thể tìm thấy mã khách trọ.');
+                }
+            });
+
+
+            // Sự kiện click cho nút "Kê khai thông tin khách mới"
+            $('#keKhaiKhachMoiBtn').on('click', function () {
+                // Ẩn danh sách cư dân
+                $('#danhSachCuDan').hide();
+
+                // Hiển thị chi tiết cư dân
+                $('#chiTietCuDan').show();
+
+                // Đặt lại tất cả các trường thông tin trong chi tiết cư dân để nhập thông tin mới
+                resetChiTietCuDan(); // Gọi hàm reset
+            });
+
+
+
+            // Sự kiện click cho nút quay lại
+            $(document).on('click', '.btn-image', function () {
+                // Ẩn phần thông tin chi tiết
+                $('#chiTietCuDan').hide();
+
+                // Hiển thị lại danh sách cư dân
+                $('#danhSachCuDan').show();
+
+                // Load lại trang
+                location.reload(); // Làm mới lại trang
+            });
+
+
+
+            $(".profile-button").click(function (event) {
+                event.stopPropagation(); // Ngăn chặn sự kiện tiếp tục
+
+                // Lấy giá trị từ các input
+                const maKhachTro = $("#hiddenMaKhachTro").val(); // Lấy mã khách trọ từ input ẩn
+                const hoTen = $("input[placeholder='Nhập họ tên']").val();
+                const gioiTinh = $("select[name='gioiTinh']").val();
+                const ngaySinh = $("#datepicker").val(); // Lấy giá trị trực tiếp từ DatePicker
+                const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
+                const email = $("input[placeholder='Nhập email']").val();
+                const phong = $("input[placeholder='Thông tin phòng']").val();
+                const quanHe = $("select[name='quanHe']").val();
+                const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
+                const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
+                const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
+                const queQuan = $("select[name='queQuan']").val();
+                const ngayCap = $("#datepicker_ngaycap").val(); // Lấy giá trị trực tiếp từ DatePicker
+                const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
+                const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
+
+                // Tạo đối tượng dữ liệu để gửi
+                const data = {
+                    HoTen: hoTen,
+                    GioiTinh: gioiTinh,
+                    NgaySinh: ngaySinh,
+                    Phone: soDienThoai,
+                    Email: email,
+                    MaPhong: phong,
+                    QuanHe: quanHe,
+                    CCCD: soCCCD,
+                    NoiCap: noiCap,
+                    ThuongTru: thuongTru,
+                    QueQuan: queQuan,
+                    NgayCap: ngayCap,
+                    TrangThai: trangThai
+                };
+
+                // Nếu có tệp chữ ký, thêm trường ChuKy vào data
+                if (chuKyFile) {
+                    data.ChuKy = chuKyFile.name; // Chỉ thêm chuKy nếu tệp được chọn
+                }
+
+                // Kiểm tra nếu mã khách trọ có giá trị
+                if (maKhachTro) {
+                    // Gọi API để cập nhật thông tin khách trọ
+                    $.ajax({
+                        url: `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
+                        type: 'PUT',
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        data: JSON.stringify(data),
+                        success: function (response) {
+                            $("#successUpdateModal").modal('show');
+                            console.log(response);
+                            // Nếu có tệp chữ ký, tải nó lên
+                            if (chuKyFile) {
+                                uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
+                            }
+                            // location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Cập nhật thông tin thất bại!");
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    // Nếu không có mã khách trọ, gọi API để tạo mới thông tin khách
+                    $.ajax({
+                        url: '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        data: JSON.stringify(data),
+                        success: function (response) {
+                            $("#successCreateModal").modal('show');
+                            console.log(response);
+                            if (response.isSuccess && response.khachs.length > 0) {
+                                const maKhachTroMoi = response.khachs[0].maKhachTro; // Lưu mã khách trọ mới từ phản hồi
+                                if (chuKyFile) {
+                                    uploadChuKy(maKhachTroMoi, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên với mã khách mới
+                                }
+                            } else {
+                                alert("Tạo khách hàng mới không thành công.");
+                            }
+                            // location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Tạo mới khách thất bại!");
+                            console.error(xhr.responseText);
+                        }
+                    });
+                }
+
+                // Hàm tải chữ ký lên server
+                function uploadChuKy(maKhachTro, hoTen, chuKyFile) {
+                    if (chuKyFile) {
+                        const formData = new FormData();
+                        formData.append("file", chuKyFile); // Thêm tệp chữ ký vào formData
+                        formData.append("maKhachTro", maKhachTro); // Thêm mã khách trọ
+                        formData.append("hoTen", hoTen); // Thêm họ tên
+
+                        // Gọi API để tải ảnh chữ ký lên
+                        $.ajax({
+                            url: '@apiBaseUrl/api/ThongTinKhaches/Upload', // Đường dẫn API để tải tệp
+                            type: 'POST',
+                            data: formData,
+                            headers: {
+                                'Authorization': 'Bearer ' + loginResponse.token
+                            },
+                            processData: false,
+                            contentType: false,
+                            success: function (uploadResponse) {
+                                console.log("Tải ảnh chữ ký lên thành công!");
+                                console.log(uploadResponse);
+
+                                // Hiển thị ảnh chữ ký
+                                $('.img-chuky').attr('src', '/images/CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
+                                    $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
+                                });
+                            },
+                            error: function (uploadError) {
+                                console.log("Tải ảnh chữ ký lên thất bại!");
+                                console.error(uploadError.responseText);
+                            }
+                        });
+                    } else {
+                        console.log("Không có tệp chữ ký để tải lên.");
+                    }
+                }
+            });
+
+
+
+
+            // // Hàm chuyển đổi định dạng ngày
+            //  function convertDate(dateString) {
+            //      if (!dateString) return null; // Nếu không có giá trị, trả về null
+            //      const parts = dateString.split('/');
+            //      if (parts.length === 3) {
+            //          return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
+            //      }
+            //      return null; // Trả về null nếu định dạng không hợp lệ
+            //  }
+
+
+
+
+            // Hàm reload trang khi nhấn nút Ok
+            $('#successCreateModal .btn-primary').click(function () {
+                location.reload();
+            });
+
+            $('#successUpdateModal .btn-primary').click(function () {
+                location.reload();
+            });
+
+
+
+            // Hàm để đặt lại tất cả các trường trong chi tiết cư dân
+            function resetChiTietCuDan() {
+                $('input[placeholder="Nhập họ tên"]').val('');
+                $('select[name="gioiTinh"]').val('');
+                // $('input[placeholder="Chọn ngày sinh"]').val('');
+                $('input[placeholder="Chọn ngày sinh"]').val('');
+                $('input[placeholder="Nhập số điện thoại"]').val('');
+                $('input[placeholder="Nhập email"]').val('');
+                $('input[placeholder="Thông tin phòng"]').val(maPhong); // Gán giá trị mã phòng vào input
+                $('select[name="quanHe"]').val('');
+                $('input[placeholder="Nhập số căn cước"]').val('');
+                $('input[placeholder="Nhập nơi cấp"]').val('');
+                $('input[placeholder="Nhập nơi thường trú"]').val('');
+                $('select[name="queQuan"]').val('');
+                // $('input[placeholder="Chọn ngày cấp"]').val('');
+                $('input[placeholder="Chọn ngày cấp"]').val('');
+                $('select[name="trangThaiKhach"]').val('');
+
+
+                // Reset hình chữ ký
+                $('.img-chuky').attr('src', '/images/signature.png'); // Đặt về hình ảnh mặc định
+                $('#chuKyName').text(''); // Xóa tên chữ ký
+                $('#chuKyInput').val(''); // Đặt lại input tệp chữ ký
+            }
+
+
+
+            // Lắng nghe sự kiện submit của biểu mẫu
+            $('#emailForm').on('submit', function (e) {
+                e.preventDefault(); // Ngăn chặn gửi form mặc định
+
+                var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
+
+                // Gọi API để gửi email
+                $.ajax({
+                    url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
+                    type: 'POST',
+                    success: function (response) {
+                        // alert(response); // Thông báo thành công
+                        $('#SendEmailSuccessModal').modal('show');
+                    },
+                    error: function (xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
+                    }
+                });
+            });
+
+
+
+
+            $(document).on('click', '.add-experience', function () {
+                $('#chuKyInput').click(); // Kích hoạt input file khi nhấn vào nút
+            });
+
+            // Khi người dùng chọn tệp
+            $('#chuKyInput').on('change', function () {
+                const file = $(this).prop('files')[0]; // Lấy tệp đã chọn
+                if (file) {
+                    const reader = new FileReader(); // Tạo đối tượng FileReader để đọc tệp
+
+                    reader.onload = function (e) {
+                        // Hiển thị ảnh chữ ký lên giao diện
+                        $('.img-chuky').attr('src', e.target.result).on('error', function () {
+                            $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
+                        });
+                    };
+
+                    reader.readAsDataURL(file); // Đọc tệp dưới dạng Data URL
+                }
+            });
+        });
+
+
+    </script>
 
 
 

@@ -11,13 +11,6 @@ namespace Apartment_Management_Web_GUI.Controllers
             _apiBaseUrl = configuration["ApiSettings:BaseUrl"];
         }
 
-        public IActionResult SearchBillPage()
-        {
-            // Truyền URL API vào View thông qua ViewBag
-            ViewBag.ApiBaseUrl = _apiBaseUrl;
-            return View();
-        }
-
         public IActionResult InputBill()
         {
             // Truyền URL API vào View thông qua ViewBag
