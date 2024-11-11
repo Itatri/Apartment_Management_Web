@@ -792,10 +792,9 @@
                                                           </td>
 
                                                           <td>
-                                                            <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info"
-                                                                    onclick="exportPhieuThuToPdf('${phieuThu.maPt}')">
-                                                               Xem hóa đơn
-                                                            </button>
+             <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info export-pdf-btn" data-ma-pt="${phieuThu.maPt}">
+                            Xem hóa đơn
+                        </button>
                                                         </td>
 
 
@@ -839,12 +838,9 @@
                     });
                 }
 
-                $(document).on('click', '.btn-info', function () {
-                    var row = $(this).closest('tr');
-                    var maPt = row.find('th').text(); // Lấy mã phiếu thu từ hàng tương ứng
-
-                    // Gọi hàm exportPhieuThuToPdf với mã phiếu thu
-                    exportPhieuThuToPdf(maPt);
+                $(document).on('click', '.export-pdf-btn', function () {
+                    var maPt = $(this).data('ma-pt'); // Lấy maPt từ thuộc tính data
+                    exportPhieuThuToPdf(maPt); // Gọi hàm
                 });
 
 
