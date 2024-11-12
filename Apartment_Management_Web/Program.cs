@@ -114,6 +114,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Fix lỗi không Deploy được API trên IIS 
+app.UseSwagger();
+app.UseSwaggerUI();
+// --------------------------------------
+
 app.UseHttpsRedirection();
 
 // Thêm UseAuthentication trước UseAuthorization
