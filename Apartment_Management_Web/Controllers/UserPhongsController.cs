@@ -5,6 +5,7 @@ using Apartment_Management_Web.Models.Login;
 using Apartment_Management_Web.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,12 +21,57 @@ namespace Apartment_Management_Web.Controllers
     {
         private readonly IUserPhongService _userPhongService;
         private readonly JwtSettings _jwtSettings;
+        private readonly QlChungCuContext _dbContext;
 
-        public UserPhongsController(IUserPhongService userPhongService, IOptions<JwtSettings> jwtSettings)
+        public UserPhongsController(IUserPhongService userPhongService, IOptions<JwtSettings> jwtSettings, QlChungCuContext dbContext)
         {
             _userPhongService = userPhongService;
             _jwtSettings = jwtSettings.Value;
+            _dbContext = dbContext;
         }
+
+        [HttpGet("TestDatabaseConnection")]
+        public async Task<IActionResult> TestDatabaseConnection()
+        {
+            try
+            {
+                // Kiểm tra kết nối
+                var canConnect = await _dbContext.Database.CanConnectAsync();
+
+                if (canConnect)
+                {
+                    var connectionInfo = new
+                    {
+                        Server = _dbContext.Database.GetDbConnection().DataSource,
+                        Database = _dbContext.Database.GetDbConnection().Database,
+                        ConnectionState = _dbContext.Database.GetDbConnection().State.ToString()
+                    };
+
+                    return Ok(new
+                    {
+                        Message = "Kết nối cơ sở dữ liệu thành công.",
+                        ConnectionInfo = connectionInfo
+                    });
+                }
+                else
+                {
+                    return StatusCode(500, "Kết nối cơ sở dữ liệu không thành công do lý do không xác định.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Kiểm tra lỗi nội bộ nếu có
+                var errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return StatusCode(500, new
+                {
+                    Message = "Lỗi kết nối cơ sở dữ liệu.",
+                    ErrorDetails = errorMessage // Cung cấp chi tiết lỗi từ Exception
+                });
+            }
+        }
+
+
+
         // API lấy danh sách User phòng 
         [Authorize]
         [HttpGet("GetAllUserPhongs")]
