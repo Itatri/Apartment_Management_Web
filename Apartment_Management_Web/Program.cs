@@ -22,6 +22,11 @@
 // Cài đặt Thư Viện iTextSharp ( Chuyen den thu muc cua API ) 
 // dotnet add package itext7
 
+// Cài Đặt Serilog
+// dotnet add package Serilog.AspNetCore
+// dotnet add package Serilog.Sinks.File
+
+
 
 
 // Add services to the container.
@@ -36,6 +41,7 @@ using Apartment_Management_Web.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 
 
@@ -44,6 +50,19 @@ using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Cấu hình Serilog để ghi log vào file
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console() // Ghi log vào console
+    .WriteTo.File("Logs/myapp.txt", rollingInterval: RollingInterval.Day) // Ghi log vào file (lưu theo ngày)
+    .CreateLogger();
+
+// Đăng ký Serilog làm logger cho ứng dụng
+builder.Host.UseSerilog(); // Đảm bảo sử dụng Serilog
+
+
+
 
 // Lấy cấu hình FrontendUrl từ appsettings
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrl");
