@@ -45,11 +45,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Lấy cấu hình FrontendUrl từ appsettings
+var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrl");
+
 // Thêm CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
-        builder => builder.WithOrigins("https://localhost:7230") // Địa chỉ của frontend
+        builder => builder.WithOrigins(frontendUrl) // Sử dụng URL từ cấu hình
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });
