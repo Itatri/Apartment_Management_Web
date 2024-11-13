@@ -9,10 +9,12 @@
 // Generate Model from Database :
 // Scaffold-DbContext "Server=TRIS72\VANTRI;Database=QL_ChungCu;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
-//  Triển khai IIS thì đổi Connection thành "Server=TRIS72\VANTRI;Database=QL_ChungCu;Trusted_Connection=True;TrustServerCertificate=True;"
-
 //  Generate and Override Model from Database :
-// Scaffold-DbContext "Server=TRIS72\\VANTRI;Database=QL_ChungCu;User Id=ITApartment;Password=16092003;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
+// Scaffold-DbContext "Server=TRIS72\VANTRI;Database=QL_ChungCu;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
+
+//  Triển khai IIS thì đổi Connection ở QLChungContext thành "Server=TRIS72\\VANTRI;Database=QL_ChungCu;User Id=ITApartment;Password=16092003;TrustServerCertificate=True;"
+
+
 
 // Cài đặt gói xác thực JWT Bearer
 // Install-Package Microsoft.AspNetCore.Authentication.JwtBearer
