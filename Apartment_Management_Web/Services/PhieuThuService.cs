@@ -186,40 +186,10 @@ namespace Apartment_Management_Web.Services
                         document.Add(dateLine);
 
 
-
-
-
-
-
-                        // Thêm bảng Dịch vụ phòng sử dụng
-                        var dichVuTable = new Table(3); // Bảng có 4 cột
-                        dichVuTable.SetWidth(UnitValue.CreatePercentValue(100)); // Đặt độ rộng bảng là 100% chiều rộng trang
-
-                        dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("STT").SetFont(font).SetBold()));
-                        dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("Dịch vụ").SetFont(font).SetBold()));
-                        dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("Đơn giá").SetFont(font).SetBold()));
-
-
-
                         int stt = 1;
 
-                        // Thêm các dịch vụ từ DichVuPhieuThu
-                        foreach (var dichVu in dichVuList)
-                        {
-                            dichVuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
-                            dichVuTable.AddCell(new Cell().Add(new Paragraph(dichVu.TenDichVu).SetFont(font)));
-                            dichVuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0")} ").SetFont(font)));
 
-                            stt++;
-                        }
 
-                        document.Add(new Paragraph("DỊCH VỤ PHÒNG SỬ DỤNG")
-                          .SetTextAlignment(TextAlignment.LEFT)
-                          .SetBold()
-                          .SetFont(font)
-                          .SetFontSize(12));
-
-                        document.Add(dichVuTable);
 
                         // Thêm khoảng cách trước bảng Phiếu Thu
                         document.Add(new Paragraph("\n"));
@@ -288,11 +258,46 @@ namespace Apartment_Management_Web.Services
                         document.Add(phieuThuTable);
 
                         document.Add(new Paragraph("\n"));
+
+                        // Kiểm tra xem có dịch vụ nào không, nếu không thì bỏ qua phần tạo bảng dịch vụ
+                        if (dichVuList.Any())
+                        {
+                            // Thêm bảng Dịch vụ phòng sử dụng
+                            var dichVuTable = new Table(3); // Bảng có 4 cột
+                            dichVuTable.SetWidth(UnitValue.CreatePercentValue(100)); // Đặt độ rộng bảng là 100% chiều rộng trang
+
+                            dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("STT").SetFont(font).SetBold()));
+                            dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("Dịch vụ").SetFont(font).SetBold()));
+                            dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("Đơn giá").SetFont(font).SetBold()));
+
+
+                            // Thêm các dịch vụ từ DichVuPhieuThu
+                            foreach (var dichVu in dichVuList)
+                            {
+                                dichVuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
+                                dichVuTable.AddCell(new Cell().Add(new Paragraph(dichVu.TenDichVu).SetFont(font)));
+                                dichVuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0")} ").SetFont(font)));
+
+                                stt++;
+                            }
+
+
+                            document.Add(new Paragraph("DỊCH VỤ PHÒNG SỬ DỤNG")
+                              .SetTextAlignment(TextAlignment.LEFT)
+                              .SetBold()
+                              .SetFont(font)
+                              .SetFontSize(12));
+
+                            document.Add(dichVuTable);
+                        }
+
+                        // Thêm khoảng cách trước bảng Phiếu Thu
+                        document.Add(new Paragraph("\n"));
+
                         // Tổng tiền và kết thúc
                         document.Add(new Paragraph($"Tổng Tiền: {phieuThu.TongTien?.ToString("#,0")} VND")
                             .SetTextAlignment(TextAlignment.RIGHT).SetFont(font).SetBold().SetFontSize(12));
-                        // Thêm khoảng cách trước bảng Phiếu Thu
-                        document.Add(new Paragraph("\n")); // Thêm khoảng cách trước bảng Phiếu Thu
+
                         document.Add(new Paragraph("\n"));
 
                         // Thêm dòng yêu cầu và thông tin liên hệ, căn giữa

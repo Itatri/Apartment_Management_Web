@@ -30,6 +30,7 @@
 
 using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models;
+using Apartment_Management_Web.Models.Authentication;
 using Apartment_Management_Web.Models.Mail;
 using Apartment_Management_Web.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -67,11 +68,13 @@ builder.Services.AddScoped<IPhieuThuService, PhieuThuService>();
 builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 
 
+
 builder.Services.AddControllers();
 
 // Đọc cấu hình JWT từ appsettings.json
 var jwtSettings = builder.Configuration.GetSection("Jwt");
-
+// Đăng ký dịch vụ dùng chung cho các Controller
+builder.Services.Configure<JwtSettings>(jwtSettings);
 
 // Cấu hình xác thực JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
