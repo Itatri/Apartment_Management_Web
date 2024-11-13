@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models;
-using static Apartment_Management_Web.Models.Login.LoginRequest;
-using Apartment_Management_Web.Services;
-using Apartment_Management_Web.Interfaces;
+using Apartment_Management_Web.Models.Authentication;
+using Apartment_Management_Web.Models.Login;
+using Apartment_Management_Web.Models.User;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Apartment_Management_Web.Models.Login;
-using Microsoft.AspNetCore.Authorization;
-using Apartment_Management_Web.Models.Authentication;
-using Apartment_Management_Web.Models.User;
+using static Apartment_Management_Web.Models.Login.LoginRequest;
 
 namespace Apartment_Management_Web.Controllers
 {
@@ -25,10 +19,12 @@ namespace Apartment_Management_Web.Controllers
     public class UserPhongsController : ControllerBase
     {
         private readonly IUserPhongService _userPhongService;
+        private readonly JwtSettings _jwtSettings;
 
-        public UserPhongsController(IUserPhongService userPhongService)
+        public UserPhongsController(IUserPhongService userPhongService, IOptions<JwtSettings> jwtSettings)
         {
             _userPhongService = userPhongService;
+            _jwtSettings = jwtSettings.Value;
         }
         // API lấy danh sách User phòng 
         [Authorize]
@@ -159,17 +155,17 @@ namespace Apartment_Management_Web.Controllers
         };
 
             // Tạo đối tượng SecurityKey từ chuỗi bảo mật (cần đảm bảo rằng khóa có độ dài tối thiểu 32 ký tự)
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ItatriSuperSecretKeyThatIsAtLeast32CharactersLong!")); // Đảm bảo khóa đủ dài
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
 
             // Tạo token
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: "https://localhost:7298", // Địa chỉ phát hành token
-                audience: "https://localhost:7298", // Đối tượng sử dụng token
-                claims: claims,
-                expires: expires,
-                signingCredentials: creds);
+                  issuer: _jwtSettings.Issuer,
+                  audience: _jwtSettings.Audience,
+                  claims: claims,
+                  expires: expires,
+                  signingCredentials: creds);
 
             // Trả về token dưới dạng chuỗi
             return new JwtSecurityTokenHandler().WriteToken(token);
