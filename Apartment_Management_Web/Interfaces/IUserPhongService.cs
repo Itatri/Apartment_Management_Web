@@ -1,6 +1,6 @@
-﻿using Apartment_Management_Web.Models.Authentication;
+﻿using Apartment_Management_Web.Models;
+using Apartment_Management_Web.Models.Authentication;
 using Apartment_Management_Web.Models.User;
-using Apartment_Management_Web.Models;
 
 namespace Apartment_Management_Web.Interfaces
 {
@@ -14,5 +14,7 @@ namespace Apartment_Management_Web.Interfaces
         Task<bool> UpdateUserPhongAsync(UserPhong userPhong);
         Task<UserRespone> DeleteUserPhongAsync(string id);
         Task<bool> CreateUserPhongAsync(UserPhong userPhong);
+
+        Task<Phong?> GetPhongByMaPhongAsync(string maPhong);
     }
 }

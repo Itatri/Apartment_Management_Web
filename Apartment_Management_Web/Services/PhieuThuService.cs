@@ -121,11 +121,17 @@ namespace Apartment_Management_Web.Services
 
         public async Task<byte[]> ExportPhieuThuToPdfAsync(string maPt)
         {
+
+
             var phieuThu = await _context.PhieuThus.FirstOrDefaultAsync(pt => pt.MaPt == maPt);
             if (phieuThu == null)
             {
                 throw new Exception("Không tìm thấy phiếu thu.");
             }
+
+            var phong = await _context.Phongs.FirstOrDefaultAsync(p => p.MaPhong == phieuThu.MaPhong);
+            string tenPhong = phong?.TenPhong ?? "Không xác định";
+            double? congNo = phong?.CongNo; // Lấy giá trị Công Nợ từ bảng Phong
 
             var dichVuList = await _context.DichVuPhieuThus
                 .Where(dv => dv.MaPt == maPt)
@@ -160,9 +166,12 @@ namespace Apartment_Management_Web.Services
 
                         // Tạo một Paragraph cho phòng và trạng thái thanh toán cùng một dòng
                         var roomStatusLine = new Paragraph()
-                            .Add(new Text($"Phòng : {phieuThu.MaPhong}")
-                                .SetFont(font)
-                                .SetFontSize(12))
+                            //.Add(new Text($"Phòng : {phieuThu.MaPhong}")
+                            //    .SetFont(font)
+                            //    .SetFontSize(12))
+                            .Add(new Text($"Phòng : {tenPhong}")  // Hiển thị tên phòng
+                            .SetFont(font)
+                            .SetFontSize(12))
                             .Add(new Text("     ") // Khoảng cách giữa Phòng và Trạng Thái
                                 .SetFont(font)
                                 .SetFontSize(12))
@@ -185,6 +194,11 @@ namespace Apartment_Management_Web.Services
 
                         document.Add(dateLine);
 
+                        // Kiểm tra nếu congNo có giá trị, nếu có thì gọi ToString, nếu không thì sử dụng chuỗi trống hoặc giá trị mặc định
+                        document.Add(new Paragraph($"Số tiền còn nợ : {(congNo?.ToString("#,0") ?? "0")} VND")
+                            .SetTextAlignment(TextAlignment.LEFT)
+                            .SetFont(font)
+                            .SetFontSize(12));
 
                         int stt = 1;
 
@@ -291,12 +305,21 @@ namespace Apartment_Management_Web.Services
                             document.Add(dichVuTable);
                         }
 
+
+
                         // Thêm khoảng cách trước bảng Phiếu Thu
                         document.Add(new Paragraph("\n"));
+
+
+
 
                         // Tổng tiền và kết thúc
                         document.Add(new Paragraph($"Tổng Tiền: {phieuThu.TongTien?.ToString("#,0")} VND")
                             .SetTextAlignment(TextAlignment.RIGHT).SetFont(font).SetBold().SetFontSize(12));
+
+
+
+
 
                         document.Add(new Paragraph("\n"));
 

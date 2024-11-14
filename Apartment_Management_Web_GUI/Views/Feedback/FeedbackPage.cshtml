@@ -136,7 +136,8 @@
     <section class="experience_section layout_padding" style="padding-bottom: 0px; padding-top: 80px;">
         <div class="container" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
             <label for="exampleInputEmail1">
-                <strong>Phản hồi của cư dân phòng :</strong> <span id="maPhongLabel"></span>
+                <strong style="display: none;">Mã phòng </strong> <span id="maPhongLabel" style="display: none;"></span>
+                <strong>Phản hồi của cư dân phòng :</strong> <span id="tenPhongLabel"></span>
             </label>
 
             <br />
@@ -335,10 +336,17 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group">
+                            <!-- Dòng Mã phòng -->
+                            <div class="form-group" style="display: none;">
                                 <label for="recipient-name" class="col-form-label">Phòng</label>
                                 <input type="text" class="form-control" id="recipient-name" readonly>
                             </div>
+                            <!-- Dòng Tên phòng -->
+                            <div class="form-group">
+                                <label for="ten-phong" class="col-form-label">Phòng</label>
+                                <input type="text" class="form-control" id="ten-phong" readonly>
+                            </div>
+                            <!-- Nội dung phản hồi -->
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Nội dung</label>
                                 <textarea class="form-control" id="message-text"></textarea>
@@ -562,6 +570,31 @@
                 $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
                     window.location.href = '/home/homepage';
                 });
+
+                            // Fetch and display TenPhong using maPhong
+                if (user?.maPhong) {
+                    $.ajax({
+                        url: `@apiBaseUrl/api/UserPhongs/GetPhongByMaPhong?maPhong=${user.maPhong}`,
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        success: function (response) {
+                            if (response) {
+                                $('#tenPhongLabel').text(response.tenPhong || 'Không tìm thấy tên phòng');
+                                  // Hiển thị Tên phòng vào input
+                                $('#ten-phong').val(response.tenPhong || 'Không tìm thấy tên phòng');
+                            } else {
+                                $('#tenPhongLabel').text('Không tìm thấy tên phòng');
+                                  $('#ten-phong').val('Không tìm thấy tên phòng');
+                            }
+                        },
+                        error: function () {
+                            $('#tenPhongLabel').text('Không tìm thấy tên phòng');
+                              $('#ten-phong').val('Không tìm thấy tên phòng');
+                        }
+                    });
+                }
 
                 // Hàm tải phản hồi
                 function loadFeedbacks(startDate = '', endDate = '', trangThai = '', pageSize = pageSizeDefault) {
