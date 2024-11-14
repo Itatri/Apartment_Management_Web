@@ -95,6 +95,20 @@ namespace Apartment_Management_Web.Controllers
             return Ok(userPhong);
         }
 
+        // API to get Phong information by MaPhong
+        [HttpGet("GetPhongByMaPhong")]
+        [Authorize]
+        public async Task<ActionResult<Phong>> GetPhongByMaPhong(string maPhong)
+        {
+            var phong = await _userPhongService.GetPhongByMaPhongAsync(maPhong);
+            if (phong == null)
+            {
+                return NotFound();
+            }
+            return Ok(phong);
+        }
+
+
 
         // API kiển tra đăng nhập tài khoản
         [HttpPost("Login")]

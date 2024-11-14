@@ -1,11 +1,8 @@
-﻿using Apartment_Management_Web.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Apartment_Management_Web.Interfaces;
+using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Models.Authentication;
 using Apartment_Management_Web.Models.User;
-using Apartment_Management_Web.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Apartment_Management_Web.Services
@@ -31,7 +28,12 @@ namespace Apartment_Management_Web.Services
             return await _context.UserPhongs.FindAsync(id);
         }
 
-       
+        public async Task<Phong?> GetPhongByMaPhongAsync(string maPhong)
+        {
+            return await _context.Phongs.FindAsync(maPhong);
+        }
+
+
 
         public async Task<AuthResult> AuthenticateAsync(string id, string matKhau)
         {
@@ -81,7 +83,7 @@ namespace Apartment_Management_Web.Services
             }
         }
 
-        
+
 
         public async Task<UserRespone> DeleteUserPhongAsync(string id)
         {

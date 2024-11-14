@@ -218,7 +218,8 @@
             <section class="experience_section layout_padding" style="padding-bottom: 10    0px;min-width: 0px;padding-top: 50px;" ">
                 <div class="container">
                     <label for="exampleInputEmail1">
-                        <strong> Thành viên phòng : </strong>  <span id="maPhongLabel"></span>
+                        <strong style="display: none;">Mã phòng </strong> <span id="maPhongLabel" style="display: none;"></span>
+                        <strong>Thành viên phòng :</strong> <span id="tenPhongLabel"></span>
                     </label>
                     <br><br>
                     <div class="table-responsive">
@@ -298,17 +299,12 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Thông Tin Chi Tiết</h4>
                     </div>
-            @*  <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
-                    </div> *@
                     <div class="row mt-3">
                         <div class="col-md-12" style="display: none;">
                             <label class="labels">Mã Khách Trọ </label>
                             <input type="text" class="form-control" placeholder="Mã khách trọ" id="hiddenMaKhachTro" value="">
                         </div>
                         <div class="col-md-12"><label class="labels">Họ Tên </label><input type="text" class="form-control" placeholder="Nhập họ tên" value=""></div>
-                @* <div class="col-md-12"><label class="labels">Giới tính</label><input type="text" class="form-control" placeholder="Chọn giới tinh" value=""></div> *@
                         <div class="col-md-12">
                             <label class="labels">Giới tính</label>
                             <select name="gioiTinh" class="form-control">
@@ -318,19 +314,6 @@
                             </select>
                         </div>
 
-                @*     <div class="col-md-12"><label class="labels">Ngày Sinh</label><input type="text" class="form-control" placeholder="Chọn ngày sinh" value=""></div> *@
-                @*
-                        <div class="col-md-12">
-                        <label class="labels">Ngày Sinh</label>
-                        <div class="input-group">
-                        <input type="text" class="form-control" id="datepicker" placeholder="Chọn ngày sinh" />
-                        <div class="input-group-append">
-                        <span class="input-group-text bg-light d-block" id="calendar-icon">
-                        <i class="fa fa-calendar"></i> <!-- Icon lịch -->
-                        </span>
-                        </div>
-                        </div>
-                        </div> *@
 
                         <div class="col-md-12">
                             <label class="labels">Ngày Sinh</label>
@@ -343,16 +326,8 @@
 
                         <div class="col-md-12"><label class="labels">Số Điện Thoại</label><input type="text" class="form-control" placeholder="Nhập số điện thoại" value=""></div>
                         <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Nhập email" value=""></div>
-                        <div class="col-md-12"><label class="labels">Phòng</label><input type="text" class="form-control" placeholder="Thông tin phòng" value="" readonly></div>
-                @* <div class="col-md-12">
-                        <label class="labels">Quan hệ</label>
-                        <select class="form-control">
-                        <option value="">Chọn quan hệ</option> <!-- Tùy chọn mặc định -->
-                        <option value="Chủ hộ">Chủ hộ</option>
-                        <option value="Ba">Ba</option>
-                        <option value="Mẹ">Mẹ</option>
-                        </select>
-                        </div> *@
+                        <div class="col-md-12" style="display: none;"><label class="labels">Mã phòng </label><input type="text" class="form-control" placeholder="Thông tin phòng" value="" readonly></div>
+                        <div class="col-md-12" ><label class="labels">Phòng</label><input type="text" class="form-control" placeholder="Thông tin tên phòng" id="tenPhongInput" value="" readonly></div>
 
                         <div class="col-md-12">
                             <label class="labels">Quan hệ</label>
@@ -426,10 +401,10 @@
                                 <option value="Người ở nhờ">Người ở nhờ</option>
                                 <option value="Người thuê nhà">Người thuê nhà</option>
                                 <option value="Nhân khẩu tập thể">Nhân khẩu tập thể</option>
-                                <option value="Khác">Khác</option>
                                 <option value="Chưa có thông tin">Chưa có thông tin</option>
                                 <option value="Cắt">Cắt</option>
                                 <option value="Cùng ở thuê">Cùng ở thuê</option>
+                                <option value="Khác">Khác</option>
                             </select>
                         </div>
 
@@ -844,6 +819,30 @@
                 // Hiển thị mã phòng
                 var maPhong = user?.maPhong;
 
+                        // Fetch and display TenPhong using maPhong
+                if (user?.maPhong) {
+                    $.ajax({
+                        url: `@apiBaseUrl/api/UserPhongs/GetPhongByMaPhong?maPhong=${user.maPhong}`,
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        success: function (response) {
+                            if (response) {
+                                $('#tenPhongLabel').text(response.tenPhong || 'Không tìm thấy tên phòng');
+                                 $('#tenPhongInput').val(response.tenPhong || 'Không tìm thấy tên phòng');
+                            } else {
+                                $('#tenPhongLabel').text('Không tìm thấy tên phòng');
+                                  $('#tenPhongInput').val('Không tìm thấy tên phòng');
+                            }
+                        },
+                        error: function () {
+                            $('#tenPhongLabel').text('Không tìm thấy tên phòng');
+                             $('#tenPhongInput').val('Không tìm thấy tên phòng');
+                        }
+                    });
+                }
+
                 if (maPhong) {
 
                     $('#maPhongLabel').text(maPhong);
@@ -1171,18 +1170,6 @@
                 }
             });
 
-
-
-
-            // // Hàm chuyển đổi định dạng ngày
-            //  function convertDate(dateString) {
-            //      if (!dateString) return null; // Nếu không có giá trị, trả về null
-            //      const parts = dateString.split('/');
-            //      if (parts.length === 3) {
-            //          return `${parts[2]}-${parts[1]}-${parts[0]}`; // Chuyển đổi thành yyyy-mm-dd
-            //      }
-            //      return null; // Trả về null nếu định dạng không hợp lệ
-            //  }
 
 
 

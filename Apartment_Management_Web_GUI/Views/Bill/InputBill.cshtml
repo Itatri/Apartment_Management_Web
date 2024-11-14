@@ -134,13 +134,17 @@
 
     <section class="experience_section layout_padding" style="padding-bottom: 0px;   padding-top: 80px;">
         <div class="container" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
+            
             <label for="exampleInputEmail1">
-                <strong>Phiếu thu phòng : </strong> <span id="maPhongLabel"></span>
+                <strong style="display: none;">Mã phòng </strong> <span id="maPhongLabel" style="display: none;"></span>
+                <strong>Phiếu thu phòng :</strong> <span id="tenPhongLabel"></span>
+                <br /> <br />
+                  <strong>Số tiền còn nợ : </strong> <span id="congNoLabel" ></span>
             </label>
 
-
+         
             <br />
-            <br />
+           
 
             @* Lọc theo ngày *@
 
@@ -254,7 +258,7 @@
 
         </div>
 
-
+    </section>
 
 
 
@@ -325,8 +329,8 @@
                         <p>
                             <strong>Nội dung chuyển khoản</strong>
                             <br />Nội dung chuyển khoản tự động điền theo định dạng :<br>
-                            Ma phong <strong>mã phòng</strong> Ma phieu thu <strong>mã phiếu thu</strong><br>
-                            Ví dụ : <em>Ma phong P001 Ma phieuthu PTP001</em>
+                              Ten phong <strong>[tên phòng]</strong>  Tien phong thang <strong>[tháng]</strong> nam <strong>[năm]</strong> Ma phieu thu <strong>[mã phiếu thu]</strong><br>
+                            Ví dụ : <em>Ten phong M01 Tien phong thang 11 nam 2024 Ma phieuthu PTP001</em>
                         </p>
 
                         <!-- Thông tin liên hệ -->
@@ -631,7 +635,7 @@
             $(document).ready(function () {
                 var currentPage = 1; // Biến để lưu trang hiện tại
                 var totalPages = 1; // Tổng số trang
-
+                var tenPhong = '';  // Biến lưu tên phòng
 
 
                 // Lấy thông tin loginResponse từ localStorage
@@ -653,6 +657,44 @@
                     console.log('Trạng thái:', user?.trangThai);
                 }
 
+                            // Hàm định dạng số với dấu chấm phân cách hàng nghìn
+                function formatCurrency(number) {
+                    if (number == null || number === "") {
+                        return "0 VND";
+                    }
+                    // Định dạng số với dấu chấm phân cách hàng nghìn và thêm chữ VND vào cuối
+                    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VND';
+                }
+
+                   // Fetch and display TenPhong using maPhong
+                if (user?.maPhong) {
+                    $.ajax({
+                        url: `@apiBaseUrl/api/UserPhongs/GetPhongByMaPhong?maPhong=${user.maPhong}`,
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + loginResponse.token
+                        },
+                        success: function (response) {
+                            if (response) {
+                                $('#tenPhongLabel').text(response.tenPhong || 'Không tìm thấy tên phòng');
+
+                              // Lưu tên phòng vào biến
+                                tenPhong = response.tenPhong || 'Không tìm thấy tên phòng';
+
+                                     // Kiểm tra và hiển thị công nợ
+                                let congNo = response.congNo || 0; // Nếu congNo không có giá trị, gán mặc định là 0
+                                $('#congNoLabel').text(formatCurrency(congNo));
+                            } else {
+                                $('#tenPhongLabel').text('Không tìm thấy tên phòng');
+                                  $('#congNoLabel').text(formatCurrency(0));
+                            }
+                        },
+                        error: function () {
+                            $('#tenPhongLabel').text('Không tìm thấy tên phòng');
+                               $('#congNoLabel').text(formatCurrency(0));
+                        }
+                    });
+                }
 
 
                 // Xử lý sự kiện nhấn vào nút Đăng xuất
@@ -792,9 +834,9 @@
                                                           </td>
 
                                                           <td>
-             <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info export-pdf-btn" data-ma-pt="${phieuThu.maPt}">
-                            Xem hóa đơn
-                        </button>
+                                                         <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info export-pdf-btn" data-ma-pt="${phieuThu.maPt}">
+                                                                        Xem hóa đơn
+                                                                    </button>
                                                         </td>
 
 
@@ -946,8 +988,7 @@
                     $('#paymentModal').modal('show');
                 }
 
-                // // Gọi API lần đầu tiên khi load trang
-                // loadPhieuThus(maPhong, '', '', '');
+             
 
                 // Lắng nghe sự kiện nhấn nút lọc
                 $('#filterButton').on('click', function () {
@@ -984,12 +1025,22 @@
                     var maPt = row.find('th').text();
                     var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, ''); // Loại bỏ ký tự không phải số
                     var maPhongQR = maPhong; // Thay đổi để lấy mã phòng từ dữ liệu thực tế
+                    var ngayLap = row.find('td:nth-child(2)').text(); // Lấy ngày lập phiếu thu từ cột "Ngày lập"
+
+                           // Định dạng số tiền thanh toán với dấu chấm phân cách hàng nghìn
+                    var formattedTongTien = formatCurrency(tongTien);
+
+                           // Trích xuất tháng và năm từ "Ngày lập"
+                    var dateParts = new Date(ngayLap); // Chuyển "Ngày lập" thành đối tượng Date
+                    var month = dateParts.getMonth() + 1; // Lấy tháng (tháng trong JavaScript là từ 0 đến 11)
+                    var year = dateParts.getFullYear(); // Lấy năm
+
 
                     // Cập nhật thông tin trong modal
-                    $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${tongTien} VND`);
+                $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${formattedTongTien} `);
 
                     // Tạo URL động cho QR code với amount và des
-                    var qrCodeUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0328319660&template=compact&amount=${tongTien}&des= Ma phong : ${maPhongQR}, Ma phieu thu : ${maPt}`;
+                var qrCodeUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0328319660&template=compact&amount=${tongTien}&des= Ten phong : ${tenPhong}, Tien phong thang ${month} nam ${year}, Ma phieu thu : ${maPt}`;
                     $('#qrCodeImage').attr('src', qrCodeUrl);
 
                     // Hiển thị modal
