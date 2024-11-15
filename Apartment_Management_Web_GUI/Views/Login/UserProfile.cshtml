@@ -1,6 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "User Profilre";
+    ViewData["Title"] = "User Profile";
     var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
+    var imageBaseUrl = ViewBag.ImageBaseUrl; // Lấy URL API từ ViewBag
 }
 
 <!DOCTYPE html>
@@ -981,7 +982,7 @@
 
                                 // Cập nhật chữ ký nếu có
                                 var chuKyFileName = khach.chuKy || 'default.jpg';
-                                $('.img-chuky').attr('src', '/images/' + chuKyFileName).on('error', function () {
+                                $('.img-chuky').attr('src', @imageBaseUrl  + chuKyFileName).on('error', function () {
                                     $(this).attr('src', '/images/signature.png');
                                 });
                                 $('#chuKyName').text(chuKyFileName);
@@ -1155,7 +1156,7 @@
                                 console.log(uploadResponse);
 
                                 // Hiển thị ảnh chữ ký
-                                $('.img-chuky').attr('src', '/images/CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
+                                $('.img-chuky').attr('src', @imageBaseUrl + 'CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
                                     $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
                                 });
                             },
