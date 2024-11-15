@@ -71,13 +71,26 @@ builder.Host.UseSerilog(); // Đảm bảo sử dụng Serilog
 // Lấy cấu hình FrontendUrl từ appsettings
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrl");
 
-// Thêm CORS
+//// Thêm CORS
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowOrigin",
+//        builder => builder.WithOrigins(frontendUrl) // Sử dụng URL từ cấu hình
+//                          .AllowAnyHeader()
+//                          .AllowAnyMethod());
+//});
+
+//// Thêm CORS ( bổ sung cho phép Frontend lấy Backend khi chạy trên Product )
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
-        builder => builder.WithOrigins(frontendUrl) // Sử dụng URL từ cấu hình
-                          .AllowAnyHeader()
-                          .AllowAnyMethod());
+        policy =>
+        {
+            policy.AllowAnyOrigin() // Hoặc .WithOrigins(frontendUrl) nếu muốn giới hạn URL
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .WithExposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers"); // Expose thêm headers nếu cần
+        });
 });
 
 // Cấu hình SmtpSettings từ appsettings.json
