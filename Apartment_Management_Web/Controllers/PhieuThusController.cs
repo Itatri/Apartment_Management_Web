@@ -115,5 +115,22 @@ namespace Apartment_Management_Web.Controllers
         }
 
 
+        [Authorize]
+        [HttpGet("GetAdminInfoByMaPhong")]
+        public async Task<ActionResult<AdminInfoResponse>> GetAdminInfoByMaPhong(string maPhong)
+        {
+            var adminInfo = await _PhieuThuService.GetAdminInfoByMaPhongAsync(maPhong);
+            if (adminInfo == null)
+            {
+                return NotFound(new AdminInfoResponse { IsSuccess = false, Message = "Không tìm thấy thông tin Admin" });
+            }
+            return Ok(adminInfo);
+        }
+
+
+
+
+
+
     }
 }

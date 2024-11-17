@@ -1,5 +1,6 @@
 ﻿using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models;
+using Apartment_Management_Web.Models.Bill;
 using iText.IO.Font;
 using iText.IO.Image;
 using iText.Kernel.Colors;
@@ -355,6 +356,52 @@ namespace Apartment_Management_Web.Services
                 return ms.ToArray();
             }
         }
+
+        public async Task<AdminInfoResponse> GetAdminInfoByMaPhongAsync(string maPhong)
+        {
+            var phong = await _context.Phongs.FirstOrDefaultAsync(p => p.MaPhong == maPhong);
+            if (phong == null)
+            {
+                return new AdminInfoResponse { IsSuccess = false, Message = "Không tìm thấy phòng" };
+            }
+
+            var dangNhap = await _context.DangNhaps.FirstOrDefaultAsync(d => d.MaKhuVuc == phong.MaKhuVuc);
+            if (dangNhap == null)
+            {
+                return new AdminInfoResponse { IsSuccess = false, Message = "Không tìm thấy tài khoản đăng nhập cho khu vực" };
+            }
+
+            var admin = await _context.ThongTinAdmins.FirstOrDefaultAsync(a => a.IdUser == dangNhap.Id);
+            if (admin == null)
+            {
+                return new AdminInfoResponse { IsSuccess = false, Message = "Không tìm thấy thông tin Admin" };
+            }
+
+            // Lấy thông tin cần thiết
+            var adminDto = new AdminInfoDto
+            {
+                MaAdmin = admin.MaAdmin,
+                HoTen = admin.HoTen,
+                GioiTinh = admin.GioiTinh,
+                NgaySinh = admin.NgaySinh.HasValue ? admin.NgaySinh.Value.ToDateTime(TimeOnly.MinValue) : (DateTime?)null,
+                CCCD = admin.Cccd,
+                DiaChi = admin.DiaChi,
+                Phone = admin.Phone,
+                ChuKy = admin.ChuKy,
+                NganHang = admin.NganHang,
+                TaiKhoan = admin.TaiKhoan,
+                IdUser = admin.IdUser
+            };
+
+            return new AdminInfoResponse
+            {
+                IsSuccess = true,
+                Message = "Lấy thông tin Admin thành công",
+                AdminInfo = adminDto
+            };
+        }
+
+
 
 
 

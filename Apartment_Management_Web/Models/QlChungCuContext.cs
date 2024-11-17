@@ -21,8 +21,6 @@ public partial class QlChungCuContext : DbContext
 
     public virtual DbSet<DichVuPhieuThu> DichVuPhieuThus { get; set; }
 
-    public virtual DbSet<DuongDan> DuongDans { get; set; }
-
     public virtual DbSet<FeedBack> FeedBacks { get; set; }
 
     public virtual DbSet<KhuVuc> KhuVucs { get; set; }
@@ -49,7 +47,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<DangNhap>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DangNhap__3214EC27A2CE8883");
+            entity.HasKey(e => e.Id).HasName("PK__DangNhap__3214EC27E9C5A385");
 
             entity.ToTable("DangNhap");
 
@@ -71,7 +69,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<DichVu>(entity =>
         {
-            entity.HasKey(e => e.MaDichVu).HasName("PK__DichVu__C0E6DE8FE2679B98");
+            entity.HasKey(e => e.MaDichVu).HasName("PK__DichVu__C0E6DE8F2FBEBFA1");
 
             entity.ToTable("DichVu", tb => tb.HasTrigger("trg_PreventDeleteDichVu"));
 
@@ -82,7 +80,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<DichVuPhieuThu>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DichVuPh__3214EC27BCACD518");
+            entity.HasKey(e => e.Id).HasName("PK__DichVuPh__3214EC27E31A7C33");
 
             entity.ToTable("DichVuPhieuThu");
 
@@ -97,26 +95,9 @@ public partial class QlChungCuContext : DbContext
                 .HasConstraintName("fk_PhieuThu_DichVuPhieuThu");
         });
 
-        modelBuilder.Entity<DuongDan>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__DuongDan__3214EC27E520EDEE");
-
-            entity.ToTable("DuongDan");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.DdchuKy)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("DDChuKy");
-            entity.Property(e => e.Ddfile)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("DDFile");
-        });
-
         modelBuilder.Entity<FeedBack>(entity =>
         {
-            entity.HasKey(e => e.MaFb).HasName("PK__FeedBack__2725963C426D2B1D");
+            entity.HasKey(e => e.MaFb).HasName("PK__FeedBack__2725963C2807B4F2");
 
             entity.ToTable("FeedBack");
 
@@ -137,7 +118,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<KhuVuc>(entity =>
         {
-            entity.HasKey(e => e.MaKhuVuc).HasName("PK__KhuVuc__0676EB835E2F154C");
+            entity.HasKey(e => e.MaKhuVuc).HasName("PK__KhuVuc__0676EB838851159B");
 
             entity.ToTable("KhuVuc");
 
@@ -148,7 +129,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<PhieuThu>(entity =>
         {
-            entity.HasKey(e => e.MaPt).HasName("PK__PhieuThu__2725E7F69EE5BFDC");
+            entity.HasKey(e => e.MaPt).HasName("PK__PhieuThu__2725E7F6ED59209F");
 
             entity.ToTable("PhieuThu");
 
@@ -168,7 +149,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<Phong>(entity =>
         {
-            entity.HasKey(e => e.MaPhong).HasName("PK__Phong__20BD5E5BB4C9B96B");
+            entity.HasKey(e => e.MaPhong).HasName("PK__Phong__20BD5E5B328E27A5");
 
             entity.ToTable("Phong");
 
@@ -197,7 +178,7 @@ public partial class QlChungCuContext : DbContext
                         .HasConstraintName("fk_DichVuPhong_Phong"),
                     j =>
                     {
-                        j.HasKey("MaPhong", "MaDichVu").HasName("PK__DichVuPh__CCB333B3EEA38BAA");
+                        j.HasKey("MaPhong", "MaDichVu").HasName("PK__DichVuPh__CCB333B3AB1A218B");
                         j.ToTable("DichVuPhong");
                         j.IndexerProperty<string>("MaPhong")
                             .HasMaxLength(50)
@@ -210,7 +191,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<ThongTinAdmin>(entity =>
         {
-            entity.HasKey(e => e.MaAdmin).HasName("PK__ThongTin__49341E38E4DB0B8F");
+            entity.HasKey(e => e.MaAdmin).HasName("PK__ThongTin__49341E388096D926");
 
             entity.ToTable("ThongTinAdmin");
 
@@ -226,8 +207,12 @@ public partial class QlChungCuContext : DbContext
             entity.Property(e => e.IdUser)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.NganHang).IsUnicode(false);
             entity.Property(e => e.Phone)
                 .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.TaiKhoan)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.ThongTinAdmins)
@@ -237,7 +222,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<ThongTinKhach>(entity =>
         {
-            entity.HasKey(e => e.MaKhachTro).HasName("PK__ThongTin__297FACA682729A78");
+            entity.HasKey(e => e.MaKhachTro).HasName("PK__ThongTin__297FACA6F3DB4CB8");
 
             entity.ToTable("ThongTinKhach");
 
@@ -268,7 +253,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<TraPhong>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TraPhong__3214EC2774398801");
+            entity.HasKey(e => e.Id).HasName("PK__TraPhong__3214EC27ED79C3B0");
 
             entity.ToTable("TraPhong");
 
@@ -294,7 +279,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<UserPhong>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UserPhon__3214EC2743C5850A");
+            entity.HasKey(e => e.Id).HasName("PK__UserPhon__3214EC276149936E");
 
             entity.ToTable("UserPhong");
 

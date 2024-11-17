@@ -1,4 +1,5 @@
 ﻿using Apartment_Management_Web.Models;
+using Apartment_Management_Web.Models.Bill;
 
 namespace Apartment_Management_Web.Interfaces
 {
@@ -13,5 +14,7 @@ namespace Apartment_Management_Web.Interfaces
         Task<bool> UpdatePhieuThuAsync(PhieuThu phieuThu);
 
         Task<byte[]> ExportPhieuThuToPdfAsync(string maPt);
+
+        Task<AdminInfoResponse> GetAdminInfoByMaPhongAsync(string maPhong);
     }
 }
