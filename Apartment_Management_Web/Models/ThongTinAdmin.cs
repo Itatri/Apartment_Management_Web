@@ -21,6 +21,10 @@ public partial class ThongTinAdmin
 
     public string? ChuKy { get; set; }
 
+    public string? NganHang { get; set; }
+
+    public string? TaiKhoan { get; set; }
+
     public string? IdUser { get; set; }
 
     public int? TrangThai { get; set; }

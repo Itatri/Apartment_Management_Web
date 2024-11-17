@@ -17,8 +17,8 @@ namespace Apartment_Management_Web.Controllers
         [HttpPost("send")]
         public async Task<IActionResult> SendEmail(string toEmail)
         {
-            await _emailSender.SendEmailAsync(toEmail, "IT Apartment Support", "Xin chào ! Nếu có vấn đề cần hỗ trợ , hãy gửi thông tin chi tiết tới chúng tôi . ");
-            return Ok("Email đã được gửi!");
+            await _emailSender.SendEmailAsync(toEmail, "IT Apartment Support", "Xin chào ! Nếu có vấn đề cần hỗ trợ , hãy gửi lại thông tin chi tiết tới chúng tôi . ");
+            return Ok("Email đã được gửi !");
         }
     }
 }
