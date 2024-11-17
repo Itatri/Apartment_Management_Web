@@ -71,14 +71,6 @@ builder.Host.UseSerilog(); // Đảm bảo sử dụng Serilog
 // Lấy cấu hình FrontendUrl từ appsettings
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrl");
 
-//// Thêm CORS
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowOrigin",
-//        builder => builder.WithOrigins(frontendUrl) // Sử dụng URL từ cấu hình
-//                          .AllowAnyHeader()
-//                          .AllowAnyMethod());
-//});
 
 //// Thêm CORS ( bổ sung cho phép Frontend lấy Backend khi chạy trên Product )
 builder.Services.AddCors(options =>
@@ -100,7 +92,7 @@ builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpS
 builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
 
 
-// Đăng kí Interfacem Servues
+// Đăng kí Interfacem Services
 builder.Services.AddScoped<IUserPhongService, UserPhongService>();
 builder.Services.AddScoped<IThongTinKhachService, ThongTinKhachService>();
 builder.Services.AddScoped<IPhieuThuService, PhieuThuService>();

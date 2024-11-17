@@ -318,7 +318,7 @@
                         </button>
                     </div>
                     <div class="modal-body text-center">
-                        <p><strong>Tài khoản :</strong> HOANG VAN TRI - 5218 4567 89</p>
+                    <p id="accountInfo"><strong>Tài khoản :</strong> None - None</p>
                         <img style="width:70%;" id="qrCodeImage" src="" alt="QR Code" class="img-fluid" />
                         <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
 
@@ -641,6 +641,15 @@
                 // Lấy thông tin loginResponse từ localStorage
                 var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
+            
+                var maPhong = loginResponse?.user?.maPhong;
+
+                if (maPhong) {
+                    $('#maPhongLabel').text(maPhong);
+                } else {
+                    $('#maPhongLabel').text('Không tìm thấy mã phòng');
+                }
+
                 // Kiểm tra xem loginResponse có tồn tại hay không
                 if (loginResponse) {
                     var user = loginResponse.user;
@@ -744,14 +753,7 @@
 
 
 
-                var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-                var maPhong = loginResponse?.user?.maPhong;
-
-                if (maPhong) {
-                    $('#maPhongLabel').text(maPhong);
-                } else {
-                    $('#maPhongLabel').text('Không tìm thấy mã phòng');
-                }
+              
 
 
                 function loadPhieuThus(maPhong, startDate, endDate, trangThai, pageSize = 5) {
@@ -1019,33 +1021,93 @@
 
 
 
-                // Sự kiện nhấn vào nút "Thanh Toán"
-                $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
-                    var row = $(this).closest('tr');
-                    var maPt = row.find('th').text();
-                    var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, ''); // Loại bỏ ký tự không phải số
-                    var maPhongQR = maPhong; // Thay đổi để lấy mã phòng từ dữ liệu thực tế
-                    var ngayLap = row.find('td:nth-child(2)').text(); // Lấy ngày lập phiếu thu từ cột "Ngày lập"
+                // // Sự kiện nhấn vào nút "Thanh Toán"
+                // $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
+                //     var row = $(this).closest('tr');
+                //     var maPt = row.find('th').text();
+                //     var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, ''); // Loại bỏ ký tự không phải số
+                //     var maPhongQR = maPhong; // Thay đổi để lấy mã phòng từ dữ liệu thực tế
+                //     var ngayLap = row.find('td:nth-child(2)').text(); // Lấy ngày lập phiếu thu từ cột "Ngày lập"
 
-                           // Định dạng số tiền thanh toán với dấu chấm phân cách hàng nghìn
-                    var formattedTongTien = formatCurrency(tongTien);
+                //            // Định dạng số tiền thanh toán với dấu chấm phân cách hàng nghìn
+                //     var formattedTongTien = formatCurrency(tongTien);
 
-                           // Trích xuất tháng và năm từ "Ngày lập"
-                    var dateParts = new Date(ngayLap); // Chuyển "Ngày lập" thành đối tượng Date
-                    var month = dateParts.getMonth() + 1; // Lấy tháng (tháng trong JavaScript là từ 0 đến 11)
-                    var year = dateParts.getFullYear(); // Lấy năm
+                //            // Trích xuất tháng và năm từ "Ngày lập"
+                //     var dateParts = new Date(ngayLap); // Chuyển "Ngày lập" thành đối tượng Date
+                //     var month = dateParts.getMonth() + 1; // Lấy tháng (tháng trong JavaScript là từ 0 đến 11)
+                //     var year = dateParts.getFullYear(); // Lấy năm
 
 
-                    // Cập nhật thông tin trong modal
-                $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${formattedTongTien} `);
+                //     // Cập nhật thông tin trong modal
+                // $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${formattedTongTien} `);
 
-                    // Tạo URL động cho QR code với amount và des
-                var qrCodeUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0328319660&template=compact&amount=${tongTien}&des= Ten phong : ${tenPhong}, Tien phong thang ${month} nam ${year}, Ma phieu thu : ${maPt}`;
-                    $('#qrCodeImage').attr('src', qrCodeUrl);
+                //     // Tạo URL động cho QR code với amount và des
+                // var qrCodeUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0328319660&template=compact&amount=${tongTien}&des= Ten phong : ${tenPhong}, Tien phong thang ${month} nam ${year}, Ma phieu thu : ${maPt}`;
+                //     $('#qrCodeImage').attr('src', qrCodeUrl);
 
-                    // Hiển thị modal
-                    $('#paymentModal').modal('show');
-                });
+                //     // Hiển thị modal
+                //     $('#paymentModal').modal('show');
+                // });
+
+                         // Sự kiện nhấn vào nút "Thanh Toán"
+                        $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
+                            var row = $(this).closest('tr');
+                            var maPt = row.find('th').text();
+                            var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, ''); // Loại bỏ ký tự không phải số
+                            var ngayLap = row.find('td:nth-child(2)').text(); // Lấy ngày lập phiếu thu từ cột "Ngày lập"
+                            var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                            var maPhong = loginResponse?.user?.maPhong;
+
+                            // Kiểm tra nếu mã phòng không tồn tại
+                            if (!maPhong) {
+                                alert('Không tìm thấy mã phòng!');
+                                return;
+                            }
+
+                            // Định dạng số tiền thanh toán với dấu chấm phân cách hàng nghìn
+                            var formattedTongTien = formatCurrency(tongTien);
+
+                            // Trích xuất tháng và năm từ "Ngày lập"
+                            var dateParts = new Date(ngayLap);
+                            var month = dateParts.getMonth() + 1;
+                            var year = dateParts.getFullYear();
+
+                            // Gọi API để lấy thông tin Admin
+                            $.ajax({
+                                url: `@apiBaseUrl/api/PhieuThus/GetAdminInfoByMaPhong?maPhong=${maPhong}`,
+                                type: 'GET',
+                                headers: {
+                                    'Authorization': 'Bearer ' + loginResponse.token
+                                },
+                                success: function (response) {
+                                    if (response.isSuccess) {
+                                        // Lấy ngân hàng, tài khoản và họ tên từ API response
+                                        var nganHang = response.adminInfo.nganHang || 'Không có';
+                                        var taiKhoan = response.adminInfo.taiKhoan || 'Không có';
+                                        var hoTen = response.adminInfo.hoTen || 'Không có';
+
+                                        // Tạo URL QR code với thông tin ngân hàng và tài khoản
+                                        var qrCodeUrl = `https://qr.sepay.vn/img?bank=${encodeURIComponent(nganHang)}&acc=${encodeURIComponent(taiKhoan)}&template=compact&amount=${tongTien}&des=Ten phong : ${tenPhong}, Tien phong thang ${month} nam ${year}, Ma phieu thu : ${maPt}`;
+                                        $('#qrCodeImage').attr('src', qrCodeUrl);
+
+                                        // Cập nhật thông tin tài khoản và họ tên trong modal
+                                        $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${formattedTongTien}`);
+                                        $('#accountInfo').html(`<strong>Tài khoản :</strong> ${hoTen} - ${taiKhoan}`);
+
+
+                                        // Hiển thị modal
+                                        $('#paymentModal').modal('show');
+                                    } else {
+                                        alert('Không lấy được thông tin Admin: ' + response.message);
+                                    }
+                                },
+                                error: function () {
+                                    alert('Đã xảy ra lỗi khi lấy thông tin Admin.');
+                                }
+                            });
+                        });
+
+
 
 
 
