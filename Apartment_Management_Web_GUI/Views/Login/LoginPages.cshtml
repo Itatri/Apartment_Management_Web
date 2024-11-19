@@ -120,7 +120,26 @@
             </div>
         </div>
     </div>
+    <!-- Modal thông báo lỗi đăng nhập -->
+    <div class="modal" id="LoginErrorModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">Thông báo lỗi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="loginErrorMessage" class="text-danger">Sai tài khoản hoặc mật khẩu.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 
     <script src="~/js/jquery-3.4.1.min.js"></script>
@@ -163,6 +182,11 @@
                     window.location.href = '/user/homepage';
                 });
             }
+                    // Hàm xử lý đăng nhập thất bại
+            function handleLoginError(message) {
+                $('#loginErrorMessage').text(message || 'Đã xảy ra lỗi không xác định.');
+                $('#LoginErrorModal').modal('show'); // Hiển thị modal lỗi
+            }
 
             // Xử lý sự kiện gửi biểu mẫu đăng nhập
             $('#loginForm').on('submit', function (event) {
@@ -184,11 +208,14 @@
                         if (response.isSuccess) {
                             handleLoginSuccess(response);
                         } else {
-                            alert(response.message);
+                            // alert(response.message);
+                           handleLoginError(response.message); // Hiển thị lỗi từ server
                         }
                     },
                     error: function (xhr) {
-                        alert('Đã xảy ra lỗi khi đăng nhập: ' + xhr.responseJSON.message);
+                        // alert('Đã xảy ra lỗi khi đăng nhập: ' + xhr.responseJSON.message);
+                         var errorMessage = xhr.responseJSON?.message || 'Lỗi kết nối đến máy chủ.';
+                    handleLoginError(errorMessage); // Hiển thị lỗi
                     }
                 });
             });
