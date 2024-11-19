@@ -214,9 +214,27 @@ namespace Apartment_Management_Web.Controllers
             }
         }
 
-
-
-
+        // API lấy danh sách Quan Hệ
+        [HttpGet("GetQuanHe")]
+        public ActionResult<IEnumerable<string>> GetQuanHe()
+        {
+            var quanHeList = new List<string>
+            {
+                "Chủ hộ", "Ba", "Mẹ", "Bố", "Cha", "Cha chồng", "Cha đẻ", "Cha nuôi",
+                "Cha vợ", "Mẹ chồng", "Mẹ đẻ", "Mẹ nuôi", "Mẹ vợ", "Chồng", "Vợ",
+                "Con", "Con chồng", "Con dâu", "Con đẻ", "Con nuôi", "Con rể", "Con vợ",
+                "Cháu", "Cháu dâu", "Cháu họ", "Cháu ngoại", "Cháu nội", "Cháu rể",
+                "Anh", "Anh chồng", "Anh họ", "Anh rể", "Anh ruột", "Anh vợ", "Chị",
+                "Chị chồng", "Chị dâu", "Chị họ", "Chị ruột", "Chị vợ", "Em", "Em chồng",
+                "Em dâu", "Em họ", "Em rể", "Em ruột", "Em vợ", "Bà", "Bà ngoại", "Bà nội",
+                "Ông", "Ông ngoại", "Ông nội", "Cô", "Dì", "Bác", "Thím", "Tía", "Bạn",
+                "Người được chăm sóc", "Người được giám hộ", "Người được nuôi dưỡng",
+                "Người được trợ giúp", "Người giám hộ", "Người mượn nhà", "Người ở nhờ",
+                "Người thuê nhà", "Nhân khẩu tập thể", "Chưa có thông tin", "Cắt", "Cùng ở thuê",
+                "Khác"
+            };
+            return Ok(quanHeList);
+        }
 
 
     }

@@ -345,7 +345,7 @@
 
 
 
-        <!-- Modal cập nhật thông tin điện nước -->
+       @*  <!-- Modal cập nhật thông tin điện nước -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -377,7 +377,42 @@
                     </div>
                 </div>
             </div>
+        </div> *@
+
+    <!-- Modal cập nhật thông tin điện nước -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cập nhật số điện, nước</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Hủy">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="maPtInput" class="col-form-label">Mã phiếu thu</label>
+                            <input type="text" class="form-control" id="maPtInput" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="dienMoiInput" class="col-form-label">Nhập số điện hiện tại (kWh)</label>
+                            <input type="text" class="form-control" id="dienMoiInput">
+                        </div>
+                        <div class="form-group">
+                            <label for="nuocMoiInput" class="col-form-label">Nhập số nước hiện tại (m3)</label>
+                            <input type="text" class="form-control" id="nuocMoiInput">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="btnCapNhat">Cập nhật</button>
+                </div>
+            </div>
         </div>
+    </div>
+
 
 
 
@@ -632,6 +667,18 @@
 
 
         <script>
+            // Ràng buộc trường nhập điện nước 
+             document.addEventListener('DOMContentLoaded', function () {
+            const dienMoiInput = document.getElementById('dienMoiInput');
+            dienMoiInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+
+            const nuocMoiInput = document.getElementById('nuocMoiInput');
+            nuocMoiInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+
             $(document).ready(function () {
                 var currentPage = 1; // Biến để lưu trang hiện tại
                 var totalPages = 1; // Tổng số trang
@@ -858,34 +905,40 @@
                     });
                 }
 
-                function exportPhieuThuToPdf(maPt) {
-                    $.ajax({
-                        url: `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`,
-                        type: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + loginResponse.token
-                        },
-                        xhrFields: {
-                            responseType: 'blob' // Đảm bảo nhận dữ liệu dưới dạng blob (PDF)
-                        },
-                        success: function (response) {
-                            var blob = new Blob([response], { type: 'application/pdf' });
-                            var url = URL.createObjectURL(blob);
-
-                            // Hiển thị file PDF trong modal
-                            $('#pdfModal iframe').attr('src', url);
+                        function exportPhieuThuToPdf(maPt) {
+                            // Hiển thị modal và trạng thái "Loading..."
+                            $('#pdfModal iframe').attr('src', ''); // Xóa nội dung cũ
+                            $('#pdfModal .modal-body').html('<div class="text-center"><p>Đang tải hóa đơn...</p><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>');
                             $('#pdfModal').modal('show');
-                        },
-                        error: function (xhr) {
-                            alert('Đã xảy ra lỗi khi tải hóa đơn.');
-                        }
-                    });
-                }
 
-                $(document).on('click', '.export-pdf-btn', function () {
-                    var maPt = $(this).data('ma-pt'); // Lấy maPt từ thuộc tính data
-                    exportPhieuThuToPdf(maPt); // Gọi hàm
-                });
+                            $.ajax({
+                                url: `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`,
+                                type: 'GET',
+                                headers: {
+                                    'Authorization': 'Bearer ' + loginResponse.token
+                                },
+                                xhrFields: {
+                                    responseType: 'blob' // Đảm bảo nhận dữ liệu dưới dạng blob (PDF)
+                                },
+                                success: function (response) {
+                                    var blob = new Blob([response], { type: 'application/pdf' });
+                                    var url = URL.createObjectURL(blob);
+
+                                    // Thay đổi nội dung modal để hiển thị PDF
+                                    $('#pdfModal .modal-body').html(`<iframe src="${url}" style="width: 100%; height: 800px;" frameborder="0"></iframe>`);
+                                },
+                                error: function (xhr) {
+                                    // Hiển thị lỗi nếu không tải được PDF
+                                    $('#pdfModal .modal-body').html('<p class="text-danger">Đã xảy ra lỗi khi tải hóa đơn.</p>');
+                                }
+                            });
+                        }
+
+                        $(document).on('click', '.export-pdf-btn', function () {
+                            var maPt = $(this).data('ma-pt'); // Lấy maPt từ thuộc tính data
+                            exportPhieuThuToPdf(maPt); // Gọi hàm
+                        });
+
 
 
 
@@ -1021,33 +1074,7 @@
 
 
 
-                // // Sự kiện nhấn vào nút "Thanh Toán"
-                // $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
-                //     var row = $(this).closest('tr');
-                //     var maPt = row.find('th').text();
-                //     var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, ''); // Loại bỏ ký tự không phải số
-                //     var maPhongQR = maPhong; // Thay đổi để lấy mã phòng từ dữ liệu thực tế
-                //     var ngayLap = row.find('td:nth-child(2)').text(); // Lấy ngày lập phiếu thu từ cột "Ngày lập"
-
-                //            // Định dạng số tiền thanh toán với dấu chấm phân cách hàng nghìn
-                //     var formattedTongTien = formatCurrency(tongTien);
-
-                //            // Trích xuất tháng và năm từ "Ngày lập"
-                //     var dateParts = new Date(ngayLap); // Chuyển "Ngày lập" thành đối tượng Date
-                //     var month = dateParts.getMonth() + 1; // Lấy tháng (tháng trong JavaScript là từ 0 đến 11)
-                //     var year = dateParts.getFullYear(); // Lấy năm
-
-
-                //     // Cập nhật thông tin trong modal
-                // $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${formattedTongTien} `);
-
-                //     // Tạo URL động cho QR code với amount và des
-                // var qrCodeUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0328319660&template=compact&amount=${tongTien}&des= Ten phong : ${tenPhong}, Tien phong thang ${month} nam ${year}, Ma phieu thu : ${maPt}`;
-                //     $('#qrCodeImage').attr('src', qrCodeUrl);
-
-                //     // Hiển thị modal
-                //     $('#paymentModal').modal('show');
-                // });
+               
 
                          // Sự kiện nhấn vào nút "Thanh Toán"
                         $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
@@ -1118,8 +1145,11 @@
                 $(document).on('click', '.btn-primary[data-target="#exampleModal"]', function () {
                     var row = $(this).closest('tr');
                     var maPt = row.find('th').text();
-                    var dienMoi = row.find('td:nth-child(6)').text();
-                    var nuocMoi = row.find('td:nth-child(9)').text();
+                           // Lấy giá trị điện cũ, điện mới, nước cũ, nước mới từ các cột tương ứng
+                    var dienCu = row.find('td:nth-child(4)').text();
+                    var dienMoi = row.find('td:nth-child(5)').text();
+                    var nuocCu = row.find('td:nth-child(6)').text();
+                    var nuocMoi = row.find('td:nth-child(7)').text();
 
                     $('#maPtInput').val(maPt);
 
@@ -1172,9 +1202,13 @@
                         }
                     });
                 });
+
+
+
             });
 
-
+                   
+        });
 
 
 

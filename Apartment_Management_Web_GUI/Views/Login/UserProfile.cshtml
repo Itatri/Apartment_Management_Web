@@ -278,13 +278,11 @@
 
 
             @* Thông tin chi tiết của cư dân *@
-            @*   <div id="chiTietCuDan" class="container rounded bg-white mt-5 mb-5" style="display: none;"> *@ @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
     <div id="chiTietCuDan" class="container rounded bg-white mt-5 mb-5" style="display: none;">
             @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
         <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-            @*  <img class="mt-5" width="150px" src="~/images/ChuKy.jpg"> *@
                     <img class="mt-5 img-chuky" width="150px" src="~/images/signature.png">
 
 
@@ -332,90 +330,17 @@
 
                         <div class="col-md-12">
                             <label class="labels">Quan hệ</label>
-                            <select class="form-control" name='quanHe'>
-                                <option value="">Chọn quan hệ</option> <!-- Tùy chọn mặc định -->
-                                <option value="Chủ hộ">Chủ hộ</option>
-                                <option value="Ba">Ba</option>
-                                <option value="Mẹ">Mẹ</option>
-                                <option value="Bố">Bố</option>
-                                <option value="Cha">Cha</option>
-                                <option value="Cha chồng">Cha chồng</option>
-                                <option value="Cha đẻ">Cha đẻ</option>
-                                <option value="Cha nuôi">Cha nuôi</option>
-                                <option value="Cha vợ">Cha vợ</option>
-                                <option value="Mẹ chồng">Mẹ chồng</option>
-                                <option value="Mẹ đẻ">Mẹ đẻ</option>
-                                <option value="Mẹ nuôi">Mẹ nuôi</option>
-                                <option value="Mẹ vợ">Mẹ vợ</option>
-                                <option value="Chồng">Chồng</option>
-                                <option value="Vợ">Vợ</option>
-                                <option value="Con">Con</option>
-                                <option value="Con chồng">Con chồng</option>
-                                <option value="Con dâu">Con dâu</option>
-                                <option value="Con đẻ">Con đẻ</option>
-                                <option value="Con nuôi">Con nuôi</option>
-                                <option value="Con rể">Con rể</option>
-                                <option value="Con vợ">Con vợ</option>
-                                <option value="Cháu">Cháu</option>
-                                <option value="Cháu dâu">Cháu dâu</option>
-                                <option value="Cháu họ">Cháu họ</option>
-                                <option value="Cháu ngoại">Cháu ngoại</option>
-                                <option value="Cháu nội">Cháu nội</option>
-                                <option value="Cháu rể">Cháu rể</option>
-                                <option value="Anh">Anh</option>
-                                <option value="Anh chồng">Anh chồng</option>
-                                <option value="Anh họ">Anh họ</option>
-                                <option value="Anh rể">Anh rể</option>
-                                <option value="Anh ruột">Anh ruột</option>
-                                <option value="Anh vợ">Anh vợ</option>
-                                <option value="Chị">Chị</option>
-                                <option value="Chị chồng">Chị chồng</option>
-                                <option value="Chị dâu">Chị dâu</option>
-                                <option value="Chị họ">Chị họ</option>
-                                <option value="Chị ruột">Chị ruột</option>
-                                <option value="Chị vợ">Chị vợ</option>
-                                <option value="Em">Em</option>
-                                <option value="Em chồng">Em chồng</option>
-                                <option value="Em dâu">Em dâu</option>
-                                <option value="Em họ">Em họ</option>
-                                <option value="Em rể">Em rể</option>
-                                <option value="Em ruột">Em ruột</option>
-                                <option value="Em vợ">Em vợ</option>
-                                <option value="Bà">Bà</option>
-                                <option value="Bà ngoại">Bà ngoại</option>
-                                <option value="Bà nội">Bà nội</option>
-                                <option value="Ông">Ông</option>
-                                <option value="Ông ngoại">Ông ngoại</option>
-                                <option value="Ông nội">Ông nội</option>
-                                <option value="Cô">Cô</option>
-                                <option value="Dì">Dì</option>
-                                <option value="Bác">Bác</option>
-                                <option value="Thím">Thím</option>
-                                <option value="Tía">Tía</option>
-                                <option value="Bạn">Bạn</option>
-                                <option value="Người được chăm sóc">Người được chăm sóc</option>
-                                <option value="Người được giám hộ">Người được giám hộ</option>
-                                <option value="Người được nuôi dưỡng">Người được nuôi dưỡng</option>
-                                <option value="Người được trợ giúp">Người được trợ giúp</option>
-                                <option value="Người giám hộ">Người giám hộ</option>
-                                <option value="Người mượn nhà">Người mượn nhà</option>
-                                <option value="Người ở nhờ">Người ở nhờ</option>
-                                <option value="Người thuê nhà">Người thuê nhà</option>
-                                <option value="Nhân khẩu tập thể">Nhân khẩu tập thể</option>
-                                <option value="Chưa có thông tin">Chưa có thông tin</option>
-                                <option value="Cắt">Cắt</option>
-                                <option value="Cùng ở thuê">Cùng ở thuê</option>
-                                <option value="Khác">Khác</option>
+                        
+                          @*   <select id="selectQuanHe" class="form-control">
+                                <option value="">Chọn Quan Hệ</option>
+                            </select> *@
+                            <select name="quanHe" id="selectQuanHe" class="form-control">
+                                <option value="">Chọn Quan Hệ</option>
                             </select>
-                        </div>
 
-                @*  <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                        <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div> *@
+
+                        </div>
                     </div>
-            @*    <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                    </div> *@
                     <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Lưu thông tin </button></div>
                     <div class="col-md-12" style="text-align: center;">
                         <!-- Nút bấm bằng hình ảnh -->
@@ -430,9 +355,6 @@
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center experience">
                         <span>Thông tin CCCD</span>
-                @*  <span class="border px-3 p-1 add-experience">
-                        <i class="fa fa-plus"></i>&nbsp;Chọn ảnh chữ ký
-                        </span> *@
 
                         <span class="border px-3 p-1 add-experience">
                             <i class="fa fa-plus"></i>&nbsp;Chọn ảnh chữ ký
@@ -444,89 +366,21 @@
                     <br>
                     <div class="col-md-12"><label class="labels">Số căn cước</label><input type="text" class="form-control" placeholder="Nhập số căn cước" value=""></div>
                     <div class="col-md-12"><label class="labels">Nơi cấp</label><input type="text" class="form-control" placeholder="Nhập nơi cấp" value=""></div>
-            @*  <div class="col-md-12">
-                    <label class="labels">Quê quán</label>
-                    <select class="form-control">
-                    <option value="">Chọn quê quán</option> <!-- Tùy chọn mặc định -->
-                    <option value="Hà Nội">Hà Nội</option>
-                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                    </select>
-                    </div> *@
+
+                
 
                     <div class="col-md-12">
                         <label class="labels">Quê quán</label>
-                        <select class="form-control" name='queQuan'>
+                        <select class="form-control" name="queQuan" id="queQuan">
                             <option value="">Chọn quê quán</option> <!-- Tùy chọn mặc định -->
-                            <option value="Hà Nội">Hà Nội</option>
-                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                            <option value="An Giang">An Giang</option>
-                            <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                            <option value="Bắc Giang">Bắc Giang</option>
-                            <option value="Bắc Kạn">Bắc Kạn</option>
-                            <option value="Bến Tre">Bến Tre</option>
-                            <option value="Bình Định">Bình Định</option>
-                            <option value="Bình Dương">Bình Dương</option>
-                            <option value="Bình Phước">Bình Phước</option>
-                            <option value="Cà Mau">Cà Mau</option>
-                            <option value="Cần Thơ">Cần Thơ</option>
-                            <option value="Đà Nẵng">Đà Nẵng</option>
-                            <option value="Đắk Lắk">Đắk Lắk</option>
-                            <option value="Đắk Nông">Đắk Nông</option>
-                            <option value="Điện Biên">Điện Biên</option>
-                            <option value="Hà Giang">Hà Giang</option>
-                            <option value="Hà Nam">Hà Nam</option>
-                            <option value="Hà Tĩnh">Hà Tĩnh</option>
-                            <option value="Hải Dương">Hải Dương</option>
-                            <option value="Hải Phòng">Hải Phòng</option>
-                            <option value="Hòa Bình">Hòa Bình</option>
-                            <option value="Hưng Yên">Hưng Yên</option>
-                            <option value="Khánh Hòa">Khánh Hòa</option>
-                            <option value="Kiên Giang">Kiên Giang</option>
-                            <option value="Kon Tum">Kon Tum</option>
-                            <option value="Lai Châu">Lai Châu</option>
-                            <option value="Lạng Sơn">Lạng Sơn</option>
-                            <option value="Lào Cai">Lào Cai</option>
-                            <option value="Long An">Long An</option>
-                            <option value="Nam Định">Nam Định</option>
-                            <option value="Nghệ An">Nghệ An</option>
-                            <option value="Ninh Bình">Ninh Bình</option>
-                            <option value="Ninh Thuận">Ninh Thuận</option>
-                            <option value="Phú Thọ">Phú Thọ</option>
-                            <option value="Phú Yên">Phú Yên</option>
-                            <option value="Quảng Bình">Quảng Bình</option>
-                            <option value="Quảng Nam">Quảng Nam</option>
-                            <option value="Quảng Ngãi">Quảng Ngãi</option>
-                            <option value="Quảng Ninh">Quảng Ninh</option>
-                            <option value="Quảng Trị">Quảng Trị</option>
-                            <option value="Sóc Trăng">Sóc Trăng</option>
-                            <option value="Sơn La">Sơn La</option>
-                            <option value="Tây Ninh">Tây Ninh</option>
-                            <option value="Thái Bình">Thái Bình</option>
-                            <option value="Thái Nguyên">Thái Nguyên</option>
-                            <option value="Thanh Hóa">Thanh Hóa</option>
-                            <option value="Thừa Thiên - Huế">Thừa Thiên - Huế</option>
-                            <option value="Tiền Giang">Tiền Giang</option>
-                            <option value="Trà Vinh">Trà Vinh</option>
-                            <option value="Tuyên Quang">Tuyên Quang</option>
-                            <option value="Vĩnh Long">Vĩnh Long</option>
-                            <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                            <option value="Yên Bái">Yên Bái</option>
+                            <!-- Gọi API hiển thị danh sách tỉnh thành bằng Script -->
                         </select>
                     </div>
 
+
                     <div class="col-md-12"><label class="labels">Thường trú</label><input type="text" class="form-control" placeholder="Nhập nơi thường trú" value=""></div>
 
-            @* <div class="col-md-12">
-                    <label class="labels">Ngày Cấp</label>
-                    <div class="input-group">
-                    <input type="text" class="form-control" id="datepicker_ngaycap" placeholder="Chọn ngày cấp" />
-                    <div class="input-group-append">
-                    <span class="input-group-text bg-light d-block" id="calendar-icon_ngaycap">
-                    <i class="fa fa-calendar"></i> <!-- Icon lịch -->
-                    </span>
-                    </div>
-                    </div>
-                    </div> *@
+           
 
                     <div class="col-md-12">
                         <label class="labels">Ngày Cấp</label>
@@ -551,10 +405,7 @@
         </div>
     </div>
 
-    </div>
-
-
-    </div>
+    
 
     <section class="about_section layout_padding">
         <div class="container">
@@ -571,26 +422,7 @@
     </section>
 
 
-    @*   <!-- Modal thông báo lưu thông tin thành công -->
-    <div class="modal" id="successModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-    <h5 class="modal-title">Thông báo</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-    <div class="modal-body">
-    <p>Bạn đã lưu thông tin thành công!</p>
-    </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-    </div>
-    </div>
-    </div>
-    </div> *@
-
+    
 
 
     <!-- end about section -->
@@ -796,8 +628,63 @@
 
 
     <script>
+          function loadProvinces() {
+            // Gọi API lấy danh sách tỉnh thành
+            $.ajax({
+                url: 'https://provinces.open-api.vn/api/p', // URL API để lấy danh sách tỉnh thành
+                type: 'GET',
+                success: function(response) {
+                    // Kiểm tra nếu API trả về dữ liệu
+                    if (response && response.length > 0) {
+                        var select = $('#queQuan');
+                        // Duyệt qua danh sách các tỉnh thành và tạo các option
+                        response.forEach(function(province) {
+                            select.append(
+                                $('<option>', {
+                                    value: province.name,  // Tên tỉnh thànhh làm giá trị
+                                    text: province.name    // Tên tỉnh thành làm label
+                                })
+                            );
+                        });
+                    } else {
+                        console.log('Không có dữ liệu tỉnh thành');
+                    }
+                },
+                error: function() {
+                    console.log('Đã xảy ra lỗi khi lấy danh sách tỉnh thành');
+                }
+            });
+        }
+
+             function loadQuanHe() {
+            $.ajax({
+                url: '@apiBaseUrl/api/ThongTinKhaches/GetQuanHe',  // Ensure this URL matches the correct API route
+                type: 'GET',
+                success: function(data) {
+                    if (data && Array.isArray(data)) {
+                        var select = $('#selectQuanHe');
+                        // Clear existing options
+                        select.empty();
+                        // Add default placeholder option
+                        select.append('<option value="">Chọn Quan Hệ</option>');
+
+                        // Loop through each quanHe and append it as an option
+                        data.forEach(function(item) {
+                            select.append('<option value="' + item + '">' + item + '</option>');
+                        });
+                    } else {
+                        alert('Không thể tải danh sách quan hệ.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching quanHe list:', error);
+                    alert('Có lỗi xảy ra khi tải danh sách quan hệ.');
+                }
+            });
+        }
 
         $(document).ready(function () {
+         
             // Lấy thông tin loginResponse từ localStorage
             var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
@@ -1047,7 +934,9 @@
                 const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
                 const email = $("input[placeholder='Nhập email']").val();
                 const phong = $("input[placeholder='Thông tin phòng']").val();
-                const quanHe = $("select[name='quanHe']").val();
+                // const quanHe = $("select[name='quanHe']").val();
+                const quanHe = $("#selectQuanHe").val();
+
                 const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
                 const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
                 const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
@@ -1055,6 +944,8 @@
                 const ngayCap = $("#datepicker_ngaycap").val(); // Lấy giá trị trực tiếp từ DatePicker
                 const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
                 const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
+
+
 
                 // Tạo đối tượng dữ liệu để gửi
                 const data = {
@@ -1233,6 +1124,7 @@
                 });
             });
 
+          
 
 
 
@@ -1256,6 +1148,8 @@
                     reader.readAsDataURL(file); // Đọc tệp dưới dạng Data URL
                 }
             });
+             loadQuanHe();
+             loadProvinces(); // Gọi hàm để tải danh sách tỉnh thành
         });
 
 
