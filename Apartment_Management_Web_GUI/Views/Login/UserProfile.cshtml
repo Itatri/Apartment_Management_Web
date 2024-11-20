@@ -388,7 +388,7 @@
                     </div>
 
 
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="display: none;">
                         <label class="labels">Trạng thái</label>
                         <select class="form-control" name="trangThaiKhach">
                             <option value="">Chọn trạng thái</option> <!-- Tùy chọn mặc định -->
@@ -581,6 +581,25 @@
             </div>
         </div>
     </section>
+
+    <div id="errorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Lỗi nhập liệu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Thông báo lỗi sẽ được hiển thị ở đây -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Modal thông báo gửi Email thành công -->
@@ -923,6 +942,7 @@
 
 
 
+
             $(".profile-button").click(function (event) {
                 event.stopPropagation(); // Ngăn chặn sự kiện tiếp tục
 
@@ -943,10 +963,46 @@
                 const queQuan = $("select[name='queQuan']").val();
                 const ngayCap = $("#datepicker_ngaycap").val(); // Lấy giá trị trực tiếp từ DatePicker
                 const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
-                const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
+                // const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
+                 const trangThai = 1; // Lấy trạng thái từ select
 
+                       // Kiểm tra dữ liệu nhập
+                 // Kiểm tra dữ liệu nhập
+                    let errors = [];
+                    if (!hoTen) errors.push("Họ tên.");
+                    if (!gioiTinh) errors.push("Giới tính");
+                    if (!ngaySinh) errors.push("Ngày sinh");
+                    if (!soDienThoai) errors.push("Số điện thoại");
+                    if (!email) errors.push("Email");
+                    if (!quanHe) errors.push("Quan hệ");
+                    if (!soCCCD) errors.push("Số căn cước");
+                    if (!noiCap) errors.push("Nơi cấp");
+                    if (!thuongTru) errors.push("Nơi thường trú");
+                    if (!queQuan) errors.push("Quê quán");
+                    if (!ngayCap) errors.push("Ngày cấp");
 
+                    // Kiểm tra nếu là "Chủ hộ", phải trên 18 tuổi
+                    if (quanHe === "Chủ hộ") {
+                        const birthDate = new Date(ngaySinh); // Chuyển đổi ngày sinh thành đối tượng Date
+                        const today = new Date();
+                        const age = today.getFullYear() - birthDate.getFullYear();
+                        const m = today.getMonth() - birthDate.getMonth();
+                        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                            age--; 
+                        }
 
+                        if (age < 18) {
+                            errors.push("Chủ hộ phải trên 18 tuổi.");
+                        }
+                    }
+
+                    // Nếu có lỗi, hiển thị modal thông báo
+                    if (errors.length > 0) {
+                        let errorMessage = "Vui lòng nhập đầy đủ thông tin: \n" + errors.join("\n");
+                        $("#errorModal .modal-body").text(errorMessage);  // Gán thông báo lỗi vào modal
+                        $("#errorModal").modal('show'); // Hiển thị modal lỗi
+                        return; // Dừng lại, không thực hiện lưu thông tin
+                    }
                 // Tạo đối tượng dữ liệu để gửi
                 const data = {
                     HoTen: hoTen,

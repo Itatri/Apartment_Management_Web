@@ -345,40 +345,6 @@
 
 
 
-       @*  <!-- Modal cập nhật thông tin điện nước -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cập nhật số điện, nước</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Hủy">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="maPtInput" class="col-form-label">Mã phiếu thu</label>
-                                <input type="text" class="form-control" id="maPtInput" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="dienMoiInput" class="col-form-label">Nhập số điện hiện tại ( kWh )</label>
-                                <input type="text" class="form-control" id="dienMoiInput">
-                            </div>
-                            <div class="form-group">
-                                <label for="nuocMoiInput" class="col-form-label">Nhập số nước hiện tại ( m3 ) </label>
-                                <input type="text" class="form-control" id="nuocMoiInput">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-primary" id="btnCapNhat">Cập nhật</button>
-                    </div>
-                </div>
-            </div>
-        </div> *@
-
     <!-- Modal cập nhật thông tin điện nước -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -803,107 +769,124 @@
               
 
 
-                function loadPhieuThus(maPhong, startDate, endDate, trangThai, pageSize = 5) {
-                    $.ajax({
-                        url: `@apiBaseUrl/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}&pageNumber=${currentPage}&pageSize=${pageSize}`,
-                        type: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + loginResponse.token
-                        },
-                        success: function (response) {
-                            if (response.isSuccess) {
-                                totalPages = response.totalPages; // Lưu tổng số trang từ phản hồi API
-                                // Cập nhật pagination
-                                updatePagination();
-                                var phieuThus = response.phieuthus;
+                        function loadPhieuThus(maPhong, startDate, endDate, trangThai, pageSize = 5) {
+                            $.ajax({
+                                url: `@apiBaseUrl/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}&pageNumber=${currentPage}&pageSize=${pageSize}`,
+                                type: 'GET',
+                                headers: {
+                                    'Authorization': 'Bearer ' + loginResponse.token
+                                },
+                                success: function (response) {
+                                    if (response.isSuccess) {
+                                        totalPages = response.totalPages; // Lưu tổng số trang từ phản hồi API
+                                        // Cập nhật pagination
+                                        updatePagination();
+                                        var phieuThus = response.phieuthus;
 
 
 
-                                phieuThus.sort(function (a, b) {
-                                    return new Date(b.ngayLap) - new Date(a.ngayLap);
-                                });
+                                        phieuThus.sort(function (a, b) {
+                                            return new Date(b.ngayLap) - new Date(a.ngayLap);
+                                        });
 
-                                $('tbody').empty(); // Xóa tất cả các hàng trong tbody
+                                        $('tbody').empty(); // Xóa tất cả các hàng trong tbody
 
-                                phieuThus.forEach(function (phieuThu) {
-                                    var trangThaiClass = phieuThu.trangThai ? 'text-success' : 'text-danger';
-                                    var trangThaiText = phieuThu.trangThai ? 'Đã thanh toán' : 'Chưa thanh toán';
+                                        phieuThus.forEach(function (phieuThu) {
+                                            var trangThaiClass = '';
+                                            var trangThaiText = '';
+                                            var ngayLap = new Date(phieuThu.ngayLap); // Chuyển ngày lập thành đối tượng Date
+                                            var today = new Date(); // Lấy ngày hiện tại
+                                            var diffDays = Math.floor((today - ngayLap) / (1000 * 60 * 60 * 24)); // Tính số ngày chênh lệch
 
-                                    // Kiểm tra nếu trường nào null thì thay thế bằng 'Trống' và thêm màu đỏ
-                                    var checkNull = function (value) {
-                                        return value ? value : '<span style="color:red;">Trống</span>';
-                                    };
+                                            if (phieuThu.trangThai) {
+                                                // Đã thanh toán
+                                                trangThaiClass = 'text-success';
+                                                trangThaiText = 'Đã thanh toán';
+                                            } else if (diffDays <= 5) {
+                                                // Chưa thanh toán trong vòng 5 ngày
+                                                trangThaiClass = 'text-warning';
+                                                trangThaiText = 'Chưa thanh toán';
+                                            } else {
+                                                // Quá 5 ngày và chưa thanh toán
+                                                trangThaiClass = 'text-danger';
+                                                trangThaiText = 'Chưa thanh toán';
+                                            }
 
-                                    // Định dạng tiền với dấu chấm ngăn cách hàng nghìn
-                                    var formatCurrency = function (value) {
-                                        return value ? value.toLocaleString('vi-VN') : '<span style="color:red;">Trống</span>';
-                                    };
+                                            // Kiểm tra nếu trường nào null thì thay thế bằng 'Trống' và thêm màu đỏ
+                                            var checkNull = function (value) {
+                                                return value ? value : '<span style="color:red;">Trống</span>';
+                                            };
+
+                                            // Định dạng tiền với dấu chấm ngăn cách hàng nghìn
+                                            var formatCurrency = function (value) {
+                                                return value ? value.toLocaleString('vi-VN') : '<span style="color:red;">Trống</span>';
+                                            };
+
+
+                                            // Nếu phiếu thu đã thanh toán hoặc có tổng tiền, làm nút "Nhập Điện Nước" bị khóa
+                                            var buttonDisabled = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'disabled' : '';
+                                            var buttonClass = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'btn-secondary' : 'btn-primary';
+
+                                            // Nếu phiếu thu đã có tổng tiền hợp lệ và chưa thanh toán, cho phép thanh toán
+                                            var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0;
+                                            var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
 
 
 
-                                    // Nếu phiếu thu đã thanh toán hoặc có tổng tiền, làm nút "Nhập Điện Nước" bị khóa
-                                    var buttonDisabled = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'disabled' : '';
-                                    var buttonClass = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'btn-secondary' : 'btn-primary';
+                                            var newRow = `
+                                                            <tr>
+                                                                <th scope="row">${checkNull(phieuThu.maPt)}</th>
+                                                                <td>${checkNull(phieuThu.ngayLap)}</td>
+                                                                <td>${checkNull(phieuThu.ngayThu)}</td>
 
-                                    // Nếu phiếu thu đã có tổng tiền hợp lệ và chưa thanh toán, cho phép thanh toán
-                                    var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0;
-                                    var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
+                                                                <td>${checkNull(phieuThu.dienCu)}</td>
+                                                               <td>${phieuThu.dienCu === phieuThu.dienMoi ? '<span style="color:red;">Trống</span>' : checkNull(phieuThu.dienMoi)}</td>
 
-
-                                    var newRow = `
-                                                    <tr>
-                                                        <th scope="row">${checkNull(phieuThu.maPt)}</th>
-                                                        <td>${checkNull(phieuThu.ngayLap)}</td>
-                                                        <td>${checkNull(phieuThu.ngayThu)}</td>
-
-                                                        <td>${checkNull(phieuThu.dienCu)}</td>
-                                                        <td>${checkNull(phieuThu.dienMoi)}</td>
-
-                                                        <td>${checkNull(phieuThu.nuocCu)}</td>
-                                                        <td>${checkNull(phieuThu.nuocMoi)}</td>
-                                                         <td>${formatCurrency(phieuThu.tienDien)}</td>
-                                                        <td>${formatCurrency(phieuThu.tienNuoc)}</td>
-                                                        <td>${formatCurrency(phieuThu.tienDv)}</td>
-                                                         <td>${formatCurrency(phieuThu.tienNha)}</td>
-                                                        <td>${formatCurrency(phieuThu.tongTien)}</td>
-                                                        <td>${formatCurrency(phieuThu.thanhToan)}</td>
-                                                        <td class="${trangThaiClass}">${trangThaiText}</td>
-                                                        <td>
-                                                            <button type="button" style="width: 125px; font-size: 12px;" class="btn ${buttonClass}" ${buttonDisabled}
-                                                                    data-toggle="modal" data-target="#exampleModal"
-                                                                    ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
-                                                                Nhập Điện Nước
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" style="width: 100px; font-size: 12px;" class="btn btn-success" ${paymentButtonDisabled}
-                                                                    data-toggle="modal" data-target="#paymentModal">
-                                                                Thanh Toán
-                                                            </button>
-                                                          </td>
-
-                                                          <td>
-                                                         <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info export-pdf-btn" data-ma-pt="${phieuThu.maPt}">
-                                                                        Xem hóa đơn
+                                                                <td>${checkNull(phieuThu.nuocCu)}</td>
+                                                                <td>${checkNull(phieuThu.nuocMoi)}</td>
+                                                                 <td>${formatCurrency(phieuThu.tienDien)}</td>
+                                                                <td>${formatCurrency(phieuThu.tienNuoc)}</td>
+                                                                <td>${formatCurrency(phieuThu.tienDv)}</td>
+                                                                 <td>${formatCurrency(phieuThu.tienNha)}</td>
+                                                                <td>${formatCurrency(phieuThu.tongTien)}</td>
+                                                                <td>${formatCurrency(phieuThu.thanhToan)}</td>
+                                                                <td class="${trangThaiClass}">${trangThaiText}</td>
+                                                                <td>
+                                                                    <button type="button" style="width: 125px; font-size: 12px;" class="btn ${buttonClass}" ${buttonDisabled}
+                                                                            data-toggle="modal" data-target="#exampleModal"
+                                                                            ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
+                                                                        Nhập Điện Nước
                                                                     </button>
-                                                        </td>
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" style="width: 100px; font-size: 12px;" class="btn btn-success" ${paymentButtonDisabled}
+                                                                            data-toggle="modal" data-target="#paymentModal">
+                                                                        Thanh Toán
+                                                                    </button>
+                                                                  </td>
+
+                                                                  <td>
+                                                                 <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info export-pdf-btn" data-ma-pt="${phieuThu.maPt}">
+                                                                                Xem hóa đơn
+                                                                            </button>
+                                                                </td>
 
 
-                                                    </tr>
-                                                `;
-                                    $('tbody').append(newRow);
-                                });
-                            } else {
-                                alert(response.message);
-                            }
-                        },
-                        error: function (xhr) {
-                            // alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
-                            // alert(' Không có thông tin phiếu thu tương ứng  ');
-                            $('#filterModal').modal('show');
+                                                            </tr>
+                                                        `;
+                                            $('tbody').append(newRow);
+                                        });
+                                    } else {
+                                        alert(response.message);
+                                    }
+                                },
+                                error: function (xhr) {
+                                    // alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
+                                    // alert(' Không có thông tin phiếu thu tương ứng  ');
+                                    $('#filterModal').modal('show');
+                                }
+                            });
                         }
-                    });
-                }
 
                         function exportPhieuThuToPdf(maPt) {
                             // Hiển thị modal và trạng thái "Loading..."
