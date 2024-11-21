@@ -233,35 +233,78 @@ namespace Apartment_Management_Web.Services
                         phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienNha?.ToString("#,0")} ").SetFont(font)));
                         stt++;
 
-                        // Thêm dòng Tiền Điện
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Điện").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.DienCu?.ToString()}").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.DienMoi?.ToString()}").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{(phieuThu.DienMoi - phieuThu.DienCu)?.ToString()}").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Cần điền giá điện
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienDien?.ToString("#,0")} ").SetFont(font)));
-                        stt++;
+                        //// Thêm dòng Tiền Điện
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Điện").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.DienCu?.ToString()}").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.DienMoi?.ToString()}").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{(phieuThu.DienMoi - phieuThu.DienCu)?.ToString()}").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Cần điền giá điện
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienDien?.ToString("#,0")} ").SetFont(font)));
+                        //stt++;
 
-                        // Thêm dòng Tiền Nước
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Nước").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.NuocCu?.ToString()}").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.NuocMoi?.ToString()}").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{(phieuThu.NuocMoi - phieuThu.NuocCu)?.ToString()}").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Cần điền giá nước
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienNuoc?.ToString("#,0")} ").SetFont(font)));
-                        stt++;
+                        //// Thêm dòng Tiền Nước
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Nước").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.NuocCu?.ToString()}").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.NuocMoi?.ToString()}").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{(phieuThu.NuocMoi - phieuThu.NuocCu)?.ToString()}").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Cần điền giá nước
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienNuoc?.ToString("#,0")} ").SetFont(font)));
+                        //stt++;
 
                         // Thêm dòng Tiền Dịch Vụ
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Dịch Vụ").SetFont(font)));
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("-")).SetFont(font)); // Cột Chỉ số đầu
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("-")).SetFont(font)); // Cột Chỉ số cuối
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("-")).SetFont(font)); // Cột Số lượng
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Cột Đơn giá
-                        phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienDv?.ToString("#,0")} ").SetFont(font))); // Cột Thành Tiền
-                        stt++;
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Dịch Vụ").SetFont(font)));
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("-")).SetFont(font)); // Cột Chỉ số đầu
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("-")).SetFont(font)); // Cột Chỉ số cuối
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("-")).SetFont(font)); // Cột Số lượng
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Cột Đơn giá
+                        //phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienDv?.ToString("#,0")} ").SetFont(font))); // Cột Thành Tiền
+                        //stt++;
+
+                        // Thêm các dịch vụ vào bảng Phiếu Thu
+                        foreach (var dichVu in dichVuList)
+                        {
+                            // Kiểm tra nếu là dịch vụ điện hoặc nước
+                            if (dichVu.TenDichVu == "Dịch vụ điện")
+                            {
+                                // Cập nhật dòng Tiền Điện
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Điện").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.DienCu?.ToString()}").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.DienMoi?.ToString()}").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{(phieuThu.DienMoi - phieuThu.DienCu)?.ToString()}").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0") ?? "-"}").SetFont(font))); // Đơn giá Tiền Điện
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienDien?.ToString("#,0")} ").SetFont(font))); // Thành tiền
+                                stt++;
+                            }
+                            else if (dichVu.TenDichVu == "Dịch vụ nước")
+                            {
+                                // Cập nhật dòng Tiền Nước
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Nước").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.NuocCu?.ToString()}").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.NuocMoi?.ToString()}").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{(phieuThu.NuocMoi - phieuThu.NuocCu)?.ToString()}").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0") ?? "-"}").SetFont(font))); // Đơn giá Tiền Nước
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienNuoc?.ToString("#,0")} ").SetFont(font))); // Thành tiền
+                                stt++;
+                            }
+                            else
+                            {
+                                // Các dịch vụ còn lại hiển thị bình thường
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.TenDichVu ?? "-").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Chỉ số đầu
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Chỉ số cuối
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Số lượng
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.DonGia?.ToString("#,0") ?? "-").SetFont(font))); // Đơn giá
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{((dichVu.DonGia ?? 0) * 1).ToString("#,0")}"))); // Thành tiền có dấu phân cách
+                                stt++;
+                            }
+                        }
+
 
 
                         document.Add(new Paragraph("PHIẾU THU TIỀN PHÒNG")
@@ -274,42 +317,42 @@ namespace Apartment_Management_Web.Services
 
                         document.Add(new Paragraph("\n"));
 
-                        // Kiểm tra xem có dịch vụ nào không, nếu không thì bỏ qua phần tạo bảng dịch vụ
-                        if (dichVuList.Any())
-                        {
-                            // Thêm bảng Dịch vụ phòng sử dụng
-                            var dichVuTable = new Table(3); // Bảng có 4 cột
-                            dichVuTable.SetWidth(UnitValue.CreatePercentValue(100)); // Đặt độ rộng bảng là 100% chiều rộng trang
+                        //// Kiểm tra xem có dịch vụ nào không, nếu không thì bỏ qua phần tạo bảng dịch vụ
+                        //if (dichVuList.Any())
+                        //{
+                        //    // Thêm bảng Dịch vụ phòng sử dụng
+                        //    var dichVuTable = new Table(3); // Bảng có 4 cột
+                        //    dichVuTable.SetWidth(UnitValue.CreatePercentValue(100)); // Đặt độ rộng bảng là 100% chiều rộng trang
 
-                            dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("STT").SetFont(font).SetBold()));
-                            dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("Dịch vụ").SetFont(font).SetBold()));
-                            dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("Đơn giá").SetFont(font).SetBold()));
-
-
-                            // Thêm các dịch vụ từ DichVuPhieuThu
-                            foreach (var dichVu in dichVuList)
-                            {
-                                dichVuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
-                                dichVuTable.AddCell(new Cell().Add(new Paragraph(dichVu.TenDichVu).SetFont(font)));
-                                dichVuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0")} ").SetFont(font)));
-
-                                stt++;
-                            }
+                        //    dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("STT").SetFont(font).SetBold()));
+                        //    dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("Dịch vụ").SetFont(font).SetBold()));
+                        //    dichVuTable.AddHeaderCell(new Cell().Add(new Paragraph("Đơn giá").SetFont(font).SetBold()));
 
 
-                            document.Add(new Paragraph("DỊCH VỤ PHÒNG SỬ DỤNG")
-                              .SetTextAlignment(TextAlignment.LEFT)
-                              .SetBold()
-                              .SetFont(font)
-                              .SetFontSize(12));
+                        //    // Thêm các dịch vụ từ DichVuPhieuThu
+                        //    foreach (var dichVu in dichVuList)
+                        //    {
+                        //        dichVuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
+                        //        dichVuTable.AddCell(new Cell().Add(new Paragraph(dichVu.TenDichVu).SetFont(font)));
+                        //        dichVuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0")} ").SetFont(font)));
 
-                            document.Add(dichVuTable);
-                        }
+                        //        stt++;
+                        //    }
+
+
+                        //    document.Add(new Paragraph("DỊCH VỤ PHÒNG SỬ DỤNG")
+                        //      .SetTextAlignment(TextAlignment.LEFT)
+                        //      .SetBold()
+                        //      .SetFont(font)
+                        //      .SetFontSize(12));
+
+                        //    document.Add(dichVuTable);
+                        //}
 
 
 
-                        // Thêm khoảng cách trước bảng Phiếu Thu
-                        document.Add(new Paragraph("\n"));
+                        //// Thêm khoảng cách trước bảng Phiếu Thu
+                        //document.Add(new Paragraph("\n"));
 
 
 
