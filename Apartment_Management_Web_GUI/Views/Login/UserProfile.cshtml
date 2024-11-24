@@ -889,7 +889,7 @@
 
                                 // Cập nhật chữ ký nếu có
                                 var chuKyFileName = khach.chuKy || 'default.jpg';
-                                $('.img-chuky').attr('src', @imageBaseUrl  + chuKyFileName).on('error', function () {
+                                $('.img-chuky').attr('src', @imageBaseUrl + 'ChuKy/'  + chuKyFileName).on('error', function () {
                                     $(this).attr('src', '/images/signature.png');
                                 });
                                 $('#chuKyName').text(chuKyFileName);
@@ -1104,7 +1104,7 @@
                                 console.log(uploadResponse);
 
                                 // Hiển thị ảnh chữ ký
-                                $('.img-chuky').attr('src', @imageBaseUrl + 'CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
+                                $('.img-chuky').attr('src', @imageBaseUrl + 'ChuKy/' + 'CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
                                     $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
                                 });
                             },
