@@ -137,6 +137,20 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Chuyển hướng tới Swagger khi truy cập host API IIS
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/swagger/index.html");
+    }
+    else
+    {
+        await next();
+    }
+});
+
+
 // Sử dụng CORS kết nối frontend
 app.UseCors("AllowOrigin");
 
