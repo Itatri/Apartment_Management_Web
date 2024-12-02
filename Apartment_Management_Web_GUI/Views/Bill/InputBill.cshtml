@@ -672,14 +672,14 @@
                         $('#userIdDisplay').text(user.id);
                     }
 
-                    // Các thông tin khác từ loginResponse, nếu cần hiển thị
+                    // Các thông tin khác từ loginResponse
                     console.log('Token:', loginResponse.token);
                     console.log('User:', user);
                     console.log('Mã phòng:', user?.maPhong);
                     console.log('Trạng thái:', user?.trangThai);
                 }
 
-                            // Hàm định dạng số với dấu chấm phân cách hàng nghìn
+                   // Hàm định dạng số với dấu chấm phân cách hàng nghìn
                 function formatCurrency(number) {
                     if (number == null || number === "") {
                         return "0 VND";
@@ -725,7 +725,7 @@
                     localStorage.removeItem('loginResponse');
 
                     // Kiểm tra xem loginResponse đã bị xóa chưa
-                    console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
+                    console.log('loginResponse:', localStorage.getItem('loginResponse')); 
 
                     // Hiển thị Modal thông báo đăng xuất thành công
                     $('#LogoutSuccessModal').modal('show');
@@ -739,14 +739,14 @@
 
                 // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
                 $('#confirmLogout').on('click', function () {
-                    $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
+                    $('#LogoutSuccessModal').modal('hide'); 
                 });
 
 
 
                 // Lắng nghe sự kiện submit của biểu mẫu
                 $('#emailForm').on('submit', function (e) {
-                    e.preventDefault(); // Ngăn chặn gửi form mặc định
+                    e.preventDefault(); 
 
                     var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
 
@@ -755,7 +755,7 @@
                         url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
                         type: 'POST',
                         success: function (response) {
-                            // alert(response); // Thông báo thành công
+                          
                             $('#SendEmailSuccessModal').modal('show');
                         },
                         error: function (xhr) {
@@ -881,8 +881,7 @@
                                     }
                                 },
                                 error: function (xhr) {
-                                    // alert('Đã xảy ra lỗi khi lấy dữ liệu: ' + xhr.responseJSON.message);
-                                    // alert(' Không có thông tin phiếu thu tương ứng  ');
+                                   
                                     $('#filterModal').modal('show');
                                 }
                             });
