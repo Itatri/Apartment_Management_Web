@@ -126,7 +126,7 @@ namespace Apartment_Management_Web.Controllers
             {
                 IsSuccess = true,
                 Message = "Cập nhật thông tin khách thành công.",
-                Khachs = null // Bạn có thể trả về thông tin khách đã cập nhật nếu cần
+                Khachs = null // Trả về thông tin khách đã cập nhật 
             });
         }
 

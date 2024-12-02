@@ -717,7 +717,7 @@
 
             // Lắng nghe sự kiện submit của biểu mẫu
             $('#emailForm').on('submit', function (e) {
-                e.preventDefault(); // Ngăn chặn gửi form mặc định
+                e.preventDefault(); 
 
                 var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
 
@@ -726,8 +726,7 @@
                     url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
                     type: 'POST',
                     success: function (response) {
-                        // alert(response); // Thông báo thành công
-                        // Hiển thị modal thông báo gửi Email thành công
+                        
                         $('#SendEmailSuccessModal').modal('show');
                     },
                     error: function (xhr) {

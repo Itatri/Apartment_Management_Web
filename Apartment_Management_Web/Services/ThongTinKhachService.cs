@@ -11,13 +11,13 @@ namespace Apartment_Management_Web.Services
     public class ThongTinKhachService : IThongTinKhachService
     {
         private readonly IConfiguration _configuration;
-        // Sửa lại DBContext nếu có thay đổi DB
+
         private readonly QlChungCuContext _context;
 
         public ThongTinKhachService(QlChungCuContext context, IConfiguration configuration)
         {
             _context = context;
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration)); // Khởi tạo IConfiguration
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public async Task<IEnumerable<ThongTinKhach>> GetAllThongTinKhachAsync()
@@ -119,40 +119,7 @@ namespace Apartment_Management_Web.Services
         }
 
 
-        //public async Task<string> UploadChuKyAsync(IFormFile file, string maKhachTro, string hoTen)
-        //{
-        //    if (file == null || file.Length == 0)
-        //    {
-        //        throw new ArgumentException("Không có tệp nào được tải lên.");
-        //    }
 
-        //    // Đọc đường dẫn từ appsettings.json
-        //    var folderPath = _configuration["ImageSettings:UploadFolderPath"];
-
-
-        //    // Kiểm tra thư mục có tồn tại hay không, nếu không thì tạo
-        //    if (!Directory.Exists(folderPath))
-        //    {
-        //        Directory.CreateDirectory(folderPath);
-        //    }
-
-        //    // Xử lý họ tên để loại bỏ dấu và khoảng trắng
-        //    var tenKhongDau = RemoveDiacritics(hoTen).Replace(" ", "");
-
-        //    // Đặt tên file theo định dạng CK_MaKhachTro_HoTen.jpg
-        //    var fileName = $"CK_{maKhachTro}_{tenKhongDau}.jpg";
-        //    var filePath = Path.Combine(folderPath, fileName);
-
-        //    using (var stream = new FileStream(filePath, FileMode.Create))
-        //    {
-        //        await file.CopyToAsync(stream); // Lưu tệp vào thư mục
-        //    }
-
-        //    // Ghi tên file vào database
-        //    await UpdateChuKyAsync(maKhachTro, fileName);
-
-        //    return fileName; // Trả về tên file đã upload
-        //}
 
         public async Task<string> UploadChuKyAsync(IFormFile file, string maKhachTro, string hoTen)
         {

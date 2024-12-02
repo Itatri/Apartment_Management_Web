@@ -766,7 +766,7 @@
 
             // Kiểm tra xem loginResponse có tồn tại hay không
             if (loginResponse) {
-                var user = loginResponse.user; // Lấy thông tin user từ loginResponse
+                var user = loginResponse.user; 
 
 
 
@@ -807,13 +807,13 @@
 
             // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
             $('#confirmLogout').on('click', function () {
-                $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
+                $('#LogoutSuccessModal').modal('hide'); 
             });
 
 
             // Lắng nghe sự kiện submit của biểu mẫu
             $('#emailForm').on('submit', function (e) {
-                e.preventDefault(); // Ngăn chặn gửi form mặc định
+                e.preventDefault(); 
 
                 var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
 
@@ -822,7 +822,7 @@
                     url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
                     type: 'POST',
                     success: function (response) {
-                        // alert(response); // Thông báo thành công
+                      
                         $('#SendEmailSuccessModal').modal('show');
                     },
                     error: function (xhr) {

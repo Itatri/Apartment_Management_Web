@@ -208,12 +208,12 @@
                         if (response.isSuccess) {
                             handleLoginSuccess(response);
                         } else {
-                            // alert(response.message);
+                            
                            handleLoginError(response.message); // Hiển thị lỗi từ server
                         }
                     },
                     error: function (xhr) {
-                        // alert('Đã xảy ra lỗi khi đăng nhập: ' + xhr.responseJSON.message);
+                    
                          var errorMessage = xhr.responseJSON?.message || 'Lỗi kết nối đến máy chủ.';
                     handleLoginError(errorMessage); // Hiển thị lỗi
                     }
