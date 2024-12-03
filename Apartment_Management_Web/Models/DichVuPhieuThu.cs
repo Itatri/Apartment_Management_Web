@@ -11,7 +11,11 @@ public partial class DichVuPhieuThu
 
     public string? TenDichVu { get; set; }
 
+    public int? SoLuong { get; set; }
+
     public double? DonGia { get; set; }
+
+    public double? ThanhTien { get; set; }
 
     public virtual PhieuThu? MaPtNavigation { get; set; }
 }
