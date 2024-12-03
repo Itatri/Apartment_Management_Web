@@ -47,7 +47,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<DangNhap>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DangNhap__3214EC27E9C5A385");
+            entity.HasKey(e => e.Id).HasName("PK__DangNhap__3214EC2733A4EC59");
 
             entity.ToTable("DangNhap");
 
@@ -69,7 +69,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<DichVu>(entity =>
         {
-            entity.HasKey(e => e.MaDichVu).HasName("PK__DichVu__C0E6DE8F2FBEBFA1");
+            entity.HasKey(e => e.MaDichVu).HasName("PK__DichVu__C0E6DE8F4B4DCD2D");
 
             entity.ToTable("DichVu", tb => tb.HasTrigger("trg_PreventDeleteDichVu"));
 
@@ -80,7 +80,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<DichVuPhieuThu>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DichVuPh__3214EC27E31A7C33");
+            entity.HasKey(e => e.Id).HasName("PK__DichVuPh__3214EC270D289247");
 
             entity.ToTable("DichVuPhieuThu");
 
@@ -97,7 +97,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<FeedBack>(entity =>
         {
-            entity.HasKey(e => e.MaFb).HasName("PK__FeedBack__2725963C2807B4F2");
+            entity.HasKey(e => e.MaFb).HasName("PK__FeedBack__2725963C70304EB5");
 
             entity.ToTable("FeedBack");
 
@@ -118,7 +118,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<KhuVuc>(entity =>
         {
-            entity.HasKey(e => e.MaKhuVuc).HasName("PK__KhuVuc__0676EB838851159B");
+            entity.HasKey(e => e.MaKhuVuc).HasName("PK__KhuVuc__0676EB839ADAC0EC");
 
             entity.ToTable("KhuVuc");
 
@@ -129,7 +129,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<PhieuThu>(entity =>
         {
-            entity.HasKey(e => e.MaPt).HasName("PK__PhieuThu__2725E7F6ED59209F");
+            entity.HasKey(e => e.MaPt).HasName("PK__PhieuThu__2725E7F632F0BC05");
 
             entity.ToTable("PhieuThu");
 
@@ -149,7 +149,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<Phong>(entity =>
         {
-            entity.HasKey(e => e.MaPhong).HasName("PK__Phong__20BD5E5B328E27A5");
+            entity.HasKey(e => e.MaPhong).HasName("PK__Phong__20BD5E5B5F4BE59A");
 
             entity.ToTable("Phong");
 
@@ -178,7 +178,7 @@ public partial class QlChungCuContext : DbContext
                         .HasConstraintName("fk_DichVuPhong_Phong"),
                     j =>
                     {
-                        j.HasKey("MaPhong", "MaDichVu").HasName("PK__DichVuPh__CCB333B3AB1A218B");
+                        j.HasKey("MaPhong", "MaDichVu").HasName("PK__DichVuPh__CCB333B3525F03C6");
                         j.ToTable("DichVuPhong");
                         j.IndexerProperty<string>("MaPhong")
                             .HasMaxLength(50)
@@ -191,7 +191,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<ThongTinAdmin>(entity =>
         {
-            entity.HasKey(e => e.MaAdmin).HasName("PK__ThongTin__49341E388096D926");
+            entity.HasKey(e => e.MaAdmin).HasName("PK__ThongTin__49341E38FD562099");
 
             entity.ToTable("ThongTinAdmin");
 
@@ -222,7 +222,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<ThongTinKhach>(entity =>
         {
-            entity.HasKey(e => e.MaKhachTro).HasName("PK__ThongTin__297FACA6F3DB4CB8");
+            entity.HasKey(e => e.MaKhachTro).HasName("PK__ThongTin__297FACA660B7FA56");
 
             entity.ToTable("ThongTinKhach");
 
@@ -253,7 +253,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<TraPhong>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TraPhong__3214EC27ED79C3B0");
+            entity.HasKey(e => e.Id).HasName("PK__TraPhong__3214EC27CE707E63");
 
             entity.ToTable("TraPhong");
 
@@ -279,7 +279,7 @@ public partial class QlChungCuContext : DbContext
 
         modelBuilder.Entity<UserPhong>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UserPhon__3214EC276149936E");
+            entity.HasKey(e => e.Id).HasName("PK__UserPhon__3214EC277908F3FF");
 
             entity.ToTable("UserPhong");
 

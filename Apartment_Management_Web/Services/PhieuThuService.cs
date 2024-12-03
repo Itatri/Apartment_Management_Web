@@ -268,7 +268,7 @@ namespace Apartment_Management_Web.Services
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.TenDichVu ?? "-").SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Chỉ số đầu
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Chỉ số cuối
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Số lượng
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.SoLuong?.ToString() ?? "-").SetFont(font))); // Số lượng
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.DonGia?.ToString("#,0") ?? "-").SetFont(font))); // Đơn giá
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{((dichVu.DonGia ?? 0) * 1).ToString("#,0")}"))); // Thành tiền có dấu phân cách
                                 stt++;
