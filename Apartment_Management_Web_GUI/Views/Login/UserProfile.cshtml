@@ -150,6 +150,25 @@
         </header>
     </div>
 
+<!-- Thêm Modal thông báo lỗi khi lấy thông tin khách -->
+<div class="modal fade" id="errorGetKhachModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Nội dung thông báo sẽ được thêm vào đây động -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
     <!-- Modal thông báo đăng xuất thành công -->
@@ -793,12 +812,16 @@
                                     khachTableBody.append(row);
                                 });
                             } else {
-                                alert(response.message || 'Không tìm thấy thông tin khách.');
+                                // Thay thế alert bằng Modal
+                                $('#errorGetKhachModal .modal-body').text(response.message || 'Không tìm thấy thông tin khách.');
+                                $('#errorGetKhachModal').modal('show');
                             }
                         },
                         error: function (error) {
                             console.error('Đã xảy ra lỗi:', error);
-                            alert('Không thể lấy thông tin khách.');
+                            // Thay thế alert bằng Modal
+                            $('#errorGetKhachModal .modal-body').text('Không thể lấy thông tin khách.');
+                            $('#errorGetKhachModal').modal('show');
                         }
                     });
                 } else {
