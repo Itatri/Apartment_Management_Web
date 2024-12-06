@@ -133,6 +133,7 @@ namespace Apartment_Management_Web.Services
             var phong = await _context.Phongs.FirstOrDefaultAsync(p => p.MaPhong == phieuThu.MaPhong);
             string tenPhong = phong?.TenPhong ?? "Không xác định";
             double? congNo = phong?.CongNo; // Lấy giá trị Công Nợ từ bảng Phong
+            double? congNoHienThi = congNo.HasValue ? -congNo : 0;
 
             var dichVuList = await _context.DichVuPhieuThus
                 .Where(dv => dv.MaPt == maPt)
@@ -194,10 +195,10 @@ namespace Apartment_Management_Web.Services
                         document.Add(dateLine);
 
                         // Kiểm tra nếu congNo có giá trị, nếu có thì gọi ToString, nếu không thì sử dụng chuỗi trống hoặc giá trị mặc định
-                        document.Add(new Paragraph($"Số tiền còn nợ : {(congNo?.ToString("#,0") ?? "0")} VND")
-                            .SetTextAlignment(TextAlignment.LEFT)
-                            .SetFont(font)
-                            .SetFontSize(12));
+                        document.Add(new Paragraph($"Số tiền còn nợ : {congNoHienThi?.ToString("#,0") ?? "0"} VND")
+                        .SetTextAlignment(TextAlignment.LEFT)
+                        .SetFont(font)
+                        .SetFontSize(12));
 
                         int stt = 1;
 
