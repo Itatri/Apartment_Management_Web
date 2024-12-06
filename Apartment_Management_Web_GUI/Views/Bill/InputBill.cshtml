@@ -689,34 +689,36 @@
                 }
 
                    // Fetch and display TenPhong using maPhong
-                if (user?.maPhong) {
-                    $.ajax({
-                        url: `@apiBaseUrl/api/UserPhongs/GetPhongByMaPhong?maPhong=${user.maPhong}`,
-                        type: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + loginResponse.token
-                        },
-                        success: function (response) {
-                            if (response) {
-                                $('#tenPhongLabel').text(response.tenPhong || 'Không tìm thấy tên phòng');
+                        if (user?.maPhong) {
+                        $.ajax({
+                            url: `@apiBaseUrl/api/UserPhongs/GetPhongByMaPhong?maPhong=${user.maPhong}`,
+                            type: 'GET',
+                            headers: {
+                                'Authorization': 'Bearer ' + loginResponse.token
+                            },
+                            success: function (response) {
+                                if (response) {
+                                    $('#tenPhongLabel').text(response.tenPhong || 'Không tìm thấy tên phòng');
 
-                              // Lưu tên phòng vào biến
-                                tenPhong = response.tenPhong || 'Không tìm thấy tên phòng';
+                                   
+                                    tenPhong = response.tenPhong || 'Không tìm thấy tên phòng';
 
-                                     // Kiểm tra và hiển thị công nợ
-                                let congNo = response.congNo || 0; // Nếu congNo không có giá trị, gán mặc định là 0
-                                $('#congNoLabel').text(formatCurrency(congNo));
-                            } else {
+                                  
+                                    let congNo = response.congNo || 0; 
+                                    let congNoHienThi = congNo > 0 ? -congNo : Math.abs(congNo); 
+                                    $('#congNoLabel').text(formatCurrency(congNoHienThi));
+                                } else {
+                                    $('#tenPhongLabel').text('Không tìm thấy tên phòng');
+                                    $('#congNoLabel').text(formatCurrency(0));
+                                }
+                            },
+                            error: function () {
                                 $('#tenPhongLabel').text('Không tìm thấy tên phòng');
-                                  $('#congNoLabel').text(formatCurrency(0));
+                                $('#congNoLabel').text(formatCurrency(0));
                             }
-                        },
-                        error: function () {
-                            $('#tenPhongLabel').text('Không tìm thấy tên phòng');
-                               $('#congNoLabel').text(formatCurrency(0));
-                        }
-                    });
-                }
+                        });
+                    }
+
 
 
                 // Xử lý sự kiện nhấn vào nút Đăng xuất
