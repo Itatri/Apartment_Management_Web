@@ -2,8 +2,8 @@
 {
     public class CreateFeedbackRequest
     {
-        public string MaPhong { get; set; } // Mã phòng cần truyền từ phía client
-        public string MoTa { get; set; } // Mô tả phản hồi
+        public string MaPhong { get; set; }
+        public string MoTa { get; set; }
     }
 
 }

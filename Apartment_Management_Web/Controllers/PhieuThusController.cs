@@ -18,7 +18,7 @@ namespace Apartment_Management_Web.Controllers
         }
 
 
-        // API lấy danh sách User phòng 
+        // API lấy danh sách phiếu thu của phòng
         [Authorize]
         [HttpGet("GetAllThongTinPhieuThu")]
         public async Task<ActionResult<IEnumerable<PhieuThu>>> GetPhieuThus()
@@ -28,15 +28,15 @@ namespace Apartment_Management_Web.Controllers
         }
 
 
-
+        // API lấy danh sách phiếu thu theo phòng
         [Authorize]
         [HttpGet("GetThongTinPhieuThuBy_MaPhong")]
         public async Task<ActionResult<BillCustomerRespone>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai, int pageNumber = 1, int pageSize = 5)
         {
-            // Lấy dữ liệu phiếu thu
+
             var thongtinPhieuThu = await _PhieuThuService.GetThongTinPhieuThuBy_MaPhongAsync(maPhong, startDate, endDate, trangThai, pageNumber, pageSize);
 
-            // Tính tổng số bản ghi
+
             var totalCount = await _PhieuThuService.GetTotalCountAsync(maPhong, startDate, endDate, trangThai);
 
             var response = new BillCustomerRespone();
@@ -47,7 +47,7 @@ namespace Apartment_Management_Web.Controllers
                 response.Message = "Không tìm thấy thông tin phiếu thu.";
                 response.Phieuthus = null;
                 response.TotalCount = totalCount;
-                response.TotalPages = 0; // Không có trang nếu không có dữ liệu
+                response.TotalPages = 0;
                 return NotFound(response);
             }
 
@@ -55,17 +55,17 @@ namespace Apartment_Management_Web.Controllers
             response.Message = "Lấy thông tin phiếu thu thành công.";
             response.Phieuthus = thongtinPhieuThu;
             response.TotalCount = totalCount;
-            response.TotalPages = (int)Math.Ceiling((double)totalCount / pageSize); // Tính tổng số trang
+            response.TotalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
             return Ok(response);
         }
 
-
+        // API cập nhật điện nước mới của phiếu thu 
         [Authorize]
         [HttpPut("UpdatePhieuThu")]
         public async Task<ActionResult<BillCustomerRespone>> UpdatePhieuThuAsync(string maPt, decimal dienMoi, decimal nuocMoi)
         {
-            // Tìm phiếu thu theo MaPt
+
             var phieuThu = await _PhieuThuService.GetPhieuThuByMaPtAsync(maPt);
 
             var response = new BillCustomerRespone();
@@ -74,32 +74,32 @@ namespace Apartment_Management_Web.Controllers
             {
                 response.IsSuccess = false;
                 response.Message = "Không tìm thấy phiếu thu với mã phiếu thu.";
-                return NotFound(response); // Trả về trạng thái 404 với response
+                return NotFound(response);
             }
 
-            // Cập nhật thông tin phiếu thu, chuyển đổi từ decimal sang double?
+
             phieuThu.DienMoi = (double?)dienMoi;
             phieuThu.NuocMoi = (double?)nuocMoi;
 
-            // Lưu thay đổi vào cơ sở dữ liệu
+
             var updateResult = await _PhieuThuService.UpdatePhieuThuAsync(phieuThu);
 
             if (!updateResult)
             {
                 response.IsSuccess = false;
                 response.Message = "Cập nhật phiếu thu không thành công.";
-                return StatusCode(500, response); // Trả về trạng thái 500 nếu có lỗi trong quá trình cập nhật
+                return StatusCode(500, response);
             }
 
             response.IsSuccess = true;
             response.Message = "Cập nhật phiếu thu thành công.";
-            response.Phieuthus = new List<PhieuThu> { phieuThu }; // Trả về thông tin phiếu thu đã cập nhật
+            response.Phieuthus = new List<PhieuThu> { phieuThu };
 
-            return Ok(response); // Trả về trạng thái 200 với response
+            return Ok(response);
         }
 
 
-        // Phương thức xuất phiếu thu thành PDF
+        // API xuất phiếu thu thành PDF
         [HttpGet("ExportPhieuThuToPdf")]
         public async Task<IActionResult> ExportPhieuThuToPdf(string maPt)
         {
@@ -114,7 +114,7 @@ namespace Apartment_Management_Web.Controllers
             }
         }
 
-
+        // API lấy thông tin Admin của phòng
         [Authorize]
         [HttpGet("GetAdminInfoByMaPhong")]
         public async Task<ActionResult<AdminInfoResponse>> GetAdminInfoByMaPhong(string maPhong)

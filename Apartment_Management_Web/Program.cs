@@ -12,30 +12,28 @@
 //  Generate and Override Model from Database :
 // Scaffold-DbContext "Server=TRIS72\VANTRI;Database=QL_ChungCu;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
 
-//  Triển khai IIS thì đổi Connection ở QLChungContext thành "Server=TRIS72\\VANTRI;Database=QL_ChungCu;User Id=ITApartment;Password=16092003;TrustServerCertificate=True;"
+//  Triển khai IIS thì đổi Connection ở QLChungContext thành :
+//  "Server=TRIS72\\VANTRI;Database=QL_ChungCu;User Id=ITApartment;Password=16092003;TrustServerCertificate=True;"
 
 
 
-// Cài đặt gói xác thực JWT Bearer
+// Cài đặt gói xác thực JWT Bearer :
 // Install-Package Microsoft.AspNetCore.Authentication.JwtBearer
 // dotnet add package System.IdentityModel.Tokens.Jwt
 
-// Add libary Bootstrap Terminal 
+// Cài đặt gói Bootstrap  
 // dotnet add package Bootstrap
 
-// Cài đặt Thư Viện iTextSharp ( Chuyen den thu muc cua API ) 
+// Cài đặt Thư Viện iTextSharp ( PDF )
 // dotnet add package itext7
 
-// Cài Đặt Serilog
+// Cài Đặt Serilog ( Viết log lỗi )
 // dotnet add package Serilog.AspNetCore
 // dotnet add package Serilog.Sinks.File
 
 
 
 
-// Add services to the container.
-
-//  Đăng ký Service trong Program.cs
 
 using Apartment_Management_Web.Interfaces;
 using Apartment_Management_Web.Models;
@@ -49,21 +47,20 @@ using Serilog;
 using System.Text;
 
 
-//using Microsoft.AspNetCore.Mvc;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Cấu hình Serilog để ghi log vào file
+// Cấu hình  ghi log 
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console() // Ghi log vào console
-    .WriteTo.File("Logs/myapp.txt", rollingInterval: RollingInterval.Day) // Ghi log vào file (lưu theo ngày)
+    .WriteTo.Console()
+    .WriteTo.File("Logs/myapp.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
-// Đăng ký Serilog làm logger cho ứng dụng
-builder.Host.UseSerilog(); // Đảm bảo sử dụng Serilog
+
+builder.Host.UseSerilog();
 
 
 
@@ -78,10 +75,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowOrigin",
         policy =>
         {
-            policy.AllowAnyOrigin() // Hoặc .WithOrigins(frontendUrl) nếu muốn giới hạn URL
+            policy.AllowAnyOrigin()
                   .AllowAnyHeader()
                   .AllowAnyMethod()
-                  .WithExposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers"); // Expose thêm headers nếu cần
+                  .WithExposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers");
         });
 });
 
@@ -117,14 +114,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtSettings["Issuer"], // Địa chỉ phát hành token hợp lệ (issuer)
-            ValidAudience = jwtSettings["Audience"], // Đối tượng sử dụng token hợp lệ (audience)
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"])) // Chuỗi bảo mật token
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
         };
     });
 
 
-// Sửa lại DBContext nếu có thay đổi DB
+// Cấu hình kết nối Data
 builder.Services.AddDbContext<QlChungCuContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -133,7 +130,7 @@ builder.Services.AddDbContext<QlChungCuContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-////builder.Services.AddControllersWithViews(); // Thêm dịch vụ cho MVC và View
+
 
 var app = builder.Build();
 
@@ -169,15 +166,12 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-// Thêm UseAuthentication trước UseAuthorization
 app.UseAuthentication();
 app.UseAuthorization();
 
 
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}"); // Thiết lập routing cho MVC
+
 
 app.MapControllers();
 

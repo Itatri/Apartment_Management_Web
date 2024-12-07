@@ -7,7 +7,7 @@ using iText.Kernel.Colors;
 using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
-using iText.Layout;  // Thêm dòng này
+using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using Microsoft.EntityFrameworkCore;
@@ -23,14 +23,13 @@ namespace Apartment_Management_Web.Services
         {
             _context = context;
         }
+        // Hàm lấy danh sách phiếu thu của phòng 
 
         public async Task<IEnumerable<PhieuThu>> GetAllThongTinPhieuThuAsync()
         {
             return await _context.PhieuThus.ToListAsync();
         }
-
-
-
+        // Hàm lấy danh sách phiếu thu theo phòng
 
         public async Task<List<PhieuThu>> GetThongTinPhieuThuBy_MaPhongAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai, int pageNumber, int pageSize)
         {
@@ -38,7 +37,7 @@ namespace Apartment_Management_Web.Services
 
             query = query.Where(t => t.MaPhong == maPhong);
 
-            // Lọc theo ngày lập
+
             if (startDate.HasValue)
             {
                 query = query.Where(t => t.NgayLap >= startDate.Value);
@@ -49,7 +48,7 @@ namespace Apartment_Management_Web.Services
                 query = query.Where(t => t.NgayLap <= endDate.Value);
             }
 
-            // Lọc theo trạng thái
+
             if (trangThai.HasValue)
             {
                 query = query.Where(t => t.TrangThai == trangThai.Value);
@@ -57,9 +56,9 @@ namespace Apartment_Management_Web.Services
 
 
 
-            // Sắp xếp theo ngày lập giảm dần để hiển thị ngày mới nhất trước
+
             var pagedResult = await query
-                .OrderByDescending(t => t.NgayLap) // Sắp xếp theo ngày lập
+                .OrderByDescending(t => t.NgayLap)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -68,6 +67,7 @@ namespace Apartment_Management_Web.Services
             return pagedResult;
         }
 
+        // Hàm lấy tổng phiếu thu API trả về
 
         public async Task<int> GetTotalCountAsync(string maPhong, DateOnly? startDate, DateOnly? endDate, bool? trangThai)
         {
@@ -75,7 +75,7 @@ namespace Apartment_Management_Web.Services
 
             query = query.Where(t => t.MaPhong == maPhong);
 
-            // Lọc theo ngày lập
+
             if (startDate.HasValue)
             {
                 query = query.Where(t => t.NgayLap >= startDate.Value);
@@ -86,7 +86,7 @@ namespace Apartment_Management_Web.Services
                 query = query.Where(t => t.NgayLap <= endDate.Value);
             }
 
-            // Lọc theo trạng thái
+
             if (trangThai.HasValue)
             {
                 query = query.Where(t => t.TrangThai == trangThai.Value);
@@ -96,29 +96,29 @@ namespace Apartment_Management_Web.Services
         }
 
 
+        // Hàm lấy thông tin phiếu thu theo mã phiếu
 
-
-
-        // Lấy phiếu thu theo MaPt
         public async Task<PhieuThu?> GetPhieuThuByMaPtAsync(string maPt)
         {
             return await _context.PhieuThus
                 .FirstOrDefaultAsync(pt => pt.MaPt == maPt);
         }
 
-        // Cập nhật phiếu thu
+        // Hàm cập nhật điện nước mới của phiếu thu 
+
         public async Task<bool> UpdatePhieuThuAsync(PhieuThu phieuThu)
         {
             _context.PhieuThus.Update(phieuThu);
             return await _context.SaveChangesAsync() > 0;
         }
-
+        // Hàm lấy dịch vụ theo mã phiếu
         public async Task<List<DichVuPhieuThu>> GetDichVuByMaPtAsync(string maPt)
         {
             return await _context.DichVuPhieuThus
                 .Where(dv => dv.MaPt == maPt)
                 .ToListAsync();
         }
+        // Hàm xuất phiếu thu thành PDF
 
         public async Task<byte[]> ExportPhieuThuToPdfAsync(string maPt)
         {
@@ -132,7 +132,7 @@ namespace Apartment_Management_Web.Services
 
             var phong = await _context.Phongs.FirstOrDefaultAsync(p => p.MaPhong == phieuThu.MaPhong);
             string tenPhong = phong?.TenPhong ?? "Không xác định";
-            double? congNo = phong?.CongNo; // Lấy giá trị Công Nợ từ bảng Phong
+            double? congNo = phong?.CongNo;
             double? congNoHienThi = congNo.HasValue ? -congNo : 0;
 
             var dichVuList = await _context.DichVuPhieuThus
@@ -155,7 +155,7 @@ namespace Apartment_Management_Web.Services
 
 
 
-                        // Thông tin cơ bản
+
                         document.Add(new Paragraph("HÓA ĐƠN TIỀN PHÒNG")
                             .SetTextAlignment(TextAlignment.CENTER)
                             .SetBold()
@@ -166,13 +166,13 @@ namespace Apartment_Management_Web.Services
                             .SetFont(font).SetFontSize(12));
 
 
-                        // Tạo một Paragraph cho phòng và trạng thái thanh toán cùng một dòng
+
                         var roomStatusLine = new Paragraph()
 
-                            .Add(new Text($"Phòng : {tenPhong}")  // Hiển thị tên phòng
+                            .Add(new Text($"Phòng : {tenPhong}")
                             .SetFont(font)
                             .SetFontSize(12))
-                            .Add(new Text("     ") // Khoảng cách giữa Phòng và Trạng Thái
+                            .Add(new Text("     ")
                                 .SetFont(font)
                                 .SetFontSize(12))
                             .Add(new Text($"Trạng Thái : ")
@@ -183,18 +183,18 @@ namespace Apartment_Management_Web.Services
                                 .SetFontSize(12)
                                 .SetFontColor(phieuThu.TrangThai == true ? ColorConstants.GREEN : ColorConstants.RED));
 
-                        // Thêm đoạn văn vào tài liệu
+
                         document.Add(roomStatusLine);
 
 
-                        // Thêm ngày lập và ngày thu vào cùng một dòng
+
                         var dateLine = new Paragraph()
                             .Add(new Text($"Ngày Lập : {phieuThu.NgayLap?.ToString("dd/MM/yyyy")}").SetFont(font).SetFontSize(12))
                             .Add(new Text($"     Ngày Thu : {phieuThu.NgayThu?.ToString("dd/MM/yyyy")}").SetFont(font).SetFontSize(12));
 
                         document.Add(dateLine);
 
-                        // Kiểm tra nếu congNo có giá trị, nếu có thì gọi ToString, nếu không thì sử dụng chuỗi trống hoặc giá trị mặc định
+
                         document.Add(new Paragraph($"Số tiền còn nợ : {congNoHienThi?.ToString("#,0") ?? "0"} VND")
                         .SetTextAlignment(TextAlignment.LEFT)
                         .SetFont(font)
@@ -205,12 +205,12 @@ namespace Apartment_Management_Web.Services
 
 
 
-                        // Thêm khoảng cách trước bảng Phiếu Thu
+
                         document.Add(new Paragraph("\n"));
 
-                        // Thêm bảng Phiếu Thu tiền phòng
-                        var phieuThuTable = new Table(7); // Bảng có 7 cột
-                        phieuThuTable.SetWidth(UnitValue.CreatePercentValue(100)); // Đặt độ rộng bảng là 100% chiều rộng trang
+
+                        var phieuThuTable = new Table(7);
+                        phieuThuTable.SetWidth(UnitValue.CreatePercentValue(100));
 
                         phieuThuTable.AddHeaderCell(new Cell().Add(new Paragraph("STT").SetFont(font).SetBold()));
                         phieuThuTable.AddHeaderCell(new Cell().Add(new Paragraph("Khoản").SetFont(font).SetBold()));
@@ -222,7 +222,7 @@ namespace Apartment_Management_Web.Services
 
                         stt = 1;
 
-                        // Thêm các dịch vụ cố định như Tiền Phòng
+
                         phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
                         phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Phòng").SetFont(font)));
                         phieuThuTable.AddCell(new Cell().Add(new Paragraph("-")).SetFont(font));
@@ -234,44 +234,44 @@ namespace Apartment_Management_Web.Services
 
 
 
-                        // Thêm các dịch vụ vào bảng Phiếu Thu
+
                         foreach (var dichVu in dichVuList)
                         {
-                            // Kiểm tra nếu là dịch vụ điện hoặc nước
+
                             if (dichVu.TenDichVu == "Dịch vụ điện")
                             {
-                                // Cập nhật dòng Tiền Điện
+
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Điện").SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.DienCu?.ToString()}").SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.DienMoi?.ToString()}").SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{(phieuThu.DienMoi - phieuThu.DienCu)?.ToString()}").SetFont(font)));
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0") ?? "-"}").SetFont(font))); // Đơn giá Tiền Điện
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienDien?.ToString("#,0")} ").SetFont(font))); // Thành tiền
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0") ?? "-"}").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienDien?.ToString("#,0")} ").SetFont(font)));
                                 stt++;
                             }
                             else if (dichVu.TenDichVu == "Dịch vụ nước")
                             {
-                                // Cập nhật dòng Tiền Nước
+
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph("Tiền Nước").SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.NuocCu?.ToString()}").SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.NuocMoi?.ToString()}").SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{(phieuThu.NuocMoi - phieuThu.NuocCu)?.ToString()}").SetFont(font)));
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0") ?? "-"}").SetFont(font))); // Đơn giá Tiền Nước
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienNuoc?.ToString("#,0")} ").SetFont(font))); // Thành tiền
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{dichVu.DonGia?.ToString("#,0") ?? "-"}").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{phieuThu.TienNuoc?.ToString("#,0")} ").SetFont(font)));
                                 stt++;
                             }
                             else
                             {
-                                // Các dịch vụ còn lại hiển thị bình thường
+
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph(stt.ToString()).SetFont(font)));
                                 phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.TenDichVu ?? "-").SetFont(font)));
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Chỉ số đầu
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font))); // Chỉ số cuối
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.SoLuong?.ToString() ?? "-").SetFont(font))); // Số lượng
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.DonGia?.ToString("#,0") ?? "-").SetFont(font))); // Đơn giá
-                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{((dichVu.DonGia ?? 0) * 1).ToString("#,0")}"))); // Thành tiền có dấu phân cách
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph("-").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.SoLuong?.ToString() ?? "-").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph(dichVu.DonGia?.ToString("#,0") ?? "-").SetFont(font)));
+                                phieuThuTable.AddCell(new Cell().Add(new Paragraph($"{((dichVu.DonGia ?? 0) * 1).ToString("#,0")}")));
                                 stt++;
                             }
                         }
@@ -289,11 +289,6 @@ namespace Apartment_Management_Web.Services
                         document.Add(new Paragraph("\n"));
 
 
-
-
-
-
-                        // Tổng tiền và kết thúc
                         document.Add(new Paragraph($"Tổng Tiền: {phieuThu.TongTien?.ToString("#,0")} VND")
                             .SetTextAlignment(TextAlignment.RIGHT).SetFont(font).SetBold().SetFontSize(12));
 
@@ -303,7 +298,7 @@ namespace Apartment_Management_Web.Services
 
                         document.Add(new Paragraph("\n"));
 
-                        // Thêm dòng yêu cầu và thông tin liên hệ, căn giữa
+
                         document.Add(new Paragraph("* Yêu cầu các phòng thanh toán trước thời gian quy định")
                             .SetTextAlignment(TextAlignment.CENTER)
                             .SetFont(font)
@@ -320,12 +315,12 @@ namespace Apartment_Management_Web.Services
                             .SetFont(font)
                             .SetFontSize(12));
 
-                        // Thêm khoảng cách giữa logo và tiêu đề
+
                         document.Add(new Paragraph("\n"));
-                        // Thêm logo vào đầu trang, căn giữa
+
                         var logoImage = new Image(ImageDataFactory.Create(logoPath));
                         logoImage.SetHorizontalAlignment(HorizontalAlignment.CENTER);
-                        logoImage.ScaleToFit(30, 30); // Điều chỉnh kích thước logo 
+                        logoImage.ScaleToFit(30, 30);
                         document.Add(logoImage);
 
                         document.Close();
@@ -335,7 +330,7 @@ namespace Apartment_Management_Web.Services
                 return ms.ToArray();
             }
         }
-
+        // Hàm lấy thông tin Admin của phòng
         public async Task<AdminInfoResponse> GetAdminInfoByMaPhongAsync(string maPhong)
         {
             var phong = await _context.Phongs.FirstOrDefaultAsync(p => p.MaPhong == maPhong);
@@ -356,7 +351,7 @@ namespace Apartment_Management_Web.Services
                 return new AdminInfoResponse { IsSuccess = false, Message = "Không tìm thấy thông tin Admin" };
             }
 
-            // Lấy thông tin cần thiết
+
             var adminDto = new AdminInfoDto
             {
                 MaAdmin = admin.MaAdmin,

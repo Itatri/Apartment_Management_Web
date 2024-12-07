@@ -58,7 +58,7 @@
 
 <body class="sub_page">
     <div class="hero_area">
-        <!-- header section strats -->
+        <!-- Thanh navbar -->
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
@@ -148,9 +148,10 @@
                 </nav>
             </div>
         </header>
+        <!-- Thanh navbar -->
     </div>
 
-<!-- Thêm Modal thông báo lỗi khi lấy thông tin khách -->
+<!--  Modal thông báo lỗi khi lấy thông tin khách không thành công -->
 <div class="modal fade" id="errorGetKhachModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -161,7 +162,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Nội dung thông báo sẽ được thêm vào đây động -->
+                <!-- Nội dung thông báo  -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
@@ -232,7 +233,7 @@
         </div>
     </div>
 
-    <!-- Phần Danh sách cư dân của phòng -->
+    <!-- Table Danh sách cư dân của phòng -->
     <div class="container rounded bg-white mt-5 mb-5" id="danhSachCuDan">
         <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
             <section class="experience_section layout_padding" style="padding-bottom: 10    0px;min-width: 0px;padding-top: 50px;" ">
@@ -296,9 +297,9 @@
     </div>
 
 
-            @* Thông tin chi tiết của cư dân *@
+    <!-- Section thông tin chi tiết -->
     <div id="chiTietCuDan" class="container rounded bg-white mt-5 mb-5" style="display: none;">
-            @*  sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân *@
+        <!-- sử dụng style="display: none; để ẩn Thông tin chi tiết của cư dân -->
         <div class="row" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -423,9 +424,8 @@
             </div>
         </div>
     </div>
-
-    
-
+    <!-- Section thông tin chi tiết -->
+    <!-- Section ảnh minh họa -->
     <section class="about_section layout_padding">
         <div class="container">
             <div class="row">
@@ -439,13 +439,13 @@
             </div>
         </div>
     </section>
-
+    <!-- Section ảnh minh họa -->
 
     
 
 
-    <!-- end about section -->
-    <!-- info section -->
+   
+    <!-- Footer -->
 
     <section class="info_section ">
         <div class="info_container layout_padding-top">
@@ -600,7 +600,7 @@
             </div>
         </div>
     </section>
-
+    <!-- Footer -->
     <!-- Modal thông báo lỗi thông tin kê khai -->
     <div id="errorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -612,7 +612,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Thông báo lỗi sẽ được hiển thị ở đây -->
+                    <!-- Hiển thị các lỗi kê khai -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
@@ -641,8 +641,7 @@
             </div>
         </div>
     </div>
-    <!-- end info section -->
-    <!-- footer section -->
+    <!-- Footer -->
     <footer class="container-fluid footer_section ">
         <div class="container">
             <p>
@@ -651,7 +650,7 @@
             </p>
         </div>
     </footer>
-    <!-- end  footer section -->
+    <!-- Footer -->
 
 
     <script src="~/js/jquery-3.4.1.min.js"></script>
@@ -670,18 +669,18 @@
           function loadProvinces() {
             // Gọi API lấy danh sách tỉnh thành
             $.ajax({
-                url: 'https://provinces.open-api.vn/api/p', // URL API để lấy danh sách tỉnh thành
+                url: 'https://provinces.open-api.vn/api/p', 
                 type: 'GET',
                 success: function(response) {
-                    // Kiểm tra nếu API trả về dữ liệu
+                    
                     if (response && response.length > 0) {
                         var select = $('#queQuan');
-                        // Duyệt qua danh sách các tỉnh thành và tạo các option
+                      
                         response.forEach(function(province) {
                             select.append(
                                 $('<option>', {
-                                    value: province.name,  // Tên tỉnh thànhh làm giá trị
-                                    text: province.name    // Tên tỉnh thành làm label
+                                    value: province.name, 
+                                    text: province.name   
                                 })
                             );
                         });
@@ -694,20 +693,20 @@
                 }
             });
         }
-
+         // Gọi API lấy danh sách quan hệ 
              function loadQuanHe() {
             $.ajax({
-                url: '@apiBaseUrl/api/ThongTinKhaches/GetQuanHe',  // Ensure this URL matches the correct API route
+                url: '@apiBaseUrl/api/ThongTinKhaches/GetQuanHe',  
                 type: 'GET',
                 success: function(data) {
                     if (data && Array.isArray(data)) {
                         var select = $('#selectQuanHe');
-                        // Clear existing options
+                       
                         select.empty();
-                        // Add default placeholder option
+                       
                         select.append('<option value="">Chọn Quan Hệ</option>');
 
-                        // Loop through each quanHe and append it as an option
+                      
                         data.forEach(function(item) {
                             select.append('<option value="' + item + '">' + item + '</option>');
                         });
@@ -724,29 +723,29 @@
 
         $(document).ready(function () {
          
-            // Lấy thông tin loginResponse từ localStorage
+          
             var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
-            // Kiểm tra xem loginResponse có tồn tại hay không
+            
             if (loginResponse) {
                 var user = loginResponse.user;
 
-                // Hiển thị userId nếu có
+                // Hiển thị userId lên Navbar
                 if (user?.id) {
                     $('#userIdDisplay').text(user.id);
                 }
 
-                // Các thông tin khác từ loginResponse, nếu cần hiển thị
+              
                 console.log('Token:', loginResponse.token);
                 console.log('User:', user);
                 console.log('Mã phòng:', user?.maPhong);
                 console.log('Trạng thái:', user?.trangThai);
 
 
-                // Hiển thị mã phòng
+               
                 var maPhong = user?.maPhong;
 
-                    
+                // Gọi API lấy phòng theo mã phòng    
                 if (user?.maPhong) {
                     $.ajax({
                         url: `@apiBaseUrl/api/UserPhongs/GetPhongByMaPhong?maPhong=${user.maPhong}`,
@@ -774,7 +773,7 @@
 
                     $('#maPhongLabel').text(maPhong);
 
-                    // Gọi API để lấy thông tin khách theo mã phòng
+                    // Gọi API để lấy thông tin thành viên theo mã phòng
                     $.ajax({
                         url: '@apiBaseUrl/api/ThongTinKhaches/GetThongTinKhachByPhong',
                         type: 'GET',
@@ -785,9 +784,9 @@
                         success: function (response) {
                             if (response.isSuccess && response.khachs && response.khachs.length > 0) {
                                 var khachTableBody = $('#khachTableBody');
-                                khachTableBody.empty(); // Xóa nội dung cũ trong bảng
+                                khachTableBody.empty(); 
 
-                                // Lặp qua danh sách khách và thêm từng hàng vào bảng
+                            
                                 response.khachs.forEach(function (khach) {
 
                                     var trangThaiClass = khach.trangThai ? 'text-success' : 'text-danger';
@@ -812,14 +811,14 @@
                                     khachTableBody.append(row);
                                 });
                             } else {
-                                // Thay thế alert bằng Modal
+                              
                                 $('#errorGetKhachModal .modal-body').text(response.message || 'Không tìm thấy thông tin khách.');
                                 $('#errorGetKhachModal').modal('show');
                             }
                         },
                         error: function (error) {
                             console.error('Đã xảy ra lỗi:', error);
-                            // Thay thế alert bằng Modal
+                         
                             $('#errorGetKhachModal .modal-body').text('Không thể lấy thông tin khách.');
                             $('#errorGetKhachModal').modal('show');
                         }
@@ -832,25 +831,25 @@
 
             // Xử lý sự kiện nhấn vào nút Đăng xuất
             $('#logoutBtn').on('click', function () {
-                // Xóa toàn bộ thông tin từ localStorage
+                
                 localStorage.removeItem('loginResponse');
 
-                // Kiểm tra xem loginResponse đã bị xóa chưa
-                console.log('loginResponse:', localStorage.getItem('loginResponse')); // Sẽ in ra null nếu đã xóa thành công
+                
+                console.log('loginResponse:', localStorage.getItem('loginResponse'));
 
-                // Hiển thị Modal thông báo đăng xuất thành công
+                
                 $('#LogoutSuccessModal').modal('show');
             });
 
             // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
             $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
-                // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
+              
                 window.location.href = '/home/homepage';
             });
 
-            // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
+            // ĐChuyển hướng khi nhấn "OK"
             $('#confirmLogout').on('click', function () {
-                $('#LogoutSuccessModal').modal('hide'); // Đóng Modal
+                $('#LogoutSuccessModal').modal('hide'); 
             });
 
 
@@ -870,44 +869,43 @@
 
             // Sự kiện click cho nút "Xem chi tiết"
             $(document).on('click', '.btn-primary:not(.profile-button)', function () {
-                // Lấy mã khách trọ từ cột đầu tiên của hàng hiện tại
+                
                 var maKhachTro = $(this).closest('tr').find('th.hidden-column').text().trim();
 
                 if (maKhachTro) {
-                    // Lưu mã khách trọ vào input ẩn
+                   
                     $('#hiddenMaKhachTro').val(maKhachTro);
 
-                    // Gọi API để lấy thông tin khách theo mã khách trọ
+                    // Gọi API để lấy thông tin khách theo mã khách 
                     $.ajax({
                         url: '@apiBaseUrl/api/ThongTinKhaches/GetThongTinKhachByMaKhachTro',
                         type: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + loginResponse.token
                         },
-                        data: { maKhachTro: maKhachTro },  // Truyền mã khách trọ vừa lấy
+                        data: { maKhachTro: maKhachTro },  
                         success: function (response) {
                             if (response.isSuccess && response.khachs && response.khachs.length > 0) {
-                                var khach = response.khachs[0];  // Lấy thông tin khách đầu tiên trong danh sách
+                                var khach = response.khachs[0];  
 
-                                // Đổ dữ liệu vào các trường trên giao diện
                                 $('input[placeholder="Nhập họ tên"]').val(khach.hoTen);
-                                // Sử dụng class để chọn thẻ select
-                                $('select.form-control').val(khach.gioiTinh); // Thay đổi ở đây
-                                // $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toLocaleDateString());
+                               
+                                $('select.form-control').val(khach.gioiTinh); 
+                              
                                 $('input[placeholder="Chọn ngày sinh"]').val(new Date(khach.ngaySinh).toISOString().slice(0, 10));
                                 $('input[placeholder="Nhập số điện thoại"]').val(khach.phone);
                                 $('input[placeholder="Nhập email"]').val(khach.email);
                                 $('input[placeholder="Thông tin phòng"]').val(khach.maPhong);
-                                // Cập nhật quan hệ
+                               
                                 $('select.form-control').eq(1).val(khach.quanHe);
                                 $('input[placeholder="Nhập số căn cước"]').val(khach.cccd);
                                 $('input[placeholder="Nhập nơi cấp"]').val(khach.noiCap);
                                 $('select.form-control').eq(2).val(khach.queQuan);
                                 $('input[placeholder="Nhập nơi thường trú"]').val(khach.thuongTru);
-                                // $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toLocaleDateString());
+                               
                                 $('input[placeholder="Chọn ngày cấp"]').val(new Date(khach.ngayCap).toISOString().slice(0, 10));
-                                // Cập nhật trạng thái
-                                $('select[name="trangThaiKhach"]').val(khach.trangThai); // Cập nhật trạng thái
+                               
+                                $('select[name="trangThaiKhach"]').val(khach.trangThai); 
 
 
                                 // Cập nhật chữ ký nếu có
@@ -919,7 +917,7 @@
 
 
                                 $('#danhSachCuDan').hide();
-                                // Hiển thị thông tin chi tiết
+                                
                                 $('#chiTietCuDan').show();
 
 
@@ -940,13 +938,13 @@
 
             // Sự kiện click cho nút "Kê khai thông tin khách mới"
             $('#keKhaiKhachMoiBtn').on('click', function () {
-                // Ẩn danh sách cư dân
+             
                 $('#danhSachCuDan').hide();
 
-                // Hiển thị chi tiết cư dân
+                
                 $('#chiTietCuDan').show();
 
-                // Đặt lại tất cả các trường thông tin trong chi tiết cư dân để nhập thông tin mới
+              
                 resetChiTietCuDan(); 
             });
 
@@ -954,41 +952,40 @@
 
             // Sự kiện click cho nút quay lại
             $(document).on('click', '.btn-image', function () {
-                // Ẩn phần thông tin chi tiết
+              
                 $('#chiTietCuDan').hide();
 
-                // Hiển thị lại danh sách cư dân
+                
                 $('#danhSachCuDan').show();
 
-                // Load lại trang
-                location.reload(); // Làm mới lại trang
+              
+                location.reload(); 
             });
 
 
 
-
+            // Sự kiện nhấn nút Lưu thông tin 
             $(".profile-button").click(function (event) {
-                event.stopPropagation(); // Ngăn chặn sự kiện tiếp tục
+                event.stopPropagation(); 
 
-                // Lấy giá trị từ các input
-                const maKhachTro = $("#hiddenMaKhachTro").val(); // Lấy mã khách trọ từ input ẩn
+                const maKhachTro = $("#hiddenMaKhachTro").val();
                 const hoTen = $("input[placeholder='Nhập họ tên']").val();
                 const gioiTinh = $("select[name='gioiTinh']").val();
-                const ngaySinh = $("#datepicker").val(); // Lấy giá trị trực tiếp từ DatePicker
+                const ngaySinh = $("#datepicker").val(); 
                 const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
                 const email = $("input[placeholder='Nhập email']").val();
                 const phong = $("input[placeholder='Thông tin phòng']").val();
-                // const quanHe = $("select[name='quanHe']").val();
+      
                 const quanHe = $("#selectQuanHe").val();
 
                 const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
                 const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
                 const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
                 const queQuan = $("select[name='queQuan']").val();
-                const ngayCap = $("#datepicker_ngaycap").val(); // Lấy giá trị trực tiếp từ DatePicker
-                const chuKyFile = $("#chuKyInput").prop('files')[0]; // Lấy tệp chữ ký
-                // const trangThai = $("select[name='trangThaiKhach']").val(); // Lấy trạng thái từ select
-                 const trangThai = 1; // Lấy trạng thái từ select
+                const ngayCap = $("#datepicker_ngaycap").val(); 
+                const chuKyFile = $("#chuKyInput").prop('files')[0];
+              
+                 const trangThai = 1; 
 
                  
                  // Kiểm tra dữ liệu nhập
@@ -1007,7 +1004,7 @@
 
                     // Kiểm tra nếu là "Chủ hộ", phải trên 18 tuổi
                     if (quanHe === "Chủ hộ") {
-                        const birthDate = new Date(ngaySinh); // Chuyển đổi ngày sinh thành đối tượng Date
+                        const birthDate = new Date(ngaySinh); 
                         const today = new Date();
                         const age = today.getFullYear() - birthDate.getFullYear();
                         const m = today.getMonth() - birthDate.getMonth();
@@ -1022,12 +1019,12 @@
 
                             if (errors.length > 0) {
                                 let errorMessage = "Vui lòng nhập đầy đủ và chính xác các thông tin: <br>" + `<ul style="color: red;">${errors.map(e => `<li>${e}</li>`).join("")}</ul>`;
-                                $("#errorModal .modal-body").html(errorMessage); // Sử dụng `.html` để hiển thị danh sách
-                                $("#errorModal").modal('show'); // Hiển thị modal lỗi
-                                return; // Dừng lại, không thực hiện lưu thông tin
+                                $("#errorModal .modal-body").html(errorMessage);
+                                $("#errorModal").modal('show');
+                                return; 
                             }
 
-                // Tạo đối tượng dữ liệu để gửi
+               
                 const data = {
                     HoTen: hoTen,
                     GioiTinh: gioiTinh,
@@ -1044,12 +1041,12 @@
                     TrangThai: trangThai
                 };
 
-                // Nếu có tệp chữ ký, thêm trường ChuKy vào data
+               
                 if (chuKyFile) {
-                    data.ChuKy = chuKyFile.name; // Chỉ thêm chuKy nếu tệp được chọn
+                    data.ChuKy = chuKyFile.name; 
                 }
 
-                // Kiểm tra nếu mã khách trọ có giá trị
+              
                 if (maKhachTro) {
                     // Gọi API để cập nhật thông tin khách trọ
                     $.ajax({
@@ -1063,9 +1060,9 @@
                         success: function (response) {
                             $("#successUpdateModal").modal('show');
                             console.log(response);
-                            // Nếu có tệp chữ ký, tải nó lên
+                            
                             if (chuKyFile) {
-                                uploadChuKy(maKhachTro, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên
+                                uploadChuKy(maKhachTro, hoTen, chuKyFile); 
                             }
                            
                         },
@@ -1088,9 +1085,9 @@
                             $("#successCreateModal").modal('show');
                             console.log(response);
                             if (response.isSuccess && response.khachs.length > 0) {
-                                const maKhachTroMoi = response.khachs[0].maKhachTro; // Lưu mã khách trọ mới từ phản hồi
+                                const maKhachTroMoi = response.khachs[0].maKhachTro; 
                                 if (chuKyFile) {
-                                    uploadChuKy(maKhachTroMoi, hoTen, chuKyFile); // Gọi hàm tải chữ ký lên với mã khách mới
+                                    uploadChuKy(maKhachTroMoi, hoTen, chuKyFile); 
                                 }
                             } else {
                                 alert("Tạo khách hàng mới không thành công.");
@@ -1104,15 +1101,15 @@
                     });
                 }
 
-                // Hàm tải chữ ký lên server
+                // Gọi API Upload chữ ký 
                 function uploadChuKy(maKhachTro, hoTen, chuKyFile) {
                     if (chuKyFile) {
                         const formData = new FormData();
-                        formData.append("file", chuKyFile); // Thêm tệp chữ ký vào formData
-                        formData.append("maKhachTro", maKhachTro); // Thêm mã khách trọ
-                        formData.append("hoTen", hoTen); // Thêm họ tên
+                        formData.append("file", chuKyFile); 
+                        formData.append("maKhachTro", maKhachTro); 
+                        formData.append("hoTen", hoTen);
 
-                        // Gọi API để tải ảnh chữ ký lên
+                        
                         $.ajax({
                             url: '@apiBaseUrl/api/ThongTinKhaches/Upload', 
                             type: 'POST',
@@ -1128,7 +1125,7 @@
 
                                 // Hiển thị ảnh chữ ký
                                 $('.img-chuky').attr('src', @imageBaseUrl + 'ChuKy/' + 'CK_' + maKhachTro + '_' + hoTen + '.jpeg').on('error', function () {
-                                    $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
+                                    $(this).attr('src', '/images/signature.png'); 
                                 });
                             },
                             error: function (uploadError) {
@@ -1146,7 +1143,8 @@
 
 
 
-            // Hàm reload trang khi nhấn nút Ok
+            // Reload trang khi nhấn nút Ok
+
             $('#successCreateModal .btn-primary').click(function () {
                 location.reload();
             });
@@ -1157,40 +1155,40 @@
 
 
 
-            // Hàm để đặt lại tất cả các trường trong chi tiết cư dân
+            // Hàm đặt lại tất cả các trường trong chi tiết cư dân
             function resetChiTietCuDan() {
                 $('input[placeholder="Nhập họ tên"]').val('');
                 $('select[name="gioiTinh"]').val('');
-                // $('input[placeholder="Chọn ngày sinh"]').val('');
+               
                 $('input[placeholder="Chọn ngày sinh"]').val('');
                 $('input[placeholder="Nhập số điện thoại"]').val('');
                 $('input[placeholder="Nhập email"]').val('');
-                $('input[placeholder="Thông tin phòng"]').val(maPhong); // Gán giá trị mã phòng vào input
+                $('input[placeholder="Thông tin phòng"]').val(maPhong); 
                 $('select[name="quanHe"]').val('');
                 $('input[placeholder="Nhập số căn cước"]').val('');
                 $('input[placeholder="Nhập nơi cấp"]').val('');
                 $('input[placeholder="Nhập nơi thường trú"]').val('');
                 $('select[name="queQuan"]').val('');
-                // $('input[placeholder="Chọn ngày cấp"]').val('');
+              
                 $('input[placeholder="Chọn ngày cấp"]').val('');
                 $('select[name="trangThaiKhach"]').val('');
 
 
                 // Reset hình chữ ký
-                $('.img-chuky').attr('src', '/images/signature.png'); // Đặt về hình ảnh mặc định
-                $('#chuKyName').text(''); // Xóa tên chữ ký
-                $('#chuKyInput').val(''); // Đặt lại input tệp chữ ký
+                $('.img-chuky').attr('src', '/images/signature.png'); 
+                $('#chuKyName').text('');
+                $('#chuKyInput').val(''); 
             }
 
 
 
-            // Lắng nghe sự kiện submit của biểu mẫu
+             //  API để gửi email
             $('#emailForm').on('submit', function (e) {
-                e.preventDefault(); // Ngăn chặn gửi form mặc định
+                e.preventDefault(); 
 
-                var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
+                var toEmail = $('#toEmail').val();
 
-                // Gọi API để gửi email
+                
                 $.ajax({
                     url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
                     type: 'POST',
@@ -1206,26 +1204,26 @@
 
           
 
-
+            // Sự kiện hiển thị khi chọn ảnh chữ ký
 
             $(document).on('click', '.add-experience', function () {
-                $('#chuKyInput').click(); // Kích hoạt input file khi nhấn vào nút
+                $('#chuKyInput').click();
             });
 
-            // Khi người dùng chọn tệp
+            
             $('#chuKyInput').on('change', function () {
-                const file = $(this).prop('files')[0]; // Lấy tệp đã chọn
+                const file = $(this).prop('files')[0]; 
                 if (file) {
-                    const reader = new FileReader(); // Tạo đối tượng FileReader để đọc tệp
+                    const reader = new FileReader();
 
                     reader.onload = function (e) {
-                        // Hiển thị ảnh chữ ký lên giao diện
+                        
                         $('.img-chuky').attr('src', e.target.result).on('error', function () {
-                            $(this).attr('src', '/images/signature.png'); // Nếu có lỗi, hiển thị ảnh mặc định
+                            $(this).attr('src', '/images/signature.png');
                         });
                     };
 
-                    reader.readAsDataURL(file); // Đọc tệp dưới dạng Data URL
+                    reader.readAsDataURL(file); 
                 }
             });
              loadQuanHe();

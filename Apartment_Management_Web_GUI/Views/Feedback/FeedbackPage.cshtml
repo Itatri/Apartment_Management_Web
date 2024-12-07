@@ -34,7 +34,7 @@
 
 <body class="sub_page">
     <div class="hero_area">
-        <!-- header section strats -->
+        <!-- Thanh navbar -->
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
@@ -121,7 +121,7 @@
                 </nav>
             </div>
         </header>
-        <!-- end header section -->
+        <!-- Thanh navbar -->
     </div>
 
 
@@ -132,7 +132,7 @@
 
 
 
-    <!-- Table danh sách phiếu thu của phòng -->
+    <!-- Section phản hồi -->
     <section class="experience_section layout_padding" style="padding-bottom: 0px; padding-top: 80px;">
         <div class="container" style="border: 2px solid #dee7eb;border-radius: 8px;padding: 20px;margin-top: 20px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
             <label for="exampleInputEmail1">
@@ -143,7 +143,7 @@
             <br />
             <br />
 
-            <!-- Lọc theo ngày -->
+            <!-- Lọc  -->
             <div class="row mb-4 d-flex align-items-end">
                 <div class="col-md-3" style="margin-right: 10px;">
                     <label for="startDate" class="form-label">Từ ngày</label>
@@ -167,7 +167,7 @@
                 <div class="col-md-2 d-flex align-items-end">
 
                     <button class="btn btn-primary" id="filterButton" style="height: 40px;margin: 0px 12px 0px 12px;">
-                        <i class="fas fa-filter"></i> <!-- Biểu tượng lọc -->
+                        <i class="fas fa-filter"></i> 
                     </button>
 
                     <button class="btn btn-primary" id="refeshButton" style="height: 40px; margin: 0px 12px 0px 12px;">
@@ -178,15 +178,15 @@
                         <i class="fa-solid fa-comment" style="color: #ffffff;"></i>
                     </button>
                 </div>
-
-
             </div>
+            <!-- Lọc  -->
 
+            <!-- Table phản hồi -->
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" class="hidden-column">Mã phản hồi</th> <!-- Thêm class để ẩn cột -->
+                            <th scope="col" class="hidden-column">Mã phản hồi</th> 
                             <th scope="col">Nội dung phản hồi</th>
                             <th scope="col">Ngày gửi</th>
                             <th scope="col">Trả lời</th>
@@ -206,8 +206,9 @@
                     </tbody>
                 </table>
             </div>
+            <!-- Table phản hồi -->
 
-            <!-- Phân trang Bootstrap -->
+            <!-- Phân trang  -->
             <section class="about_section layout_padding">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center" id="pagination">
@@ -233,19 +234,14 @@
 
                 </nav>
             </section>
+            <!-- Phân trang  -->
 
 
-            @*                       <!-- Button tạo phản hồi -->
-            <section class="about_section layout_padding">
-            <div class="container">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Phản hồi dịch vụ</button>
-            </div>
-
-            </section> *@
 
         </div>
-
-
+    </section>
+    <!-- Section phản hồi -->
+    <!-- Section ảnh minh họa -->
         <section class="about_section layout_padding">
 
             <div class="container">
@@ -260,7 +256,7 @@
                 </div>
             </div>
         </section>
-
+    <!-- Section ảnh minh họa -->
 
         <!-- Modal thông báo đăng xuất thành công -->
         <div class="modal fade" id="LogoutSuccessModal" tabindex="-1" role="dialog">
@@ -383,8 +379,8 @@
         </div>
 
 
-        <!-- end about section -->
-        <!-- info section -->
+       
+        <!-- Footer -->
 
         <section class="info_section ">
             <div class="info_container layout_padding-top">
@@ -528,10 +524,8 @@
                 </div>
             </div>
         </section>
-
-
-        <!-- end info section -->
-        <!-- footer section -->
+    <!-- Footer -->
+    <!-- Footer -->
         <footer class="container-fluid footer_section ">
             <div class="container">
                 <p>
@@ -540,7 +534,7 @@
                 </p>
             </div>
         </footer>
-        <!-- end  footer section -->
+    <!-- Footer -->
 
 
         <script src="~/js/jquery-3.4.1.min.js"></script>
@@ -582,7 +576,7 @@
                         success: function (response) {
                             if (response) {
                                 $('#tenPhongLabel').text(response.tenPhong || 'Không tìm thấy tên phòng');
-                                  // Hiển thị Tên phòng vào input
+                                 
                                 $('#ten-phong').val(response.tenPhong || 'Không tìm thấy tên phòng');
                             } else {
                                 $('#tenPhongLabel').text('Không tìm thấy tên phòng');
@@ -628,7 +622,7 @@
                         const trangThaiClass = Feedback.trangThai ? 'text-success' : 'text-danger';
                         const trangThaiText = Feedback.trangThai ? 'Đã trả lời' : 'Chưa trả lời';
 
-                        // Kiểm tra giá trị null và định dạng ngày
+                      
                         const checkNull = (value) => value ? value : '<span style="color:red;">Trống</span>';
                         const formatDate = (dateStr) => {
                             if (!dateStr) return '<span style="color:red;">Trống</span>';
@@ -699,13 +693,13 @@
 
 
 
-                // Lắng nghe sự kiện submit của biểu mẫu
+                // Xử lí sự kiện Mail
                 $('#emailForm').on('submit', function (e) {
                     e.preventDefault(); 
 
-                    var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
+                    var toEmail = $('#toEmail').val(); 
 
-                    // Gọi API để gửi email
+                   
                     $.ajax({
                         url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
                         type: 'POST',
@@ -714,7 +708,7 @@
                             $('#SendEmailSuccessModal').modal('show');
                         },
                         error: function (xhr) {
-                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
+                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); 
                         }
                     });
                 });
@@ -757,7 +751,7 @@
                     });
                 });
 
-                loadFeedbacks(); // Lần đầu tải dữ liệu
+                loadFeedbacks(); 
             });
         </script>
 

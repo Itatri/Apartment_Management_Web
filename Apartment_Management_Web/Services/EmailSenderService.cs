@@ -16,36 +16,36 @@ namespace Apartment_Management_Web.Services
             _smtpSettings = smtpSettings.Value;
         }
 
-
+        // Hàm gửi Mail hỗ trợ đến khách hàng
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
             try
             {
-                // Tạo SmtpClient để gửi email
+
                 var client = new SmtpClient(_smtpSettings.Server, _smtpSettings.Port)
                 {
                     Credentials = new NetworkCredential(_smtpSettings.Username, _smtpSettings.Password),
                     EnableSsl = true
                 };
 
-                // Tạo MailMessage
+
                 var mailMessage = new MailMessage
                 {
                     From = new MailAddress(_smtpSettings.SenderEmail, _smtpSettings.SenderName),
                     Subject = subject,
-                    IsBodyHtml = true // Cho phép nội dung HTML
+                    IsBodyHtml = true
                 };
 
-                // Đường dẫn đến logo
+
                 string logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "mailsupport.jpg");
 
-                // Kiểm tra xem file logo có tồn tại không
+
                 if (!File.Exists(logoPath))
                 {
                     throw new FileNotFoundException("Logo file not found at " + logoPath);
                 }
 
-                // Tạo nội dung HTML với hình ảnh chèn trong email
+
                 string htmlBody = $@"
                     <html>
                         <body>
@@ -55,26 +55,26 @@ namespace Apartment_Management_Web.Services
                         </body>
                     </html>";
 
-                // Gán nội dung HTML vào email
+
                 var altView = AlternateView.CreateAlternateViewFromString(htmlBody, null, "text/html");
 
-                // Tạo tài nguyên hình ảnh để chèn vào nội dung email
+
                 var logo = new LinkedResource(logoPath)
                 {
-                    ContentId = "LogoImage", // ID được tham chiếu trong HTML
+                    ContentId = "LogoImage",
                     ContentType = new System.Net.Mime.ContentType("image/png")
                 };
 
-                // Thêm tài nguyên hình ảnh vào AlternateView
+
                 altView.LinkedResources.Add(logo);
 
-                // Thêm AlternateView vào email
+
                 mailMessage.AlternateViews.Add(altView);
 
-                // Thêm người nhận email
+
                 mailMessage.To.Add(toEmail);
 
-                // Gửi email
+
                 await client.SendMailAsync(mailMessage);
             }
             catch (Exception ex)

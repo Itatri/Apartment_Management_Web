@@ -29,13 +29,13 @@ namespace Apartment_Management_Web.Controllers
             _jwtSettings = jwtSettings.Value;
             _dbContext = dbContext;
         }
-
+        // API kiểm tra kết nối tới Database
         [HttpGet("TestDatabaseConnection")]
         public async Task<IActionResult> TestDatabaseConnection()
         {
             try
             {
-                // Kiểm tra kết nối
+
                 var canConnect = await _dbContext.Database.CanConnectAsync();
 
                 if (canConnect)
@@ -60,19 +60,18 @@ namespace Apartment_Management_Web.Controllers
             }
             catch (Exception ex)
             {
-                // Kiểm tra lỗi nội bộ nếu có
                 var errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 return StatusCode(500, new
                 {
                     Message = "Lỗi kết nối cơ sở dữ liệu.",
-                    ErrorDetails = errorMessage // Cung cấp chi tiết lỗi từ Exception
+                    ErrorDetails = errorMessage
                 });
             }
         }
 
 
 
-        // API lấy danh sách User phòng 
+        // API lấy danh sách tài khoản phòng 
         [Authorize]
         [HttpGet("GetAllUserPhongs")]
         public async Task<ActionResult<IEnumerable<UserPhong>>> GetUserPhongs()
@@ -82,7 +81,7 @@ namespace Apartment_Management_Web.Controllers
         }
 
 
-        // API lấy User phòng theo Id
+        // API lấy  tài khoản phòng theo Id
         [HttpGet("GetUserPhongById")]
         [Authorize]
         public async Task<ActionResult<UserPhong>> GetUserPhong(string id)
@@ -95,7 +94,7 @@ namespace Apartment_Management_Web.Controllers
             return Ok(userPhong);
         }
 
-        // API to get Phong information by MaPhong
+        // API lấy thông tin phòng theo mã phòng
         [HttpGet("GetPhongByMaPhong")]
         [Authorize]
         public async Task<ActionResult<Phong>> GetPhongByMaPhong(string maPhong)
@@ -110,7 +109,7 @@ namespace Apartment_Management_Web.Controllers
 
 
 
-        // API kiển tra đăng nhập tài khoản
+        // API kiểm tra đăng nhập vào trang web
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
@@ -134,13 +133,13 @@ namespace Apartment_Management_Web.Controllers
                 IsSuccess = true,
                 Token = token,
                 Message = "Đăng nhập thành công.",
-                User = authenticationResult.User // Cung cấp thông tin người dùng nếu cần
+                User = authenticationResult.User
             };
 
             return Ok(successResponse);
         }
 
-
+        // API cập nhật tài khoản phòng
         [HttpPut("UpdateUserPhong")]
         [Authorize]
         public async Task<IActionResult> UpdateUserPhong(string id, [FromBody] UserPhong userPhong)
@@ -168,12 +167,12 @@ namespace Apartment_Management_Web.Controllers
             {
                 IsSuccess = true,
                 Message = "Cập nhật thông tin người dùng thành công.",
-                UpdatedUser = userPhong // Trả về thông tin người dùng đã cập nhật
+                UpdatedUser = userPhong
             });
         }
 
 
-        // API xóa thông tin User phòng  
+        // API xóa thông tin tài khoản phòng  
         [Authorize]
         [HttpDelete("DeleteUserPhong")]
         public async Task<IActionResult> DeleteUserPhong(string id)
@@ -185,10 +184,10 @@ namespace Apartment_Management_Web.Controllers
                 return NotFound(response);
             }
 
-            return Ok(response); // Trả về thông tin thành công
+            return Ok(response);
         }
 
-        // API tạo thông tin User phòng mới 
+        // API tạo thông tin tài khoản phòng mới 
         [Authorize]
         [HttpPost("CreateUserPhong")]
         public async Task<ActionResult<UserPhong>> CreateUserPhong(UserPhong userPhong)
@@ -202,22 +201,23 @@ namespace Apartment_Management_Web.Controllers
             return CreatedAtAction(nameof(GetUserPhong), new { id = userPhong.Id }, userPhong);
         }
 
+        // Hàm tạo token xác thực đăng nhập cho tài khoản phòng
         private string GenerateJwtToken(UserPhong user)
         {
-            // Thời gian hết hạn của token
-            var expires = DateTime.UtcNow.AddDays(7); // Token có hiệu lực trong 7 ngày
 
-            // Tạo danh sách các claim cho token
+            var expires = DateTime.UtcNow.AddDays(7);
+
+
             var claims = new List<Claim>
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id), // Đặt Id của người dùng làm claim
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Đặt một ID duy nhất cho token
-        };
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            };
 
-            // Tạo đối tượng SecurityKey từ chuỗi bảo mật (cần đảm bảo rằng khóa có độ dài tối thiểu 32 ký tự)
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
 
-            // Tạo token
+
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
@@ -227,7 +227,7 @@ namespace Apartment_Management_Web.Controllers
                   expires: expires,
                   signingCredentials: creds);
 
-            // Trả về token dưới dạng chuỗi
+
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 

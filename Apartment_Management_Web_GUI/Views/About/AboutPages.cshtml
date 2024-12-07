@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "About Page";
-    var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
+    var apiBaseUrl = ViewBag.ApiBaseUrl; 
 }
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@
 
 <body class="sub_page">
     <div class="hero_area">
-        <!-- header section strats -->
+        <!-- Thanh navbar -->
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
@@ -94,36 +94,15 @@
                 </nav>
             </div>
         </header>
-        <!-- end header section -->
+        <!-- Thanh navbar -->
     </div>
 
-    <!-- category section -->
-
-
-
+    <!-- Giới thiệu -->
 
     <section class="about_section layout_padding">
-        @*  <div class="container">
-        <div class="row">
-        <div class="col-md-10 col-lg-9 mx-auto">
-        <div class="img-box">
-        <img src="/images/meet.png" alt="">
-        </div>
-        </div>
-        </div>
-        <div class="detail-box">
-        <h2>
-        GIỚI THIỆU VỀ IT APARTMENT
-        </h2>
-        <p>
-        Được thành lập vào năm 2024, bởi các sinh viên IT trực thuộc Trường đại học Công Thương, với mục đích nâng cao trải nghiệm và cung cấp dịch vụ tiện lợi cho khách hàng sử dụng căn hộ
-        </p>
+      
 
-
-        </div>
-        </div> *@
-
-        @*    Gioi thieu team *@
+      
         <div class="py-5 team3 bg-light">
             <div class="container">
                 <div class="row justify-content-center mb-4">
@@ -167,6 +146,7 @@
 
                     </div>
                     <!-- column  -->
+
                     <!-- column  -->
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" style="margin: 25px; border: 1px solid #ccc; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px; padding: 15px;">
 
@@ -194,6 +174,7 @@
 
                     </div>
                     <!-- column  -->
+
                     <!-- column  -->
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" style="margin: 25px; border: 1px solid #ccc; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px; padding: 15px;">
 
@@ -223,12 +204,14 @@
                 </div>
             </div>
         </div>
+
     </section>
 
 
 
-    <!-- end category section -->
-    <!-- info section -->
+    <!-- Giới thiệu -->
+
+    <!-- Footer  -->
 
 
     <section class="info_section ">
@@ -398,8 +381,9 @@
     </div>
 
 
-    <!-- end info section -->
-    <!-- footer section -->
+    <!-- Footer  -->
+
+    <!-- Footer  -->
     <footer class="container-fluid footer_section ">
         <div class="container">
             <p>
@@ -408,7 +392,7 @@
             </p>
         </div>
     </footer>
-    <!-- end  footer section -->
+    <!-- Footer  -->
 
 
     <script src="~/js/jquery-3.4.1.min.js"></script>
@@ -417,13 +401,13 @@
 
 
     <script>
-        // Lắng nghe sự kiện submit của biểu mẫu
+        // Gửi mail hỗ trợ khách hàng
         $('#emailForm').on('submit', function (e) {
             e.preventDefault(); 
 
-            var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
+            var toEmail = $('#toEmail').val(); =
 
-            // Gọi API để gửi email
+            
             $.ajax({
                 url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
                 type: 'POST',
@@ -432,7 +416,7 @@
                     $('#SendEmailSuccessModal').modal('show');
                 },
                 error: function (xhr) {
-                    alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
+                    alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); 
                 }
             });
         });
