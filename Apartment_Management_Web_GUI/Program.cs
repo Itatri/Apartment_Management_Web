@@ -23,47 +23,49 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
+// Set Router
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=HomePage}/{id?}");
 
-app.MapControllerRoute(name: "inputBill",  // Tên của route
-    pattern: "user/input",  // URL mà người dùng sẽ truy cập
-    defaults: new { controller = "Bill", action = "InputBill" }  // Điều hướng đến action và controller tương ứng
+app.MapControllerRoute(name: "inputBill",
+    pattern: "user/input",
+    defaults: new { controller = "Bill", action = "InputBill" }
 );
 
-app.MapControllerRoute(name: "userProfile",  // Tên của route
-    pattern: "user/profile",  // URL mà người dùng sẽ truy cập
-    defaults: new { controller = "Login", action = "UserProfile" }  // Điều hướng đến action và controller tương ứng
-);
-
-
-app.MapControllerRoute(name: "feedbackPage",  // Tên của route
-    pattern: "user/feedback",  // URL mà người dùng sẽ truy cập
-    defaults: new { controller = "Feedback", action = "FeedbackPage" }  // Điều hướng đến action và controller tương ứng
+app.MapControllerRoute(name: "userProfile",
+    pattern: "user/profile",
+    defaults: new { controller = "Login", action = "UserProfile" }
 );
 
 
-app.MapControllerRoute(name: "homePageLogin",  // Tên của route
-    pattern: "user/homepage",  // URL mà người dùng sẽ truy cập
-    defaults: new { controller = "Home", action = "HomePageLogin" }  // Điều hướng đến action và controller tương ứng
+app.MapControllerRoute(name: "feedbackPage",
+    pattern: "user/feedback",
+    defaults: new { controller = "Feedback", action = "FeedbackPage" }
+);
+
+
+app.MapControllerRoute(name: "homePageLogin",
+    pattern: "user/homepage",
+    defaults: new { controller = "Home", action = "HomePageLogin" }
 );
 
 
 
-app.MapControllerRoute(name: "aboutUs",  // Tên của route
-    pattern: "home/aboutus",  // URL mà người dùng sẽ truy cập
-    defaults: new { controller = "About", action = "AboutPages" }  // Điều hướng đến action và controller tương ứng
+app.MapControllerRoute(name: "aboutUs",
+    pattern: "home/aboutus",
+    defaults: new { controller = "About", action = "AboutPages" }
 );
 
 
-app.MapControllerRoute(name: "loginPage",  // Tên của route
-    pattern: "home/login",  // URL mà người dùng sẽ truy cập
-    defaults: new { controller = "Login", action = "LoginPages" }  // Điều hướng đến action và controller tương ứng
+app.MapControllerRoute(name: "loginPage",
+    pattern: "home/login",
+    defaults: new { controller = "Login", action = "LoginPages" }
 );
 
 
-app.MapControllerRoute(name: "homePage",  // Tên của route
-    pattern: "home/homepage",  // URL mà người dùng sẽ truy cập
-    defaults: new { controller = "Home", action = "HomePage" }  // Điều hướng đến action và controller tương ứng
+app.MapControllerRoute(name: "homePage",
+    pattern: "home/homepage",
+    defaults: new { controller = "Home", action = "HomePage" }
 );
 
 app.Run();

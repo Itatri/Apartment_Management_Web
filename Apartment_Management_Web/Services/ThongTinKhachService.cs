@@ -19,17 +19,20 @@ namespace Apartment_Management_Web.Services
             _context = context;
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
+        // Hàm lấy danh sách thành viên phòng 
 
         public async Task<IEnumerable<ThongTinKhach>> GetAllThongTinKhachAsync()
         {
             return await _context.ThongTinKhaches.ToListAsync();
         }
+        // Hàm lấy thông tin khách theo CCCD và Phone 
 
         public async Task<ThongTinKhach?> GetThongTinKhachByCDDD_PhoneAsync(string cccd, string phone)
         {
             return await _context.ThongTinKhaches
                 .FirstOrDefaultAsync(t => t.Cccd == cccd && t.Phone == phone);
         }
+        // Hàm lấy thông tin khách theo phòng
 
         public async Task<List<ThongTinKhach?>> GetThongTinKhachByPhongAsync(string maPhong)
         {
@@ -38,6 +41,7 @@ namespace Apartment_Management_Web.Services
                .ToListAsync();
         }
 
+        // Hàm lấy thông tin thanh viên theo mã thành viên
 
 
         public async Task<List<ThongTinKhach?>> GetThongTinKhachByMaKhachTroAsync(string maKhachTro)
@@ -46,6 +50,7 @@ namespace Apartment_Management_Web.Services
                .Where(t => t.MaKhachTro == maKhachTro)
                .ToListAsync();
         }
+        // Hàm cập nhật thông tin thành viên
 
         public async Task<bool> UpdateThongTinKhachAsync(string maKhachTro, UpdateThongTinKhachRequest request)
         {
@@ -54,10 +59,10 @@ namespace Apartment_Management_Web.Services
 
             if (thongTinKhach == null)
             {
-                return false; // Không tìm thấy khách
+                return false;
             }
 
-            // Cập nhật các trường thông tin từ request
+
             thongTinKhach.HoTen = request.HoTen ?? thongTinKhach.HoTen;
             thongTinKhach.GioiTinh = request.GioiTinh ?? thongTinKhach.GioiTinh;
             thongTinKhach.NgaySinh = request.NgaySinh ?? thongTinKhach.NgaySinh;
@@ -74,13 +79,14 @@ namespace Apartment_Management_Web.Services
 
             thongTinKhach.ThuongTru = request.ThuongTru ?? thongTinKhach.ThuongTru;
 
-            // Cập nhật vào cơ sở dữ liệu
+
             _context.Entry(thongTinKhach).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return true; // Cập nhật thành công
+            return true;
         }
 
+        // Hàm  Upload File chữ kí
 
         public async Task<bool> UpdateChuKyAsync(string maKhachTro, string chuKyFileName)
         {
@@ -89,19 +95,20 @@ namespace Apartment_Management_Web.Services
 
             if (thongTinKhach == null)
             {
-                return false; // Không tìm thấy khách
+                return false;
             }
 
-            // Cập nhật tên file chữ ký
+
             thongTinKhach.ChuKy = chuKyFileName;
 
-            // Cập nhật vào cơ sở dữ liệu
+
             _context.Entry(thongTinKhach).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return true; // Cập nhật thành công
+            return true;
         }
 
+        // Hàm  lấy thông tin ID khách hàng mới nhất
 
         public async Task<ThongTinKhach?> GetLastCustomerAsync()
         {
@@ -110,7 +117,8 @@ namespace Apartment_Management_Web.Services
                 .FirstOrDefaultAsync();
         }
 
-        // Tạo khách hàng mới
+        // Hàm API kê khai thông tin thành viên phòng
+
         public async Task<ThongTinKhach> CreateCustomerAsync(ThongTinKhach customer)
         {
             _context.ThongTinKhaches.Add(customer);
@@ -120,7 +128,7 @@ namespace Apartment_Management_Web.Services
 
 
 
-
+        // Hàm API Upload hình ảnh chữ ký thành viên phòng
         public async Task<string> UploadChuKyAsync(IFormFile file, string maKhachTro, string hoTen)
         {
             if (file == null || file.Length == 0)
@@ -128,42 +136,42 @@ namespace Apartment_Management_Web.Services
                 throw new ArgumentException("Không có tệp nào được tải lên.");
             }
 
-            // Đọc đường dẫn từ appsettings.json
+
             var folderPath = _configuration["ImageSettings:UploadFolderPath"];
 
-            // Đảm bảo thư mục images tồn tại
+
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
 
-            // Kiểm tra và tạo thư mục ChuKy trong thư mục images
+
             var chuKyFolderPath = Path.Combine(folderPath, "ChuKy");
             if (!Directory.Exists(chuKyFolderPath))
             {
-                Directory.CreateDirectory(chuKyFolderPath); // Tạo thư mục ChuKy nếu chưa có
+                Directory.CreateDirectory(chuKyFolderPath);
             }
 
-            // Xử lý họ tên để loại bỏ dấu và khoảng trắng
+
             var tenKhongDau = RemoveDiacritics(hoTen).Replace(" ", "");
 
-            // Đặt tên file theo định dạng CK_MaKhachTro_HoTen.jpg
+
             var fileName = $"CK_{maKhachTro}_{tenKhongDau}.jpg";
-            var filePath = Path.Combine(chuKyFolderPath, fileName);  // Lưu tệp trong thư mục ChuKy
+            var filePath = Path.Combine(chuKyFolderPath, fileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await file.CopyToAsync(stream); // Lưu tệp vào thư mục
+                await file.CopyToAsync(stream);
             }
 
-            // Ghi tên file vào database
+
             await UpdateChuKyAsync(maKhachTro, fileName);
 
-            return fileName; // Trả về tên file đã upload
+            return fileName;
         }
 
 
-        // Phương thức để loại bỏ dấu trong chuỗi
+        // Hàm loại bỏ dấu và khoảng trống chuỗi
         public string RemoveDiacritics(string text)
         {
             if (string.IsNullOrEmpty(text))

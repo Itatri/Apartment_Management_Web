@@ -22,7 +22,7 @@
 </head>
 
 <body>
-
+    <!-- Section đăng nhập -->
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -80,7 +80,7 @@
             </div>
         </div>
     </section>
-
+    <!-- Section đăng nhập -->
     <!-- Modal thông báo chưa chọn đồng ý -->
     <div class="modal" id="AgreeModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -150,16 +150,16 @@
 
     <script>
         $(document).ready(function () {
-            // Hàm kiểm tra trạng thái checkbox "Đồng ý"
+            // Ràng buộc "Đồng ý" khi đăng nhập
             function checkAgreeCheckbox() {
                 if (!$('#agreeCheckbox').is(':checked')) {
-                    $('#AgreeModal').modal('show'); // Hiển thị modal nếu chưa chọn
+                    $('#AgreeModal').modal('show'); 
                     return false;
                 }
                 return true;
             }
 
-            // Hàm kiểm tra nếu trường đầu vào rỗng
+            // Kiểm tra nhập
             function validateInput(userId, password) {
                 if (!userId) {
                     alert("Vui lòng nhập ID");
@@ -174,31 +174,31 @@
                 return true;
             }
 
-            // Hàm xử lý đăng nhập
+            // Xử lý đăng nhập
             function handleLoginSuccess(response) {
-                localStorage.setItem('loginResponse', JSON.stringify(response)); // Lưu vào localStorage
-                $('#LoginSuccessModal').modal('show'); // Hiển thị modal thành công
-                $('#LoginSuccessModal').on('hide.bs.modal', function () { // Điều hướng sau khi đóng modal
+                localStorage.setItem('loginResponse', JSON.stringify(response)); 
+                $('#LoginSuccessModal').modal('show'); 
+                $('#LoginSuccessModal').on('hide.bs.modal', function () { 
                     window.location.href = '/user/homepage';
                 });
             }
-                    // Hàm xử lý đăng nhập thất bại
+            // Xử lý đăng nhập thất bại
             function handleLoginError(message) {
                 $('#loginErrorMessage').text(message || 'Đã xảy ra lỗi không xác định.');
-                $('#LoginErrorModal').modal('show'); // Hiển thị modal lỗi
+                $('#LoginErrorModal').modal('show');
             }
 
-            // Xử lý sự kiện gửi biểu mẫu đăng nhập
+            // Xử lý sự kiện đăng nhập
             $('#loginForm').on('submit', function (event) {
                 event.preventDefault();
 
-                // Kiểm tra checkbox "Đồng ý" và các trường đầu vào
+                // Kiểm tra checkbox "Đồng ý" và Input
                 if (!checkAgreeCheckbox()) return;
                 var userId = $('#userId').val();
                 var password = $('#password').val();
                 if (!validateInput(userId, password)) return;
 
-                // Gọi API đăng nhập
+                
                 $.ajax({
                     url: '@apiBaseUrl/api/UserPhongs/Login',
                     type: 'POST',
@@ -209,13 +209,13 @@
                             handleLoginSuccess(response);
                         } else {
                             
-                           handleLoginError(response.message); // Hiển thị lỗi từ server
+                           handleLoginError(response.message); 
                         }
                     },
                     error: function (xhr) {
                     
                          var errorMessage = xhr.responseJSON?.message || 'Lỗi kết nối đến máy chủ.';
-                    handleLoginError(errorMessage); // Hiển thị lỗi
+                    handleLoginError(errorMessage); 
                     }
                 });
             });

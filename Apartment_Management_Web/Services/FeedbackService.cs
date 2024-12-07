@@ -13,15 +13,14 @@ namespace Apartment_Management_Web.Services
             _context = context;
         }
 
+        // Hàm lấy danh sách Feedback
         public async Task<IEnumerable<FeedBack>> GetAllThongTinFeedbackAsync()
         {
             return await _context.FeedBacks.ToListAsync();
         }
 
+        // Hàm lấy danh sách Feedback theo mã phòng
 
-
-
-        // Cập nhật phương thức GetThongTinFeedBacksBy_MaPhongAsync để trả về danh sách phản hồi
         public async Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(
             string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai, int pageNumber, int pageSize)
         {
@@ -43,13 +42,13 @@ namespace Apartment_Management_Web.Services
                 query = query.Where(t => t.TrangThai == trangThai.Value);
             }
 
-            // Sắp xếp theo NgayGui từ mới đến cũ, rồi phân trang
+
             query = query.OrderByDescending(t => t.NgayGui);
 
             return await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         }
 
-        // Thêm phương thức để lấy tổng số phản hồi
+        // Hàm lấy tổng feedback API trả về của phòng
         public async Task<int> GetTotalFeedbackCount(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai)
         {
             var query = _context.FeedBacks.AsQueryable();
@@ -74,7 +73,8 @@ namespace Apartment_Management_Web.Services
         }
 
 
-        // Lấy phản hồi cuối cùng để tính số thứ tự
+        // Hàm lấy tổng số feedback có trong Data
+
         public async Task<FeedBack?> GetLastFeedbackAsync()
         {
             return await _context.FeedBacks
@@ -82,7 +82,8 @@ namespace Apartment_Management_Web.Services
                 .FirstOrDefaultAsync();
         }
 
-        // Tạo phản hồi mới
+        // Hàm gửi phản hồi 
+
         public async Task<FeedBack> CreateFeedbackAsync(FeedBack feedback)
         {
             _context.FeedBacks.Add(feedback);

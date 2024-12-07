@@ -19,7 +19,7 @@ namespace Apartment_Management_Web.Controllers
             _ThongTinKhachService = ThongTinKhachService;
         }
 
-        // API lấy danh sách User phòng 
+        // API lấy danh sách thành viên phòng 
         [Authorize]
         [HttpGet("GetAllThongTinKhach")]
         public async Task<ActionResult<IEnumerable<ThongTinKhach>>> GetThongTinKhachs()
@@ -30,7 +30,7 @@ namespace Apartment_Management_Web.Controllers
 
 
 
-        // API lấy thông tin khách theo CCCD và Phone
+        // API lấy thông tin khách theo CCCD và Phone 
         [Authorize]
         [HttpGet("GetThongTinKhachByCDDD_Phone")]
         public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByCDDD_Phone(string cccd, string phone)
@@ -44,17 +44,17 @@ namespace Apartment_Management_Web.Controllers
                 response.IsSuccess = false;
                 response.Message = "Không tìm thấy thông tin khách.";
                 response.Khach = null;
-                return NotFound(response); // Trả về trạng thái 404 với response
+                return NotFound(response);
             }
 
             response.IsSuccess = true;
             response.Message = "Lấy thông tin khách thành công.";
-            response.Khach = thongTinKhach; // Trả về thông tin khách tìm thấy
+            response.Khach = thongTinKhach;
 
-            return Ok(response); // Trả về trạng thái 200 với response
+            return Ok(response);
         }
 
-        // API lấy thông tin khách theo CCCD và Phone
+        // API lấy thông tin khách theo phòng
         [Authorize]
         [HttpGet("GetThongTinKhachByPhong")]
         public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByPhong(string maPhong)
@@ -68,19 +68,19 @@ namespace Apartment_Management_Web.Controllers
                 response.IsSuccess = false;
                 response.Message = "Không tìm thấy thông tin khách.";
                 response.Khachs = null;
-                return NotFound(response); // Trả về trạng thái 404 với response
+                return NotFound(response);
             }
 
             response.IsSuccess = true;
             response.Message = "Lấy thông tin khách thành công.";
-            response.Khachs = thongTinKhach; // Trả về thông tin khách tìm thấy
+            response.Khachs = thongTinKhach;
 
-            return Ok(response); // Trả về trạng thái 200 với response
+            return Ok(response);
         }
 
 
 
-        // API lấy thông tin khách theo CCCD và Phone
+        // API lấy thông tin thanh viên theo mã thành viên
         [Authorize]
         [HttpGet("GetThongTinKhachByMaKhachTro")]
         public async Task<ActionResult<APICustomerRespone>> GetThongTinKhachByMaKhachTro(string maKhachTro)
@@ -94,18 +94,18 @@ namespace Apartment_Management_Web.Controllers
                 response.IsSuccess = false;
                 response.Message = "Không tìm thấy thông tin khách.";
                 response.Khachs = null;
-                return NotFound(response); // Trả về trạng thái 404 với response
+                return NotFound(response);
             }
 
             response.IsSuccess = true;
             response.Message = "Lấy thông tin khách thành công.";
-            response.Khachs = thongTinKhach; // Trả về thông tin khách tìm thấy
+            response.Khachs = thongTinKhach;
 
-            return Ok(response); // Trả về trạng thái 200 với response
+            return Ok(response);
         }
 
 
-
+        // API cập nhật thông tin thành viên
         [HttpPut("UpdateThongTinKhach")]
         [Authorize]
         public async Task<ActionResult<APICustomerRespone>> UpdateThongTinKhach(string maKhachTro, [FromBody] UpdateThongTinKhachRequest request)
@@ -126,10 +126,11 @@ namespace Apartment_Management_Web.Controllers
             {
                 IsSuccess = true,
                 Message = "Cập nhật thông tin khách thành công.",
-                Khachs = null // Trả về thông tin khách đã cập nhật 
+                Khachs = null
             });
         }
 
+        // API kê khai thông tin thành viên phòng
         [HttpPost("CreateThongTinKhach")]
         [Authorize]
         public async Task<ActionResult<APICustomerRespone>> CreateCustomer([FromBody] CreateCustomerRequest request)
@@ -138,21 +139,21 @@ namespace Apartment_Management_Web.Controllers
 
             try
             {
-                // Tự động tạo MaKhachTro với tiền tố KT + số thứ tự
+                // Tạo ID thành viên
                 var lastCustomer = await _ThongTinKhachService.GetLastCustomerAsync();
                 int nextNumber = 1;
 
                 if (lastCustomer != null)
                 {
-                    // Lấy số thứ tự từ MaKhachTro cuối cùng
+
                     var lastNumber = int.Parse(lastCustomer.MaKhachTro.Substring(2));
                     nextNumber = lastNumber + 1;
                 }
 
-                // Tạo mã khách mới
+
                 string maKhachTro = "KH" + nextNumber.ToString("D3");
 
-                // Tạo đối tượng ThongTinKhach mới
+
                 var newCustomer = new ThongTinKhach
                 {
                     MaKhachTro = maKhachTro,
@@ -167,25 +168,25 @@ namespace Apartment_Management_Web.Controllers
                     QueQuan = request.QueQuan,
                     QuanHe = request.QuanHe,
                     MaPhong = request.MaPhong,
-                    ChuKy = request.ChuKy, // Gán tên tệp chữ ký vào đối tượng
+                    ChuKy = request.ChuKy,
                     ThuongTru = request.ThuongTru,
-                    TrangThai = 1 // Set trạng thái mặc định là 1 (đang hoạt động)
+                    TrangThai = 1
                 };
 
-                // Gọi service để thêm khách hàng mới vào database
+
                 var createdCustomer = await _ThongTinKhachService.CreateCustomerAsync(newCustomer);
 
                 response.IsSuccess = true;
                 response.Message = "Tạo khách hàng mới thành công.";
                 response.Khachs = new List<ThongTinKhach> { createdCustomer };
 
-                return Ok(response); // Trả về 200 với response
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
                 response.Message = "Đã xảy ra lỗi khi tạo khách hàng mới: " + ex.Message;
-                return BadRequest(response); // Trả về 400 nếu có lỗi
+                return BadRequest(response);
             }
         }
 
@@ -193,7 +194,7 @@ namespace Apartment_Management_Web.Controllers
 
 
 
-
+        // API Upload hình ảnh chữ ký thành viên phòng
         [Authorize]
         [HttpPost("Upload")]
         public async Task<IActionResult> Upload()

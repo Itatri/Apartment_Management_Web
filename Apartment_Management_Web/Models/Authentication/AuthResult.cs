@@ -1,5 +1,6 @@
 ﻿namespace Apartment_Management_Web.Models.Authentication
 {
+
     public class AuthResult
     {
         public bool IsSuccess { get; set; }

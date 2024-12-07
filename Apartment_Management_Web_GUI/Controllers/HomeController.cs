@@ -7,25 +7,25 @@ namespace Apartment_Management_Web_GUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly string _apiBaseUrl; // Khai báo biến cho API Url
+        private readonly string _apiBaseUrl;
 
 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
-            _apiBaseUrl = configuration["ApiSettings:BaseUrl"]; // Lấy URL từ cấu hình
+            _apiBaseUrl = configuration["ApiSettings:BaseUrl"];
         }
-        // Run Home Page
+
         public IActionResult HomePage()
         {
-            // Truyền URL API vào View thông qua ViewBag
+
             ViewBag.ApiBaseUrl = _apiBaseUrl;
             return View();
         }
 
         public IActionResult HomePageLogin()
         {
-            // Truyền URL API vào View thông qua ViewBag
+
             ViewBag.ApiBaseUrl = _apiBaseUrl;
             return View();
         }

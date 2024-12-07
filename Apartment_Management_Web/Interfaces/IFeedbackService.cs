@@ -4,12 +4,23 @@ namespace Apartment_Management_Web.Interfaces
 {
     public interface IFeedbackService
     {
+        // Interface API lấy danh sách Feedback
         Task<IEnumerable<FeedBack>> GetAllThongTinFeedbackAsync();
-        //Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong);
-        //Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai);
+        // Interface  API lấy danh sách Feedback theo mã phòng
         Task<List<FeedBack>> GetThongTinFeedBacksBy_MaPhongAsync(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai, int pageNumber, int pageSize);
+        // Interface hàm lấy tổng feedback API trả về của phòng
         Task<int> GetTotalFeedbackCount(string maPhong, DateTime? startDate, DateTime? endDate, int? trangThai);
-        Task<FeedBack?> GetLastFeedbackAsync(); // Lấy phản hồi cuối cùng
-        Task<FeedBack> CreateFeedbackAsync(FeedBack feedback); // Tạo phản hồi mới
+        // Interface hàm lấy tổng số feedback có trong Data
+        Task<FeedBack?> GetLastFeedbackAsync();
+        // Interface API gửi phản hồi 
+        Task<FeedBack> CreateFeedbackAsync(FeedBack feedback);
+
+        // Interface API lấy danh sách Feedback
+        // Interface  API lấy danh sách Feedback theo mã phòng
+        // Interface hàm lấy tổng feedback API trả về của phòng
+        // Interface hàm lấy tổng số feedback có trong Data
+        // Interface hàm lấy tổng số feedback có trong Data
+        // Interface API gửi phản hồi 
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Input Bill";
-    var apiBaseUrl = ViewBag.ApiBaseUrl; // Lấy URL API từ ViewBag
+    var apiBaseUrl = ViewBag.ApiBaseUrl; 
 }
 
 
@@ -37,7 +37,7 @@
 
 <body class="sub_page">
     <div class="hero_area">
-        <!-- header section strats -->
+        <!-- Thanh navbar -->
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
@@ -126,7 +126,8 @@
                 </nav>
             </div>
         </header>
-        <!-- end header section -->
+        <!-- Thanh navbar -->
+
     </div>
 
 
@@ -144,9 +145,9 @@
 
          
             <br />
-           
 
-            @* Lọc theo ngày *@
+
+            <!-- Lọc  -->
 
 
             <div class="row mb-4 d-flex align-items-end">
@@ -179,9 +180,9 @@
                 </div>
             </div>
 
+            <!-- Lọc  -->
 
-
-
+            <!-- Table phiếu thu  -->
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -229,7 +230,10 @@
                 </table>
             </div>
 
-            <!-- Phân trang Bootstrap -->
+            <!-- Table phiếu thu  -->
+
+
+            <!-- Phân trang  -->
             <section class="about_section layout_padding">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center" id="pagination">
@@ -255,6 +259,7 @@
 
                 </nav>
             </section>
+            <!-- Phân trang  -->
 
         </div>
 
@@ -320,7 +325,9 @@
                     <div class="modal-body text-center">
                     <p id="accountInfo"><strong>Tài khoản :</strong> None - None</p>
                         <img style="width:70%;" id="qrCodeImage" src="" alt="QR Code" class="img-fluid" />
-                        <p style="color:red;"><strong>Quét mã QR để thanh toán</strong></p>
+                    <p id="errorInfo"></p> <!-- Thông báo lỗi QR -->
+
+                        <p style="color:green;"><strong>Quét mã QR để thanh toán</strong></p>
 
                         <!-- Hiển thị thông tin thanh toán -->
                         <div id="paymentInfo" class="mb-3"></div>
@@ -423,8 +430,8 @@
         </div>
 
 
-        <!-- end experience section -->
-        <!-- about section -->
+       
+        <!-- Hình minh họa -->
 
         <section class="about_section layout_padding">
             <div class="container">
@@ -449,8 +456,10 @@
             </div>
         </section>
 
-        <!-- end about section -->
-        <!-- info section -->
+    <!-- Hình minh họa -->
+
+
+        <!-- Footer -->
 
         <section class="info_section ">
             <div class="info_container layout_padding-top">
@@ -614,8 +623,8 @@
                 </div>
             </div>
         </div>
-        <!-- end info section -->
-        <!-- footer section -->
+    <!-- Footer -->
+    <!-- Footer -->
         <footer class="container-fluid footer_section ">
             <div class="container">
                 <p>
@@ -624,7 +633,7 @@
                 </p>
             </div>
         </footer>
-        <!-- end  footer section -->
+    <!-- Footer -->
 
 
         <script src="~/js/jquery-3.4.1.min.js"></script>
@@ -633,63 +642,56 @@
 
 
         <script>
-            // Ràng buộc trường nhập điện nước 
-             document.addEventListener('DOMContentLoaded', function () {
-            const dienMoiInput = document.getElementById('dienMoiInput');
-            dienMoiInput.addEventListener('input', function () {
-                this.value = this.value.replace(/[^0-9]/g, '');
-            });
+            // Ràng buộc nhập số cho nhập điện được 
+            document.addEventListener('DOMContentLoaded', function () {
+                const dienMoiInput = document.getElementById('dienMoiInput');
+                dienMoiInput.addEventListener('input', function () {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
 
-            const nuocMoiInput = document.getElementById('nuocMoiInput');
-            nuocMoiInput.addEventListener('input', function () {
-                this.value = this.value.replace(/[^0-9]/g, '');
-            });
+                const nuocMoiInput = document.getElementById('nuocMoiInput');
+                nuocMoiInput.addEventListener('input', function () {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
 
-            $(document).ready(function () {
-                var currentPage = 1; // Biến để lưu trang hiện tại
-                var totalPages = 1; // Tổng số trang
-                var tenPhong = '';  // Biến lưu tên phòng
+                $(document).ready(function () {
+                    var currentPage = 1; 
+                    var totalPages = 1; 
+                    var tenPhong = '';  
 
+                    var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                    var maPhong = loginResponse?.user?.maPhong;
 
-                // Lấy thông tin loginResponse từ localStorage
-                var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-
-            
-                var maPhong = loginResponse?.user?.maPhong;
-
-                if (maPhong) {
-                    $('#maPhongLabel').text(maPhong);
-                } else {
-                    $('#maPhongLabel').text('Không tìm thấy mã phòng');
-                }
-
-                // Kiểm tra xem loginResponse có tồn tại hay không
-                if (loginResponse) {
-                    var user = loginResponse.user;
-
-                    // Hiển thị userId nếu có
-                    if (user?.id) {
-                        $('#userIdDisplay').text(user.id);
+                    if (maPhong) {
+                        $('#maPhongLabel').text(maPhong);
+                    } else {
+                        $('#maPhongLabel').text('Không tìm thấy mã phòng');
                     }
 
-                    // Các thông tin khác từ loginResponse
-                    console.log('Token:', loginResponse.token);
-                    console.log('User:', user);
-                    console.log('Mã phòng:', user?.maPhong);
-                    console.log('Trạng thái:', user?.trangThai);
-                }
+                    if (loginResponse) {
+                        var user = loginResponse.user;
 
-                   // Hàm định dạng số với dấu chấm phân cách hàng nghìn
-                function formatCurrency(number) {
-                    if (number == null || number === "") {
-                        return "0 VND";
+                        // Hiển thị userId lên mục tài khoản đăng nhập
+                        if (user?.id) {
+                            $('#userIdDisplay').text(user.id);
+                        }
+
+                        console.log('Token:', loginResponse.token);
+                        console.log('User:', user);
+                        console.log('Mã phòng:', user?.maPhong);
+                        console.log('Trạng thái:', user?.trangThai);
                     }
-                    // Định dạng số với dấu chấm phân cách hàng nghìn và thêm chữ VND vào cuối
-                    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VND';
-                }
 
-                   // Fetch and display TenPhong using maPhong
-                        if (user?.maPhong) {
+                    // Hàm định dạng số phân cách hàng nghìn bằng dấu chấm
+                    function formatCurrency(number) {
+                        if (number == null || number === "") {
+                            return "0 VND";
+                        }
+                        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VND';
+                    }
+
+                    // Gọi API lấy thông tin Phòng theo mã phòng
+                    if (user?.maPhong) {
                         $.ajax({
                             url: `@apiBaseUrl/api/UserPhongs/GetPhongByMaPhong?maPhong=${user.maPhong}`,
                             type: 'GET',
@@ -699,11 +701,7 @@
                             success: function (response) {
                                 if (response) {
                                     $('#tenPhongLabel').text(response.tenPhong || 'Không tìm thấy tên phòng');
-
-                                   
                                     tenPhong = response.tenPhong || 'Không tìm thấy tên phòng';
-
-                                  
                                     let congNo = response.congNo || 0; 
                                     let congNoHienThi = congNo > 0 ? -congNo : Math.abs(congNo); 
                                     $('#congNoLabel').text(formatCurrency(congNoHienThi));
@@ -719,483 +717,396 @@
                         });
                     }
 
-
-
-                // Xử lý sự kiện nhấn vào nút Đăng xuất
-                $('#logoutBtn').on('click', function () {
-                    // Xóa toàn bộ thông tin từ localStorage
-                    localStorage.removeItem('loginResponse');
-
-                    // Kiểm tra xem loginResponse đã bị xóa chưa
-                    console.log('loginResponse:', localStorage.getItem('loginResponse')); 
-
-                    // Hiển thị Modal thông báo đăng xuất thành công
-                    $('#LogoutSuccessModal').modal('show');
-                });
-
-                // Xử lý sự kiện khi người dùng nhấn nút "Ok" hoặc đóng Modal
-                $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
-                    // Chuyển hướng người dùng về trang đăng nhập khi Modal bị đóng
-                    window.location.href = '/home/homepage';
-                });
-
-                // Đảm bảo chỉ chuyển hướng khi nhấn "OK"
-                $('#confirmLogout').on('click', function () {
-                    $('#LogoutSuccessModal').modal('hide'); 
-                });
-
-
-
-                // Lắng nghe sự kiện submit của biểu mẫu
-                $('#emailForm').on('submit', function (e) {
-                    e.preventDefault(); 
-
-                    var toEmail = $('#toEmail').val(); // Lấy giá trị email từ input
-
-                    // Gọi API để gửi email
-                    $.ajax({
-                        url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
-                        type: 'POST',
-                        success: function (response) {
-                          
-                            $('#SendEmailSuccessModal').modal('show');
-                        },
-                        error: function (xhr) {
-                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); // Hiển thị lỗi nếu có
-                        }
+                    // Xử lý sự kiện  Đăng xuất
+                    $('#logoutBtn').on('click', function () {
+                        localStorage.removeItem('loginResponse');
+                        console.log('loginResponse:', localStorage.getItem('loginResponse')); 
+                        $('#LogoutSuccessModal').modal('show');
                     });
-                });
 
+                    // Xử lý sự kiện khi tắt Modal thông báo đăng xuất thành công
+                    $('#LogoutSuccessModal').on('hidden.bs.modal', function () {
+                        window.location.href = '/home/homepage';
+                    });
+                    
+                    $('#confirmLogout').on('click', function () {
+                        $('#LogoutSuccessModal').modal('hide'); 
+                    });
 
+                    // Gửi mail hỗ trợ khách hàng
+                    $('#emailForm').on('submit', function (e) {
+                        e.preventDefault(); 
+                        var toEmail = $('#toEmail').val(); 
+                        $.ajax({
+                            url: '@apiBaseUrl/api/Mails/send?toEmail=' + encodeURIComponent(toEmail),
+                            type: 'POST',
+                            success: function (response) {
+                                $('#SendEmailSuccessModal').modal('show');
+                            },
+                            error: function (xhr) {
+                                alert('Có lỗi xảy ra: ' + xhr.responseJSON.title); 
+                            }
+                        });
+                    });
 
-              
+                    // Hàm gọi API phiếu phieuthus theo mã phòng
+                    function loadPhieuThus(maPhong, startDate, endDate, trangThai, pageSize = 5) {
+                        $.ajax({
+                            url: `@apiBaseUrl/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}&pageNumber=${currentPage}&pageSize=${pageSize}`,
+                            type: 'GET',
+                            headers: {
+                                'Authorization': 'Bearer ' + loginResponse.token
+                            },
+                            success: function (response) {
+                                if (response.isSuccess) {
+                                    totalPages = response.totalPages; 
+                                    updatePagination();
+                                    var phieuThus = response.phieuthus;
 
+                                    phieuThus.sort(function (a, b) {
+                                        return new Date(b.ngayLap) - new Date(a.ngayLap);
+                                    });
 
-                        function loadPhieuThus(maPhong, startDate, endDate, trangThai, pageSize = 5) {
-                            $.ajax({
-                                url: `@apiBaseUrl/api/PhieuThus/GetThongTinPhieuThuBy_MaPhong?maPhong=${maPhong}&startDate=${startDate}&endDate=${endDate}&trangThai=${trangThai}&pageNumber=${currentPage}&pageSize=${pageSize}`,
-                                type: 'GET',
-                                headers: {
-                                    'Authorization': 'Bearer ' + loginResponse.token
-                                },
-                                success: function (response) {
-                                    if (response.isSuccess) {
-                                        totalPages = response.totalPages; // Lưu tổng số trang từ phản hồi API
-                                        // Cập nhật pagination
-                                        updatePagination();
-                                        var phieuThus = response.phieuthus;
+                                    $('tbody').empty(); 
 
+                                    phieuThus.forEach(function (phieuThu) {
+                                        var trangThaiClass = '';
+                                        var trangThaiText = '';
+                                        var ngayLap = new Date(phieuThu.ngayLap); 
+                                        var today = new Date();
+                                        // Tính số ngày chưa thanh tán và hiển thị trang thái theo màu
+                                        var diffDays = Math.floor((today - ngayLap) / (1000 * 60 * 60 * 24)); 
 
+                                        if (phieuThu.trangThai) {
+                                            trangThaiClass = 'text-success';
+                                            trangThaiText = 'Đã thanh toán';
+                                        } else if (diffDays <= 5) {
+                                            trangThaiClass = 'text-warning';
+                                            trangThaiText = 'Chưa thanh toán';
+                                        } else {
+                                            trangThaiClass = 'text-danger';
+                                            trangThaiText = 'Chưa thanh toán';
+                                        }
 
-                                        phieuThus.sort(function (a, b) {
-                                            return new Date(b.ngayLap) - new Date(a.ngayLap);
-                                        });
+                                        // Kiểm tra trường hợp null
+                                        var checkNull = function (value) {
+                                            return value ? value : '<span style="color:red;">Trống</span>';
+                                        };
 
-                                        $('tbody').empty(); // Xóa tất cả các hàng trong tbody
+                                        var formatCurrency = function (value) {
+                                            return value ? value.toLocaleString('vi-VN') : '<span style="color:red;">Trống</span>';
+                                        };
 
-                                        phieuThus.forEach(function (phieuThu) {
-                                            var trangThaiClass = '';
-                                            var trangThaiText = '';
-                                            var ngayLap = new Date(phieuThu.ngayLap); // Chuyển ngày lập thành đối tượng Date
-                                            var today = new Date(); // Lấy ngày hiện tại
-                                            var diffDays = Math.floor((today - ngayLap) / (1000 * 60 * 60 * 24)); // Tính số ngày chênh lệch
+                                        // Nếu phiếu thu đã thanh toán hoặc có tổng tiền, làm nút "Nhập Điện Nước" bị khóa
+                                        var buttonDisabled = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'disabled' : '';
+                                        var buttonClass = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'btn-secondary' : 'btn-primary';
 
-                                            if (phieuThu.trangThai) {
-                                                // Đã thanh toán
-                                                trangThaiClass = 'text-success';
-                                                trangThaiText = 'Đã thanh toán';
-                                            } else if (diffDays <= 5) {
-                                                // Chưa thanh toán trong vòng 5 ngày
-                                                trangThaiClass = 'text-warning';
-                                                trangThaiText = 'Chưa thanh toán';
-                                            } else {
-                                                // Quá 5 ngày và chưa thanh toán
-                                                trangThaiClass = 'text-danger';
-                                                trangThaiText = 'Chưa thanh toán';
-                                            }
+                                        // Nếu phiếu thu đã có tổng tiền hợp lệ và chưa thanh toán, cho phép thanh toán
+                                        var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0;
+                                        var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
 
-                                            // Kiểm tra nếu trường nào null thì thay thế bằng 'Trống' và thêm màu đỏ
-                                            var checkNull = function (value) {
-                                                return value ? value : '<span style="color:red;">Trống</span>';
-                                            };
-
-                                            // Định dạng tiền với dấu chấm ngăn cách hàng nghìn
-                                            var formatCurrency = function (value) {
-                                                return value ? value.toLocaleString('vi-VN') : '<span style="color:red;">Trống</span>';
-                                            };
-
-
-                                            // Nếu phiếu thu đã thanh toán hoặc có tổng tiền, làm nút "Nhập Điện Nước" bị khóa
-                                            var buttonDisabled = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'disabled' : '';
-                                            var buttonClass = phieuThu.trangThai || (phieuThu.tongTien != null && phieuThu.tongTien > 0) ? 'btn-secondary' : 'btn-primary';
-
-                                            // Nếu phiếu thu đã có tổng tiền hợp lệ và chưa thanh toán, cho phép thanh toán
-                                            var isTongTienValid = phieuThu.tongTien != null && phieuThu.tongTien > 0;
-                                            var paymentButtonDisabled = !isTongTienValid || phieuThu.trangThai ? 'disabled' : '';
-
-
-
-                                            var newRow = `
-                                                            <tr>
-                                                                <th scope="row">${checkNull(phieuThu.maPt)}</th>
-                                                                <td>${checkNull(phieuThu.ngayLap)}</td>
-                                                                <td>${checkNull(phieuThu.ngayThu)}</td>
-
-                                                                <td>${checkNull(phieuThu.dienCu)}</td>
-                                                               <td>${phieuThu.dienCu === phieuThu.dienMoi ? '<span style="color:red;">Trống</span>' : checkNull(phieuThu.dienMoi)}</td>
-
-                                                                <td>${checkNull(phieuThu.nuocCu)}</td>
-                                                                <td>${checkNull(phieuThu.nuocMoi)}</td>
-                                                                 <td>${formatCurrency(phieuThu.tienDien)}</td>
-                                                                <td>${formatCurrency(phieuThu.tienNuoc)}</td>
-                                                                <td>${formatCurrency(phieuThu.tienDv)}</td>
-                                                                 <td>${formatCurrency(phieuThu.tienNha)}</td>
-                                                                <td>${formatCurrency(phieuThu.tongTien)}</td>
-                                                                <td>${formatCurrency(phieuThu.thanhToan)}</td>
-                                                                <td class="${trangThaiClass}">${trangThaiText}</td>
-                                                                <td>
-                                                                    <button type="button" style="width: 125px; font-size: 12px;" class="btn ${buttonClass}" ${buttonDisabled}
-                                                                            data-toggle="modal" data-target="#exampleModal"
-                                                                            ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
-                                                                        Nhập Điện Nước
-                                                                    </button>
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button" style="width: 100px; font-size: 12px;" class="btn btn-success" ${paymentButtonDisabled}
-                                                                            data-toggle="modal" data-target="#paymentModal">
-                                                                        Thanh Toán
-                                                                    </button>
-                                                                  </td>
-
-                                                                  <td>
-                                                                 <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info export-pdf-btn" data-ma-pt="${phieuThu.maPt}">
-                                                                                Xem hóa đơn
-                                                                            </button>
-                                                                </td>
-
-
-                                                            </tr>
-                                                        `;
-                                            $('tbody').append(newRow);
-                                        });
-                                    } else {
-                                        alert(response.message);
-                                    }
-                                },
-                                error: function (xhr) {
-                                   
-                                    $('#filterModal').modal('show');
+                                        var newRow = `
+                                            <tr>
+                                                <th scope="row">${checkNull(phieuThu.maPt)}</th>
+                                                <td>${checkNull(phieuThu.ngayLap)}</td>
+                                                <td>${checkNull(phieuThu.ngayThu)}</td>
+                                                <td>${checkNull(phieuThu.dienCu)}</td>
+                                                <td>${phieuThu.dienCu === phieuThu.dienMoi ? '<span style="color:red;">Trống</span>' : checkNull(phieuThu.dienMoi)}</td>
+                                                <td>${checkNull(phieuThu.nuocCu)}</td>
+                                                <td>${checkNull(phieuThu.nuocMoi)}</td>
+                                                <td>${formatCurrency(phieuThu.tienDien)}</td>
+                                                <td>${formatCurrency(phieuThu.tienNuoc)}</td>
+                                                <td>${formatCurrency(phieuThu.tienDv)}</td>
+                                                <td>${formatCurrency(phieuThu.tienNha)}</td>
+                                                <td>${formatCurrency(phieuThu.tongTien)}</td>
+                                                <td>${formatCurrency(phieuThu.thanhToan)}</td>
+                                                <td class="${trangThaiClass}">${trangThaiText}</td>
+                                                <td>
+                                                    <button type="button" style="width: 125px; font-size: 12px;" class="btn ${buttonClass}" ${buttonDisabled}
+                                                            data-toggle="modal" data-target="#exampleModal"
+                                                            ${buttonDisabled ? 'onclick="alert(\'Phiếu thu này đã được thanh toán, không thể cập nhật.\');"' : ''}>
+                                                        Nhập Điện Nước
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" style="width: 100px; font-size: 12px;" class="btn btn-success" ${paymentButtonDisabled}
+                                                            data-toggle="modal" data-target="#paymentModal">
+                                                        Thanh Toán
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" style="width: 115px; font-size: 12px;" class="btn btn-info export-pdf-btn" data-ma-pt="${phieuThu.maPt}">
+                                                        Xem hóa đơn
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        `;
+                                        $('tbody').append(newRow);
+                                    });
+                                } else {
+                                    alert(response.message);
                                 }
-                            });
+                            },
+                            error: function (xhr) {
+                                $('#filterModal').modal('show');
+                            }
+                        });
+                    }
+
+                    // Hàm xuất phiếu thu PDF
+                    function exportPhieuThuToPdf(maPt) {
+                        $('#pdfModal iframe').attr('src', ''); 
+                        $('#pdfModal .modal-body').html('<div class="text-center"><p>Đang tải hóa đơn...</p><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>');
+                        $('#pdfModal').modal('show');
+
+                        $.ajax({
+                            url: `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`,
+                            type: 'GET',
+                            headers: {
+                                'Authorization': 'Bearer ' + loginResponse.token
+                            },
+                            xhrFields: {
+                                responseType: 'blob' 
+                            },
+                            success: function (response) {
+                                var blob = new Blob([response], { type: 'application/pdf' });
+                                var url = URL.createObjectURL(blob);
+                                $('#pdfModal .modal-body').html(`<iframe src="${url}" style="width: 100%; height: 800px;" frameborder="0"></iframe>`);
+                            },
+                            error: function (xhr) {
+                                $('#pdfModal .modal-body').html('<p class="text-danger">Đã xảy ra lỗi khi tải hóa đơn.</p>');
+                            }
+                        });
+                    }
+
+                    // Xử lý sự kiện xuất phiếu thu PDF của phiếu thu tương ứng
+                    $(document).on('click', '.export-pdf-btn', function () {
+                        var maPt = $(this).data('ma-pt'); 
+                        exportPhieuThuToPdf(maPt);
+                    });
+
+                    // Số dòng mặc định
+                    var currentRowsPerPage = 5; 
+
+                    function updatePagination() {
+                        $('#pagination').empty(); 
+
+                        // Previous button
+                        if (currentPage > 1) {
+                            $('#pagination').append(`
+                                <li class="page-item" id="prevPage">
+                                    <a class="page-link" href="#" tabindex="-1">Trước đó</a>
+                                </li>
+                            `);
+                        } else {
+                            $('#pagination').append(`
+                                <li class="page-item disabled" id="prevPage">
+                                    <a class="page-link" href="#" tabindex="-1">Trước đó</a>
+                                </li>
+                            `);
                         }
 
-                        function exportPhieuThuToPdf(maPt) {
-                            // Hiển thị modal và trạng thái "Loading..."
-                            $('#pdfModal iframe').attr('src', ''); // Xóa nội dung cũ
-                            $('#pdfModal .modal-body').html('<div class="text-center"><p>Đang tải hóa đơn...</p><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>');
-                            $('#pdfModal').modal('show');
+                        // Current page button
+                        $('#pagination').append(`
+                            <li class="page-item active" aria-current="page" id="currentPage">
+                                <a class="page-link" href="#">${currentPage} / ${totalPages}</a>
+                            </li>
+                        `);
 
-                            $.ajax({
-                                url: `@apiBaseUrl/api/PhieuThus/ExportPhieuThuToPdf?maPt=${maPt}`,
-                                type: 'GET',
-                                headers: {
-                                    'Authorization': 'Bearer ' + loginResponse.token
-                                },
-                                xhrFields: {
-                                    responseType: 'blob' // Đảm bảo nhận dữ liệu dưới dạng blob (PDF)
-                                },
-                                success: function (response) {
-                                    var blob = new Blob([response], { type: 'application/pdf' });
-                                    var url = URL.createObjectURL(blob);
 
-                                    // Thay đổi nội dung modal để hiển thị PDF
-                                    $('#pdfModal .modal-body').html(`<iframe src="${url}" style="width: 100%; height: 800px;" frameborder="0"></iframe>`);
-                                },
-                                error: function (xhr) {
-                                    // Hiển thị lỗi nếu không tải được PDF
-                                    $('#pdfModal .modal-body').html('<p class="text-danger">Đã xảy ra lỗi khi tải hóa đơn.</p>');
-                                }
-                            });
+                        // Next button
+                        if (currentPage < totalPages) {
+                            $('#pagination').append(`
+                                <li class="page-item" id="nextPage">
+                                    <a class="page-link" href="#">Tiếp theo</a>
+                                </li>
+                            `);
+                        } else {
+                            $('#pagination').append(`
+                                <li class="page-item disabled" id="nextPage">
+                                    <a class="page-link" href="#">Tiếp theo</a>
+                                </li>
+                            `);
                         }
 
-                        $(document).on('click', '.export-pdf-btn', function () {
-                            var maPt = $(this).data('ma-pt'); // Lấy maPt từ thuộc tính data
-                            exportPhieuThuToPdf(maPt); // Gọi hàm
+
+                        // Gán sự kiện cho nút Previous
+                        $('#prevPage').off('click').on('click', function () {
+                            if (currentPage > 1) {
+                                currentPage--;
+                                loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); 
+                            }
                         });
 
-
-
-
-
-
-
-                // Khai báo biến để lưu số dòng hiển thị
-                var currentRowsPerPage = 5; // Giá trị mặc định là 10
-
-                function updatePagination() {
-                    $('#pagination').empty(); // Xóa tất cả các trang hiện tại
-
-                    // Previous button
-                    if (currentPage > 1) {
-                        $('#pagination').append(`
-                                        <li class="page-item" id="prevPage">
-                                            <a class="page-link" href="#" tabindex="-1">Trước đó</a>
-                                        </li>
-                                    `);
-                    } else {
-                        $('#pagination').append(`
-                                        <li class="page-item disabled" id="prevPage">
-                                            <a class="page-link" href="#" tabindex="-1">Trước đó</a>
-                                        </li>
-                                    `);
-                    }
-
-                    // Current page button
-                    $('#pagination').append(`
-                                    <li class="page-item active" aria-current="page" id="currentPage">
-                                        <a class="page-link" href="#">${currentPage} / ${totalPages}</a>
-                                    </li>
-                                `);
-
-                    // Next button
-                    if (currentPage < totalPages) {
-                        $('#pagination').append(`
-                                        <li class="page-item" id="nextPage">
-                                            <a class="page-link" href="#">Tiếp theo</a>
-                                        </li>
-                                    `);
-                    } else {
-                        $('#pagination').append(`
-                                        <li class="page-item disabled" id="nextPage">
-                                            <a class="page-link" href="#">Tiếp theo</a>
-                                        </li>
-                                    `);
-                    }
-
-
-                    // Gán sự kiện cho nút Previous
-                    $('#prevPage').off('click').on('click', function () {
-                        if (currentPage > 1) {
-                            currentPage--;
-                            loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); // Gọi lại dữ liệu
-                        }
-                    });
-
-                    // Gán sự kiện cho nút Next
-                    $('#nextPage').off('click').on('click', function () {
-                        if (currentPage < totalPages) {
-                            currentPage++;
-                            loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); // Gọi lại dữ liệu
-                        }
-                    });
-
-
-                    // Thêm combo box cho số dòng hiển thị vào cuối
-                    $('#pagination').append(`
-                                    <li class="page-item" id="rowsPerPageItem">
-                                        <select name="phantrangFeedback" class="form-control" id="feedbackRowsPerPageSelect" style="margin: 0px 10px 0px 10px;">
-                                            <option value="5" disabled>Số dòng</option> <!-- Lựa chọn mặc định -->
-                                            <option value="5" ${currentRowsPerPage == 5 ? 'selected' : ''}>5</option>
-                                            <option value="10" ${currentRowsPerPage == 10 ? 'selected' : ''}>10</option>
-                                            <option value="15" ${currentRowsPerPage == 15 ? 'selected' : ''}>15</option>
-                                        </select>
-                                    </li>
-                                `);
-
-
-
-                    // Gán sự kiện thay đổi cho combo box số dòng hiển thị
-                    $('#feedbackRowsPerPageSelect').on('change', function () {
-                        currentRowsPerPage = parseInt($(this).val()); // Lấy số dòng hiển thị từ select và chuyển đổi thành số nguyên
-                        currentPage = 1; // Đặt lại currentPage về 1 mỗi khi thay đổi số dòng
-                        loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); // Gọi lại dữ liệu với số dòng mới
-                    });
-
-                }
-
-                // Gọi API lần đầu tiên khi load trang
-                loadPhieuThus(maPhong, '', '', '', 5); // Mặc định là 10 dòng hiển thị
-
-
-
-                // Gán sự kiện cho nút "Ok" trong filterModal
-                $('#filterModalOk').off('click').on('click', function () {
-                    $('#filterModal').modal('hide');
-                });
-
-                function showQrCodeModal() {
-                    $('#paymentModal').modal('show');
-                }
-
-             
-
-                // Lắng nghe sự kiện nhấn nút lọc
-                $('#filterButton').on('click', function () {
-                    var startDate = $('#startDate').val();
-                    var endDate = $('#endDate').val();
-                    var trangThai = $('#trangThaiSelect').val(); // Lấy giá trị từ dropdown trạng thái
-
-                    loadPhieuThus(maPhong, startDate, endDate, trangThai);
-                });
-
-                // Lắng nghe sự kiện nhấn nút làm mới
-                $('#refeshButton').on('click', function () {
-                    // Gọi API lần đầu tiên khi load trang
-                    loadPhieuThus(maPhong, '', '', '');
-
-                    // Đặt lại giá trị của các trường ngày
-                    $('#startDate').val('2024-01-01');
-                    $('#endDate').val('2024-12-31');
-
-                    $('#trangThaiSelect').val('');
-
-                    // Cập nhật lại phân trang
-                    currentPage = 1; // Đặt lại currentPage về 1 mỗi khi thay đổi số dòng
-                    currentRowsPerPage = 5; // Đặt lại số dòng hiển thị về 5
-                    updatePagination(); // Gọi lại hàm cập nhật phân trang
-                });
-
-
-
-
-               
-
-                         // Sự kiện nhấn vào nút "Thanh Toán"
-                        $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
-                            var row = $(this).closest('tr');
-                            var maPt = row.find('th').text();
-                            var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, ''); // Loại bỏ ký tự không phải số
-                            var ngayLap = row.find('td:nth-child(2)').text(); // Lấy ngày lập phiếu thu từ cột "Ngày lập"
-                            var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-                            var maPhong = loginResponse?.user?.maPhong;
-
-                            // Kiểm tra nếu mã phòng không tồn tại
-                            if (!maPhong) {
-                                alert('Không tìm thấy mã phòng!');
-                                return;
+                        // Gán sự kiện cho nút Next
+                        $('#nextPage').off('click').on('click', function () {
+                            if (currentPage < totalPages) {
+                                currentPage++;
+                                loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); 
                             }
+                        });
 
-                            // Định dạng số tiền thanh toán với dấu chấm phân cách hàng nghìn
-                            var formattedTongTien = formatCurrency(tongTien);
+                        // Combobox cho số dòng hiển thị vào cuối
+                        $('#pagination').append(`
+                            <li class="page-item" id="rowsPerPageItem">
+                                <select name="phantrangFeedback" class="form-control" id="feedbackRowsPerPageSelect" style="margin: 0px 10px 0px 10px;">
+                                    <option value="5" disabled>Số dòng</option> <!-- Lựa chọn mặc định -->
+                                    <option value="5" ${currentRowsPerPage == 5 ? 'selected' : ''}>5</option>
+                                    <option value="10" ${currentRowsPerPage == 10 ? 'selected' : ''}>10</option>
+                                    <option value="15" ${currentRowsPerPage == 15 ? 'selected' : ''}>15</option>
+                                </select>
+                            </li>
+                        `);
 
-                            // Trích xuất tháng và năm từ "Ngày lập"
-                            var dateParts = new Date(ngayLap);
-                            var month = dateParts.getMonth() + 1;
-                            var year = dateParts.getFullYear();
+                        // Sự kiện thay đổi cho combo box số dòng hiển thị
+                        $('#feedbackRowsPerPageSelect').on('change', function () {
+                            currentRowsPerPage = parseInt($(this).val()); 
+                            currentPage = 1;
+                            loadPhieuThus(maPhong, '', '', '', currentRowsPerPage); 
+                        });
+                    }
 
-                            // Gọi API để lấy thông tin Admin
-                            $.ajax({
-                                url: `@apiBaseUrl/api/PhieuThus/GetAdminInfoByMaPhong?maPhong=${maPhong}`,
-                                type: 'GET',
-                                headers: {
-                                    'Authorization': 'Bearer ' + loginResponse.token
-                                },
-                                success: function (response) {
-                                    if (response.isSuccess) {
-                                        // Lấy ngân hàng, tài khoản và họ tên từ API response
-                                        var nganHang = response.adminInfo.nganHang || 'Không có';
-                                        var taiKhoan = response.adminInfo.taiKhoan || 'Không có';
-                                        var hoTen = response.adminInfo.hoTen || 'Không có';
+                    // Gọi API lần đầu tiên khi load trang
+                    loadPhieuThus(maPhong, '', '', '', 5); 
 
-                                        // Tạo URL QR code với thông tin ngân hàng và tài khoản
+                    // Gán sự kiện cho nút "Ok" trong filterModal
+                    $('#filterModalOk').off('click').on('click', function () {
+                        $('#filterModal').modal('hide');
+                    });
+
+                    // Sự kiện nhấn nút lọc
+                    $('#filterButton').on('click', function () {
+                        var startDate = $('#startDate').val();
+                        var endDate = $('#endDate').val();
+                        var trangThai = $('#trangThaiSelect').val(); 
+
+                        loadPhieuThus(maPhong, startDate, endDate, trangThai);
+                    });
+
+                    // Sự kiện nhấn nút làm mới
+                    $('#refeshButton').on('click', function () {
+                        loadPhieuThus(maPhong, '', '', '');
+                        $('#startDate').val('2024-01-01');
+                        $('#endDate').val('2024-12-31');
+                        $('#trangThaiSelect').val('');
+                        currentPage = 1;
+                        currentRowsPerPage = 5; 
+                        updatePagination();
+                    });
+
+                    // Sự kiện nhấn vào nút "Thanh Toán"
+                    $(document).on('click', '.btn-success[data-target="#paymentModal"]', function () {
+                        var row = $(this).closest('tr');
+                        var maPt = row.find('th').text();
+                        var tongTien = row.find('td:nth-child(12)').text().replace(/\D/g, '');
+                        var ngayLap = row.find('td:nth-child(2)').text();
+                        var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+                        var maPhong = loginResponse?.user?.maPhong;
+
+                        if (!maPhong) {
+                            alert('Không tìm thấy mã phòng!');
+                            return;
+                        }
+
+                        var formattedTongTien = formatCurrency(tongTien);
+                        var dateParts = new Date(ngayLap);
+                        var month = dateParts.getMonth() + 1;
+                        var year = dateParts.getFullYear();
+
+                        // Gọi API lấy thông tin Admin của phòng
+                        $.ajax({
+                            url: `@apiBaseUrl/api/PhieuThus/GetAdminInfoByMaPhong?maPhong=${maPhong}`,
+                            type: 'GET',
+                            headers: {
+                                'Authorization': 'Bearer ' + loginResponse.token
+                            },
+                            success: function (response) {
+                                if (response.isSuccess) {
+                                    var nganHang = response.adminInfo.nganHang || '';
+                                    var taiKhoan = response.adminInfo.taiKhoan || '';
+                                    var hoTen = response.adminInfo.hoTen || '';
+
+                                    if (!nganHang || !taiKhoan || !hoTen) {
+                                        // Hiển thị ảnh mặc định và thông báo lỗi
+                                        $('#qrCodeImage').attr('src', '/images/404NotFound.png');
+                                        $('#errorInfo').html('<br><strong style="color: red;">Quản lí chưa cập nhật thông tin tài khoản.</strong>');
+                                    } else {
+                                        // Hiển thị QR Code nếu có đầy đủ thông tin
                                         var qrCodeUrl = `https://qr.sepay.vn/img?bank=${encodeURIComponent(nganHang)}&acc=${encodeURIComponent(taiKhoan)}&template=compact&amount=${tongTien}&des=Ten phong : ${tenPhong}, Tien phong thang ${month} nam ${year}, Ma phieu thu : ${maPt}`;
                                         $('#qrCodeImage').attr('src', qrCodeUrl);
-
-                                        // Cập nhật thông tin tài khoản và họ tên trong modal
-                                        $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${formattedTongTien}`);
-                                        $('#accountInfo').html(`<strong>Tài khoản :</strong> ${hoTen} - ${taiKhoan}`);
-
-
-                                        // Hiển thị modal
-                                        $('#paymentModal').modal('show');
-                                    } else {
-                                        alert('Không lấy được thông tin Admin: ' + response.message);
+                                        $('#errorInfo').html(''); // Xóa thông báo lỗi nếu có
                                     }
-                                },
-                                error: function () {
-                                    alert('Đã xảy ra lỗi khi lấy thông tin Admin.');
+
+                                    // Hiển thị thông tin tài khoản
+                                    $('#paymentInfo').html(`<strong>Mã phiếu thu :</strong> ${maPt} <br> <strong>Số tiền thanh toán :</strong> ${formattedTongTien}`);
+                                    $('#accountInfo').html(`<strong>Tài khoản :</strong> ${hoTen || 'Không xác định'} - ${taiKhoan || 'Không xác định'}`);
+                                    $('#paymentModal').modal('show');
+                                } else {
+                                    alert('Không lấy được thông tin Admin: ' + response.message);
                                 }
-                            });
-                        });
-
-
-
-
-
-
-
-
-                // Sự kiện nhấn vào nút "Nhập Điện Nước"
-                $(document).on('click', '.btn-primary[data-target="#exampleModal"]', function () {
-                    var row = $(this).closest('tr');
-                    var maPt = row.find('th').text();
-                           // Lấy giá trị điện cũ, điện mới, nước cũ, nước mới từ các cột tương ứng
-                    var dienCu = row.find('td:nth-child(4)').text();
-                    var dienMoi = row.find('td:nth-child(5)').text();
-                    var nuocCu = row.find('td:nth-child(6)').text();
-                    var nuocMoi = row.find('td:nth-child(7)').text();
-
-                    $('#maPtInput').val(maPt);
-
-                    if (dienMoi !== 'Trống') {
-                        $('#dienMoiInput').val(dienMoi);
-                    } else {
-                        $('#dienMoiInput').val('');
-                    }
-
-                    if (nuocMoi !== 'Trống') {
-                        $('#nuocMoiInput').val(nuocMoi);
-                    } else {
-                        $('#nuocMoiInput').val('');
-                    }
-                });
-
-
-
-                // Sự kiện nhấn vào nút "Cập nhật" trong Modal
-                $('#btnCapNhat').on('click', function () {
-                    var maPt = $('#maPtInput').val();
-                    var dienMoi = $('#dienMoiInput').val();
-                    var nuocMoi = $('#nuocMoiInput').val();
-
-                    $.ajax({
-                        url: `@apiBaseUrl/api/PhieuThus/UpdatePhieuThu?maPt=${maPt}&dienMoi=${dienMoi}&nuocMoi=${nuocMoi}`,
-                        type: 'PUT',
-                        headers: {
-                            'Authorization': 'Bearer ' + loginResponse.token
-                        },
-                        success: function (response) {
-                            if (response.isSuccess) {
-                                // Ẩn modal exampleModal
-                                $('#exampleModal').modal('hide');
-
-                                // Hiển thị modal thông báo cập nhật thành công
-                                $('#successModal').modal('show'); // Mở modal thông báo
-
-                                // Sự kiện nhấn vào nút "Ok" trong successModal
-                                $('#successModal .btn-primary').on('click', function () {
-                                    location.reload(); // Tải lại trang khi nhấn Ok
-                                });
-
-                            } else {
-                                alert(response.message);
+                            },
+                            error: function () {
+                                alert('Đã xảy ra lỗi khi lấy thông tin Admin.');
                             }
-                        },
-                        error: function (xhr) {
-                            alert('Đã xảy ra lỗi khi cập nhật phiếu thu: ' + xhr.responseJSON.message);
+                        });
+                    });
+
+
+                    // Sự kiện nhấn vào nút "Nhập Điện Nước"
+                    $(document).on('click', '.btn-primary[data-target="#exampleModal"]', function () {
+                        var row = $(this).closest('tr');
+                        var maPt = row.find('th').text();
+                        var dienCu = row.find('td:nth-child(4)').text();
+                        var dienMoi = row.find('td:nth-child(5)').text();
+                        var nuocCu = row.find('td:nth-child(6)').text();
+                        var nuocMoi = row.find('td:nth-child(7)').text();
+
+                        $('#maPtInput').val(maPt);
+
+                        if (dienMoi !== 'Trống') {
+                            $('#dienMoiInput').val(dienMoi);
+                        } else {
+                            $('#dienMoiInput').val('');
+                        }
+
+                        if (nuocMoi !== 'Trống') {
+                            $('#nuocMoiInput').val(nuocMoi);
+                        } else {
+                            $('#nuocMoiInput').val('');
                         }
                     });
+
+                    // Sự kiện nhấn vào nút "Cập nhật" trong Modal
+                    $('#btnCapNhat').on('click', function () {
+                        var maPt = $('#maPtInput').val();
+                        var dienMoi = $('#dienMoiInput').val();
+                        var nuocMoi = $('#nuocMoiInput').val();
+
+                        $.ajax({
+                            url: `@apiBaseUrl/api/PhieuThus/UpdatePhieuThu?maPt=${maPt}&dienMoi=${dienMoi}&nuocMoi=${nuocMoi}`,
+                            type: 'PUT',
+                            headers: {
+                                'Authorization': 'Bearer ' + loginResponse.token
+                            },
+                            success: function (response) {
+                                if (response.isSuccess) {
+                                    $('#exampleModal').modal('hide');
+                                    $('#successModal').modal('show'); 
+
+                                    $('#successModal .btn-primary').on('click', function () {
+                                        location.reload(); 
+                                    });
+                                } else {
+                                    alert(response.message);
+                                }
+                            },
+                            error: function (xhr) {
+                                alert('Đã xảy ra lỗi khi cập nhật phiếu thu: ' + xhr.responseJSON.message);
+                            }
+                        });
+                    });
                 });
-
-
-
             });
-
-                   
-        });
-
-
-
         </script>
 
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Apartment_Management_Web.Controllers
 {
+    // API gửi Mail hỗ trợ đến khách hàng
     [Route("api/Mails")]
     [ApiController]
     public class EmailController : ControllerBase
