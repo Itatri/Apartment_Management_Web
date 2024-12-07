@@ -793,21 +793,21 @@
                                     var trangThaiText = khach.trangThai ? 'Đang cư trú' : 'Đã rời đi';
 
                                     var row = `
-                                                                                <tr>
+                                        <tr>
 
-                                                                                    <th scope="row" class="hidden-column">${khach.maKhachTro}</th>  <!-- Thêm class để ẩn cột -->
-                                                                                    <td>${khach.hoTen}</td>
-                                                                                    <td>${khach.gioiTinh}</td>
-                                                                                    <td>${khach.ngaySinh ? new Date(khach.ngaySinh).toLocaleDateString() : 'Trống'}</td>
-                                                                                    <td>${khach.cccd}</td>
-                                                                                    <td>${khach.phone}</td>
-                                                                                    <td>${khach.email}</td>
-                                                                                    <td>${khach.queQuan}</td>
-                                                                                    <td>${khach.quanHe}</td>
-                                                                                      <td class="${trangThaiClass}">${trangThaiText}</td>
-                                                                                    <td><button class="btn btn-primary"  style="width: 115px; font-size: 12px;" >Xem chi tiết</button></td>
-                                                                                </tr>
-                                                                            `;
+                                            <th scope="row" class="hidden-column">${khach.maKhachTro}</th>  <!-- Thêm class để ẩn cột -->
+                                            <td>${khach.hoTen}</td>
+                                            <td>${khach.gioiTinh}</td>
+                                            <td>${khach.ngaySinh ? new Date(khach.ngaySinh).toLocaleDateString() : 'Trống'}</td>
+                                            <td>${khach.cccd}</td>
+                                            <td>${khach.phone}</td>
+                                            <td>${khach.email}</td>
+                                            <td>${khach.queQuan}</td>
+                                            <td>${khach.quanHe}</td>
+                                                <td class="${trangThaiClass}">${trangThaiText}</td>
+                                            <td><button class="btn btn-primary"  style="width: 115px; font-size: 12px;" >Xem chi tiết</button></td>
+                                        </tr>
+                                    `;
                                     khachTableBody.append(row);
                                 });
                             } else {
@@ -985,44 +985,44 @@
                 const ngayCap = $("#datepicker_ngaycap").val(); 
                 const chuKyFile = $("#chuKyInput").prop('files')[0];
               
-                 const trangThai = 1; 
+                const trangThai = 1; 
 
                  
                  // Kiểm tra dữ liệu nhập
-                    let errors = [];
-                    if (!hoTen) errors.push("Họ tên.");
-                    if (!gioiTinh) errors.push("Giới tính");
-                    if (!ngaySinh) errors.push("Ngày sinh");
-                    if (!soDienThoai) errors.push("Số điện thoại");
-                    if (!email) errors.push("Email");
-                    if (!quanHe) errors.push("Quan hệ");
-                    if (!soCCCD) errors.push("Số căn cước");
-                    if (!noiCap) errors.push("Nơi cấp");
-                    if (!thuongTru) errors.push("Nơi thường trú");
-                    if (!queQuan) errors.push("Quê quán");
-                    if (!ngayCap) errors.push("Ngày cấp");
+                let errors = [];
+                if (!hoTen) errors.push("Họ tên.");
+                if (!gioiTinh) errors.push("Giới tính");
+                if (!ngaySinh) errors.push("Ngày sinh");
+                if (!soDienThoai) errors.push("Số điện thoại");
+                if (!email) errors.push("Email");
+                if (!quanHe) errors.push("Quan hệ");
+                if (!soCCCD) errors.push("Số căn cước");
+                if (!noiCap) errors.push("Nơi cấp");
+                if (!thuongTru) errors.push("Nơi thường trú");
+                if (!queQuan) errors.push("Quê quán");
+                if (!ngayCap) errors.push("Ngày cấp");
 
-                    // Kiểm tra nếu là "Chủ hộ", phải trên 18 tuổi
-                    if (quanHe === "Chủ hộ") {
-                        const birthDate = new Date(ngaySinh); 
-                        const today = new Date();
-                        const age = today.getFullYear() - birthDate.getFullYear();
-                        const m = today.getMonth() - birthDate.getMonth();
-                        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                            age--; 
-                        }
-
-                        if (age < 18) {
-                            errors.push("Chủ hộ phải trên 18 tuổi.");
-                        }
+                // Kiểm tra nếu là "Chủ hộ", phải trên 18 tuổi
+                if (quanHe === "Chủ hộ") {
+                    const birthDate = new Date(ngaySinh); 
+                    const today = new Date();
+                    const age = today.getFullYear() - birthDate.getFullYear();
+                    const m = today.getMonth() - birthDate.getMonth();
+                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                        age--; 
                     }
 
-                            if (errors.length > 0) {
-                                let errorMessage = "Vui lòng nhập đầy đủ và chính xác các thông tin: <br>" + `<ul style="color: red;">${errors.map(e => `<li>${e}</li>`).join("")}</ul>`;
-                                $("#errorModal .modal-body").html(errorMessage);
-                                $("#errorModal").modal('show');
-                                return; 
-                            }
+                    if (age < 18) {
+                        errors.push("Chủ hộ phải trên 18 tuổi.");
+                    }
+                }
+
+                if (errors.length > 0) {
+                    let errorMessage = "Vui lòng nhập đầy đủ và chính xác các thông tin: <br>" + `<ul style="color: red;">${errors.map(e => `<li>${e}</li>`).join("")}</ul>`;
+                    $("#errorModal .modal-body").html(errorMessage);
+                    $("#errorModal").modal('show');
+                    return; 
+                }
 
                
                 const data = {
