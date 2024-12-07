@@ -190,6 +190,45 @@ namespace Apartment_Management_Web.Controllers
             }
         }
 
+        // API kiểm tra phòng đã có chủ hộ chưa
+        [Authorize]
+        [HttpGet("CheckRoomHasOwner")]
+        public async Task<ActionResult<APICustomerRespone>> CheckRoomHasOwner(string maPhong)
+        {
+
+            var thongTinKhach = await _ThongTinKhachService.GetThongTinKhachByPhongAsync(maPhong);
+
+            var response = new APICustomerRespone();
+
+
+            if (thongTinKhach == null || thongTinKhach.Count == 0)
+            {
+                response.IsSuccess = false;
+                response.Message = "Phòng chưa có chủ hộ.";
+                response.Khachs = null;
+                return Ok(response);
+            }
+
+
+            var hasOwner = thongTinKhach.Any(khach => khach.QuanHe == "Chủ hộ");
+
+            if (hasOwner)
+            {
+
+                response.IsSuccess = false;
+                response.Message = "Phòng này đã có chủ hộ. Không thể thêm chủ hộ mới.";
+                response.Khachs = thongTinKhach;
+                return Ok(response);
+            }
+
+            response.IsSuccess = true;
+            response.Message = "Phòng chưa có chủ hộ.";
+            response.Khachs = thongTinKhach;
+
+            return Ok(response);
+        }
+
+
 
 
 
@@ -199,13 +238,13 @@ namespace Apartment_Management_Web.Controllers
         [HttpPost("Upload")]
         public async Task<IActionResult> Upload()
         {
-            var file = Request.Form.Files.FirstOrDefault(); // Lấy tệp từ request
-            var maKhachTro = Request.Form["maKhachTro"]; // Lấy mã khách trọ từ request
-            var hoTen = Request.Form["hoTen"]; // Lấy họ tên từ request
+            var file = Request.Form.Files.FirstOrDefault();
+            var maKhachTro = Request.Form["maKhachTro"];
+            var hoTen = Request.Form["hoTen"];
 
             try
             {
-                // Gọi phương thức UploadChuKyAsync từ service
+
                 var fileName = await _ThongTinKhachService.UploadChuKyAsync(file, maKhachTro, hoTen);
                 return Ok(new { message = "Upload thành công!", fileName });
             }
