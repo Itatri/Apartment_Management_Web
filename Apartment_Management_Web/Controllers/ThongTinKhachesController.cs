@@ -191,42 +191,60 @@ namespace Apartment_Management_Web.Controllers
         }
 
         // API kiểm tra phòng đã có chủ hộ chưa
+
         [Authorize]
         [HttpGet("CheckRoomHasOwner")]
-        public async Task<ActionResult<APICustomerRespone>> CheckRoomHasOwner(string maPhong)
+        public async Task<ActionResult<APICustomerRespone>> CheckRoomHasOwner(string maPhong, string quanHe, bool isUpdating = false)
         {
-
             var thongTinKhach = await _ThongTinKhachService.GetThongTinKhachByPhongAsync(maPhong);
 
             var response = new APICustomerRespone();
 
-
+            // Trường hợp phòng chưa có khách nào
             if (thongTinKhach == null || thongTinKhach.Count == 0)
             {
-                response.IsSuccess = false;
-                response.Message = "Phòng chưa có chủ hộ.";
-                response.Khachs = null;
+                if (quanHe != "Chủ hộ")
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Phòng này chưa có ai. Hãy kê khai chủ hộ trước tiên.";
+                    return Ok(response);
+                }
+                else
+                {
+                    response.IsSuccess = true;
+                    response.Message = "Có thể thêm chủ hộ.";
+                    return Ok(response);
+                }
+            }
+
+            // Nếu không phải thêm mới (cập nhật thông tin), bỏ qua kiểm tra trạng thái chủ hộ
+            if (isUpdating)
+            {
+                response.IsSuccess = true;
+                response.Message = "Có thể cập nhật thông tin.";
+                response.Khachs = thongTinKhach;
                 return Ok(response);
             }
 
-
+            // Nếu đang thêm mới
             var hasOwner = thongTinKhach.Any(khach => khach.QuanHe == "Chủ hộ");
 
-            if (hasOwner)
+            if (quanHe == "Chủ hộ" && hasOwner)
             {
-
                 response.IsSuccess = false;
                 response.Message = "Phòng này đã có chủ hộ. Không thể thêm chủ hộ mới.";
                 response.Khachs = thongTinKhach;
                 return Ok(response);
             }
 
+            // Nếu thêm khách không phải chủ hộ, cho phép thêm
             response.IsSuccess = true;
-            response.Message = "Phòng chưa có chủ hộ.";
+            response.Message = "Có thể thêm khách.";
             response.Khachs = thongTinKhach;
 
             return Ok(response);
         }
+
 
 
 

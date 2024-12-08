@@ -1020,33 +1020,27 @@
                     return; 
                 }
 
+              
+
                 $.ajax({
-                    url: `@apiBaseUrl/api/ThongTinKhaches/CheckRoomHasOwner?maPhong=${phong}`,
+                    url: `@apiBaseUrl/api/ThongTinKhaches/CheckRoomHasOwner?maPhong=${phong}&quanHe=${quanHe}&isUpdating=${maKhachTro ? true : false}`,
                     type: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + loginResponse.token
                     },
                     success: function (response) {
-                       
                         if (!response) {
                             console.error("Không có phản hồi từ API");
                             return;
                         }
 
-                           
-                        if (response.isSuccess === false && response.message.includes("Phòng này đã có chủ hộ")) {
-                            $("#errorModal .modal-body").html("Phòng này đã có chủ hộ. Không thể thêm chủ hộ mới.");
+                        if (!response.isSuccess) {
+                            $("#errorModal .modal-body").html(response.message);
                             $("#errorModal").modal('show');
                             return;
                         }
 
-                           
-                        if (!response.hasOwner && quanHe !== "Chủ hộ") {
-                            $("#errorModal .modal-body").html("Phòng này chưa có ai. Hãy kê khai chủ hộ trước tiên.");
-                            $("#errorModal").modal('show');
-                            return;
-                        }
-               
+                        // Tiếp tục lưu thông tin nếu không có lỗi
                         const data = {
                             HoTen: hoTen,
                             GioiTinh: gioiTinh,
@@ -1063,71 +1057,46 @@
                             TrangThai: trangThai
                         };
 
-               
                         if (chuKyFile) {
-                            data.ChuKy = chuKyFile.name; 
+                            data.ChuKy = chuKyFile.name;
                         }
 
-              
-                        if (maKhachTro) {
-                            // Gọi API để cập nhật thông tin khách trọ
-                            $.ajax({
-                                url: `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`,
-                                type: 'PUT',
-                                contentType: 'application/json',
-                                headers: {
-                                    'Authorization': 'Bearer ' + loginResponse.token
-                                },
-                                data: JSON.stringify(data),
-                                success: function (response) {
-                                    $("#successUpdateModal").modal('show');
-                                    console.log(response);
-                            
-                                    if (chuKyFile) {
-                                        uploadChuKy(maKhachTro, hoTen, chuKyFile); 
-                                    }
-                           
-                                },
-                                error: function (xhr, status, error) {
-                                    alert("Cập nhật thông tin thất bại!");
-                                    console.error(xhr.responseText);
+                        const url = maKhachTro
+                            ? `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`
+                            : '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach';
+
+                        const method = maKhachTro ? 'PUT' : 'POST';
+
+                        $.ajax({
+                            url: url,
+                            type: method,
+                            contentType: 'application/json',
+                            headers: {
+                                'Authorization': 'Bearer ' + loginResponse.token
+                            },
+                            data: JSON.stringify(data),
+                            success: function (response) {
+                                const modalId = maKhachTro ? "#successUpdateModal" : "#successCreateModal";
+                                $(modalId).modal('show');
+                                console.log(response);
+
+                                if (chuKyFile) {
+                                    const maKhachTroMoi = maKhachTro || response.khachs[0].maKhachTro;
+                                    uploadChuKy(maKhachTroMoi, hoTen, chuKyFile);
                                 }
-                            });
-                        } else {
-                            // Nếu không có mã khách trọ, gọi API để tạo mới thông tin khách
-                            $.ajax({
-                                url: '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach',
-                                type: 'POST',
-                                contentType: 'application/json',
-                                headers: {
-                                    'Authorization': 'Bearer ' + loginResponse.token
-                                },
-                                data: JSON.stringify(data),
-                                success: function (response) {
-                                    $("#successCreateModal").modal('show');
-                                    console.log(response);
-                                    if (response.isSuccess && response.khachs.length > 0) {
-                                        const maKhachTroMoi = response.khachs[0].maKhachTro; 
-                                        if (chuKyFile) {
-                                            uploadChuKy(maKhachTroMoi, hoTen, chuKyFile); 
-                                        }
-                                    } else {
-                                        alert("Tạo khách hàng mới không thành công.");
-                                    }
-                           
-                                },
-                                error: function (xhr, status, error) {
-                                    alert("Tạo mới khách thất bại!");
-                                    console.error(xhr.responseText);
-                                }
-                            });
-                        }
+                            },
+                            error: function (xhr, status, error) {
+                                alert(maKhachTro ? "Cập nhật thông tin thất bại!" : "Tạo mới khách thất bại!");
+                                console.error(xhr.responseText);
+                            }
+                        });
                     },
                     error: function (xhr, status, error) {
                         alert("Lỗi kiểm tra phòng.");
                         console.error(xhr.responseText);
                     }
                 });
+
 
                 // Gọi API Upload chữ ký 
                 function uploadChuKy(maKhachTro, hoTen, chuKyFile) {
