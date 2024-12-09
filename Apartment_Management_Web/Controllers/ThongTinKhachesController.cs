@@ -3,8 +3,7 @@ using Apartment_Management_Web.Models;
 using Apartment_Management_Web.Models.Customer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
+using System.Text.RegularExpressions;
 
 namespace Apartment_Management_Web.Controllers
 {
@@ -17,6 +16,18 @@ namespace Apartment_Management_Web.Controllers
         public ThongTinKhachesController(IThongTinKhachService ThongTinKhachService)
         {
             _ThongTinKhachService = ThongTinKhachService;
+        }
+
+        private bool KiemTraSoDienThoai(string soDienThoai)
+        {
+            string pattern = @"^(0[3|5|7|8|9])\d{8}$";
+            return Regex.IsMatch(soDienThoai, pattern);
+        }
+
+        private bool KiemTraEmail(string email)
+        {
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(email, pattern);
         }
 
         // API lấy danh sách thành viên phòng 
@@ -110,11 +121,13 @@ namespace Apartment_Management_Web.Controllers
         [Authorize]
         public async Task<ActionResult<APICustomerRespone>> UpdateThongTinKhach(string maKhachTro, [FromBody] UpdateThongTinKhachRequest request)
         {
+            var response = new APICustomerRespone();
+
             var isUpdated = await _ThongTinKhachService.UpdateThongTinKhachAsync(maKhachTro, request);
 
             if (!isUpdated)
             {
-                return NotFound(new APICustomerRespone
+                return Ok(new APICustomerRespone
                 {
                     IsSuccess = false,
                     Message = "Không tìm thấy thông tin khách.",
@@ -145,14 +158,11 @@ namespace Apartment_Management_Web.Controllers
 
                 if (lastCustomer != null)
                 {
-
                     var lastNumber = int.Parse(lastCustomer.MaKhachTro.Substring(2));
                     nextNumber = lastNumber + 1;
                 }
 
-
                 string maKhachTro = "KH" + nextNumber.ToString("D3");
-
 
                 var newCustomer = new ThongTinKhach
                 {
@@ -173,7 +183,6 @@ namespace Apartment_Management_Web.Controllers
                     TrangThai = 1
                 };
 
-
                 var createdCustomer = await _ThongTinKhachService.CreateCustomerAsync(newCustomer);
 
                 response.IsSuccess = true;
@@ -186,7 +195,7 @@ namespace Apartment_Management_Web.Controllers
             {
                 response.IsSuccess = false;
                 response.Message = "Đã xảy ra lỗi khi tạo khách hàng mới: " + ex.Message;
-                return BadRequest(response);
+                return Ok(response);
             }
         }
 
@@ -200,7 +209,7 @@ namespace Apartment_Management_Web.Controllers
 
             var response = new APICustomerRespone();
 
-            // Trường hợp phòng chưa có khách nào
+
             if (thongTinKhach == null || thongTinKhach.Count == 0)
             {
                 if (quanHe != "Chủ hộ")
@@ -217,7 +226,7 @@ namespace Apartment_Management_Web.Controllers
                 }
             }
 
-            // Nếu không phải thêm mới (cập nhật thông tin), bỏ qua kiểm tra trạng thái chủ hộ
+
             if (isUpdating)
             {
                 response.IsSuccess = true;
@@ -226,7 +235,7 @@ namespace Apartment_Management_Web.Controllers
                 return Ok(response);
             }
 
-            // Nếu đang thêm mới
+
             var hasOwner = thongTinKhach.Any(khach => khach.QuanHe == "Chủ hộ");
 
             if (quanHe == "Chủ hộ" && hasOwner)
@@ -237,7 +246,7 @@ namespace Apartment_Management_Web.Controllers
                 return Ok(response);
             }
 
-            // Nếu thêm khách không phải chủ hộ, cho phép thêm
+
             response.IsSuccess = true;
             response.Message = "Có thể thêm khách.";
             response.Khachs = thongTinKhach;
@@ -294,6 +303,30 @@ namespace Apartment_Management_Web.Controllers
             return Ok(quanHeList);
         }
 
+        [HttpGet("CheckPhoneAndEmail")]
+        [Authorize]
+        public async Task<ActionResult<APICustomerRespone>> CheckPhoneAndEmail(string phone, string email)
+        {
+            var response = new APICustomerRespone();
+
+            if (!KiemTraSoDienThoai(phone))
+            {
+                response.IsSuccess = false;
+                response.Message = "Số điện thoại không hợp lệ.";
+                return Ok(response);
+            }
+
+            if (!KiemTraEmail(email))
+            {
+                response.IsSuccess = false;
+                response.Message = "Email không hợp lệ.";
+                return Ok(response);
+            }
+
+            response.IsSuccess = true;
+            response.Message = "Số điện thoại và email hợp lệ.";
+            return Ok(response);
+        }
 
     }
 }

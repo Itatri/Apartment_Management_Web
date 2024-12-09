@@ -1082,6 +1082,23 @@
                         var dienMoi = $('#dienMoiInput').val();
                         var nuocMoi = $('#nuocMoiInput').val();
 
+                       
+                        var row = $('.btn-primary[data-target="#exampleModal"]').closest('tr');
+                        var dienCu = row.find('td:nth-child(4)').text();
+                        var nuocCu = row.find('td:nth-child(6)').text();
+
+                        
+                        if (parseInt(dienMoi) < parseInt(dienCu)) {
+                            $('#inputErrorMessage').text('Số điện mới không được nhỏ hơn số điện cũ.');
+                            $('#inputErrorModal').modal('show');
+                            return; 
+                        }
+                        if (parseInt(nuocMoi) < parseInt(nuocCu)) {
+                            $('#inputErrorMessage').text('Số nước mới không được nhỏ hơn số nước cũ.');
+                            $('#inputErrorModal').modal('show');
+                            return; 
+                        }
+
                         $.ajax({
                             url: `@apiBaseUrl/api/PhieuThus/UpdatePhieuThu?maPt=${maPt}&dienMoi=${dienMoi}&nuocMoi=${nuocMoi}`,
                             type: 'PUT',
@@ -1097,11 +1114,13 @@
                                         location.reload(); 
                                     });
                                 } else {
-                                    alert(response.message);
+                                    $('#inputErrorMessage').text(response.message);
+                                    $('#inputErrorModal').modal('show');
                                 }
                             },
                             error: function (xhr) {
-                                alert('Đã xảy ra lỗi khi cập nhật phiếu thu: ' + xhr.responseJSON.message);
+                                $('#inputErrorMessage').text('Đã xảy ra lỗi khi cập nhật phiếu thu: ' + xhr.responseJSON.message);
+                                $('#inputErrorModal').modal('show');
                             }
                         });
                     });
