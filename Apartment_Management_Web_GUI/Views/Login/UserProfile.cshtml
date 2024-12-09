@@ -971,20 +971,16 @@
                 const soDienThoai = $("input[placeholder='Nhập số điện thoại']").val();
                 const email = $("input[placeholder='Nhập email']").val();
                 const phong = $("input[placeholder='Thông tin phòng']").val();
-      
                 const quanHe = $("#selectQuanHe").val();
-
                 const soCCCD = $("input[placeholder='Nhập số căn cước']").val();
                 const noiCap = $("input[placeholder='Nhập nơi cấp']").val();
                 const thuongTru = $("input[placeholder='Nhập nơi thường trú']").val();
                 const queQuan = $("select[name='queQuan']").val();
                 const ngayCap = $("#datepicker_ngaycap").val(); 
                 const chuKyFile = $("#chuKyInput").prop('files')[0];
-              
                 const trangThai = 1; 
 
-                 
-                 // Kiểm tra dữ liệu nhập
+                // Kiểm tra dữ liệu nhập
                 let errors = [];
                 if (!hoTen) errors.push("Họ tên.");
                 if (!gioiTinh) errors.push("Giới tính");
@@ -1020,8 +1016,7 @@
                     return; 
                 }
 
-              
-
+                // Kiểm tra phòng đã có chủ hộ hay chưa
                 $.ajax({
                     url: `@apiBaseUrl/api/ThongTinKhaches/CheckRoomHasOwner?maPhong=${phong}&quanHe=${quanHe}&isUpdating=${maKhachTro ? true : false}`,
                     type: 'GET',
@@ -1040,53 +1035,73 @@
                             return;
                         }
 
-                        // Tiếp tục lưu thông tin nếu không có lỗi
-                        const data = {
-                            HoTen: hoTen,
-                            GioiTinh: gioiTinh,
-                            NgaySinh: ngaySinh,
-                            Phone: soDienThoai,
-                            Email: email,
-                            MaPhong: phong,
-                            QuanHe: quanHe,
-                            CCCD: soCCCD,
-                            NoiCap: noiCap,
-                            ThuongTru: thuongTru,
-                            QueQuan: queQuan,
-                            NgayCap: ngayCap,
-                            TrangThai: trangThai
-                        };
-
-                        if (chuKyFile) {
-                            data.ChuKy = chuKyFile.name;
-                        }
-
-                        const url = maKhachTro
-                            ? `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`
-                            : '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach';
-
-                        const method = maKhachTro ? 'PUT' : 'POST';
-
+                        // Kiểm tra số điện thoại và email qua API
                         $.ajax({
-                            url: url,
-                            type: method,
-                            contentType: 'application/json',
+                            url: `@apiBaseUrl/api/ThongTinKhaches/CheckPhoneAndEmail?phone=${soDienThoai}&email=${email}`,
+                            type: 'GET',
                             headers: {
                                 'Authorization': 'Bearer ' + loginResponse.token
                             },
-                            data: JSON.stringify(data),
                             success: function (response) {
-                                const modalId = maKhachTro ? "#successUpdateModal" : "#successCreateModal";
-                                $(modalId).modal('show');
-                                console.log(response);
+                                if (!response.isSuccess) {
+                                    $("#errorModal .modal-body").html(response.message);
+                                    $("#errorModal").modal('show');
+                                    return;
+                                }
+
+                                // Tiếp tục lưu thông tin nếu không có lỗi
+                                const data = {
+                                    HoTen: hoTen,
+                                    GioiTinh: gioiTinh,
+                                    NgaySinh: ngaySinh,
+                                    Phone: soDienThoai,
+                                    Email: email,
+                                    MaPhong: phong,
+                                    QuanHe: quanHe,
+                                    CCCD: soCCCD,
+                                    NoiCap: noiCap,
+                                    ThuongTru: thuongTru,
+                                    QueQuan: queQuan,
+                                    NgayCap: ngayCap,
+                                    TrangThai: trangThai
+                                };
 
                                 if (chuKyFile) {
-                                    const maKhachTroMoi = maKhachTro || response.khachs[0].maKhachTro;
-                                    uploadChuKy(maKhachTroMoi, hoTen, chuKyFile);
+                                    data.ChuKy = chuKyFile.name;
                                 }
+
+                                const url = maKhachTro
+                                    ? `@apiBaseUrl/api/ThongTinKhaches/UpdateThongTinKhach?maKhachTro=${maKhachTro}`
+                                    : '@apiBaseUrl/api/ThongTinKhaches/CreateThongTinKhach';
+
+                                const method = maKhachTro ? 'PUT' : 'POST';
+
+                                $.ajax({
+                                    url: url,
+                                    type: method,
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + loginResponse.token
+                                    },
+                                    data: JSON.stringify(data),
+                                    success: function (response) {
+                                        const modalId = maKhachTro ? "#successUpdateModal" : "#successCreateModal";
+                                        $(modalId).modal('show');
+                                        console.log(response);
+
+                                        if (chuKyFile) {
+                                            const maKhachTroMoi = maKhachTro || response.khachs[0].maKhachTro;
+                                            uploadChuKy(maKhachTroMoi, hoTen, chuKyFile);
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        alert(maKhachTro ? "Cập nhật thông tin thất bại!" : "Tạo mới khách thất bại!");
+                                        console.error(xhr.responseText);
+                                    }
+                                });
                             },
                             error: function (xhr, status, error) {
-                                alert(maKhachTro ? "Cập nhật thông tin thất bại!" : "Tạo mới khách thất bại!");
+                                alert("Lỗi kiểm tra số điện thoại và email.");
                                 console.error(xhr.responseText);
                             }
                         });
@@ -1097,7 +1112,6 @@
                     }
                 });
 
-
                 // Gọi API Upload chữ ký 
                 function uploadChuKy(maKhachTro, hoTen, chuKyFile) {
                     if (chuKyFile) {
@@ -1106,7 +1120,6 @@
                         formData.append("maKhachTro", maKhachTro); 
                         formData.append("hoTen", hoTen);
 
-                        
                         $.ajax({
                             url: '@apiBaseUrl/api/ThongTinKhaches/Upload', 
                             type: 'POST',
