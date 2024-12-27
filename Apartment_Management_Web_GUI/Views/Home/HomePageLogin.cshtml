@@ -764,6 +764,8 @@
             // Lấy thông tin loginResponse từ localStorage
             var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
+
+
             // Kiểm tra xem loginResponse có tồn tại hay không
             if (loginResponse) {
                 var user = loginResponse.user; 
@@ -785,7 +787,13 @@
                 console.log('Trạng thái:', user?.trangThai);
             }
 
+             const loginData = localStorage.getItem('loginResponse');
 
+            if (!loginData) {
+                // Nếu không có dữ liệu đăng nhập, chuyển hướng về trang HomePage
+                window.location.href = '/home/homepage';
+                return;
+            }
 
             // Xử lý sự kiện nhấn vào nút Đăng xuất
             $('#logoutBtn').on('click', function () {
