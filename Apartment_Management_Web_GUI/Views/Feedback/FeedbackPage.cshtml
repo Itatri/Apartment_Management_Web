@@ -545,12 +545,20 @@
 
 
         <script>
+
             $(document).ready(function () {
                 let currentPage = 1;
                 let totalPages = 1;
                 const pageSizeDefault = 5;
                 const loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
                 const user = loginResponse?.user;
+                        
+                const loginData = localStorage.getItem('loginResponse');
+                if (!loginData) {
+                    // Nếu không có dữ liệu đăng nhập, chuyển hướng về trang HomePage
+                    window.location.href = '/home/homepage';
+                    return;
+                }
 
                 // Hiển thị userId và mã phòng nếu có
                 $('#userIdDisplay').text(user?.id || 'Không có ID');

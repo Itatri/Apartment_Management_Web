@@ -716,6 +716,15 @@
         }
 
         $(document).ready(function () {
+
+
+            const loginData = localStorage.getItem('loginResponse');
+
+            if (!loginData) {
+                // Nếu không có dữ liệu đăng nhập, chuyển hướng về trang HomePage
+                window.location.href = '/home/homepage';
+                return;
+            }
          
           
             var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));

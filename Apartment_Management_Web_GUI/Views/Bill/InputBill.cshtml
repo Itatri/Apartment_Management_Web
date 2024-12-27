@@ -657,7 +657,15 @@
                 $(document).ready(function () {
                     var currentPage = 1; 
                     var totalPages = 1; 
-                    var tenPhong = '';  
+                    var tenPhong = '';
+
+                    const loginData = localStorage.getItem('loginResponse');
+
+                    if (!loginData) {
+                        // Nếu không có dữ liệu đăng nhập, chuyển hướng về trang HomePage
+                        window.location.href = '/home/homepage';
+                        return;
+                    }
 
                     var loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
                     var maPhong = loginResponse?.user?.maPhong;
