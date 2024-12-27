@@ -1,7 +1,6 @@
 ## Website dành cho cư dân thuê căn hộ ( User Role ) 
-
-### Winform Admin 
-- https://github.com/Itatri/QuanLyPhongTro.git
+ 
+- Ứng dụng quản lí : https://github.com/Itatri/QuanLyPhongTro.git
 
 ### Functions
 - Kê khai thông tin thành viên phòng
