@@ -1,4 +1,4 @@
-## Website dành cho cư dân thuê căn hộ ( User Role ) 
+## Website dành cho cư dân thuê căn hộ 
  
 - Ứng dụng quản lí : https://github.com/Itatri/QuanLyPhongTro.git
 
@@ -18,17 +18,6 @@
 ### Model 
 - Mô hình Web MVC kết hợp Web API
 - Database First Entity Framework Core
-
-### Demo
-- Đăng nhập <br> <br>
-
-
-![DangNhap](https://github.com/user-attachments/assets/c391b0aa-fe12-4d8a-972b-0256db6e2ee8)
-
-
-- Trang chủ <br> <br>
-
-![HomePage](https://github.com/user-attachments/assets/f03ae76c-0669-4b22-981c-6805fd3ae0f9)
 
 
 
