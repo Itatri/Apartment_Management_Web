@@ -1,21 +1,21 @@
-## Website dành cho cư dân thuê căn hộ 
+## Website for apartment residents
  
-- Ứng dụng quản lí : https://github.com/Itatri/QuanLyPhongTro.git
+- Management application : https://github.com/Itatri/QuanLyPhongTro.git
 
-### Chức năng
-- Kê khai thông tin thành viên phòng
-- Xem hóa đơn dịch vụ sử dụng ( PDF )
-- Nhập điện nước, quét QR thanh toán
-- Phản hồi đến quản lý căn hộ 
+### Function
+- Declare room member information
+- View service usage invoice (PDF)
+- Enter electricity and water, scan QR to pay
+- Feedback to apartment management
 
 
-### Công nghệ
+### Technology
 
 - Microsoft SQL Server (Database SQL)
 - ASP.NET Core Web API (Backend)
 - ASP.NET Core Web MVC (Frontend)
 
-### Mô hình 
+### Model
 - Web MVC , Web API
 - Database First Entity Framework Core
 
