@@ -21,7 +21,7 @@
 
 ### Demo
 - Login
-  <details>
-    <summary>Preview</summary>
-    <img loading="lazy" src="https://github.com/user-attachments/assets/4a71b7c7-d583-47d2-9b31-ddabd64c80d4">
-  </details>
+ <details>
+   <summary>Preview</summary>
+   <img loading="lazy" src="https://github.com/user-attachments/assets/4a71b7c7-d583-47d2-9b31-ddabd64c80d4">
+ </details>
